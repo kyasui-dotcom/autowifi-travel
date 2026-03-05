@@ -5,7 +5,8 @@ import { desc } from "drizzle-orm";
 
 export async function GET() {
   try {
-    const latest = await getDb()
+    const db = await getDb();
+    const latest = await db
       .select()
       .from(patternBundleVersions)
       .orderBy(desc(patternBundleVersions.version))
@@ -17,7 +18,7 @@ export async function GET() {
 
     return NextResponse.json({
       version: latest[0].version,
-      publishedAt: latest[0].publishedAt.toISOString(),
+      publishedAt: latest[0].publishedAt,
     });
   } catch (error) {
     console.error("Failed to fetch pattern version:", error);

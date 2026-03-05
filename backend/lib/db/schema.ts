@@ -1,63 +1,68 @@
 import {
-  pgTable,
+  sqliteTable,
   text,
-  timestamp,
   integer,
-  boolean,
-  jsonb,
-  serial,
-  varchar,
   uniqueIndex,
-} from "drizzle-orm/pg-core";
+} from "drizzle-orm/sqlite-core";
 
-export const users = pgTable("users", {
-  id: serial("id").primaryKey(),
-  email: varchar("email", { length: 255 }).notNull().unique(),
-  firstName: varchar("first_name", { length: 100 }).notNull(),
-  lastName: varchar("last_name", { length: 100 }).notNull(),
-  subscriptionTier: varchar("subscription_tier", { length: 20 })
+export const users = sqliteTable("users", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  email: text("email").notNull().unique(),
+  firstName: text("first_name").notNull(),
+  lastName: text("last_name").notNull(),
+  subscriptionTier: text("subscription_tier").notNull().default("free"),
+  subscriptionExpiresAt: text("subscription_expires_at"),
+  createdAt: text("created_at")
     .notNull()
-    .default("free"),
-  subscriptionExpiresAt: timestamp("subscription_expires_at"),
-  createdAt: timestamp("created_at").notNull().defaultNow(),
-  updatedAt: timestamp("updated_at").notNull().defaultNow(),
+    .$defaultFn(() => new Date().toISOString()),
+  updatedAt: text("updated_at")
+    .notNull()
+    .$defaultFn(() => new Date().toISOString()),
 });
 
-export const portalPatterns = pgTable(
+export const portalPatterns = sqliteTable(
   "portal_patterns",
   {
-    id: serial("id").primaryKey(),
-    spotId: varchar("spot_id", { length: 100 }).notNull().unique(),
-    name: varchar("name", { length: 255 }).notNull(),
-    nameJa: varchar("name_ja", { length: 255 }).notNull(),
-    airportCode: varchar("airport_code", { length: 10 }).default(""),
-    country: varchar("country", { length: 5 }).notNull(),
-    ssids: jsonb("ssids").notNull().$type<string[]>(),
-    portalType: varchar("portal_type", { length: 30 }).notNull(),
-    tier: varchar("tier", { length: 20 }).notNull().default("free"),
-    patternData: jsonb("pattern_data").notNull(),
+    id: integer("id").primaryKey({ autoIncrement: true }),
+    spotId: text("spot_id").notNull().unique(),
+    name: text("name").notNull(),
+    nameJa: text("name_ja").notNull(),
+    airportCode: text("airport_code").default(""),
+    country: text("country").notNull(),
+    ssids: text("ssids", { mode: "json" }).notNull().$type<string[]>(),
+    portalType: text("portal_type").notNull(),
+    tier: text("tier").notNull().default("free"),
+    patternData: text("pattern_data", { mode: "json" }).notNull(),
     patternVersion: integer("pattern_version").notNull().default(1),
-    lastVerified: timestamp("last_verified"),
-    isActive: boolean("is_active").notNull().default(true),
+    lastVerified: text("last_verified"),
+    isActive: integer("is_active", { mode: "boolean" }).notNull().default(true),
     notes: text("notes"),
-    createdAt: timestamp("created_at").notNull().defaultNow(),
-    updatedAt: timestamp("updated_at").notNull().defaultNow(),
+    createdAt: text("created_at")
+      .notNull()
+      .$defaultFn(() => new Date().toISOString()),
+    updatedAt: text("updated_at")
+      .notNull()
+      .$defaultFn(() => new Date().toISOString()),
   },
   (table) => [uniqueIndex("spot_id_idx").on(table.spotId)]
 );
 
-export const patternBundleVersions = pgTable("pattern_bundle_versions", {
-  id: serial("id").primaryKey(),
+export const patternBundleVersions = sqliteTable("pattern_bundle_versions", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
   version: integer("version").notNull(),
-  publishedAt: timestamp("published_at").notNull().defaultNow(),
+  publishedAt: text("published_at")
+    .notNull()
+    .$defaultFn(() => new Date().toISOString()),
 });
 
-export const connectionReports = pgTable("connection_reports", {
-  id: serial("id").primaryKey(),
-  spotId: varchar("spot_id", { length: 100 }).notNull(),
-  success: boolean("success").notNull(),
+export const connectionReports = sqliteTable("connection_reports", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  spotId: text("spot_id").notNull(),
+  success: integer("success", { mode: "boolean" }).notNull(),
   errorDetail: text("error_detail"),
-  automationLog: jsonb("automation_log"),
-  deviceInfo: varchar("device_info", { length: 255 }),
-  createdAt: timestamp("created_at").notNull().defaultNow(),
+  automationLog: text("automation_log", { mode: "json" }),
+  deviceInfo: text("device_info"),
+  createdAt: text("created_at")
+    .notNull()
+    .$defaultFn(() => new Date().toISOString()),
 });

@@ -58,6 +58,14 @@ function RootLayoutNav() {
             headerShown: true,
           }}
         />
+        <Stack.Screen
+          name="esim-webview"
+          options={{
+            title: "eSIM購入",
+            presentation: "modal",
+            headerShown: true,
+          }}
+        />
         <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
       </Stack>
     </ThemeProvider>

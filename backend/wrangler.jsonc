@@ -2,5 +2,12 @@
   "name": "autowifi-travel-api",
   "compatibility_date": "2025-04-01",
   "compatibility_flags": ["nodejs_compat"],
-  "pages_build_output_dir": ".open-next/cloudflare"
+  "pages_build_output_dir": ".open-next/cloudflare",
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "autowifi-travel-db",
+      "database_id": "<YOUR_D1_DATABASE_ID>"
+    }
+  ]
 }

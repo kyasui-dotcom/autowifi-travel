@@ -46,6 +46,23 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
+        name="esim"
+        options={{
+          title: "eSIM",
+          tabBarIcon: ({ color }) => (
+            <SymbolView
+              name={{
+                ios: "simcard",
+                android: "sim_card",
+                web: "sim_card",
+              }}
+              tintColor={color}
+              size={28}
+            />
+          ),
+        }}
+      />
+      <Tabs.Screen
         name="settings"
         options={{
           title: "設定",

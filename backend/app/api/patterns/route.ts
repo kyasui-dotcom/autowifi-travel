@@ -6,16 +6,17 @@ import { eq, gt } from "drizzle-orm";
 export async function GET(request: NextRequest) {
   try {
     const sinceVersion = request.nextUrl.searchParams.get("since_version");
+    const db = await getDb();
 
     let rows;
     if (sinceVersion) {
       const version = parseInt(sinceVersion, 10);
-      rows = await getDb()
+      rows = await db
         .select()
         .from(portalPatterns)
         .where(gt(portalPatterns.patternVersion, version));
     } else {
-      rows = await getDb()
+      rows = await db
         .select()
         .from(portalPatterns)
         .where(eq(portalPatterns.isActive, true));
@@ -31,7 +32,7 @@ export async function GET(request: NextRequest) {
       portalType: row.portalType,
       tier: row.tier,
       patternVersion: row.patternVersion,
-      lastVerified: row.lastVerified?.toISOString(),
+      lastVerified: row.lastVerified,
       notes: row.notes,
       ...((row.patternData as Record<string, unknown>) ?? {}),
     }));

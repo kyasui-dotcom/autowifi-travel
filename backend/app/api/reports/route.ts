@@ -4,7 +4,13 @@ import { connectionReports } from "@/lib/db/schema";
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
+    const body = (await request.json()) as {
+      spotId?: string;
+      success?: boolean;
+      errorDetail?: string;
+      automationLog?: unknown;
+      deviceInfo?: string;
+    };
 
     const { spotId, success, errorDetail, automationLog, deviceInfo } = body;
 
@@ -15,7 +21,8 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    await getDb().insert(connectionReports).values({
+    const db = await getDb();
+    await db.insert(connectionReports).values({
       spotId,
       success,
       errorDetail: errorDetail ?? null,

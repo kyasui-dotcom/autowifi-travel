@@ -14,7 +14,6 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "@neondatabase/serverless": "^1.0.2",
     "@opennextjs/cloudflare": "^1.17.1",
     "drizzle-orm": "^0.45.1",
     "next": "16.1.6",
@@ -22,6 +21,7 @@
     "react-dom": "19.2.3"
   },
   "devDependencies": {
+    "@cloudflare/workers-types": "^4.20260305.1",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
