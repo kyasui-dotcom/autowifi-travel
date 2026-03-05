@@ -5,11 +5,17 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:cloudflare": "npx @opennextjs/cloudflare build",
+    "preview:cloudflare": "npx wrangler pages dev",
+    "deploy:cloudflare": "npx wrangler pages deploy",
+    "db:generate": "npx drizzle-kit generate",
+    "db:push": "npx drizzle-kit push",
     "start": "next start",
     "lint": "eslint"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.0.2",
+    "@opennextjs/cloudflare": "^1.17.1",
     "drizzle-orm": "^0.45.1",
     "next": "16.1.6",
     "react": "19.2.3",
