@@ -10,15 +10,21 @@ import {
   saveCredentials,
 } from "@/services/credential-manager";
 import { verifyInternetAccess } from "@/services/portal-detector";
-import { forceWifiUsage } from "@/services/wifi-manager";
-import patternsData from "@/assets/portal-patterns/patterns-v1.json";
+import { loadPatterns } from "@/services/pattern-sync";
 import type {
   PortalPattern,
   AutomationMessage,
   SavedCredentials,
 } from "@/lib/types";
 
-const patterns = patternsData.patterns as PortalPattern[];
+// Try to import native wifi module (unavailable in Expo Go)
+let forceWifiUsage: (enable: boolean) => Promise<void> = async () => {};
+try {
+  const wm = require("@/services/wifi-manager");
+  forceWifiUsage = wm.forceWifiUsage;
+} catch {
+  // Expo Go
+}
 
 type Phase = "loading" | "automating" | "verifying" | "success" | "failed" | "manual";
 
@@ -34,8 +40,13 @@ export default function PortalScreen() {
   const [portalUrl, setPortalUrl] = useState<string | null>(null);
   const [injectionScript, setInjectionScript] = useState<string | null>(null);
   const [generatedPassword, setGeneratedPassword] = useState<string | undefined>();
+  const [pattern, setPattern] = useState<PortalPattern | undefined>();
 
-  const pattern = patterns.find((p) => p.spotId === spotId);
+  useEffect(() => {
+    loadPatterns().then((patterns) => {
+      setPattern(patterns.find((p) => p.spotId === spotId));
+    });
+  }, [spotId]);
 
   const addLog = useCallback((msg: string) => {
     setLogs((prev) => [...prev.slice(-20), msg]);

@@ -1,28 +1,62 @@
-import { useEffect, useCallback } from "react";
-import { StyleSheet, TouchableOpacity, Linking, Platform } from "react-native";
+import { useEffect, useCallback, useState } from "react";
+import {
+  StyleSheet,
+  TouchableOpacity,
+  Linking,
+  Platform,
+  ScrollView,
+  Alert,
+} from "react-native";
 import { useRouter } from "expo-router";
 
 import { Text, View } from "@/components/Themed";
 import { useWifiStore, useProfileStore } from "@/lib/store";
-import {
-  getCurrentSSID,
-  matchSSIDToPattern,
-  subscribeToWifiChanges,
-  requestLocationPermission,
-} from "@/services/wifi-manager";
-import { detectCaptivePortal } from "@/services/portal-detector";
-import patternsData from "@/assets/portal-patterns/patterns-v1.json";
+import { loadPatterns } from "@/services/pattern-sync";
 import type { PortalPattern } from "@/lib/types";
 
-const patterns = patternsData.patterns as PortalPattern[];
+// Dynamically try to import native WiFi modules (unavailable in Expo Go)
+let getCurrentSSID: () => Promise<string | null>;
+let matchSSIDToPattern: (
+  ssid: string,
+  patterns: PortalPattern[]
+) => PortalPattern | null;
+let subscribeToWifiChanges: (cb: (isWifi: boolean) => void) => () => void;
+let requestLocationPermission: () => Promise<boolean>;
+let detectCaptivePortal: () => Promise<{
+  isCaptive: boolean;
+  portalUrl?: string;
+}>;
+
+let nativeWifiAvailable = false;
+try {
+  const wm = require("@/services/wifi-manager");
+  const pd = require("@/services/portal-detector");
+  getCurrentSSID = wm.getCurrentSSID;
+  matchSSIDToPattern = wm.matchSSIDToPattern;
+  subscribeToWifiChanges = wm.subscribeToWifiChanges;
+  requestLocationPermission = wm.requestLocationPermission;
+  detectCaptivePortal = pd.detectCaptivePortal;
+  nativeWifiAvailable = true;
+} catch {
+  // Expo Go - native modules not available
+}
 
 export default function HomeScreen() {
   const router = useRouter();
   const { wifi, setSSID, setMatchedPattern, setPortalUrl, setStatus } =
     useWifiStore();
   const { profile } = useProfileStore();
+  const [patterns, setPatterns] = useState<PortalPattern[]>([]);
+  const [demoMode, setDemoMode] = useState(!nativeWifiAvailable);
+
+  // Load patterns from API + local
+  useEffect(() => {
+    loadPatterns().then(setPatterns);
+  }, []);
 
   const checkWifi = useCallback(async () => {
+    if (!nativeWifiAvailable || demoMode) return;
+
     const ssid = await getCurrentSSID();
     setSSID(ssid);
 
@@ -48,9 +82,10 @@ export default function HomeScreen() {
     } else {
       setStatus("connected");
     }
-  }, [setSSID, setMatchedPattern, setPortalUrl, setStatus]);
+  }, [setSSID, setMatchedPattern, setPortalUrl, setStatus, patterns, demoMode]);
 
   useEffect(() => {
+    if (!nativeWifiAvailable || demoMode) return;
     requestLocationPermission().then(() => checkWifi());
     const unsub = subscribeToWifiChanges((isWifi) => {
       if (isWifi) checkWifi();
@@ -60,7 +95,14 @@ export default function HomeScreen() {
       }
     });
     return unsub;
-  }, [checkWifi, setSSID, setStatus]);
+  }, [checkWifi, setSSID, setStatus, demoMode]);
+
+  const handleDemoSelect = (pattern: PortalPattern) => {
+    setSSID(pattern.ssids[0]);
+    setMatchedPattern(pattern);
+    setStatus("portal_detected");
+    setPortalUrl(pattern.portalUrl ?? null);
+  };
 
   const handleAutoConnect = () => {
     if (wifi.matchedPattern) {
@@ -79,19 +121,30 @@ export default function HomeScreen() {
   const current = statusConfig[wifi.status];
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container} contentContainerStyle={styles.content}>
       <Text style={styles.appTitle}>AutoWiFi Travel</Text>
 
+      {/* Demo Mode Banner */}
+      {demoMode && (
+        <View style={styles.demoBanner}>
+          <Text style={styles.demoBannerText}>
+            Demo Mode - WiFiスポットを選んでテスト
+          </Text>
+        </View>
+      )}
+
       {/* WiFi Status Card */}
-      <View style={[styles.statusCard, { borderColor: current.color }]}>
-        <View
-          style={[styles.statusDot, { backgroundColor: current.color }]}
-        />
-        <Text style={styles.statusText}>{current.label}</Text>
-        {wifi.ssid && (
-          <Text style={styles.ssidText}>SSID: {wifi.ssid}</Text>
-        )}
-      </View>
+      {!demoMode && (
+        <View style={[styles.statusCard, { borderColor: current.color }]}>
+          <View
+            style={[styles.statusDot, { backgroundColor: current.color }]}
+          />
+          <Text style={styles.statusText}>{current.label}</Text>
+          {wifi.ssid && (
+            <Text style={styles.ssidText}>SSID: {wifi.ssid}</Text>
+          )}
+        </View>
+      )}
 
       {/* Matched Pattern Info */}
       {wifi.matchedPattern && (
@@ -100,7 +153,9 @@ export default function HomeScreen() {
             {wifi.matchedPattern.nameJa}
           </Text>
           <Text style={styles.matchSub}>
-            {wifi.matchedPattern.airportCode} -{" "}
+            {wifi.matchedPattern.airportCode
+              ? `${wifi.matchedPattern.airportCode} - `
+              : ""}
             {wifi.matchedPattern.country}
           </Text>
           <Text style={styles.matchType}>
@@ -115,13 +170,41 @@ export default function HomeScreen() {
       )}
 
       {/* Auto Connect Button */}
-      {wifi.status === "portal_detected" && wifi.matchedPattern && (
-        <TouchableOpacity
-          style={styles.connectButton}
-          onPress={handleAutoConnect}
-        >
-          <Text style={styles.connectButtonText}>自動接続する</Text>
-        </TouchableOpacity>
+      {(wifi.status === "portal_detected" || demoMode) &&
+        wifi.matchedPattern && (
+          <TouchableOpacity
+            style={styles.connectButton}
+            onPress={handleAutoConnect}
+          >
+            <Text style={styles.connectButtonText}>
+              {demoMode ? "ポータル画面を開く" : "自動接続する"}
+            </Text>
+          </TouchableOpacity>
+        )}
+
+      {/* Demo Mode: Pattern List */}
+      {demoMode && (
+        <View style={styles.demoSection}>
+          <Text style={styles.demoSectionTitle}>
+            テスト対象 ({patterns.length}件)
+          </Text>
+          {patterns.map((p) => (
+            <TouchableOpacity
+              key={p.spotId}
+              style={[
+                styles.demoItem,
+                wifi.matchedPattern?.spotId === p.spotId &&
+                  styles.demoItemActive,
+              ]}
+              onPress={() => handleDemoSelect(p)}
+            >
+              <Text style={styles.demoItemName}>{p.nameJa}</Text>
+              <Text style={styles.demoItemSsid}>
+                {p.ssids[0]} ({p.portalType})
+              </Text>
+            </TouchableOpacity>
+          ))}
+        </View>
       )}
 
       {/* Profile Warning */}
@@ -135,30 +218,40 @@ export default function HomeScreen() {
 
       {/* WiFi Settings & Refresh */}
       <View style={styles.bottomButtons}>
+        {!demoMode && (
+          <TouchableOpacity
+            style={styles.wifiSettingsButton}
+            onPress={() => {
+              if (Platform.OS === "android") {
+                Linking.sendIntent("android.settings.WIFI_SETTINGS");
+              } else if (Platform.OS === "ios") {
+                Linking.openURL("App-Prefs:WIFI");
+              }
+            }}
+          >
+            <Text style={styles.wifiSettingsText}>WiFi設定を開く</Text>
+          </TouchableOpacity>
+        )}
         <TouchableOpacity
-          style={styles.wifiSettingsButton}
-          onPress={() => {
-            if (Platform.OS === "android") {
-              Linking.sendIntent("android.settings.WIFI_SETTINGS");
-            } else if (Platform.OS === "ios") {
-              Linking.openURL("App-Prefs:WIFI");
-            }
-          }}
+          style={styles.refreshButton}
+          onPress={demoMode ? () => loadPatterns().then(setPatterns) : checkWifi}
         >
-          <Text style={styles.wifiSettingsText}>WiFi設定を開く</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.refreshButton} onPress={checkWifi}>
-          <Text style={styles.refreshText}>状態を更新</Text>
+          <Text style={styles.refreshText}>
+            {demoMode ? "パターン更新" : "状態を更新"}
+          </Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  content: {
     padding: 20,
+    paddingBottom: 40,
   },
   appTitle: {
     fontSize: 28,
@@ -256,5 +349,46 @@ const styles = StyleSheet.create({
   },
   refreshText: {
     fontSize: 14,
+  },
+  demoBanner: {
+    backgroundColor: "#FF9800",
+    borderRadius: 10,
+    padding: 10,
+    marginBottom: 16,
+    alignItems: "center",
+  },
+  demoBannerText: {
+    color: "#fff",
+    fontWeight: "bold",
+    fontSize: 14,
+  },
+  demoSection: {
+    marginTop: 8,
+    marginBottom: 16,
+  },
+  demoSectionTitle: {
+    fontSize: 16,
+    fontWeight: "bold",
+    marginBottom: 10,
+  },
+  demoItem: {
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: "rgba(150,150,150,0.2)",
+    padding: 12,
+    marginBottom: 8,
+  },
+  demoItemActive: {
+    borderColor: "#2196F3",
+    backgroundColor: "rgba(33, 150, 243, 0.08)",
+  },
+  demoItemName: {
+    fontSize: 15,
+    fontWeight: "600",
+  },
+  demoItemSsid: {
+    fontSize: 12,
+    opacity: 0.5,
+    marginTop: 2,
   },
 });

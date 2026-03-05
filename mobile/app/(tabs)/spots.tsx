@@ -1,9 +1,8 @@
+import { useState, useEffect } from "react";
 import { StyleSheet, FlatList, TouchableOpacity } from "react-native";
 import { Text, View } from "@/components/Themed";
-import patternsData from "@/assets/portal-patterns/patterns-v1.json";
+import { loadPatterns } from "@/services/pattern-sync";
 import type { PortalPattern } from "@/lib/types";
-
-const patterns = patternsData.patterns as PortalPattern[];
 
 const countryFlags: Record<string, string> = {
   KR: "KR",
@@ -53,6 +52,10 @@ function SpotItem({ pattern }: { pattern: PortalPattern }) {
 }
 
 export default function SpotsScreen() {
+  const [patterns, setPatterns] = useState<PortalPattern[]>([]);
+  useEffect(() => {
+    loadPatterns().then(setPatterns);
+  }, []);
   const freePatterns = patterns.filter((p) => p.tier === "free");
   const premiumPatterns = patterns.filter((p) => p.tier === "premium");
 
