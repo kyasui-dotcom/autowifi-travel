@@ -1,5 +1,5 @@
 import { useEffect, useCallback } from "react";
-import { StyleSheet, TouchableOpacity } from "react-native";
+import { StyleSheet, TouchableOpacity, Linking, Platform } from "react-native";
 import { useRouter } from "expo-router";
 
 import { Text, View } from "@/components/Themed";
@@ -133,10 +133,24 @@ export default function HomeScreen() {
         </View>
       )}
 
-      {/* Manual Refresh */}
-      <TouchableOpacity style={styles.refreshButton} onPress={checkWifi}>
-        <Text style={styles.refreshText}>WiFi状態を更新</Text>
-      </TouchableOpacity>
+      {/* WiFi Settings & Refresh */}
+      <View style={styles.bottomButtons}>
+        <TouchableOpacity
+          style={styles.wifiSettingsButton}
+          onPress={() => {
+            if (Platform.OS === "android") {
+              Linking.sendIntent("android.settings.WIFI_SETTINGS");
+            } else if (Platform.OS === "ios") {
+              Linking.openURL("App-Prefs:WIFI");
+            }
+          }}
+        >
+          <Text style={styles.wifiSettingsText}>WiFi設定を開く</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.refreshButton} onPress={checkWifi}>
+          <Text style={styles.refreshText}>状態を更新</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
@@ -215,13 +229,30 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: "#FF9800",
   },
+  bottomButtons: {
+    flexDirection: "row",
+    gap: 10,
+    marginTop: "auto",
+  },
+  wifiSettingsButton: {
+    flex: 1,
+    borderRadius: 12,
+    backgroundColor: "#2196F3",
+    padding: 12,
+    alignItems: "center",
+  },
+  wifiSettingsText: {
+    fontSize: 14,
+    color: "#fff",
+    fontWeight: "bold",
+  },
   refreshButton: {
+    flex: 1,
     borderRadius: 12,
     borderWidth: 1,
     borderColor: "#ccc",
     padding: 12,
     alignItems: "center",
-    marginTop: "auto",
   },
   refreshText: {
     fontSize: 14,

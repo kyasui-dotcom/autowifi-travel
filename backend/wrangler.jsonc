@@ -2,12 +2,16 @@
   "name": "autowifi-travel-api",
   "compatibility_date": "2025-04-01",
   "compatibility_flags": ["nodejs_compat"],
-  "pages_build_output_dir": ".open-next/cloudflare",
+  "main": ".open-next/worker.js",
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
   "d1_databases": [
     {
       "binding": "DB",
       "database_name": "autowifi-travel-db",
-      "database_id": "<YOUR_D1_DATABASE_ID>"
+      "database_id": "f7020ddb-1033-49cf-a6dd-3680f32aee4d"
     }
   ]
 }

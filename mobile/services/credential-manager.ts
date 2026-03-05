@@ -1,11 +1,11 @@
-import EncryptedStorage from "react-native-encrypted-storage";
+import * as SecureStore from "expo-secure-store";
 import type { SavedCredentials } from "@/lib/types";
 
 const CREDENTIALS_KEY = "autowifi_credentials";
 
 async function getAllCredentials(): Promise<Record<string, SavedCredentials>> {
   try {
-    const raw = await EncryptedStorage.getItem(CREDENTIALS_KEY);
+    const raw = await SecureStore.getItemAsync(CREDENTIALS_KEY);
     return raw ? JSON.parse(raw) : {};
   } catch {
     return {};
@@ -15,7 +15,7 @@ async function getAllCredentials(): Promise<Record<string, SavedCredentials>> {
 async function saveAllCredentials(
   creds: Record<string, SavedCredentials>
 ): Promise<void> {
-  await EncryptedStorage.setItem(CREDENTIALS_KEY, JSON.stringify(creds));
+  await SecureStore.setItemAsync(CREDENTIALS_KEY, JSON.stringify(creds));
 }
 
 export async function getCredentials(
