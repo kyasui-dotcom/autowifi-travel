@@ -1,0 +1,116 @@
+{
+  "common": {
+    "save": "保存",
+    "saved": "已保存",
+    "cancel": "取消",
+    "done": "完成",
+    "retry": "重试",
+    "error": "错误",
+    "loading": "加载中",
+    "confirm": "确认"
+  },
+  "tabs": {
+    "home": "首页",
+    "spots": "热点",
+    "esim": "eSIM",
+    "settings": "设置"
+  },
+  "nav": {
+    "wifiConnect": "WiFi连接",
+    "esimPurchase": "购买eSIM"
+  },
+  "home": {
+    "appTitle": "AutoWiFi Travel",
+    "demoBanner": "演示模式 - 选择WiFi热点进行测试",
+    "status": {
+      "disconnected": "WiFi未连接",
+      "connected_no_portal": "WiFi已连接（无门户）",
+      "portal_detected": "检测到门户！",
+      "auto_connecting": "自动连接中...",
+      "connected": "已连接"
+    },
+    "type": {
+      "agree_only": "仅需同意",
+      "registration": "需要注册",
+      "login": "登录"
+    },
+    "typeLabel": "类型：{{type}}",
+    "openPortal": "打开门户页面",
+    "autoConnect": "自动连接",
+    "testTargets": "测试对象（{{count}}个）",
+    "profileWarning": "尚未设置个人资料。请在设置选项卡中注册。",
+    "openWifiSettings": "打开WiFi设置",
+    "updatePatterns": "更新模式",
+    "updateStatus": "刷新状态",
+    "reconnecting": "重新连接中...",
+    "reconnected": "已重新连接",
+    "reconnectFailed": "重新连接失败",
+    "reconnectChecking": "正在检查连接..."
+  },
+  "spots": {
+    "title": "支持的WiFi热点（{{count}}个）",
+    "portalType": {
+      "agree_only": "仅需同意",
+      "registration": "注册",
+      "login": "登录",
+      "redirect_only": "自动"
+    },
+    "premium": "Premium"
+  },
+  "esim": {
+    "title": "购买eSIM",
+    "subtitle": "在Airalo购买目的地的eSIM。\n即使没有免费WiFi也能保持连接。",
+    "viewEsim": "查看eSIM →",
+    "spotCount": "{{count}}个WiFi热点",
+    "countryEsim": "{{country}}的eSIM",
+    "openBrowser": "在浏览器中打开",
+    "noUrl": "未指定URL",
+    "countries": {
+      "KR": "韩国",
+      "SG": "新加坡",
+      "US": "美国",
+      "HK": "香港",
+      "TW": "台湾",
+      "TH": "泰国",
+      "MY": "马来西亚",
+      "JP": "日本"
+    }
+  },
+  "settings": {
+    "profile": "个人资料",
+    "profileDesc": "用于WiFi门户自动注册的信息。请使用罗马字母输入。",
+    "firstName": "名",
+    "lastName": "姓",
+    "email": "电子邮件地址",
+    "inputError": "输入错误",
+    "fillAll": "请填写所有项目",
+    "invalidEmail": "请输入有效的电子邮件地址",
+    "saveFailed": "保存个人资料失败",
+    "passwordInfo": "关于密码",
+    "passwordDesc": "WiFi门户注册所需的密码会按热点自动生成。生成的密码经过加密存储在设备上，下次连接时会自动使用。",
+    "supportedSpots": "支持的热点",
+    "supportedSpotsDesc": "Free: 仁川(ICN), 樟宜(SIN), 夏威夷(HNL), 香港(HKG)\nPremium: 桃园(TPE), 素万那普(BKK), 等",
+    "language": "语言",
+    "languageDesc": "选择应用的显示语言"
+  },
+  "portal": {
+    "spotNotFound": "未找到WiFi热点：{{spotId}}",
+    "setProfileFirst": "请先设置个人资料",
+    "phase": {
+      "loading": "加载中",
+      "automating": "自动连接中...",
+      "verifying": "验证中...",
+      "success": "连接成功！",
+      "failed": "失败",
+      "manual": "手动模式"
+    },
+    "switchManual": "切换到手动模式",
+    "manualConnect": "手动连接"
+  },
+  "wifi": {
+    "locationPermTitle": "位置权限",
+    "locationPermMessage": "需要位置权限来检测WiFi SSID",
+    "locationPermAllow": "允许",
+    "locationPermDeny": "拒绝"
+  }
+}

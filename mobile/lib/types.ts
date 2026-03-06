@@ -67,6 +67,8 @@ export interface PortalPattern {
   spotId: string;
   name: string;
   nameJa: string;
+  nameZh?: string;
+  nameKo?: string;
   airportCode: string;
   country: string;
   ssids: string[];

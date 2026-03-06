@@ -26,6 +26,8 @@ export async function GET(request: NextRequest) {
       spotId: row.spotId,
       name: row.name,
       nameJa: row.nameJa,
+      nameZh: row.nameZh,
+      nameKo: row.nameKo,
       airportCode: row.airportCode,
       country: row.country,
       ssids: row.ssids,

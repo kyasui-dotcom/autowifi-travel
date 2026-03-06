@@ -27,6 +27,8 @@ export const portalPatterns = sqliteTable(
     spotId: text("spot_id").notNull().unique(),
     name: text("name").notNull(),
     nameJa: text("name_ja").notNull(),
+    nameZh: text("name_zh").notNull().default(""),
+    nameKo: text("name_ko").notNull().default(""),
     airportCode: text("airport_code").default(""),
     country: text("country").notNull(),
     ssids: text("ssids", { mode: "json" }).notNull().$type<string[]>(),

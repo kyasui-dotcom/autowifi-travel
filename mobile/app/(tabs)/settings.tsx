@@ -10,7 +10,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useTranslation } from "react-i18next";
 import { Text, View } from "@/components/Themed";
 import { useProfileStore } from "@/lib/store";
-import { setLanguage, getCurrentLanguage } from "@/lib/i18n";
+import { setLanguage, getCurrentLanguage, type SupportedLanguage } from "@/lib/i18n";
 import type { UserProfile } from "@/lib/types";
 
 const PROFILE_STORAGE_KEY = "autowifi_user_profile";
@@ -74,7 +74,7 @@ export default function SettingsScreen() {
     }
   };
 
-  const handleLanguageChange = async (lang: "ja" | "en") => {
+  const handleLanguageChange = async (lang: SupportedLanguage) => {
     await setLanguage(lang);
     setCurrentLang(lang);
   };
@@ -85,39 +85,31 @@ export default function SettingsScreen() {
         {/* Language Switcher */}
         <Text style={styles.sectionTitle}>{t('settings.language')}</Text>
         <Text style={styles.description}>{t('settings.languageDesc')}</Text>
-        <View style={styles.langRow}>
-          <TouchableOpacity
-            style={[
-              styles.langButton,
-              currentLang === "ja" && styles.langButtonActive,
-            ]}
-            onPress={() => handleLanguageChange("ja")}
-          >
-            <Text
+        <View style={styles.langGrid}>
+          {([
+            { code: "ja" as const, label: "日本語" },
+            { code: "en" as const, label: "English" },
+            { code: "zh" as const, label: "中文" },
+            { code: "ko" as const, label: "한국어" },
+          ]).map(({ code, label }) => (
+            <TouchableOpacity
+              key={code}
               style={[
-                styles.langButtonText,
-                currentLang === "ja" && styles.langButtonTextActive,
+                styles.langButton,
+                currentLang === code && styles.langButtonActive,
               ]}
+              onPress={() => handleLanguageChange(code)}
             >
-              日本語
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[
-              styles.langButton,
-              currentLang === "en" && styles.langButtonActive,
-            ]}
-            onPress={() => handleLanguageChange("en")}
-          >
-            <Text
-              style={[
-                styles.langButtonText,
-                currentLang === "en" && styles.langButtonTextActive,
-              ]}
-            >
-              English
-            </Text>
-          </TouchableOpacity>
+              <Text
+                style={[
+                  styles.langButtonText,
+                  currentLang === code && styles.langButtonTextActive,
+                ]}
+              >
+                {label}
+              </Text>
+            </TouchableOpacity>
+          ))}
         </View>
 
         {/* Profile Section */}
@@ -246,13 +238,14 @@ const styles = StyleSheet.create({
     lineHeight: 20,
     opacity: 0.7,
   },
-  langRow: {
+  langGrid: {
     flexDirection: "row",
+    flexWrap: "wrap",
     gap: 10,
     marginBottom: 8,
   },
   langButton: {
-    flex: 1,
+    width: "47%",
     borderRadius: 10,
     borderWidth: 1,
     borderColor: "#ccc",
