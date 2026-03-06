@@ -625,8 +625,14 @@ export async function POST() {
       }).onConflictDoUpdate({
         target: portalPatterns.spotId,
         set: {
+          name: p.name,
+          nameJa: p.nameJa,
+          nameZh: p.nameZh,
+          nameKo: p.nameKo,
           patternData: p.patternData,
           ssids: p.ssids,
+          tier: p.tier,
+          notes: p.notes,
           updatedAt: now,
         },
       });
