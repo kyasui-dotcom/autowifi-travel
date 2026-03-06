@@ -1,0 +1,139 @@
+{
+  "version": 1,
+  "updatedAt": "2026-03-06",
+  "regions": [
+    {
+      "spotId": "icn-airport-wifi",
+      "latitude": 37.4602,
+      "longitude": 126.4407,
+      "radius": 2000,
+      "identifier": "geofence_icn-airport-wifi"
+    },
+    {
+      "spotId": "sin-changi-wifi",
+      "latitude": 1.3644,
+      "longitude": 103.9915,
+      "radius": 1500,
+      "identifier": "geofence_sin-changi-wifi"
+    },
+    {
+      "spotId": "hnl-free-wifi",
+      "latitude": 21.3245,
+      "longitude": -157.9251,
+      "radius": 1000,
+      "identifier": "geofence_hnl-free-wifi"
+    },
+    {
+      "spotId": "hkg-airport-wifi",
+      "latitude": 22.3080,
+      "longitude": 113.9185,
+      "radius": 2000,
+      "identifier": "geofence_hkg-airport-wifi"
+    },
+    {
+      "spotId": "tpe-taoyuan-wifi",
+      "latitude": 25.0797,
+      "longitude": 121.2342,
+      "radius": 2000,
+      "identifier": "geofence_tpe-taoyuan-wifi"
+    },
+    {
+      "spotId": "bkk-suvarnabhumi-wifi",
+      "latitude": 13.6900,
+      "longitude": 100.7501,
+      "radius": 2000,
+      "identifier": "geofence_bkk-suvarnabhumi-wifi"
+    },
+    {
+      "spotId": "kr-gimpo-wifi",
+      "latitude": 37.5585,
+      "longitude": 126.7906,
+      "radius": 1000,
+      "identifier": "geofence_kr-gimpo-wifi"
+    },
+    {
+      "spotId": "cn-pek-wifi",
+      "latitude": 40.0799,
+      "longitude": 116.6031,
+      "radius": 2500,
+      "identifier": "geofence_cn-pek-wifi"
+    },
+    {
+      "spotId": "cn-pvg-wifi",
+      "latitude": 31.1443,
+      "longitude": 121.8083,
+      "radius": 2000,
+      "identifier": "geofence_cn-pvg-wifi"
+    },
+    {
+      "spotId": "cn-can-wifi",
+      "latitude": 23.3924,
+      "longitude": 113.2988,
+      "radius": 2000,
+      "identifier": "geofence_cn-can-wifi"
+    },
+    {
+      "spotId": "my-klia-wifi",
+      "latitude": 2.7456,
+      "longitude": 101.7099,
+      "radius": 2000,
+      "identifier": "geofence_my-klia-wifi"
+    },
+    {
+      "spotId": "vn-sgn-wifi",
+      "latitude": 10.8188,
+      "longitude": 106.6520,
+      "radius": 1000,
+      "identifier": "geofence_vn-sgn-wifi"
+    },
+    {
+      "spotId": "ph-mnl-wifi",
+      "latitude": 14.5086,
+      "longitude": 121.0198,
+      "radius": 1500,
+      "identifier": "geofence_ph-mnl-wifi"
+    },
+    {
+      "spotId": "id-cgk-wifi",
+      "latitude": -6.1256,
+      "longitude": 106.6558,
+      "radius": 2500,
+      "identifier": "geofence_id-cgk-wifi"
+    },
+    {
+      "spotId": "jp-narita-wifi",
+      "latitude": 35.7720,
+      "longitude": 140.3929,
+      "radius": 2000,
+      "identifier": "geofence_jp-narita-wifi"
+    },
+    {
+      "spotId": "jp-haneda-wifi",
+      "latitude": 35.5494,
+      "longitude": 139.7798,
+      "radius": 1500,
+      "identifier": "geofence_jp-haneda-wifi"
+    },
+    {
+      "spotId": "jp-kix-wifi",
+      "latitude": 34.4320,
+      "longitude": 135.2304,
+      "radius": 1500,
+      "identifier": "geofence_jp-kix-wifi"
+    },
+    {
+      "spotId": "jp-fuk-wifi",
+      "latitude": 33.5859,
+      "longitude": 130.4512,
+      "radius": 1000,
+      "identifier": "geofence_jp-fuk-wifi"
+    },
+    {
+      "spotId": "jp-ngo-wifi",
+      "latitude": 34.8584,
+      "longitude": 136.8128,
+      "radius": 1500,
+      "identifier": "geofence_jp-ngo-wifi"
+    }
+  ]
+}

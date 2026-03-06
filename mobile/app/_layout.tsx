@@ -11,6 +11,10 @@ import { useColorScheme } from '@/components/useColorScheme';
 import '@/lib/i18n';
 import { loadSavedLanguage } from '@/lib/i18n';
 
+// Register background geofence task at module level (required by expo-task-manager)
+import '@/services/geofence-service';
+import { useGeofenceMonitor } from '@/hooks/useGeofenceMonitor';
+
 export {
   // Catch any errors thrown by the Layout component.
   ErrorBoundary,
@@ -62,6 +66,9 @@ export default function RootLayout() {
 function RootLayoutNav({ isFirstLaunch }: { isFirstLaunch: boolean }) {
   const colorScheme = useColorScheme();
   const { t } = useTranslation();
+
+  // Initialize geofence monitoring (reads persisted setting, starts if enabled)
+  useGeofenceMonitor();
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>

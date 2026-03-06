@@ -109,7 +109,13 @@
     "supportedSpots": "支持的热点",
     "supportedSpotsDesc": "Free: 仁川(ICN), 樟宜(SIN), 夏威夷(HNL), 香港(HKG)\nPremium: 桃园(TPE), 素万那普(BKK), 等",
     "language": "语言",
-    "languageDesc": "选择应用的显示语言"
+    "languageDesc": "选择应用的显示语言",
+    "geofence": "WiFi热点通知",
+    "geofenceDesc": "当您接近支持的机场WiFi热点时收到通知。使用省电的地理围栏技术。",
+    "geofenceEnable": "启用机场WiFi通知",
+    "geofenceActive": "正在监控{{count}}个机场WiFi热点",
+    "geofencePermDenied": "需要后台位置权限。请在设备设置中启用。",
+    "openAppSettings": "打开应用设置"
   },
   "portal": {
     "spotNotFound": "未找到WiFi热点：{{spotId}}",

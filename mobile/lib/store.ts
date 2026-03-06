@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import type { UserProfile, WifiState, PortalPattern, AutoReconnectState, AutoReconnectStatus } from "@/lib/types";
+import type { UserProfile, WifiState, PortalPattern, AutoReconnectState, AutoReconnectStatus, GeofenceState, GeofenceStatus } from "@/lib/types";
 
 // ===== User Profile Store =====
 
@@ -70,4 +70,48 @@ export const useReconnectStore = create<ReconnectStore>((set) => ({
   setLastCheckAt: (time) =>
     set((s) => ({ reconnect: { ...s.reconnect, lastCheckAt: time } })),
   resetReconnect: () => set({ reconnect: initialReconnectState }),
+}));
+
+// ===== Geofence Store =====
+
+interface GeofenceStore {
+  geofence: GeofenceState;
+  setEnabled: (enabled: boolean) => void;
+  setStatus: (status: GeofenceStatus) => void;
+  setActiveRegionCount: (count: number) => void;
+  setLastTriggered: (spotId: string) => void;
+  resetGeofence: () => void;
+}
+
+const initialGeofenceState: GeofenceState = {
+  enabled: false,
+  status: "disabled",
+  activeRegionCount: 0,
+  lastTriggeredSpotId: null,
+  lastTriggeredAt: null,
+};
+
+export const useGeofenceStore = create<GeofenceStore>((set) => ({
+  geofence: initialGeofenceState,
+  setEnabled: (enabled) =>
+    set((s) => ({
+      geofence: {
+        ...s.geofence,
+        enabled,
+        status: enabled ? "initializing" : "disabled",
+      },
+    })),
+  setStatus: (status) =>
+    set((s) => ({ geofence: { ...s.geofence, status } })),
+  setActiveRegionCount: (count) =>
+    set((s) => ({ geofence: { ...s.geofence, activeRegionCount: count } })),
+  setLastTriggered: (spotId) =>
+    set((s) => ({
+      geofence: {
+        ...s.geofence,
+        lastTriggeredSpotId: spotId,
+        lastTriggeredAt: new Date().toISOString(),
+      },
+    })),
+  resetGeofence: () => set({ geofence: initialGeofenceState }),
 }));

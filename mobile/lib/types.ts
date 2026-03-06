@@ -142,3 +142,29 @@ export interface AutomationMessage {
   status: AutomationStatus;
   detail: string;
 }
+
+// ===== Geofence Types =====
+
+export interface GeofenceRegion {
+  spotId: string;
+  latitude: number;
+  longitude: number;
+  radius: number;
+  identifier: string;
+}
+
+export interface GeofenceBundle {
+  version: number;
+  updatedAt: string;
+  regions: GeofenceRegion[];
+}
+
+export type GeofenceStatus = "disabled" | "permission_denied" | "initializing" | "monitoring" | "error";
+
+export interface GeofenceState {
+  enabled: boolean;
+  status: GeofenceStatus;
+  activeRegionCount: number;
+  lastTriggeredSpotId: string | null;
+  lastTriggeredAt: string | null;
+}

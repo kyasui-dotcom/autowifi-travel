@@ -109,7 +109,13 @@
     "supportedSpots": "対応スポット",
     "supportedSpotsDesc": "Free: 仁川(ICN), チャンギ(SIN), ハワイ(HNL), 香港(HKG)\nPremium: 桃園(TPE), スワンナプーム(BKK), 他",
     "language": "言語",
-    "languageDesc": "アプリの表示言語を選択してください"
+    "languageDesc": "アプリの表示言語を選択してください",
+    "geofence": "WiFiスポット通知",
+    "geofenceDesc": "対応空港に近づくと通知でお知らせします。バッテリー消費の少ないジオフェンスを使用。",
+    "geofenceEnable": "空港WiFi通知を有効にする",
+    "geofenceActive": "{{count}}箇所の空港WiFiを監視中",
+    "geofencePermDenied": "バックグラウンド位置情報の許可が必要です。デバイスの設定から有効にしてください。",
+    "openAppSettings": "アプリ設定を開く"
   },
   "portal": {
     "spotNotFound": "WiFiスポットが見つかりません: {{spotId}}",

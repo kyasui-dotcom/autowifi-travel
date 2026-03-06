@@ -13,7 +13,12 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSLocationAlwaysAndWhenInUseUsageDescription": "AutoWiFi needs background location access to notify you when you're near a supported WiFi spot.",
+        "NSLocationWhenInUseUsageDescription": "AutoWiFi needs location access to detect nearby WiFi spots.",
+        "UIBackgroundModes": ["location", "fetch"]
+      }
     },
     "android": {
       "package": "com.autowifi.travel",
@@ -26,8 +31,13 @@
       "permissions": [
         "ACCESS_FINE_LOCATION",
         "ACCESS_COARSE_LOCATION",
+        "ACCESS_BACKGROUND_LOCATION",
         "ACCESS_WIFI_STATE",
-        "CHANGE_WIFI_STATE"
+        "CHANGE_WIFI_STATE",
+        "POST_NOTIFICATIONS",
+        "RECEIVE_BOOT_COMPLETED",
+        "FOREGROUND_SERVICE",
+        "FOREGROUND_SERVICE_LOCATION"
       ],
       "predictiveBackGestureEnabled": false
     },
@@ -38,7 +48,23 @@
     },
     "plugins": [
       "expo-router",
-      "expo-secure-store"
+      "expo-secure-store",
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "AutoWiFi needs background location access to notify you when you're near a supported WiFi spot.",
+          "locationWhenInUsePermission": "AutoWiFi needs location access to detect nearby WiFi spots.",
+          "isAndroidBackgroundLocationEnabled": true,
+          "isAndroidForegroundServiceEnabled": true
+        }
+      ],
+      [
+        "expo-notifications",
+        {
+          "color": "#2196F3"
+        }
+      ],
+      "expo-task-manager"
     ],
     "experiments": {
       "typedRoutes": true

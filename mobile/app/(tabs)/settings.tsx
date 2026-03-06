@@ -5,12 +5,16 @@ import {
   TouchableOpacity,
   Alert,
   ScrollView,
+  Switch,
+  Platform,
+  Linking,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useTranslation } from "react-i18next";
 import { Text, View } from "@/components/Themed";
 import { useProfileStore } from "@/lib/store";
 import { setLanguage, getCurrentLanguage, type SupportedLanguage } from "@/lib/i18n";
+import { useGeofenceMonitor } from "@/hooks/useGeofenceMonitor";
 import type { UserProfile } from "@/lib/types";
 
 const PROFILE_STORAGE_KEY = "autowifi_user_profile";
@@ -23,6 +27,12 @@ export default function SettingsScreen() {
   const [email, setEmail] = useState(profile?.email ?? "");
   const [saved, setSaved] = useState(false);
   const [currentLang, setCurrentLang] = useState(getCurrentLanguage());
+  const {
+    geofenceEnabled,
+    geofenceStatus,
+    activeRegionCount,
+    toggleGeofence,
+  } = useGeofenceMonitor();
 
   useEffect(() => {
     loadProfile();
@@ -111,6 +121,52 @@ export default function SettingsScreen() {
             </TouchableOpacity>
           ))}
         </View>
+
+        {/* Geofence Notifications Section */}
+        <Text style={[styles.sectionTitle, { marginTop: 24 }]}>
+          {t('settings.geofence')}
+        </Text>
+        <Text style={styles.description}>{t('settings.geofenceDesc')}</Text>
+
+        <View style={styles.settingRow}>
+          <View style={{ flex: 1 }}>
+            <Text style={styles.settingLabel}>
+              {t('settings.geofenceEnable')}
+            </Text>
+            {geofenceEnabled && geofenceStatus === "monitoring" && (
+              <Text style={styles.settingSubtext}>
+                {t('settings.geofenceActive', { count: activeRegionCount })}
+              </Text>
+            )}
+            {geofenceStatus === "permission_denied" && (
+              <Text style={[styles.settingSubtext, { color: "#FF9800" }]}>
+                {t('settings.geofencePermDenied')}
+              </Text>
+            )}
+          </View>
+          <Switch
+            value={geofenceEnabled}
+            onValueChange={toggleGeofence}
+            trackColor={{ false: "#ccc", true: "#2196F3" }}
+          />
+        </View>
+
+        {geofenceStatus === "permission_denied" && (
+          <TouchableOpacity
+            style={styles.openSettingsButton}
+            onPress={() => {
+              if (Platform.OS === "ios") {
+                Linking.openURL("app-settings:");
+              } else {
+                Linking.openSettings();
+              }
+            }}
+          >
+            <Text style={styles.openSettingsText}>
+              {t('settings.openAppSettings')}
+            </Text>
+          </TouchableOpacity>
+        )}
 
         {/* Profile Section */}
         <Text style={[styles.sectionTitle, { marginTop: 24 }]}>
@@ -262,5 +318,34 @@ const styles = StyleSheet.create({
   },
   langButtonTextActive: {
     color: "#2196F3",
+  },
+  settingRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingVertical: 12,
+    marginBottom: 8,
+  },
+  settingLabel: {
+    fontSize: 16,
+    fontWeight: "500",
+  },
+  settingSubtext: {
+    fontSize: 12,
+    opacity: 0.6,
+    marginTop: 2,
+  },
+  openSettingsButton: {
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: "#FF9800",
+    padding: 10,
+    alignItems: "center",
+    marginBottom: 16,
+  },
+  openSettingsText: {
+    fontSize: 14,
+    color: "#FF9800",
+    fontWeight: "600",
   },
 });
