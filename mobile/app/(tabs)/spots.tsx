@@ -1,35 +1,21 @@
 import { useState, useEffect } from "react";
 import { StyleSheet, FlatList, TouchableOpacity } from "react-native";
+import { useTranslation } from "react-i18next";
 import { Text, View } from "@/components/Themed";
 import { loadPatterns } from "@/services/pattern-sync";
+import { getPatternName } from "@/lib/i18n";
 import type { PortalPattern } from "@/lib/types";
 
-const countryFlags: Record<string, string> = {
-  KR: "KR",
-  SG: "SG",
-  US: "US",
-  HK: "HK",
-  TW: "TW",
-  TH: "TH",
-  MY: "MY",
-  JP: "JP",
-};
-
 function SpotItem({ pattern }: { pattern: PortalPattern }) {
-  const portalTypeLabel = {
-    agree_only: "同意のみ",
-    registration: "登録が必要",
-    login: "ログイン",
-    redirect_only: "自動",
-  };
+  const { t } = useTranslation();
 
   return (
     <View style={styles.spotCard}>
       <View style={styles.spotHeader}>
-        <Text style={styles.spotName}>{pattern.nameJa}</Text>
+        <Text style={styles.spotName}>{getPatternName(pattern)}</Text>
         {pattern.tier === "premium" && (
           <View style={styles.premiumBadge}>
-            <Text style={styles.premiumText}>Premium</Text>
+            <Text style={styles.premiumText}>{t('spots.premium')}</Text>
           </View>
         )}
       </View>
@@ -41,7 +27,7 @@ function SpotItem({ pattern }: { pattern: PortalPattern }) {
       </Text>
       <View style={styles.spotFooter}>
         <Text style={styles.spotType}>
-          {portalTypeLabel[pattern.portalType]}
+          {t(`spots.portalType.${pattern.portalType}`)}
         </Text>
         <Text style={styles.spotVersion}>
           v{pattern.patternVersion}
@@ -52,6 +38,7 @@ function SpotItem({ pattern }: { pattern: PortalPattern }) {
 }
 
 export default function SpotsScreen() {
+  const { t } = useTranslation();
   const [patterns, setPatterns] = useState<PortalPattern[]>([]);
   useEffect(() => {
     loadPatterns().then(setPatterns);
@@ -67,7 +54,7 @@ export default function SpotsScreen() {
         renderItem={({ item }) => <SpotItem pattern={item} />}
         ListHeaderComponent={
           <Text style={styles.sectionTitle}>
-            対応WiFiスポット ({patterns.length}件)
+            {t('spots.title', { count: patterns.length })}
           </Text>
         }
         contentContainerStyle={styles.listContent}

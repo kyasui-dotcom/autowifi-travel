@@ -7,18 +7,22 @@ import {
   ScrollView,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useTranslation } from "react-i18next";
 import { Text, View } from "@/components/Themed";
 import { useProfileStore } from "@/lib/store";
+import { setLanguage, getCurrentLanguage } from "@/lib/i18n";
 import type { UserProfile } from "@/lib/types";
 
 const PROFILE_STORAGE_KEY = "autowifi_user_profile";
 
 export default function SettingsScreen() {
+  const { t } = useTranslation();
   const { profile, setProfile } = useProfileStore();
   const [firstName, setFirstName] = useState(profile?.firstName ?? "");
   const [lastName, setLastName] = useState(profile?.lastName ?? "");
   const [email, setEmail] = useState(profile?.email ?? "");
   const [saved, setSaved] = useState(false);
+  const [currentLang, setCurrentLang] = useState(getCurrentLanguage());
 
   useEffect(() => {
     loadProfile();
@@ -41,13 +45,13 @@ export default function SettingsScreen() {
 
   const handleSave = async () => {
     if (!firstName.trim() || !lastName.trim() || !email.trim()) {
-      Alert.alert("入力エラー", "すべての項目を入力してください");
+      Alert.alert(t('settings.inputError'), t('settings.fillAll'));
       return;
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-      Alert.alert("入力エラー", "正しいメールアドレスを入力してください");
+      Alert.alert(t('settings.inputError'), t('settings.invalidEmail'));
       return;
     }
 
@@ -66,19 +70,63 @@ export default function SettingsScreen() {
       setSaved(true);
       setTimeout(() => setSaved(false), 2000);
     } catch {
-      Alert.alert("エラー", "プロフィールの保存に失敗しました");
+      Alert.alert(t('common.error'), t('settings.saveFailed'));
     }
+  };
+
+  const handleLanguageChange = async (lang: "ja" | "en") => {
+    await setLanguage(lang);
+    setCurrentLang(lang);
   };
 
   return (
     <ScrollView style={styles.container}>
       <View style={styles.content}>
-        <Text style={styles.sectionTitle}>プロフィール</Text>
-        <Text style={styles.description}>
-          WiFiポータルの自動登録に使用される情報です。ローマ字で入力してください。
-        </Text>
+        {/* Language Switcher */}
+        <Text style={styles.sectionTitle}>{t('settings.language')}</Text>
+        <Text style={styles.description}>{t('settings.languageDesc')}</Text>
+        <View style={styles.langRow}>
+          <TouchableOpacity
+            style={[
+              styles.langButton,
+              currentLang === "ja" && styles.langButtonActive,
+            ]}
+            onPress={() => handleLanguageChange("ja")}
+          >
+            <Text
+              style={[
+                styles.langButtonText,
+                currentLang === "ja" && styles.langButtonTextActive,
+              ]}
+            >
+              日本語
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[
+              styles.langButton,
+              currentLang === "en" && styles.langButtonActive,
+            ]}
+            onPress={() => handleLanguageChange("en")}
+          >
+            <Text
+              style={[
+                styles.langButtonText,
+                currentLang === "en" && styles.langButtonTextActive,
+              ]}
+            >
+              English
+            </Text>
+          </TouchableOpacity>
+        </View>
 
-        <Text style={styles.label}>名 (First Name)</Text>
+        {/* Profile Section */}
+        <Text style={[styles.sectionTitle, { marginTop: 24 }]}>
+          {t('settings.profile')}
+        </Text>
+        <Text style={styles.description}>{t('settings.profileDesc')}</Text>
+
+        <Text style={styles.label}>{t('settings.firstName')}</Text>
         <TextInput
           style={styles.input}
           value={firstName}
@@ -88,7 +136,7 @@ export default function SettingsScreen() {
           autoCorrect={false}
         />
 
-        <Text style={styles.label}>姓 (Last Name)</Text>
+        <Text style={styles.label}>{t('settings.lastName')}</Text>
         <TextInput
           style={styles.input}
           value={lastName}
@@ -98,7 +146,7 @@ export default function SettingsScreen() {
           autoCorrect={false}
         />
 
-        <Text style={styles.label}>メールアドレス</Text>
+        <Text style={styles.label}>{t('settings.email')}</Text>
         <TextInput
           style={styles.input}
           value={email}
@@ -114,23 +162,19 @@ export default function SettingsScreen() {
           onPress={handleSave}
         >
           <Text style={styles.saveButtonText}>
-            {saved ? "保存しました" : "保存する"}
+            {saved ? t('common.saved') : t('common.save')}
           </Text>
         </TouchableOpacity>
 
         <View style={styles.infoSection}>
-          <Text style={styles.infoTitle}>パスワードについて</Text>
-          <Text style={styles.infoText}>
-            WiFiポータルの登録時に必要なパスワードは、スポットごとに自動生成されます。
-            生成されたパスワードは暗号化してデバイスに保存され、次回接続時に自動で使用されます。
-          </Text>
+          <Text style={styles.infoTitle}>{t('settings.passwordInfo')}</Text>
+          <Text style={styles.infoText}>{t('settings.passwordDesc')}</Text>
         </View>
 
         <View style={styles.infoSection}>
-          <Text style={styles.infoTitle}>対応スポット</Text>
+          <Text style={styles.infoTitle}>{t('settings.supportedSpots')}</Text>
           <Text style={styles.infoText}>
-            Free: 仁川(ICN), チャンギ(SIN), ハワイ(HNL), 香港(HKG){"\n"}
-            Premium: 桃園(TPE), スワンナプーム(BKK), 他
+            {t('settings.supportedSpotsDesc')}
           </Text>
         </View>
       </View>
@@ -201,5 +245,29 @@ const styles = StyleSheet.create({
     fontSize: 13,
     lineHeight: 20,
     opacity: 0.7,
+  },
+  langRow: {
+    flexDirection: "row",
+    gap: 10,
+    marginBottom: 8,
+  },
+  langButton: {
+    flex: 1,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: "#ccc",
+    padding: 12,
+    alignItems: "center",
+  },
+  langButtonActive: {
+    borderColor: "#2196F3",
+    backgroundColor: "rgba(33, 150, 243, 0.1)",
+  },
+  langButtonText: {
+    fontSize: 15,
+    fontWeight: "600",
+  },
+  langButtonTextActive: {
+    color: "#2196F3",
   },
 });

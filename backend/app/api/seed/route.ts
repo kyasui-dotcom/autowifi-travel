@@ -321,6 +321,233 @@ const SEED_PATTERNS = [
     },
     notes: "Wi2 operated. Session: ~5 hours.",
   },
+  {
+    spotId: "jp-7eleven-wifi",
+    name: "7-Eleven Japan WiFi",
+    nameJa: "セブンイレブン",
+    airportCode: "",
+    country: "JP",
+    ssids: ["7SPOT"],
+    portalType: "registration",
+    tier: "free",
+    patternData: {
+      registration: {
+        fields: [
+          { fieldId: "email", selector: "input[name='email'], input[type='email']", fallbackSelectors: ["input[type='text']:first-of-type"], valueSource: "profile.email", inputMethod: "set_value", delayMs: 500 },
+        ],
+        postFillActions: [
+          { description: "Accept terms", selector: "input[type='checkbox']", fallbackSelectors: [".agree", "#terms"], action: "check", delayMs: 300 },
+          { description: "Submit", selector: "button[type='submit'], input[type='submit']", fallbackSelectors: ["button:last-of-type"], action: "click", delayMs: 500 },
+        ],
+        successCondition: { method: "http_probe", value: "http://connectivitycheck.gstatic.com/generate_204" },
+      },
+    },
+    notes: "Email registration. Session: 60 min, 3 times/day.",
+  },
+  {
+    spotId: "jp-familymart-wifi",
+    name: "FamilyMart WiFi",
+    nameJa: "ファミリーマート",
+    airportCode: "",
+    country: "JP",
+    ssids: ["Famima_Wi-Fi"],
+    portalType: "registration",
+    tier: "free",
+    patternData: {
+      registration: {
+        fields: [
+          { fieldId: "email", selector: "input[name='email'], input[type='email']", fallbackSelectors: ["input[type='text']:first-of-type"], valueSource: "profile.email", inputMethod: "set_value", delayMs: 500 },
+        ],
+        postFillActions: [
+          { description: "Accept terms", selector: "input[type='checkbox']", fallbackSelectors: [".agree", "#terms"], action: "check", delayMs: 300 },
+          { description: "Submit", selector: "button[type='submit'], input[type='submit']", fallbackSelectors: ["button:last-of-type"], action: "click", delayMs: 500 },
+        ],
+        successCondition: { method: "http_probe", value: "http://connectivitycheck.gstatic.com/generate_204" },
+      },
+    },
+    notes: "Email registration. Session: 20 min, 3 times/day.",
+  },
+  {
+    spotId: "jp-kix-wifi",
+    name: "Kansai International Airport",
+    nameJa: "関西国際空港",
+    airportCode: "KIX",
+    country: "JP",
+    ssids: ["FreeWiFi-KIX"],
+    portalType: "agree_only",
+    tier: "free",
+    patternData: {
+      agreeOnly: {
+        actions: [
+          { description: "Click connect", selector: "a.btn, button.connect, .btn-connect", fallbackSelectors: ["button:first-of-type", "a:first-of-type"], action: "click", delayMs: 500 },
+          { description: "Agree to terms", selector: "button[type='submit'], .btn-agree, a.agree", fallbackSelectors: ["button:last-of-type", "input[type='submit']"], action: "click", delayMs: 500 },
+        ],
+        successCondition: { method: "http_probe", value: "http://connectivitycheck.gstatic.com/generate_204" },
+      },
+    },
+    notes: "No registration needed. Available at T1, T2.",
+  },
+  {
+    spotId: "jp-fuk-wifi",
+    name: "Fukuoka Airport",
+    nameJa: "福岡空港",
+    airportCode: "FUK",
+    country: "JP",
+    ssids: ["FUK_Free_Wi-Fi"],
+    portalType: "agree_only",
+    tier: "free",
+    patternData: {
+      agreeOnly: {
+        actions: [
+          { description: "Click connect", selector: "a.btn, button.connect, .btn-connect", fallbackSelectors: ["button:first-of-type", "a:first-of-type"], action: "click", delayMs: 500 },
+          { description: "Agree to terms", selector: "button[type='submit'], .btn-agree, a.agree", fallbackSelectors: ["button:last-of-type", "input[type='submit']"], action: "click", delayMs: 500 },
+        ],
+        successCondition: { method: "http_probe", value: "http://connectivitycheck.gstatic.com/generate_204" },
+      },
+    },
+    notes: "No registration needed.",
+  },
+  {
+    spotId: "jp-ngo-wifi",
+    name: "Chubu Centrair International Airport",
+    nameJa: "中部国際空港",
+    airportCode: "NGO",
+    country: "JP",
+    ssids: ["centrair-free-wifi"],
+    portalType: "agree_only",
+    tier: "free",
+    patternData: {
+      agreeOnly: {
+        actions: [
+          { description: "Click connect", selector: "a.btn, button.connect, .btn-connect", fallbackSelectors: ["button:first-of-type", "a:first-of-type"], action: "click", delayMs: 500 },
+          { description: "Agree to terms", selector: "button[type='submit'], .btn-agree, a.agree", fallbackSelectors: ["button:last-of-type", "input[type='submit']"], action: "click", delayMs: 500 },
+        ],
+        successCondition: { method: "http_probe", value: "http://connectivitycheck.gstatic.com/generate_204" },
+      },
+    },
+    notes: "No registration needed.",
+  },
+  {
+    spotId: "jp-tullys-wifi",
+    name: "Tully's Coffee WiFi",
+    nameJa: "タリーズコーヒー",
+    airportCode: "",
+    country: "JP",
+    ssids: ["tullys_Wi-Fi"],
+    portalType: "registration",
+    tier: "free",
+    patternData: {
+      registration: {
+        fields: [
+          { fieldId: "email", selector: "input[name='email'], input[type='email']", fallbackSelectors: ["input[type='text']:first-of-type"], valueSource: "profile.email", inputMethod: "set_value", delayMs: 500 },
+        ],
+        postFillActions: [
+          { description: "Accept terms", selector: "input[type='checkbox']", fallbackSelectors: [".agree", "#terms"], action: "check", delayMs: 300 },
+          { description: "Submit", selector: "button[type='submit'], input[type='submit']", fallbackSelectors: ["button:last-of-type"], action: "click", delayMs: 500 },
+        ],
+        successCondition: { method: "http_probe", value: "http://connectivitycheck.gstatic.com/generate_204" },
+      },
+    },
+    notes: "Wi2 operated. Email registration. Session: 60 min.",
+  },
+  {
+    spotId: "jp-doutor-wifi",
+    name: "Doutor Coffee WiFi",
+    nameJa: "ドトールコーヒー",
+    airportCode: "",
+    country: "JP",
+    ssids: ["doutor_Wi-Fi"],
+    portalType: "registration",
+    tier: "free",
+    patternData: {
+      registration: {
+        fields: [
+          { fieldId: "email", selector: "input[name='email'], input[type='email']", fallbackSelectors: ["input[type='text']:first-of-type"], valueSource: "profile.email", inputMethod: "set_value", delayMs: 500 },
+        ],
+        postFillActions: [
+          { description: "Accept terms", selector: "input[type='checkbox']", fallbackSelectors: [".agree", "#terms"], action: "check", delayMs: 300 },
+          { description: "Submit", selector: "button[type='submit'], input[type='submit']", fallbackSelectors: ["button:last-of-type"], action: "click", delayMs: 500 },
+        ],
+        successCondition: { method: "http_probe", value: "http://connectivitycheck.gstatic.com/generate_204" },
+      },
+    },
+    notes: "Wi2 operated. Email registration. Session: 60 min.",
+  },
+  {
+    spotId: "jp-dwifi",
+    name: "d Wi-Fi (NTT docomo)",
+    nameJa: "d Wi-Fi (docomo)",
+    airportCode: "",
+    country: "JP",
+    ssids: ["0000docomo"],
+    portalType: "registration",
+    tier: "premium",
+    patternData: {
+      registration: {
+        fields: [
+          { fieldId: "email", selector: "input[name='email'], input[type='email'], input[name='userId']", fallbackSelectors: ["input[type='text']:first-of-type"], valueSource: "profile.email", inputMethod: "set_value", delayMs: 500 },
+          { fieldId: "password", selector: "input[name='password'], input[type='password']", fallbackSelectors: ["input[type='password']:first-of-type"], valueSource: "credentials.password", inputMethod: "set_value", delayMs: 200 },
+        ],
+        postFillActions: [
+          { description: "Accept terms", selector: "input[type='checkbox']", fallbackSelectors: [".agree", "#terms"], action: "check", delayMs: 300 },
+          { description: "Submit login", selector: "button[type='submit'], input[type='submit']", fallbackSelectors: ["button:last-of-type", ".btn-login"], action: "click", delayMs: 500 },
+        ],
+        successCondition: { method: "http_probe", value: "http://connectivitycheck.gstatic.com/generate_204" },
+      },
+      passwordRules: { minLength: 8, maxLength: 20, requireUppercase: true, requireLowercase: true, requireNumbers: true, requireSpecial: false },
+    },
+    notes: "Requires d-account (docomo ID).",
+  },
+  {
+    spotId: "jp-au-wifi",
+    name: "au Wi-Fi",
+    nameJa: "au Wi-Fi",
+    airportCode: "",
+    country: "JP",
+    ssids: ["au_Wi-Fi", "au_Wi-Fi2"],
+    portalType: "registration",
+    tier: "premium",
+    patternData: {
+      registration: {
+        fields: [
+          { fieldId: "email", selector: "input[name='email'], input[type='email'], input[name='userId']", fallbackSelectors: ["input[type='text']:first-of-type"], valueSource: "profile.email", inputMethod: "set_value", delayMs: 500 },
+          { fieldId: "password", selector: "input[name='password'], input[type='password']", fallbackSelectors: ["input[type='password']:first-of-type"], valueSource: "credentials.password", inputMethod: "set_value", delayMs: 200 },
+        ],
+        postFillActions: [
+          { description: "Accept terms", selector: "input[type='checkbox']", fallbackSelectors: [".agree", "#terms"], action: "check", delayMs: 300 },
+          { description: "Submit login", selector: "button[type='submit'], input[type='submit']", fallbackSelectors: ["button:last-of-type", ".btn-login"], action: "click", delayMs: 500 },
+        ],
+        successCondition: { method: "http_probe", value: "http://connectivitycheck.gstatic.com/generate_204" },
+      },
+      passwordRules: { minLength: 8, maxLength: 20, requireUppercase: true, requireLowercase: true, requireNumbers: true, requireSpecial: false },
+    },
+    notes: "Requires au ID.",
+  },
+  {
+    spotId: "jp-softbank-wifi",
+    name: "SoftBank Wi-Fi Spot",
+    nameJa: "ソフトバンクWi-Fi",
+    airportCode: "",
+    country: "JP",
+    ssids: ["0002softbank", "mobilepoint"],
+    portalType: "registration",
+    tier: "premium",
+    patternData: {
+      registration: {
+        fields: [
+          { fieldId: "email", selector: "input[name='email'], input[type='email'], input[name='userId']", fallbackSelectors: ["input[type='text']:first-of-type"], valueSource: "profile.email", inputMethod: "set_value", delayMs: 500 },
+          { fieldId: "password", selector: "input[name='password'], input[type='password']", fallbackSelectors: ["input[type='password']:first-of-type"], valueSource: "credentials.password", inputMethod: "set_value", delayMs: 200 },
+        ],
+        postFillActions: [
+          { description: "Accept terms", selector: "input[type='checkbox']", fallbackSelectors: [".agree", "#terms"], action: "check", delayMs: 300 },
+          { description: "Submit login", selector: "button[type='submit'], input[type='submit']", fallbackSelectors: ["button:last-of-type", ".btn-login"], action: "click", delayMs: 500 },
+        ],
+        successCondition: { method: "http_probe", value: "http://connectivitycheck.gstatic.com/generate_204" },
+      },
+      passwordRules: { minLength: 8, maxLength: 20, requireUppercase: true, requireLowercase: true, requireNumbers: true, requireSpecial: false },
+    },
+    notes: "Requires SoftBank/Y!mobile account.",
+  },
 ];
 
 export async function POST() {
@@ -356,7 +583,7 @@ export async function POST() {
     }
 
     await db.insert(patternBundleVersions).values({
-      version: 2,
+      version: 3,
       publishedAt: now,
     });
 

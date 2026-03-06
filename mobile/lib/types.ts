@@ -121,6 +121,16 @@ export interface WifiState {
   portalUrl: string | null;
 }
 
+// ===== Auto Reconnect =====
+
+export type AutoReconnectStatus = "idle" | "checking" | "reconnecting" | "reconnected" | "failed" | "no_credentials";
+
+export interface AutoReconnectState {
+  status: AutoReconnectStatus;
+  lastCheckAt: string | null;
+  reconnectPattern: PortalPattern | null;
+}
+
 // ===== Automation Status =====
 
 export type AutomationStatus = "started" | "field_filled" | "action_done" | "completed" | "error" | "field_not_found" | "action_not_found";

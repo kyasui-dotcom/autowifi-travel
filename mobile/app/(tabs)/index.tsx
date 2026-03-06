@@ -8,10 +8,15 @@ import {
   Alert,
 } from "react-native";
 import { useRouter } from "expo-router";
+import { useTranslation } from "react-i18next";
 
 import { Text, View } from "@/components/Themed";
-import { useWifiStore, useProfileStore } from "@/lib/store";
+import { useWifiStore, useProfileStore, useReconnectStore } from "@/lib/store";
 import { loadPatterns } from "@/services/pattern-sync";
+import { getPatternName } from "@/lib/i18n";
+import { useAutoReconnect } from "@/hooks/useAutoReconnect";
+import { ReconnectBanner } from "@/components/wifi/ReconnectBanner";
+import { SilentReconnectWebView } from "@/components/wifi/SilentReconnectWebView";
 import type { PortalPattern } from "@/lib/types";
 
 // Dynamically try to import native WiFi modules (unavailable in Expo Go)
@@ -43,11 +48,16 @@ try {
 
 export default function HomeScreen() {
   const router = useRouter();
+  const { t } = useTranslation();
   const { wifi, setSSID, setMatchedPattern, setPortalUrl, setStatus } =
     useWifiStore();
   const { profile } = useProfileStore();
+  const { resetReconnect } = useReconnectStore();
   const [patterns, setPatterns] = useState<PortalPattern[]>([]);
   const [demoMode, setDemoMode] = useState(!nativeWifiAvailable);
+
+  // Auto reconnect hook (only active when nativeWifiAvailable)
+  const { reconnectStatus, reconnectPattern } = useAutoReconnect();
 
   // Load patterns from API + local
   useEffect(() => {
@@ -110,36 +120,64 @@ export default function HomeScreen() {
     }
   };
 
-  const statusConfig = {
-    disconnected: { label: "WiFi未接続", color: "#999" },
-    connected_no_portal: { label: "WiFi接続済み（ポータルなし）", color: "#4CAF50" },
-    portal_detected: { label: "ポータル検出！", color: "#FF9800" },
-    auto_connecting: { label: "自動接続中...", color: "#2196F3" },
-    connected: { label: "接続完了", color: "#4CAF50" },
+  const handleSilentReconnectComplete = useCallback(
+    (success: boolean) => {
+      if (success) {
+        // Reconnection succeeded - update WiFi status
+        setStatus("connected");
+      }
+    },
+    [setStatus]
+  );
+
+  const statusColors = {
+    disconnected: "#999",
+    connected_no_portal: "#4CAF50",
+    portal_detected: "#FF9800",
+    auto_connecting: "#2196F3",
+    connected: "#4CAF50",
   };
 
-  const current = statusConfig[wifi.status];
+  const currentColor = statusColors[wifi.status];
 
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.content}>
-      <Text style={styles.appTitle}>AutoWiFi Travel</Text>
+      <Text style={styles.appTitle}>{t('home.appTitle')}</Text>
+
+      {/* Auto Reconnect Banner */}
+      {!demoMode && (
+        <ReconnectBanner
+          status={reconnectStatus}
+          onDismiss={() => resetReconnect()}
+        />
+      )}
+
+      {/* Silent Reconnect WebView (hidden) */}
+      {reconnectStatus === "reconnecting" && reconnectPattern && (
+        <SilentReconnectWebView
+          pattern={reconnectPattern}
+          onComplete={handleSilentReconnectComplete}
+        />
+      )}
 
       {/* Demo Mode Banner */}
       {demoMode && (
         <View style={styles.demoBanner}>
           <Text style={styles.demoBannerText}>
-            Demo Mode - WiFiスポットを選んでテスト
+            {t('home.demoBanner')}
           </Text>
         </View>
       )}
 
       {/* WiFi Status Card */}
       {!demoMode && (
-        <View style={[styles.statusCard, { borderColor: current.color }]}>
+        <View style={[styles.statusCard, { borderColor: currentColor }]}>
           <View
-            style={[styles.statusDot, { backgroundColor: current.color }]}
+            style={[styles.statusDot, { backgroundColor: currentColor }]}
           />
-          <Text style={styles.statusText}>{current.label}</Text>
+          <Text style={styles.statusText}>
+            {t(`home.status.${wifi.status}`)}
+          </Text>
           {wifi.ssid && (
             <Text style={styles.ssidText}>SSID: {wifi.ssid}</Text>
           )}
@@ -150,7 +188,7 @@ export default function HomeScreen() {
       {wifi.matchedPattern && (
         <View style={styles.matchCard}>
           <Text style={styles.matchTitle}>
-            {wifi.matchedPattern.nameJa}
+            {getPatternName(wifi.matchedPattern)}
           </Text>
           <Text style={styles.matchSub}>
             {wifi.matchedPattern.airportCode
@@ -159,12 +197,9 @@ export default function HomeScreen() {
             {wifi.matchedPattern.country}
           </Text>
           <Text style={styles.matchType}>
-            タイプ:{" "}
-            {wifi.matchedPattern.portalType === "agree_only"
-              ? "同意のみ"
-              : wifi.matchedPattern.portalType === "registration"
-              ? "登録が必要"
-              : "ログイン"}
+            {t('home.typeLabel', {
+              type: t(`home.type.${wifi.matchedPattern.portalType}`)
+            })}
           </Text>
         </View>
       )}
@@ -177,7 +212,7 @@ export default function HomeScreen() {
             onPress={handleAutoConnect}
           >
             <Text style={styles.connectButtonText}>
-              {demoMode ? "ポータル画面を開く" : "自動接続する"}
+              {demoMode ? t('home.openPortal') : t('home.autoConnect')}
             </Text>
           </TouchableOpacity>
         )}
@@ -186,7 +221,7 @@ export default function HomeScreen() {
       {demoMode && (
         <View style={styles.demoSection}>
           <Text style={styles.demoSectionTitle}>
-            テスト対象 ({patterns.length}件)
+            {t('home.testTargets', { count: patterns.length })}
           </Text>
           {patterns.map((p) => (
             <TouchableOpacity
@@ -198,7 +233,7 @@ export default function HomeScreen() {
               ]}
               onPress={() => handleDemoSelect(p)}
             >
-              <Text style={styles.demoItemName}>{p.nameJa}</Text>
+              <Text style={styles.demoItemName}>{getPatternName(p)}</Text>
               <Text style={styles.demoItemSsid}>
                 {p.ssids[0]} ({p.portalType})
               </Text>
@@ -211,7 +246,7 @@ export default function HomeScreen() {
       {!profile && (
         <View style={styles.warningCard}>
           <Text style={styles.warningText}>
-            プロフィールが未設定です。設定タブから登録してください。
+            {t('home.profileWarning')}
           </Text>
         </View>
       )}
@@ -229,7 +264,9 @@ export default function HomeScreen() {
               }
             }}
           >
-            <Text style={styles.wifiSettingsText}>WiFi設定を開く</Text>
+            <Text style={styles.wifiSettingsText}>
+              {t('home.openWifiSettings')}
+            </Text>
           </TouchableOpacity>
         )}
         <TouchableOpacity
@@ -237,7 +274,7 @@ export default function HomeScreen() {
           onPress={demoMode ? () => loadPatterns().then(setPatterns) : checkWifi}
         >
           <Text style={styles.refreshText}>
-            {demoMode ? "パターン更新" : "状態を更新"}
+            {demoMode ? t('home.updatePatterns') : t('home.updateStatus')}
           </Text>
         </TouchableOpacity>
       </View>

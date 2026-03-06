@@ -1,0 +1,116 @@
+{
+  "common": {
+    "save": "Save",
+    "saved": "Saved",
+    "cancel": "Cancel",
+    "done": "Done",
+    "retry": "Retry",
+    "error": "Error",
+    "loading": "Loading",
+    "confirm": "Confirm"
+  },
+  "tabs": {
+    "home": "Home",
+    "spots": "Spots",
+    "esim": "eSIM",
+    "settings": "Settings"
+  },
+  "nav": {
+    "wifiConnect": "WiFi Connect",
+    "esimPurchase": "Buy eSIM"
+  },
+  "home": {
+    "appTitle": "AutoWiFi Travel",
+    "demoBanner": "Demo Mode - Select a WiFi spot to test",
+    "status": {
+      "disconnected": "WiFi Disconnected",
+      "connected_no_portal": "WiFi Connected (No Portal)",
+      "portal_detected": "Portal Detected!",
+      "auto_connecting": "Auto-connecting...",
+      "connected": "Connected"
+    },
+    "type": {
+      "agree_only": "Agree Only",
+      "registration": "Registration Required",
+      "login": "Login"
+    },
+    "typeLabel": "Type: {{type}}",
+    "openPortal": "Open Portal",
+    "autoConnect": "Auto Connect",
+    "testTargets": "Test Targets ({{count}})",
+    "profileWarning": "Profile not set. Please register from the Settings tab.",
+    "openWifiSettings": "Open WiFi Settings",
+    "updatePatterns": "Update Patterns",
+    "updateStatus": "Refresh Status",
+    "reconnecting": "Reconnecting...",
+    "reconnected": "Reconnected",
+    "reconnectFailed": "Reconnection failed",
+    "reconnectChecking": "Checking connection..."
+  },
+  "spots": {
+    "title": "Supported WiFi Spots ({{count}})",
+    "portalType": {
+      "agree_only": "Agree Only",
+      "registration": "Registration",
+      "login": "Login",
+      "redirect_only": "Auto"
+    },
+    "premium": "Premium"
+  },
+  "esim": {
+    "title": "Buy eSIM",
+    "subtitle": "Purchase eSIMs for your destination on Airalo.\nStay connected even without free WiFi.",
+    "viewEsim": "View eSIM →",
+    "spotCount": "{{count}} WiFi spots",
+    "countryEsim": "eSIM for {{country}}",
+    "openBrowser": "Open in Browser",
+    "noUrl": "No URL specified",
+    "countries": {
+      "KR": "South Korea",
+      "SG": "Singapore",
+      "US": "United States",
+      "HK": "Hong Kong",
+      "TW": "Taiwan",
+      "TH": "Thailand",
+      "MY": "Malaysia",
+      "JP": "Japan"
+    }
+  },
+  "settings": {
+    "profile": "Profile",
+    "profileDesc": "Information used for automatic WiFi portal registration. Please enter in Roman letters.",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "email": "Email Address",
+    "inputError": "Input Error",
+    "fillAll": "Please fill in all fields",
+    "invalidEmail": "Please enter a valid email address",
+    "saveFailed": "Failed to save profile",
+    "passwordInfo": "About Passwords",
+    "passwordDesc": "Passwords required for WiFi portal registration are automatically generated per spot. Generated passwords are encrypted and stored on your device, and used automatically on your next connection.",
+    "supportedSpots": "Supported Spots",
+    "supportedSpotsDesc": "Free: Incheon(ICN), Changi(SIN), Hawaii(HNL), Hong Kong(HKG)\nPremium: Taoyuan(TPE), Suvarnabhumi(BKK), etc.",
+    "language": "Language",
+    "languageDesc": "Select the display language for the app"
+  },
+  "portal": {
+    "spotNotFound": "WiFi spot not found: {{spotId}}",
+    "setProfileFirst": "Please set up your profile before using this feature",
+    "phase": {
+      "loading": "Loading",
+      "automating": "Auto-connecting...",
+      "verifying": "Verifying...",
+      "success": "Connected!",
+      "failed": "Failed",
+      "manual": "Manual Mode"
+    },
+    "switchManual": "Switch to Manual",
+    "manualConnect": "Connect Manually"
+  },
+  "wifi": {
+    "locationPermTitle": "Location Permission",
+    "locationPermMessage": "Location permission is required to detect WiFi SSID",
+    "locationPermAllow": "Allow",
+    "locationPermDeny": "Deny"
+  }
+}

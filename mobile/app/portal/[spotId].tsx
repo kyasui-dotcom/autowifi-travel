@@ -2,6 +2,7 @@ import { useEffect, useState, useRef, useCallback } from "react";
 import { StyleSheet, TouchableOpacity, ActivityIndicator } from "react-native";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { WebView, type WebViewMessageEvent } from "react-native-webview";
+import { useTranslation } from "react-i18next";
 import { Text, View } from "@/components/Themed";
 import { useProfileStore, useWifiStore } from "@/lib/store";
 import { generateAutomationScript } from "@/services/portal-automator";
@@ -11,6 +12,7 @@ import {
 } from "@/services/credential-manager";
 import { verifyInternetAccess } from "@/services/portal-detector";
 import { loadPatterns } from "@/services/pattern-sync";
+import { getPatternName } from "@/lib/i18n";
 import type {
   PortalPattern,
   AutomationMessage,
@@ -31,6 +33,7 @@ type Phase = "loading" | "automating" | "verifying" | "success" | "failed" | "ma
 export default function PortalScreen() {
   const { spotId } = useLocalSearchParams<{ spotId: string }>();
   const router = useRouter();
+  const { t } = useTranslation();
   const { profile } = useProfileStore();
   const { wifi, setStatus } = useWifiStore();
   const webViewRef = useRef<WebView>(null);
@@ -152,7 +155,7 @@ export default function PortalScreen() {
     return (
       <View style={styles.container}>
         <Text style={styles.errorText}>
-          WiFiスポットが見つかりません: {spotId}
+          {t('portal.spotNotFound', { spotId })}
         </Text>
       </View>
     );
@@ -162,7 +165,7 @@ export default function PortalScreen() {
     return (
       <View style={styles.container}>
         <Text style={styles.errorText}>
-          プロフィールを設定してから使用してください
+          {t('portal.setProfileFirst')}
         </Text>
       </View>
     );
@@ -172,15 +175,10 @@ export default function PortalScreen() {
     <View style={styles.container}>
       {/* Header */}
       <View style={styles.header}>
-        <Text style={styles.headerTitle}>{pattern.nameJa}</Text>
+        <Text style={styles.headerTitle}>{getPatternName(pattern)}</Text>
         <View style={[styles.phaseBadge, styles[`phase_${phase}`]]}>
           <Text style={styles.phaseText}>
-            {phase === "loading" && "読み込み中"}
-            {phase === "automating" && "自動接続中..."}
-            {phase === "verifying" && "確認中..."}
-            {phase === "success" && "接続完了!"}
-            {phase === "failed" && "失敗"}
-            {phase === "manual" && "手動モード"}
+            {t(`portal.phase.${phase}`)}
           </Text>
         </View>
       </View>
@@ -191,7 +189,9 @@ export default function PortalScreen() {
           {phase === "automating" && (
             <View style={styles.overlay}>
               <ActivityIndicator size="large" color="#2196F3" />
-              <Text style={styles.overlayText}>自動接続中...</Text>
+              <Text style={styles.overlayText}>
+                {t('portal.phase.automating')}
+              </Text>
             </View>
           )}
           <WebView
@@ -224,13 +224,13 @@ export default function PortalScreen() {
               style={styles.retryButton}
               onPress={handleRetry}
             >
-              <Text style={styles.buttonText}>再試行</Text>
+              <Text style={styles.buttonText}>{t('common.retry')}</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.manualButton}
               onPress={handleManualMode}
             >
-              <Text style={styles.buttonText}>手動で接続</Text>
+              <Text style={styles.buttonText}>{t('portal.manualConnect')}</Text>
             </TouchableOpacity>
           </View>
         )}
@@ -240,7 +240,7 @@ export default function PortalScreen() {
             style={styles.doneButton}
             onPress={() => router.back()}
           >
-            <Text style={styles.buttonText}>完了</Text>
+            <Text style={styles.buttonText}>{t('common.done')}</Text>
           </TouchableOpacity>
         )}
 
@@ -249,7 +249,7 @@ export default function PortalScreen() {
             style={styles.manualButton}
             onPress={handleManualMode}
           >
-            <Text style={styles.buttonText}>手動モードに切替</Text>
+            <Text style={styles.buttonText}>{t('portal.switchManual')}</Text>
           </TouchableOpacity>
         )}
       </View>

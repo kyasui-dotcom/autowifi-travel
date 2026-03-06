@@ -1,0 +1,116 @@
+{
+  "common": {
+    "save": "保存する",
+    "saved": "保存しました",
+    "cancel": "キャンセル",
+    "done": "完了",
+    "retry": "再試行",
+    "error": "エラー",
+    "loading": "読み込み中",
+    "confirm": "確認"
+  },
+  "tabs": {
+    "home": "ホーム",
+    "spots": "スポット",
+    "esim": "eSIM",
+    "settings": "設定"
+  },
+  "nav": {
+    "wifiConnect": "WiFi接続",
+    "esimPurchase": "eSIM購入"
+  },
+  "home": {
+    "appTitle": "AutoWiFi Travel",
+    "demoBanner": "Demo Mode - WiFiスポットを選んでテスト",
+    "status": {
+      "disconnected": "WiFi未接続",
+      "connected_no_portal": "WiFi接続済み（ポータルなし）",
+      "portal_detected": "ポータル検出！",
+      "auto_connecting": "自動接続中...",
+      "connected": "接続完了"
+    },
+    "type": {
+      "agree_only": "同意のみ",
+      "registration": "登録が必要",
+      "login": "ログイン"
+    },
+    "typeLabel": "タイプ: {{type}}",
+    "openPortal": "ポータル画面を開く",
+    "autoConnect": "自動接続する",
+    "testTargets": "テスト対象 ({{count}}件)",
+    "profileWarning": "プロフィールが未設定です。設定タブから登録してください。",
+    "openWifiSettings": "WiFi設定を開く",
+    "updatePatterns": "パターン更新",
+    "updateStatus": "状態を更新",
+    "reconnecting": "再接続中...",
+    "reconnected": "再接続しました",
+    "reconnectFailed": "再接続に失敗しました",
+    "reconnectChecking": "接続確認中..."
+  },
+  "spots": {
+    "title": "対応WiFiスポット ({{count}}件)",
+    "portalType": {
+      "agree_only": "同意のみ",
+      "registration": "登録が必要",
+      "login": "ログイン",
+      "redirect_only": "自動"
+    },
+    "premium": "Premium"
+  },
+  "esim": {
+    "title": "eSIM購入",
+    "subtitle": "渡航先のeSIMをAiraloで購入できます。\nフリーWiFiが使えない場所でも安心。",
+    "viewEsim": "eSIMを見る →",
+    "spotCount": "WiFiスポット {{count}}件",
+    "countryEsim": "{{country}}のeSIM",
+    "openBrowser": "ブラウザで開く",
+    "noUrl": "URLが指定されていません",
+    "countries": {
+      "KR": "韓国",
+      "SG": "シンガポール",
+      "US": "アメリカ",
+      "HK": "香港",
+      "TW": "台湾",
+      "TH": "タイ",
+      "MY": "マレーシア",
+      "JP": "日本"
+    }
+  },
+  "settings": {
+    "profile": "プロフィール",
+    "profileDesc": "WiFiポータルの自動登録に使用される情報です。ローマ字で入力してください。",
+    "firstName": "名 (First Name)",
+    "lastName": "姓 (Last Name)",
+    "email": "メールアドレス",
+    "inputError": "入力エラー",
+    "fillAll": "すべての項目を入力してください",
+    "invalidEmail": "正しいメールアドレスを入力してください",
+    "saveFailed": "プロフィールの保存に失敗しました",
+    "passwordInfo": "パスワードについて",
+    "passwordDesc": "WiFiポータルの登録時に必要なパスワードは、スポットごとに自動生成されます。生成されたパスワードは暗号化してデバイスに保存され、次回接続時に自動で使用されます。",
+    "supportedSpots": "対応スポット",
+    "supportedSpotsDesc": "Free: 仁川(ICN), チャンギ(SIN), ハワイ(HNL), 香港(HKG)\nPremium: 桃園(TPE), スワンナプーム(BKK), 他",
+    "language": "言語",
+    "languageDesc": "アプリの表示言語を選択してください"
+  },
+  "portal": {
+    "spotNotFound": "WiFiスポットが見つかりません: {{spotId}}",
+    "setProfileFirst": "プロフィールを設定してから使用してください",
+    "phase": {
+      "loading": "読み込み中",
+      "automating": "自動接続中...",
+      "verifying": "確認中...",
+      "success": "接続完了!",
+      "failed": "失敗",
+      "manual": "手動モード"
+    },
+    "switchManual": "手動モードに切替",
+    "manualConnect": "手動で接続"
+  },
+  "wifi": {
+    "locationPermTitle": "位置情報の許可",
+    "locationPermMessage": "WiFiのSSIDを取得するために位置情報の許可が必要です",
+    "locationPermAllow": "許可する",
+    "locationPermDeny": "拒否"
+  }
+}

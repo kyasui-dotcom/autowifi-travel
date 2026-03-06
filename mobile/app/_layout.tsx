@@ -4,8 +4,11 @@ import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
+import { useTranslation } from 'react-i18next';
 
 import { useColorScheme } from '@/components/useColorScheme';
+import '@/lib/i18n';
+import { loadSavedLanguage } from '@/lib/i18n';
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -24,6 +27,11 @@ export default function RootLayout() {
   const [loaded, error] = useFonts({
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
   });
+
+  // Load saved language preference
+  useEffect(() => {
+    loadSavedLanguage();
+  }, []);
 
   // Expo Router uses Error Boundaries to catch errors in the navigation tree.
   useEffect(() => {
@@ -45,6 +53,7 @@ export default function RootLayout() {
 
 function RootLayoutNav() {
   const colorScheme = useColorScheme();
+  const { t } = useTranslation();
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
@@ -53,7 +62,7 @@ function RootLayoutNav() {
         <Stack.Screen
           name="portal/[spotId]"
           options={{
-            title: "WiFi接続",
+            title: t('nav.wifiConnect'),
             presentation: "modal",
             headerShown: true,
           }}
@@ -61,7 +70,7 @@ function RootLayoutNav() {
         <Stack.Screen
           name="esim-webview"
           options={{
-            title: "eSIM購入",
+            title: t('nav.esimPurchase'),
             presentation: "modal",
             headerShown: true,
           }}

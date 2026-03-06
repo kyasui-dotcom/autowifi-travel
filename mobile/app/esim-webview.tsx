@@ -2,8 +2,10 @@ import { StyleSheet, TouchableOpacity, Linking } from "react-native";
 import { Text, View } from "@/components/Themed";
 import { WebView } from "react-native-webview";
 import { useLocalSearchParams } from "expo-router";
+import { useTranslation } from "react-i18next";
 
 export default function EsimWebViewScreen() {
+  const { t } = useTranslation();
   const { url, title } = useLocalSearchParams<{
     url: string;
     title: string;
@@ -16,7 +18,7 @@ export default function EsimWebViewScreen() {
   if (!url) {
     return (
       <View style={styles.container}>
-        <Text>URLが指定されていません</Text>
+        <Text>{t('esim.noUrl')}</Text>
       </View>
     );
   }
@@ -28,7 +30,7 @@ export default function EsimWebViewScreen() {
           {title ?? "eSIM"}
         </Text>
         <TouchableOpacity onPress={handleOpenExternal}>
-          <Text style={styles.externalLink}>ブラウザで開く</Text>
+          <Text style={styles.externalLink}>{t('esim.openBrowser')}</Text>
         </TouchableOpacity>
       </View>
       <WebView

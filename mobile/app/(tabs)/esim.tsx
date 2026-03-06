@@ -1,12 +1,13 @@
 import { StyleSheet, FlatList, TouchableOpacity } from "react-native";
 import { Text, View } from "@/components/Themed";
 import { useRouter } from "expo-router";
+import { useTranslation } from "react-i18next";
 import patternsData from "@/assets/portal-patterns/patterns-v1.json";
 import type { PortalPattern } from "@/lib/types";
 
 const patterns = patternsData.patterns as PortalPattern[];
 
-// Country code → Airalo URL slug mapping
+// Country code -> Airalo URL slug mapping
 const airaloSlugs: Record<string, string> = {
   KR: "south-korea",
   SG: "singapore",
@@ -18,26 +19,15 @@ const airaloSlugs: Record<string, string> = {
   JP: "japan",
 };
 
-const countryNames: Record<string, string> = {
-  KR: "韓国",
-  SG: "シンガポール",
-  US: "アメリカ",
-  HK: "香港",
-  TW: "台湾",
-  TH: "タイ",
-  MY: "マレーシア",
-  JP: "日本",
-};
-
 const countryFlags: Record<string, string> = {
-  KR: "🇰🇷",
-  SG: "🇸🇬",
-  US: "🇺🇸",
-  HK: "🇭🇰",
-  TW: "🇹🇼",
-  TH: "🇹🇭",
-  MY: "🇲🇾",
-  JP: "🇯🇵",
+  KR: "\u{1F1F0}\u{1F1F7}",
+  SG: "\u{1F1F8}\u{1F1EC}",
+  US: "\u{1F1FA}\u{1F1F8}",
+  HK: "\u{1F1ED}\u{1F1F0}",
+  TW: "\u{1F1F9}\u{1F1FC}",
+  TH: "\u{1F1F9}\u{1F1ED}",
+  MY: "\u{1F1F2}\u{1F1FE}",
+  JP: "\u{1F1EF}\u{1F1F5}",
 };
 
 // Get unique countries from patterns (preserving order, overseas first)
@@ -61,7 +51,6 @@ function getCountries(): string[] {
 
 function buildAiraloUrl(countryCode: string): string {
   const slug = airaloSlugs[countryCode] ?? countryCode.toLowerCase();
-  // TODO: Replace with your Airalo affiliate tracking link
   return `https://www.airalo.com/${slug}-esim`;
 }
 
@@ -72,8 +61,9 @@ function CountryCard({
   countryCode: string;
   onPress: (url: string, name: string) => void;
 }) {
+  const { t } = useTranslation();
   const flag = countryFlags[countryCode] ?? "";
-  const name = countryNames[countryCode] ?? countryCode;
+  const name = t(`esim.countries.${countryCode}`);
   const spotCount = patterns.filter((p) => p.country === countryCode).length;
 
   const handlePress = () => {
@@ -86,24 +76,27 @@ function CountryCard({
         <Text style={styles.flag}>{flag}</Text>
         <View style={styles.cardInfo}>
           <Text style={styles.countryName}>{name}</Text>
-          <Text style={styles.spotCount}>WiFiスポット {spotCount}件</Text>
+          <Text style={styles.spotCount}>
+            {t('esim.spotCount', { count: spotCount })}
+          </Text>
         </View>
       </View>
       <View style={styles.cardRight}>
-        <Text style={styles.esimLabel}>eSIMを見る →</Text>
+        <Text style={styles.esimLabel}>{t('esim.viewEsim')}</Text>
       </View>
     </TouchableOpacity>
   );
 }
 
 export default function EsimScreen() {
+  const { t } = useTranslation();
   const countries = getCountries();
   const router = useRouter();
 
   const handleCountryPress = (url: string, name: string) => {
     router.push({
       pathname: "/esim-webview",
-      params: { url, title: `${name}のeSIM` },
+      params: { url, title: t('esim.countryEsim', { country: name }) },
     });
   };
 
@@ -117,11 +110,8 @@ export default function EsimScreen() {
         )}
         ListHeaderComponent={
           <View style={styles.header}>
-            <Text style={styles.title}>eSIM購入</Text>
-            <Text style={styles.subtitle}>
-              渡航先のeSIMをAiraloで購入できます。{"\n"}
-              フリーWiFiが使えない場所でも安心。
-            </Text>
+            <Text style={styles.title}>{t('esim.title')}</Text>
+            <Text style={styles.subtitle}>{t('esim.subtitle')}</Text>
           </View>
         }
         contentContainerStyle={styles.listContent}

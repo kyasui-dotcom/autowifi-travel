@@ -1,6 +1,7 @@
 import WifiManager from "react-native-wifi-reborn";
 import NetInfo from "@react-native-community/netinfo";
 import { PermissionsAndroid, Platform } from "react-native";
+import i18n from "@/lib/i18n";
 import type { PortalPattern } from "@/lib/types";
 
 export async function requestLocationPermission(): Promise<boolean> {
@@ -9,10 +10,10 @@ export async function requestLocationPermission(): Promise<boolean> {
   const granted = await PermissionsAndroid.request(
     PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
     {
-      title: "位置情報の許可",
-      message: "WiFiのSSIDを取得するために位置情報の許可が必要です",
-      buttonPositive: "許可する",
-      buttonNegative: "拒否",
+      title: i18n.t("wifi.locationPermTitle"),
+      message: i18n.t("wifi.locationPermMessage"),
+      buttonPositive: i18n.t("wifi.locationPermAllow"),
+      buttonNegative: i18n.t("wifi.locationPermDeny"),
     }
   );
   return granted === PermissionsAndroid.RESULTS.GRANTED;

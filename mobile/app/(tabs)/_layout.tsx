@@ -1,12 +1,14 @@
 import React from "react";
 import { Tabs } from "expo-router";
 import { SymbolView } from "expo-symbols";
+import { useTranslation } from "react-i18next";
 
 import Colors from "@/constants/Colors";
 import { useColorScheme } from "@/components/useColorScheme";
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
+  const { t } = useTranslation();
 
   return (
     <Tabs
@@ -18,7 +20,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: "ホーム",
+          title: t('tabs.home'),
           tabBarIcon: ({ color }) => (
             <SymbolView
               name={{ ios: "wifi", android: "wifi", web: "wifi" }}
@@ -31,7 +33,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="spots"
         options={{
-          title: "スポット",
+          title: t('tabs.spots'),
           tabBarIcon: ({ color }) => (
             <SymbolView
               name={{
@@ -48,7 +50,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="esim"
         options={{
-          title: "eSIM",
+          title: t('tabs.esim'),
           tabBarIcon: ({ color }) => (
             <SymbolView
               name={{
@@ -65,7 +67,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="settings"
         options={{
-          title: "設定",
+          title: t('tabs.settings'),
           tabBarIcon: ({ color }) => (
             <SymbolView
               name={{

@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import type { UserProfile, WifiState, PortalPattern } from "@/lib/types";
+import type { UserProfile, WifiState, PortalPattern, AutoReconnectState, AutoReconnectStatus } from "@/lib/types";
 
 // ===== User Profile Store =====
 
@@ -43,4 +43,31 @@ export const useWifiStore = create<WifiStore>((set) => ({
   setStatus: (status) =>
     set((s) => ({ wifi: { ...s.wifi, status } })),
   reset: () => set({ wifi: initialWifiState }),
+}));
+
+// ===== Auto Reconnect Store =====
+
+interface ReconnectStore {
+  reconnect: AutoReconnectState;
+  setReconnectStatus: (status: AutoReconnectStatus) => void;
+  setReconnectPattern: (pattern: PortalPattern | null) => void;
+  setLastCheckAt: (time: string) => void;
+  resetReconnect: () => void;
+}
+
+const initialReconnectState: AutoReconnectState = {
+  status: "idle",
+  lastCheckAt: null,
+  reconnectPattern: null,
+};
+
+export const useReconnectStore = create<ReconnectStore>((set) => ({
+  reconnect: initialReconnectState,
+  setReconnectStatus: (status) =>
+    set((s) => ({ reconnect: { ...s.reconnect, status } })),
+  setReconnectPattern: (pattern) =>
+    set((s) => ({ reconnect: { ...s.reconnect, reconnectPattern: pattern } })),
+  setLastCheckAt: (time) =>
+    set((s) => ({ reconnect: { ...s.reconnect, lastCheckAt: time } })),
+  resetReconnect: () => set({ reconnect: initialReconnectState }),
 }));
