@@ -4,7 +4,13 @@ import { spotRequests } from "@/lib/db/schema";
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
+    const body = (await request.json()) as {
+      spotName?: string;
+      location?: string;
+      country?: string;
+      ssid?: string;
+      notes?: string;
+    };
     const { spotName, location, country, ssid, notes } = body;
 
     if (!spotName) {
