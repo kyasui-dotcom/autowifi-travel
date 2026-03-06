@@ -68,3 +68,16 @@ export const connectionReports = sqliteTable("connection_reports", {
     .notNull()
     .$defaultFn(() => new Date().toISOString()),
 });
+
+export const spotRequests = sqliteTable("spot_requests", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  spotName: text("spot_name").notNull(),
+  location: text("location"),
+  country: text("country"),
+  ssid: text("ssid"),
+  notes: text("notes"),
+  status: text("status").notNull().default("pending"),
+  createdAt: text("created_at")
+    .notNull()
+    .$defaultFn(() => new Date().toISOString()),
+});

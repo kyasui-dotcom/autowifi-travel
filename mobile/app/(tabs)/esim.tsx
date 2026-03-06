@@ -15,6 +15,10 @@ const airaloSlugs: Record<string, string> = {
   HK: "hong-kong",
   TW: "taiwan",
   TH: "thailand",
+  CN: "china",
+  VN: "vietnam",
+  PH: "philippines",
+  ID: "indonesia",
   MY: "malaysia",
   JP: "japan",
 };
@@ -26,6 +30,10 @@ const countryFlags: Record<string, string> = {
   HK: "\u{1F1ED}\u{1F1F0}",
   TW: "\u{1F1F9}\u{1F1FC}",
   TH: "\u{1F1F9}\u{1F1ED}",
+  CN: "\u{1F1E8}\u{1F1F3}",
+  VN: "\u{1F1FB}\u{1F1F3}",
+  PH: "\u{1F1F5}\u{1F1ED}",
+  ID: "\u{1F1EE}\u{1F1E9}",
   MY: "\u{1F1F2}\u{1F1FE}",
   JP: "\u{1F1EF}\u{1F1F5}",
 };

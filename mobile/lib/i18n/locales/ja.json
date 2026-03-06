@@ -55,7 +55,21 @@
       "login": "ログイン",
       "redirect_only": "自動"
     },
-    "premium": "Premium"
+    "premium": "Premium",
+    "feedbackWorked": "使えた",
+    "feedbackNotWorked": "使えなかった",
+    "feedbackSent": "送信しました",
+    "feedbackComment": "コメント（任意）",
+    "feedbackPlaceholder": "詳細を入力...",
+    "feedbackSend": "送信",
+    "requestNew": "WiFiスポットをリクエスト",
+    "requestName": "スポット名",
+    "requestLocation": "場所（空港名、駅名など）",
+    "requestSsid": "SSID（分かれば）",
+    "requestNotes": "備考",
+    "requestSubmit": "リクエスト送信",
+    "requestSent": "リクエストを送信しました",
+    "requestTitle": "新規スポットリクエスト"
   },
   "esim": {
     "title": "eSIM購入",
@@ -72,6 +86,10 @@
       "HK": "香港",
       "TW": "台湾",
       "TH": "タイ",
+      "CN": "中国",
+      "VN": "ベトナム",
+      "PH": "フィリピン",
+      "ID": "インドネシア",
       "MY": "マレーシア",
       "JP": "日本"
     }

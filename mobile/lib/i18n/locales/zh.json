@@ -55,7 +55,21 @@
       "login": "登录",
       "redirect_only": "自动"
     },
-    "premium": "Premium"
+    "premium": "Premium",
+    "feedbackWorked": "可以使用",
+    "feedbackNotWorked": "无法使用",
+    "feedbackSent": "已发送",
+    "feedbackComment": "评论（可选）",
+    "feedbackPlaceholder": "输入详情...",
+    "feedbackSend": "发送",
+    "requestNew": "请求WiFi热点",
+    "requestName": "热点名称",
+    "requestLocation": "位置（机场、车站等）",
+    "requestSsid": "SSID（如果知道）",
+    "requestNotes": "备注",
+    "requestSubmit": "提交请求",
+    "requestSent": "请求已提交",
+    "requestTitle": "请求新热点"
   },
   "esim": {
     "title": "购买eSIM",
@@ -72,6 +86,10 @@
       "HK": "香港",
       "TW": "台湾",
       "TH": "泰国",
+      "CN": "中国",
+      "VN": "越南",
+      "PH": "菲律宾",
+      "ID": "印度尼西亚",
       "MY": "马来西亚",
       "JP": "日本"
     }

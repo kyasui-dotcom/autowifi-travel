@@ -55,7 +55,21 @@
       "login": "Login",
       "redirect_only": "Auto"
     },
-    "premium": "Premium"
+    "premium": "Premium",
+    "feedbackWorked": "Worked",
+    "feedbackNotWorked": "Didn't work",
+    "feedbackSent": "Sent",
+    "feedbackComment": "Comment (optional)",
+    "feedbackPlaceholder": "Enter details...",
+    "feedbackSend": "Send",
+    "requestNew": "Request a WiFi Spot",
+    "requestName": "Spot Name",
+    "requestLocation": "Location (airport, station, etc.)",
+    "requestSsid": "SSID (if known)",
+    "requestNotes": "Notes",
+    "requestSubmit": "Submit Request",
+    "requestSent": "Request submitted",
+    "requestTitle": "Request New Spot"
   },
   "esim": {
     "title": "Buy eSIM",
@@ -72,6 +86,10 @@
       "HK": "Hong Kong",
       "TW": "Taiwan",
       "TH": "Thailand",
+      "CN": "China",
+      "VN": "Vietnam",
+      "PH": "Philippines",
+      "ID": "Indonesia",
       "MY": "Malaysia",
       "JP": "Japan"
     }

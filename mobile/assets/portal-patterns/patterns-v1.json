@@ -1,5 +1,5 @@
 {
-  "version": 4,
+  "version": 5,
   "updatedAt": "2026-03-06",
   "patterns": [
     {
@@ -276,6 +276,288 @@
       },
       "patternVersion": 1,
       "lastVerified": "2026-03-05"
+    },
+    {
+      "spotId": "kr-gimpo-wifi",
+      "name": "Gimpo International Airport",
+      "nameJa": "金浦国際空港",
+      "nameZh": "金浦国际机场",
+      "nameKo": "김포국제공항",
+      "airportCode": "GMP",
+      "country": "KR",
+      "ssids": ["GimpoAirport_FreeWiFi", "GMP_Free_WiFi"],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          { "description": "Accept terms checkbox", "selector": "input[type='checkbox']", "fallbackSelectors": [".terms-checkbox", "#agree"], "action": "check", "delayMs": 500 },
+          { "description": "Click connect button", "selector": "button[type='submit'], .btn-connect", "fallbackSelectors": ["button:last-of-type", "input[type='submit']"], "action": "click", "delayMs": 500 }
+        ],
+        "successCondition": { "method": "http_probe", "value": "http://connectivitycheck.gstatic.com/generate_204" }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-06"
+    },
+    {
+      "spotId": "kr-ktx-wifi",
+      "name": "KTX (Korea Train eXpress)",
+      "nameJa": "KTX（韓国高速鉄道）",
+      "nameZh": "KTX（韩国高速铁路）",
+      "nameKo": "KTX (한국고속철도)",
+      "airportCode": "",
+      "country": "KR",
+      "ssids": ["KTX_WiFi", "KTX_Free_WiFi", "KORAIL_WiFi"],
+      "portalType": "registration",
+      "tier": "free",
+      "registration": {
+        "fields": [
+          { "fieldId": "email", "selector": "input[name='email'], input[type='email']", "fallbackSelectors": ["input[type='text']:first-of-type"], "valueSource": "profile.email", "inputMethod": "set_value", "delayMs": 500 }
+        ],
+        "postFillActions": [
+          { "description": "Accept terms", "selector": "input[type='checkbox']", "fallbackSelectors": [".agree", "#terms"], "action": "check", "delayMs": 300 },
+          { "description": "Submit", "selector": "button[type='submit'], input[type='submit']", "fallbackSelectors": ["button:last-of-type"], "action": "click", "delayMs": 500 }
+        ],
+        "successCondition": { "method": "http_probe", "value": "http://connectivitycheck.gstatic.com/generate_204" }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-06"
+    },
+    {
+      "spotId": "kr-seoul-metro-wifi",
+      "name": "Seoul Metro T WiFi Zone",
+      "nameJa": "ソウル地下鉄 T WiFi",
+      "nameZh": "首尔地铁 T WiFi",
+      "nameKo": "서울지하철 T WiFi Zone",
+      "airportCode": "",
+      "country": "KR",
+      "ssids": ["T_WiFi_Zone", "T wifi zone", "Seoul_Metro_WiFi"],
+      "portalType": "registration",
+      "tier": "free",
+      "registration": {
+        "fields": [
+          { "fieldId": "email", "selector": "input[name='email'], input[type='email']", "fallbackSelectors": ["input[type='text']:first-of-type"], "valueSource": "profile.email", "inputMethod": "set_value", "delayMs": 500 }
+        ],
+        "postFillActions": [
+          { "description": "Accept terms", "selector": "input[type='checkbox']", "fallbackSelectors": [".agree", "#terms"], "action": "check", "delayMs": 300 },
+          { "description": "Submit", "selector": "button[type='submit'], input[type='submit']", "fallbackSelectors": ["button:last-of-type"], "action": "click", "delayMs": 500 }
+        ],
+        "successCondition": { "method": "http_probe", "value": "http://connectivitycheck.gstatic.com/generate_204" }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-06"
+    },
+    {
+      "spotId": "tw-taipei-metro-wifi",
+      "name": "Taipei Metro (TPE-Free)",
+      "nameJa": "台北MRT（TPE-Free）",
+      "nameZh": "台北捷运（TPE-Free）",
+      "nameKo": "타이베이 MRT (TPE-Free)",
+      "airportCode": "",
+      "country": "TW",
+      "ssids": ["TPE-Free", "Taipei_Free_WiFi"],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          { "description": "Accept terms checkbox", "selector": "input[type='checkbox']", "fallbackSelectors": [".terms-checkbox", "#agree"], "action": "check", "delayMs": 500 },
+          { "description": "Click connect button", "selector": "button[type='submit'], .btn-connect", "fallbackSelectors": ["button:last-of-type", "input[type='submit']"], "action": "click", "delayMs": 500 }
+        ],
+        "successCondition": { "method": "http_probe", "value": "http://connectivitycheck.gstatic.com/generate_204" }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-06"
+    },
+    {
+      "spotId": "tw-thsr-wifi",
+      "name": "Taiwan High Speed Rail",
+      "nameJa": "台湾高速鉄道（高鉄）",
+      "nameZh": "台湾高速铁路（高铁）",
+      "nameKo": "타이완 고속철도 (고철)",
+      "airportCode": "",
+      "country": "TW",
+      "ssids": ["THSR_WiFi", "THSR_Free_WiFi"],
+      "portalType": "registration",
+      "tier": "free",
+      "registration": {
+        "fields": [
+          { "fieldId": "email", "selector": "input[name='email'], input[type='email']", "fallbackSelectors": ["input[type='text']:first-of-type"], "valueSource": "profile.email", "inputMethod": "set_value", "delayMs": 500 }
+        ],
+        "postFillActions": [
+          { "description": "Accept terms", "selector": "input[type='checkbox']", "fallbackSelectors": [".agree", "#terms"], "action": "check", "delayMs": 300 },
+          { "description": "Submit", "selector": "button[type='submit'], input[type='submit']", "fallbackSelectors": ["button:last-of-type"], "action": "click", "delayMs": 500 }
+        ],
+        "successCondition": { "method": "http_probe", "value": "http://connectivitycheck.gstatic.com/generate_204" }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-06"
+    },
+    {
+      "spotId": "cn-pek-wifi",
+      "name": "Beijing Capital Airport",
+      "nameJa": "北京首都空港",
+      "nameZh": "北京首都国际机场",
+      "nameKo": "베이징수도공항",
+      "airportCode": "PEK",
+      "country": "CN",
+      "ssids": ["Airport-Free-WiFi", "PEK_Free_WiFi"],
+      "portalType": "registration",
+      "tier": "free",
+      "registration": {
+        "fields": [
+          { "fieldId": "email", "selector": "input[name='email'], input[type='email']", "fallbackSelectors": ["input[type='text']:first-of-type"], "valueSource": "profile.email", "inputMethod": "set_value", "delayMs": 500 }
+        ],
+        "postFillActions": [
+          { "description": "Accept terms", "selector": "input[type='checkbox']", "fallbackSelectors": [".agree", "#terms"], "action": "check", "delayMs": 300 },
+          { "description": "Submit", "selector": "button[type='submit'], input[type='submit']", "fallbackSelectors": ["button:last-of-type"], "action": "click", "delayMs": 500 }
+        ],
+        "successCondition": { "method": "http_probe", "value": "http://connectivitycheck.gstatic.com/generate_204" }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-06",
+      "notes": "May require phone number in some terminals. Session varies."
+    },
+    {
+      "spotId": "cn-pvg-wifi",
+      "name": "Shanghai Pudong Airport",
+      "nameJa": "上海浦東空港",
+      "nameZh": "上海浦东国际机场",
+      "nameKo": "상하이푸둥공항",
+      "airportCode": "PVG",
+      "country": "CN",
+      "ssids": ["PVG-Free-WiFi", "#AirportWiFi"],
+      "portalType": "registration",
+      "tier": "free",
+      "registration": {
+        "fields": [
+          { "fieldId": "email", "selector": "input[name='email'], input[type='email']", "fallbackSelectors": ["input[type='text']:first-of-type"], "valueSource": "profile.email", "inputMethod": "set_value", "delayMs": 500 }
+        ],
+        "postFillActions": [
+          { "description": "Accept terms", "selector": "input[type='checkbox']", "fallbackSelectors": [".agree", "#terms"], "action": "check", "delayMs": 300 },
+          { "description": "Submit", "selector": "button[type='submit'], input[type='submit']", "fallbackSelectors": ["button:last-of-type"], "action": "click", "delayMs": 500 }
+        ],
+        "successCondition": { "method": "http_probe", "value": "http://connectivitycheck.gstatic.com/generate_204" }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-06",
+      "notes": "May require WeChat or phone number verification."
+    },
+    {
+      "spotId": "cn-can-wifi",
+      "name": "Guangzhou Baiyun Airport",
+      "nameJa": "広州白雲空港",
+      "nameZh": "广州白云国际机场",
+      "nameKo": "광저우바이윈공항",
+      "airportCode": "CAN",
+      "country": "CN",
+      "ssids": ["CAN-Airport-WiFi", "BAIYUN_Free_WiFi"],
+      "portalType": "registration",
+      "tier": "free",
+      "registration": {
+        "fields": [
+          { "fieldId": "email", "selector": "input[name='email'], input[type='email']", "fallbackSelectors": ["input[type='text']:first-of-type"], "valueSource": "profile.email", "inputMethod": "set_value", "delayMs": 500 }
+        ],
+        "postFillActions": [
+          { "description": "Accept terms", "selector": "input[type='checkbox']", "fallbackSelectors": [".agree", "#terms"], "action": "check", "delayMs": 300 },
+          { "description": "Submit", "selector": "button[type='submit'], input[type='submit']", "fallbackSelectors": ["button:last-of-type"], "action": "click", "delayMs": 500 }
+        ],
+        "successCondition": { "method": "http_probe", "value": "http://connectivitycheck.gstatic.com/generate_204" }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-06",
+      "notes": "May require WeChat or phone number verification."
+    },
+    {
+      "spotId": "my-klia-wifi",
+      "name": "KLIA (Kuala Lumpur International Airport)",
+      "nameJa": "クアラルンプール国際空港",
+      "nameZh": "吉隆坡国际机场",
+      "nameKo": "쿠알라룸푸르국제공항",
+      "airportCode": "KUL",
+      "country": "MY",
+      "ssids": ["KLIA_Free_WiFi", "@KLIA_WiFi", "KLIA2WiFi"],
+      "portalType": "registration",
+      "tier": "free",
+      "registration": {
+        "fields": [
+          { "fieldId": "email", "selector": "input[name='email'], input[type='email']", "fallbackSelectors": ["input[type='text']:first-of-type"], "valueSource": "profile.email", "inputMethod": "set_value", "delayMs": 500 }
+        ],
+        "postFillActions": [
+          { "description": "Accept terms", "selector": "input[type='checkbox']", "fallbackSelectors": [".agree", "#terms"], "action": "check", "delayMs": 300 },
+          { "description": "Submit", "selector": "button[type='submit'], input[type='submit']", "fallbackSelectors": ["button:last-of-type"], "action": "click", "delayMs": 500 }
+        ],
+        "successCondition": { "method": "http_probe", "value": "http://connectivitycheck.gstatic.com/generate_204" }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-06"
+    },
+    {
+      "spotId": "vn-sgn-wifi",
+      "name": "Tan Son Nhat International Airport",
+      "nameJa": "タンソンニャット国際空港",
+      "nameZh": "新山一国际机场",
+      "nameKo": "떤선녓국제공항",
+      "airportCode": "SGN",
+      "country": "VN",
+      "ssids": ["TSN_Airport_WiFi", "SGN_Free_WiFi"],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          { "description": "Accept terms checkbox", "selector": "input[type='checkbox']", "fallbackSelectors": [".terms-checkbox", "#agree"], "action": "check", "delayMs": 500 },
+          { "description": "Click connect button", "selector": "button[type='submit'], .btn-connect", "fallbackSelectors": ["button:last-of-type", "input[type='submit']"], "action": "click", "delayMs": 500 }
+        ],
+        "successCondition": { "method": "http_probe", "value": "http://connectivitycheck.gstatic.com/generate_204" }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-06"
+    },
+    {
+      "spotId": "ph-mnl-wifi",
+      "name": "Ninoy Aquino International Airport",
+      "nameJa": "ニノイ・アキノ国際空港",
+      "nameZh": "尼诺伊·阿基诺国际机场",
+      "nameKo": "니노이아키노국제공항",
+      "airportCode": "MNL",
+      "country": "PH",
+      "ssids": ["NAIA_Free_WiFi", "MNL_Airport_WiFi"],
+      "portalType": "registration",
+      "tier": "free",
+      "registration": {
+        "fields": [
+          { "fieldId": "email", "selector": "input[name='email'], input[type='email']", "fallbackSelectors": ["input[type='text']:first-of-type"], "valueSource": "profile.email", "inputMethod": "set_value", "delayMs": 500 }
+        ],
+        "postFillActions": [
+          { "description": "Accept terms", "selector": "input[type='checkbox']", "fallbackSelectors": [".agree", "#terms"], "action": "check", "delayMs": 300 },
+          { "description": "Submit", "selector": "button[type='submit'], input[type='submit']", "fallbackSelectors": ["button:last-of-type"], "action": "click", "delayMs": 500 }
+        ],
+        "successCondition": { "method": "http_probe", "value": "http://connectivitycheck.gstatic.com/generate_204" }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-06"
+    },
+    {
+      "spotId": "id-cgk-wifi",
+      "name": "Soekarno-Hatta International Airport",
+      "nameJa": "スカルノ・ハッタ国際空港",
+      "nameZh": "苏加诺-哈达国际机场",
+      "nameKo": "수카르노하타국제공항",
+      "airportCode": "CGK",
+      "country": "ID",
+      "ssids": ["@wifi.id", "CGK_Airport_WiFi", "FreeWiFi_SHIA"],
+      "portalType": "registration",
+      "tier": "free",
+      "registration": {
+        "fields": [
+          { "fieldId": "email", "selector": "input[name='email'], input[type='email']", "fallbackSelectors": ["input[type='text']:first-of-type"], "valueSource": "profile.email", "inputMethod": "set_value", "delayMs": 500 }
+        ],
+        "postFillActions": [
+          { "description": "Accept terms", "selector": "input[type='checkbox']", "fallbackSelectors": [".agree", "#terms"], "action": "check", "delayMs": 300 },
+          { "description": "Submit", "selector": "button[type='submit'], input[type='submit']", "fallbackSelectors": ["button:last-of-type"], "action": "click", "delayMs": 500 }
+        ],
+        "successCondition": { "method": "http_probe", "value": "http://connectivitycheck.gstatic.com/generate_204" }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-06"
     },
     {
       "spotId": "jp-starbucks-wifi",

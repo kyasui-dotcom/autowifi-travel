@@ -55,7 +55,21 @@
       "login": "로그인",
       "redirect_only": "자동"
     },
-    "premium": "Premium"
+    "premium": "Premium",
+    "feedbackWorked": "사용 가능",
+    "feedbackNotWorked": "사용 불가",
+    "feedbackSent": "전송 완료",
+    "feedbackComment": "코멘트 (선택)",
+    "feedbackPlaceholder": "상세 내용 입력...",
+    "feedbackSend": "전송",
+    "requestNew": "WiFi 스팟 요청",
+    "requestName": "스팟 이름",
+    "requestLocation": "위치 (공항, 역 등)",
+    "requestSsid": "SSID (알고 있다면)",
+    "requestNotes": "비고",
+    "requestSubmit": "요청 제출",
+    "requestSent": "요청이 제출되었습니다",
+    "requestTitle": "새 스팟 요청"
   },
   "esim": {
     "title": "eSIM 구매",
@@ -72,6 +86,10 @@
       "HK": "홍콩",
       "TW": "대만",
       "TH": "태국",
+      "CN": "중국",
+      "VN": "베트남",
+      "PH": "필리핀",
+      "ID": "인도네시아",
       "MY": "말레이시아",
       "JP": "일본"
     }

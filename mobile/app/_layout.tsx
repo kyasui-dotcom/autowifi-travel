@@ -2,9 +2,10 @@ import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import 'react-native-reanimated';
 import { useTranslation } from 'react-i18next';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { useColorScheme } from '@/components/useColorScheme';
 import '@/lib/i18n';
@@ -16,9 +17,10 @@ export {
 } from 'expo-router';
 
 export const unstable_settings = {
-  // Ensure that reloading on `/modal` keeps a back button present.
   initialRouteName: '(tabs)',
 };
+
+const LANGUAGE_STORAGE_KEY = 'autowifi_language';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -27,10 +29,16 @@ export default function RootLayout() {
   const [loaded, error] = useFonts({
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
   });
+  const [isFirstLaunch, setIsFirstLaunch] = useState<boolean | null>(null);
 
-  // Load saved language preference
+  // Check if this is the first launch (no language saved yet)
   useEffect(() => {
-    loadSavedLanguage();
+    AsyncStorage.getItem(LANGUAGE_STORAGE_KEY).then((val) => {
+      setIsFirstLaunch(val === null);
+      if (val !== null) {
+        loadSavedLanguage();
+      }
+    });
   }, []);
 
   // Expo Router uses Error Boundaries to catch errors in the navigation tree.
@@ -39,25 +47,29 @@ export default function RootLayout() {
   }, [error]);
 
   useEffect(() => {
-    if (loaded) {
+    if (loaded && isFirstLaunch !== null) {
       SplashScreen.hideAsync();
     }
-  }, [loaded]);
+  }, [loaded, isFirstLaunch]);
 
-  if (!loaded) {
+  if (!loaded || isFirstLaunch === null) {
     return null;
   }
 
-  return <RootLayoutNav />;
+  return <RootLayoutNav isFirstLaunch={isFirstLaunch} />;
 }
 
-function RootLayoutNav() {
+function RootLayoutNav({ isFirstLaunch }: { isFirstLaunch: boolean }) {
   const colorScheme = useColorScheme();
   const { t } = useTranslation();
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
+      <Stack initialRouteName={isFirstLaunch ? 'language-select' : '(tabs)'}>
+        <Stack.Screen
+          name="language-select"
+          options={{ headerShown: false, gestureEnabled: false }}
+        />
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen
           name="portal/[spotId]"
