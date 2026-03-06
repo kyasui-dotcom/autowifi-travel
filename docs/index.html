@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AutoWiFi Travel - Smart Airport WiFi Connection</title>
+  <meta name="description" content="AutoWiFi Travel automatically connects you to free WiFi at airports worldwide. Skip captive portals and get online instantly.">
+  <meta property="og:title" content="AutoWiFi Travel">
+  <meta property="og:description" content="Smart airport WiFi connection app. Auto-login to free WiFi at 36+ airports across 12 countries.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://kyasui-dotcom.github.io/autowifi-travel/">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: #1a1a2e;
+      background: #f8fafc;
+      line-height: 1.6;
+    }
+
+    /* Hero */
+    .hero {
+      background: linear-gradient(135deg, #0ea5e9 0%, #2563eb 50%, #7c3aed 100%);
+      color: white;
+      padding: 80px 20px 60px;
+      text-align: center;
+    }
+    .hero-icon { font-size: 72px; margin-bottom: 16px; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 12px; }
+    .hero .tagline { font-size: 1.2rem; opacity: 0.9; max-width: 500px; margin: 0 auto 32px; }
+    .hero .badges { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .badge {
+      background: rgba(255,255,255,0.2);
+      backdrop-filter: blur(8px);
+      padding: 8px 18px;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    /* Stats */
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      padding: 40px 20px;
+      flex-wrap: wrap;
+      background: white;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .stat { text-align: center; }
+    .stat-num { font-size: 2.2rem; font-weight: 800; color: #2563eb; }
+    .stat-label { font-size: 0.9rem; color: #64748b; margin-top: 4px; }
+
+    /* Features */
+    .features {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 60px 20px;
+    }
+    .features h2 {
+      text-align: center;
+      font-size: 1.8rem;
+      margin-bottom: 40px;
+      color: #1e293b;
+    }
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 24px;
+    }
+    .feature-card {
+      background: white;
+      border-radius: 16px;
+      padding: 28px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      transition: transform 0.2s;
+    }
+    .feature-card:hover { transform: translateY(-4px); }
+    .feature-icon { font-size: 36px; margin-bottom: 12px; }
+    .feature-card h3 { font-size: 1.1rem; margin-bottom: 8px; color: #1e293b; }
+    .feature-card p { font-size: 0.95rem; color: #64748b; }
+
+    /* Countries */
+    .countries {
+      background: white;
+      padding: 60px 20px;
+    }
+    .countries h2 {
+      text-align: center;
+      font-size: 1.8rem;
+      margin-bottom: 12px;
+      color: #1e293b;
+    }
+    .countries .subtitle {
+      text-align: center;
+      color: #64748b;
+      margin-bottom: 32px;
+    }
+    .country-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .country-tag {
+      background: #f1f5f9;
+      padding: 10px 20px;
+      border-radius: 50px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: #334155;
+    }
+
+    /* eSIM */
+    .esim {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 60px 20px;
+      text-align: center;
+    }
+    .esim h2 { font-size: 1.8rem; margin-bottom: 12px; color: #1e293b; }
+    .esim p { color: #64748b; max-width: 500px; margin: 0 auto 24px; }
+    .esim-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #f97316, #ef4444);
+      color: white;
+      padding: 12px 28px;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    /* Languages */
+    .languages {
+      background: white;
+      padding: 60px 20px;
+      text-align: center;
+    }
+    .languages h2 { font-size: 1.8rem; margin-bottom: 24px; color: #1e293b; }
+    .lang-grid {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .lang-card {
+      background: #f8fafc;
+      border: 2px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 16px 28px;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #334155;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 40px 20px;
+      color: #94a3b8;
+      font-size: 0.85rem;
+    }
+    .footer a { color: #2563eb; text-decoration: none; }
+
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 1.8rem; }
+      .hero .tagline { font-size: 1rem; }
+      .stats { gap: 24px; }
+      .stat-num { font-size: 1.6rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <section class="hero">
+    <div class="hero-icon">📶</div>
+    <h1>AutoWiFi Travel</h1>
+    <p class="tagline">Automatically connect to free WiFi at airports worldwide. Skip captive portals and get online instantly.</p>
+    <div class="badges">
+      <span class="badge">📱 Android</span>
+      <span class="badge">🌐 12 Countries</span>
+      <span class="badge">⚡ Auto-Login</span>
+    </div>
+  </section>
+
+  <section class="stats">
+    <div class="stat">
+      <div class="stat-num">36+</div>
+      <div class="stat-label">WiFi Spots</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">12</div>
+      <div class="stat-label">Countries</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">4</div>
+      <div class="stat-label">Languages</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">0</div>
+      <div class="stat-label">Seconds to Connect</div>
+    </div>
+  </section>
+
+  <section class="features">
+    <h2>Key Features</h2>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🔓</div>
+        <h3>Auto Portal Login</h3>
+        <p>Automatically detects and bypasses captive portal pages at airports, train stations, and public spaces.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📡</div>
+        <h3>Smart SSID Detection</h3>
+        <p>Recognizes known WiFi networks and automatically initiates the connection process.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔄</div>
+        <h3>Auto Reconnect</h3>
+        <p>Monitors your connection and automatically reconnects if the WiFi session expires.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🌏</div>
+        <h3>Global Coverage</h3>
+        <p>Supports major airports and transit hubs across Asia, with more spots added regularly.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📱</div>
+        <h3>eSIM Integration</h3>
+        <p>Compare and purchase eSIM plans for your destination directly within the app.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💬</div>
+        <h3>Community Feedback</h3>
+        <p>Report WiFi spot status and request new locations to help fellow travelers.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="countries">
+    <h2>Supported Countries</h2>
+    <p class="subtitle">Major airports and transit hubs in these countries</p>
+    <div class="country-grid">
+      <span class="country-tag">🇯🇵 Japan</span>
+      <span class="country-tag">🇰🇷 South Korea</span>
+      <span class="country-tag">🇹🇼 Taiwan</span>
+      <span class="country-tag">🇨🇳 China</span>
+      <span class="country-tag">🇹🇭 Thailand</span>
+      <span class="country-tag">🇸🇬 Singapore</span>
+      <span class="country-tag">🇲🇾 Malaysia</span>
+      <span class="country-tag">🇻🇳 Vietnam</span>
+      <span class="country-tag">🇵🇭 Philippines</span>
+      <span class="country-tag">🇮🇩 Indonesia</span>
+      <span class="country-tag">🇭🇰 Hong Kong</span>
+      <span class="country-tag">🇺🇸 United States</span>
+    </div>
+  </section>
+
+  <section class="esim">
+    <h2>Need Mobile Data Too?</h2>
+    <p>Compare eSIM plans from top providers for your destination. Stay connected even when WiFi isn't available.</p>
+    <div class="esim-badge">🛜 Powered by Airalo eSIM</div>
+  </section>
+
+  <section class="languages">
+    <h2>Multilingual Support</h2>
+    <div class="lang-grid">
+      <div class="lang-card">🇯🇵 日本語</div>
+      <div class="lang-card">🇺🇸 English</div>
+      <div class="lang-card">🇨🇳 中文</div>
+      <div class="lang-card">🇰🇷 한국어</div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>&copy; 2025 AutoWiFi Travel. Built for travelers, by travelers.</p>
+    <p style="margin-top: 8px;">
+      <a href="mailto:contact@autowifi.travel">Contact</a> &middot;
+      <a href="https://github.com/kyasui-dotcom/autowifi-travel">GitHub</a>
+    </p>
+  </footer>
+
+</body>
+</html>
