@@ -69,7 +69,12 @@
     "requestNotes": "Notes",
     "requestSubmit": "Submit Request",
     "requestSent": "Request submitted",
-    "requestTitle": "Request New Spot"
+    "requestTitle": "Request New Spot",
+    "searchPlaceholder": "Search spots, airports, SSID...",
+    "filterAll": "All",
+    "countries": "countries",
+    "resultCount": "{{count}} results",
+    "noResults": "No matching spots found"
   },
   "esim": {
     "title": "Buy eSIM",

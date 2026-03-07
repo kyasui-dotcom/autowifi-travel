@@ -1,19 +1,22 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import {
   StyleSheet,
   FlatList,
   TouchableOpacity,
   TextInput,
   Alert,
+  ActivityIndicator,
 } from "react-native";
 import { useTranslation } from "react-i18next";
 import { Text, View } from "@/components/Themed";
 import { loadPatterns } from "@/services/pattern-sync";
 import { getPatternName } from "@/lib/i18n";
+import { API_BASE_URL } from "@/lib/config";
 import SpotRequestModal from "@/components/spots/SpotRequestModal";
 import type { PortalPattern } from "@/lib/types";
 
-const API_BASE = "https://autowifi-travel-api.k-yasui-102.workers.dev";
+type FilterType = "all" | "free" | "premium";
+type SortType = "name" | "country";
 
 interface SpotItemProps {
   pattern: PortalPattern;
@@ -49,35 +52,40 @@ function SpotItem({
           </View>
         )}
       </View>
-      <Text style={styles.spotCode}>
-        {pattern.airportCode} - {pattern.country}
-      </Text>
+      <View style={styles.spotMeta}>
+        <Text style={styles.spotCode}>
+          {pattern.airportCode ? `${pattern.airportCode} · ` : ""}
+          {pattern.country}
+        </Text>
+        <Text style={styles.spotType}>
+          {t(`spots.portalType.${pattern.portalType}`)}
+        </Text>
+      </View>
       <Text style={styles.spotSsids}>
         SSID: {pattern.ssids.join(", ")}
       </Text>
       <View style={styles.spotFooter}>
-        <View style={styles.footerLeft}>
-          <Text style={styles.spotType}>
-            {t(`spots.portalType.${pattern.portalType}`)}
-          </Text>
-          <Text style={styles.spotVersion}>v{pattern.patternVersion}</Text>
-        </View>
+        <Text style={styles.spotVersion}>v{pattern.patternVersion}</Text>
         <View style={styles.feedbackRow}>
           {feedbackState ? (
             <Text style={styles.feedbackSentText}>
-              {t("spots.feedbackSent")}
+              {t("spots.feedbackSent")} {feedbackState === "up" ? "✓" : ""}
             </Text>
           ) : (
             <>
               <TouchableOpacity
                 style={styles.thumbButton}
                 onPress={() => onThumbsUp(pattern.spotId)}
+                accessibilityLabel={t("spots.feedbackWorked")}
+                accessibilityRole="button"
               >
                 <Text style={styles.thumbEmoji}>👍</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.thumbButton}
                 onPress={() => onThumbsDown(pattern.spotId)}
+                accessibilityLabel={t("spots.feedbackNotWorked")}
+                accessibilityRole="button"
               >
                 <Text style={styles.thumbEmoji}>👎</Text>
               </TouchableOpacity>
@@ -96,14 +104,18 @@ function SpotItem({
             placeholder={t("spots.feedbackPlaceholder")}
             placeholderTextColor="#999"
             multiline
+            accessibilityLabel={t("spots.feedbackComment")}
           />
           <TouchableOpacity
-            style={styles.commentSendButton}
+            style={[
+              styles.commentSendButton,
+              commentSending && styles.commentSendButtonDisabled,
+            ]}
             onPress={() => onCommentSend(pattern.spotId)}
             disabled={commentSending}
           >
             <Text style={styles.commentSendText}>
-              {t("spots.feedbackSend")}
+              {commentSending ? "..." : t("spots.feedbackSend")}
             </Text>
           </TouchableOpacity>
         </View>
@@ -115,6 +127,9 @@ function SpotItem({
 export default function SpotsScreen() {
   const { t } = useTranslation();
   const [patterns, setPatterns] = useState<PortalPattern[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filterType, setFilterType] = useState<FilterType>("all");
   const [feedbackSent, setFeedbackSent] = useState<
     Record<string, "up" | "down">
   >({});
@@ -125,16 +140,58 @@ export default function SpotsScreen() {
   const [requestModalVisible, setRequestModalVisible] = useState(false);
 
   useEffect(() => {
-    loadPatterns().then(setPatterns);
+    setLoading(true);
+    loadPatterns()
+      .then(setPatterns)
+      .finally(() => setLoading(false));
   }, []);
 
-  const freePatterns = patterns.filter((p) => p.tier === "free");
-  const premiumPatterns = patterns.filter((p) => p.tier === "premium");
+  // Filtered & searched patterns with memoization
+  const filteredPatterns = useMemo(() => {
+    let result = patterns;
+
+    // Filter by tier
+    if (filterType === "free") {
+      result = result.filter((p) => p.tier === "free");
+    } else if (filterType === "premium") {
+      result = result.filter((p) => p.tier === "premium");
+    }
+
+    // Search by name, country, airport code, SSID
+    if (searchQuery.trim()) {
+      const q = searchQuery.toLowerCase().trim();
+      result = result.filter(
+        (p) =>
+          getPatternName(p).toLowerCase().includes(q) ||
+          p.name.toLowerCase().includes(q) ||
+          p.country.toLowerCase().includes(q) ||
+          (p.airportCode?.toLowerCase().includes(q) ?? false) ||
+          (p.nameJa?.includes(q) ?? false) ||
+          (p.nameZh?.includes(q) ?? false) ||
+          (p.nameKo?.includes(q) ?? false) ||
+          p.ssids.some((s) => s.toLowerCase().includes(q))
+      );
+    }
+
+    // Sort: spots with airport codes first, then alphabetical
+    result.sort((a, b) => {
+      if (a.country !== b.country) return a.country.localeCompare(b.country);
+      return getPatternName(a).localeCompare(getPatternName(b));
+    });
+
+    return result;
+  }, [patterns, filterType, searchQuery]);
+
+  // Country count for display
+  const countryCount = useMemo(() => {
+    const countries = new Set(patterns.map((p) => p.country));
+    return countries.size;
+  }, [patterns]);
 
   const sendReport = useCallback(
     async (spotId: string, success: boolean, errorDetail?: string) => {
       try {
-        const res = await fetch(`${API_BASE}/api/reports`, {
+        const res = await fetch(`${API_BASE_URL}/api/reports`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ spotId, success, errorDetail }),
@@ -156,7 +213,6 @@ export default function SpotsScreen() {
   );
 
   const handleThumbsDown = useCallback((spotId: string) => {
-    // Show comment input - don't send report yet
     setFeedbackSent((prev) => ({ ...prev, [spotId]: "down" }));
   }, []);
 
@@ -176,10 +232,43 @@ export default function SpotsScreen() {
     [sendReport, comments]
   );
 
+  const renderFilterChip = useCallback(
+    (type: FilterType, label: string) => (
+      <TouchableOpacity
+        style={[
+          styles.filterChip,
+          filterType === type && styles.filterChipActive,
+        ]}
+        onPress={() => setFilterType(type)}
+        accessibilityRole="button"
+        accessibilityState={{ selected: filterType === type }}
+      >
+        <Text
+          style={[
+            styles.filterChipText,
+            filterType === type && styles.filterChipTextActive,
+          ]}
+        >
+          {label}
+        </Text>
+      </TouchableOpacity>
+    ),
+    [filterType]
+  );
+
+  if (loading) {
+    return (
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator size="large" color="#2196F3" />
+        <Text style={styles.loadingText}>{t("common.loading")}</Text>
+      </View>
+    );
+  }
+
   return (
     <View style={styles.container}>
       <FlatList
-        data={[...freePatterns, ...premiumPatterns]}
+        data={filteredPatterns}
         keyExtractor={(item) => item.spotId}
         renderItem={({ item }) => (
           <SpotItem
@@ -194,9 +283,45 @@ export default function SpotsScreen() {
           />
         )}
         ListHeaderComponent={
-          <Text style={styles.sectionTitle}>
-            {t("spots.title", { count: patterns.length })}
-          </Text>
+          <View style={styles.headerSection}>
+            <Text style={styles.sectionTitle}>
+              {t("spots.title", { count: patterns.length })}
+            </Text>
+            <Text style={styles.countrySubtext}>
+              {countryCount} {t("spots.countries")}
+            </Text>
+
+            {/* Search bar */}
+            <TextInput
+              style={styles.searchInput}
+              value={searchQuery}
+              onChangeText={setSearchQuery}
+              placeholder={t("spots.searchPlaceholder")}
+              placeholderTextColor="#999"
+              clearButtonMode="while-editing"
+              autoCorrect={false}
+              accessibilityLabel={t("spots.searchPlaceholder")}
+            />
+
+            {/* Filter chips */}
+            <View style={styles.filterRow}>
+              {renderFilterChip("all", t("spots.filterAll"))}
+              {renderFilterChip("free", "Free")}
+              {renderFilterChip("premium", "Premium")}
+            </View>
+
+            {/* Results count if filtered */}
+            {(searchQuery || filterType !== "all") && (
+              <Text style={styles.resultCount}>
+                {t("spots.resultCount", { count: filteredPatterns.length })}
+              </Text>
+            )}
+          </View>
+        }
+        ListEmptyComponent={
+          <View style={styles.emptyContainer}>
+            <Text style={styles.emptyText}>{t("spots.noResults")}</Text>
+          </View>
         }
         ListFooterComponent={
           <TouchableOpacity
@@ -222,18 +347,82 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    gap: 12,
+  },
+  loadingText: {
+    fontSize: 14,
+    opacity: 0.6,
+  },
   listContent: {
     padding: 16,
+  },
+  headerSection: {
+    marginBottom: 12,
   },
   sectionTitle: {
     fontSize: 20,
     fontWeight: "bold",
+  },
+  countrySubtext: {
+    fontSize: 13,
+    opacity: 0.5,
     marginBottom: 12,
+  },
+  searchInput: {
+    borderWidth: 1,
+    borderColor: "rgba(150, 150, 150, 0.3)",
+    borderRadius: 10,
+    paddingHorizontal: 14,
+    paddingVertical: 10,
+    fontSize: 15,
+    marginBottom: 10,
+  },
+  filterRow: {
+    flexDirection: "row",
+    gap: 8,
+    marginBottom: 8,
+  },
+  filterChip: {
+    paddingHorizontal: 14,
+    paddingVertical: 6,
+    borderRadius: 16,
+    borderWidth: 1,
+    borderColor: "rgba(150, 150, 150, 0.3)",
+  },
+  filterChipActive: {
+    backgroundColor: "#2196F3",
+    borderColor: "#2196F3",
+  },
+  filterChipText: {
+    fontSize: 13,
+    opacity: 0.7,
+  },
+  filterChipTextActive: {
+    color: "#fff",
+    opacity: 1,
+    fontWeight: "600",
+  },
+  resultCount: {
+    fontSize: 12,
+    opacity: 0.5,
+    marginBottom: 4,
+  },
+  emptyContainer: {
+    paddingVertical: 40,
+    alignItems: "center",
+  },
+  emptyText: {
+    fontSize: 14,
+    opacity: 0.5,
   },
   spotCard: {
     borderRadius: 12,
     padding: 16,
-    marginBottom: 12,
+    marginBottom: 10,
     borderWidth: 1,
     borderColor: "rgba(150, 150, 150, 0.2)",
   },
@@ -244,7 +433,7 @@ const styles = StyleSheet.create({
     marginBottom: 4,
   },
   spotName: {
-    fontSize: 16,
+    fontSize: 15,
     fontWeight: "bold",
     flex: 1,
   },
@@ -259,10 +448,19 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#333",
   },
+  spotMeta: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8,
+    marginBottom: 4,
+  },
   spotCode: {
     fontSize: 13,
     opacity: 0.6,
-    marginBottom: 4,
+  },
+  spotType: {
+    fontSize: 12,
+    color: "#2196F3",
   },
   spotSsids: {
     fontSize: 12,
@@ -274,15 +472,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
   },
-  footerLeft: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 8,
-  },
-  spotType: {
-    fontSize: 12,
-    color: "#2196F3",
-  },
   spotVersion: {
     fontSize: 12,
     opacity: 0.4,
@@ -293,7 +482,7 @@ const styles = StyleSheet.create({
     gap: 4,
   },
   thumbButton: {
-    padding: 4,
+    padding: 6,
   },
   thumbEmoji: {
     fontSize: 18,
@@ -330,6 +519,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 14,
     paddingVertical: 6,
     marginTop: 8,
+  },
+  commentSendButtonDisabled: {
+    opacity: 0.5,
   },
   commentSendText: {
     color: "#fff",

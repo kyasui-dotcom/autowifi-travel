@@ -69,7 +69,12 @@
     "requestNotes": "비고",
     "requestSubmit": "요청 제출",
     "requestSent": "요청이 제출되었습니다",
-    "requestTitle": "새 스팟 요청"
+    "requestTitle": "새 스팟 요청",
+    "searchPlaceholder": "스팟, 공항, SSID 검색...",
+    "filterAll": "전체",
+    "countries": "개국",
+    "resultCount": "{{count}}개 결과",
+    "noResults": "일치하는 스팟이 없습니다"
   },
   "esim": {
     "title": "eSIM 구매",

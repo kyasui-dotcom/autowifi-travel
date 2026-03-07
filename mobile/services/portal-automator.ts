@@ -12,8 +12,13 @@ function escapeJs(str: string): string {
   return str
     .replace(/\\/g, "\\\\")
     .replace(/'/g, "\\'")
+    .replace(/"/g, '\\"')
+    .replace(/`/g, "\\`")
+    .replace(/\$/g, "\\$")
     .replace(/\n/g, "\\n")
-    .replace(/\r/g, "\\r");
+    .replace(/\r/g, "\\r")
+    .replace(/</g, "\\x3c")
+    .replace(/>/g, "\\x3e");
 }
 
 function resolveValue(
@@ -234,7 +239,16 @@ export function generateAutomationScript(
         }
       }
 
-      setTimeout(runAutomation, 1500);
+      // Timeout guard: abort if automation takes >30s
+      var _automationTimer = setTimeout(function() {
+        report('error', 'Automation timed out after 30s');
+      }, 30000);
+
+      setTimeout(function() {
+        runAutomation().finally(function() {
+          clearTimeout(_automationTimer);
+        });
+      }, 1500);
       true;
     })();
   `);

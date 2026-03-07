@@ -1,11 +1,11 @@
-import { useEffect, useCallback, useState } from "react";
+import { useEffect, useCallback, useState, useMemo } from "react";
 import {
   StyleSheet,
   TouchableOpacity,
   Linking,
   Platform,
   ScrollView,
-  Alert,
+  ActivityIndicator,
 } from "react-native";
 import { useRouter } from "expo-router";
 import { useTranslation } from "react-i18next";
@@ -17,7 +17,16 @@ import { getPatternName } from "@/lib/i18n";
 import { useAutoReconnect } from "@/hooks/useAutoReconnect";
 import { ReconnectBanner } from "@/components/wifi/ReconnectBanner";
 import { SilentReconnectWebView } from "@/components/wifi/SilentReconnectWebView";
-import type { PortalPattern } from "@/lib/types";
+import type { PortalPattern, WifiConnectionStatus } from "@/lib/types";
+
+// Status color map (constant, never re-created)
+const STATUS_COLORS: Record<WifiConnectionStatus, string> = {
+  disconnected: "#999",
+  connected_no_portal: "#4CAF50",
+  portal_detected: "#FF9800",
+  auto_connecting: "#2196F3",
+  connected: "#4CAF50",
+} as const;
 
 // Dynamically try to import native WiFi modules (unavailable in Expo Go)
 let getCurrentSSID: () => Promise<string | null>;
@@ -54,14 +63,19 @@ export default function HomeScreen() {
   const { profile } = useProfileStore();
   const { resetReconnect } = useReconnectStore();
   const [patterns, setPatterns] = useState<PortalPattern[]>([]);
+  const [patternsLoading, setPatternsLoading] = useState(true);
   const [demoMode, setDemoMode] = useState(!nativeWifiAvailable);
+  const [refreshing, setRefreshing] = useState(false);
 
   // Auto reconnect hook (only active when nativeWifiAvailable)
   const { reconnectStatus, reconnectPattern } = useAutoReconnect();
 
   // Load patterns from API + local
   useEffect(() => {
-    loadPatterns().then(setPatterns);
+    setPatternsLoading(true);
+    loadPatterns()
+      .then(setPatterns)
+      .finally(() => setPatternsLoading(false));
   }, []);
 
   const checkWifi = useCallback(async () => {
@@ -107,42 +121,57 @@ export default function HomeScreen() {
     return unsub;
   }, [checkWifi, setSSID, setStatus, demoMode]);
 
-  const handleDemoSelect = (pattern: PortalPattern) => {
-    setSSID(pattern.ssids[0]);
-    setMatchedPattern(pattern);
-    setStatus("portal_detected");
-    setPortalUrl(pattern.portalUrl ?? null);
-  };
+  const handleDemoSelect = useCallback(
+    (pattern: PortalPattern) => {
+      setSSID(pattern.ssids[0]);
+      setMatchedPattern(pattern);
+      setStatus("portal_detected");
+      setPortalUrl(pattern.portalUrl ?? null);
+    },
+    [setSSID, setMatchedPattern, setStatus, setPortalUrl]
+  );
 
-  const handleAutoConnect = () => {
+  const handleAutoConnect = useCallback(() => {
     if (wifi.matchedPattern) {
       router.push(`/portal/${wifi.matchedPattern.spotId}`);
     }
-  };
+  }, [wifi.matchedPattern, router]);
 
   const handleSilentReconnectComplete = useCallback(
     (success: boolean) => {
       if (success) {
-        // Reconnection succeeded - update WiFi status
         setStatus("connected");
       }
     },
     [setStatus]
   );
 
-  const statusColors = {
-    disconnected: "#999",
-    connected_no_portal: "#4CAF50",
-    portal_detected: "#FF9800",
-    auto_connecting: "#2196F3",
-    connected: "#4CAF50",
-  };
+  const handleRefresh = useCallback(async () => {
+    setRefreshing(true);
+    if (demoMode) {
+      await loadPatterns().then(setPatterns);
+    } else {
+      await checkWifi();
+    }
+    setRefreshing(false);
+  }, [demoMode, checkWifi]);
 
-  const currentColor = statusColors[wifi.status];
+  const handleOpenWifiSettings = useCallback(() => {
+    if (Platform.OS === "android") {
+      Linking.sendIntent("android.settings.WIFI_SETTINGS");
+    } else if (Platform.OS === "ios") {
+      Linking.openURL("App-Prefs:WIFI");
+    }
+  }, []);
+
+  const currentColor = STATUS_COLORS[wifi.status];
+
+  // Memoize pattern count for demo section
+  const patternCount = useMemo(() => patterns.length, [patterns]);
 
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.content}>
-      <Text style={styles.appTitle}>{t('home.appTitle')}</Text>
+      <Text style={styles.appTitle}>{t("home.appTitle")}</Text>
 
       {/* Auto Reconnect Banner */}
       {!demoMode && (
@@ -163,15 +192,17 @@ export default function HomeScreen() {
       {/* Demo Mode Banner */}
       {demoMode && (
         <View style={styles.demoBanner}>
-          <Text style={styles.demoBannerText}>
-            {t('home.demoBanner')}
-          </Text>
+          <Text style={styles.demoBannerText}>{t("home.demoBanner")}</Text>
         </View>
       )}
 
       {/* WiFi Status Card */}
       {!demoMode && (
-        <View style={[styles.statusCard, { borderColor: currentColor }]}>
+        <View
+          style={[styles.statusCard, { borderColor: currentColor }]}
+          accessibilityRole="summary"
+          accessibilityLabel={t(`home.status.${wifi.status}`)}
+        >
           <View
             style={[styles.statusDot, { backgroundColor: currentColor }]}
           />
@@ -197,8 +228,8 @@ export default function HomeScreen() {
             {wifi.matchedPattern.country}
           </Text>
           <Text style={styles.matchType}>
-            {t('home.typeLabel', {
-              type: t(`home.type.${wifi.matchedPattern.portalType}`)
+            {t("home.typeLabel", {
+              type: t(`home.type.${wifi.matchedPattern.portalType}`),
             })}
           </Text>
         </View>
@@ -210,9 +241,13 @@ export default function HomeScreen() {
           <TouchableOpacity
             style={styles.connectButton}
             onPress={handleAutoConnect}
+            accessibilityRole="button"
+            accessibilityLabel={
+              demoMode ? t("home.openPortal") : t("home.autoConnect")
+            }
           >
             <Text style={styles.connectButtonText}>
-              {demoMode ? t('home.openPortal') : t('home.autoConnect')}
+              {demoMode ? t("home.openPortal") : t("home.autoConnect")}
             </Text>
           </TouchableOpacity>
         )}
@@ -221,32 +256,45 @@ export default function HomeScreen() {
       {demoMode && (
         <View style={styles.demoSection}>
           <Text style={styles.demoSectionTitle}>
-            {t('home.testTargets', { count: patterns.length })}
+            {t("home.testTargets", { count: patternCount })}
           </Text>
-          {patterns.map((p) => (
-            <TouchableOpacity
-              key={p.spotId}
-              style={[
-                styles.demoItem,
-                wifi.matchedPattern?.spotId === p.spotId &&
-                  styles.demoItemActive,
-              ]}
-              onPress={() => handleDemoSelect(p)}
-            >
-              <Text style={styles.demoItemName}>{getPatternName(p)}</Text>
-              <Text style={styles.demoItemSsid}>
-                {p.ssids[0]} ({p.portalType})
-              </Text>
-            </TouchableOpacity>
-          ))}
+          {patternsLoading ? (
+            <ActivityIndicator
+              size="small"
+              color="#2196F3"
+              style={{ marginVertical: 20 }}
+            />
+          ) : (
+            patterns.map((p) => (
+              <TouchableOpacity
+                key={p.spotId}
+                style={[
+                  styles.demoItem,
+                  wifi.matchedPattern?.spotId === p.spotId &&
+                    styles.demoItemActive,
+                ]}
+                onPress={() => handleDemoSelect(p)}
+                accessibilityRole="button"
+                accessibilityLabel={`${getPatternName(p)} - ${p.ssids[0]}`}
+              >
+                <Text style={styles.demoItemName}>{getPatternName(p)}</Text>
+                <Text style={styles.demoItemSsid}>
+                  {p.ssids[0]} ({p.portalType})
+                </Text>
+              </TouchableOpacity>
+            ))
+          )}
         </View>
       )}
 
       {/* Profile Warning */}
       {!profile && (
-        <View style={styles.warningCard}>
+        <View
+          style={styles.warningCard}
+          accessibilityRole="alert"
+        >
           <Text style={styles.warningText}>
-            {t('home.profileWarning')}
+            {t("home.profileWarning")}
           </Text>
         </View>
       )}
@@ -256,26 +304,27 @@ export default function HomeScreen() {
         {!demoMode && (
           <TouchableOpacity
             style={styles.wifiSettingsButton}
-            onPress={() => {
-              if (Platform.OS === "android") {
-                Linking.sendIntent("android.settings.WIFI_SETTINGS");
-              } else if (Platform.OS === "ios") {
-                Linking.openURL("App-Prefs:WIFI");
-              }
-            }}
+            onPress={handleOpenWifiSettings}
+            accessibilityRole="button"
           >
             <Text style={styles.wifiSettingsText}>
-              {t('home.openWifiSettings')}
+              {t("home.openWifiSettings")}
             </Text>
           </TouchableOpacity>
         )}
         <TouchableOpacity
           style={styles.refreshButton}
-          onPress={demoMode ? () => loadPatterns().then(setPatterns) : checkWifi}
+          onPress={handleRefresh}
+          disabled={refreshing}
+          accessibilityRole="button"
         >
-          <Text style={styles.refreshText}>
-            {demoMode ? t('home.updatePatterns') : t('home.updateStatus')}
-          </Text>
+          {refreshing ? (
+            <ActivityIndicator size="small" color="#2196F3" />
+          ) : (
+            <Text style={styles.refreshText}>
+              {demoMode ? t("home.updatePatterns") : t("home.updateStatus")}
+            </Text>
+          )}
         </TouchableOpacity>
       </View>
     </ScrollView>
@@ -383,6 +432,8 @@ const styles = StyleSheet.create({
     borderColor: "#ccc",
     padding: 12,
     alignItems: "center",
+    justifyContent: "center",
+    minHeight: 44,
   },
   refreshText: {
     fontSize: 14,

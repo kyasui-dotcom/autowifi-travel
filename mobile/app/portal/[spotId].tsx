@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef, useCallback } from "react";
+import { useEffect, useState, useRef, useCallback, useMemo } from "react";
 import { StyleSheet, TouchableOpacity, ActivityIndicator } from "react-native";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { WebView, type WebViewMessageEvent } from "react-native-webview";
@@ -51,8 +51,16 @@ export default function PortalScreen() {
     });
   }, [spotId]);
 
+  const logIdRef = useRef(0);
   const addLog = useCallback((msg: string) => {
-    setLogs((prev) => [...prev.slice(-20), msg]);
+    const id = ++logIdRef.current;
+    const time = new Date().toLocaleTimeString("en", {
+      hour12: false,
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+    });
+    setLogs((prev) => [...prev.slice(-20), `[${time}] ${msg}`]);
   }, []);
 
   useEffect(() => {

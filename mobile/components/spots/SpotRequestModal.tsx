@@ -13,8 +13,7 @@ import {
   ScrollView,
 } from "react-native";
 import { useTranslation } from "react-i18next";
-
-const API_BASE = "https://autowifi-travel-api.k-yasui-102.workers.dev";
+import { API_BASE_URL } from "@/lib/config";
 
 interface SpotRequestModalProps {
   visible: boolean;
@@ -53,7 +52,7 @@ export default function SpotRequestModal({
 
     setSubmitting(true);
     try {
-      const res = await fetch(`${API_BASE}/api/spot-requests`, {
+      const res = await fetch(`${API_BASE_URL}/api/spot-requests`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -91,7 +90,12 @@ export default function SpotRequestModal({
           {/* Title bar */}
           <View style={styles.titleBar}>
             <Text style={styles.titleText}>{t("spots.requestTitle")}</Text>
-            <TouchableOpacity onPress={handleClose} style={styles.closeButton}>
+            <TouchableOpacity
+              onPress={handleClose}
+              style={styles.closeButton}
+              accessibilityLabel={t("common.cancel")}
+              accessibilityRole="button"
+            >
               <Text style={styles.closeText}>✕</Text>
             </TouchableOpacity>
           </View>

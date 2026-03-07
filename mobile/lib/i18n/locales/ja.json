@@ -69,7 +69,12 @@
     "requestNotes": "備考",
     "requestSubmit": "リクエスト送信",
     "requestSent": "リクエストを送信しました",
-    "requestTitle": "新規スポットリクエスト"
+    "requestTitle": "新規スポットリクエスト",
+    "searchPlaceholder": "スポット名、空港、SSIDで検索...",
+    "filterAll": "すべて",
+    "countries": "カ国",
+    "resultCount": "{{count}}件の結果",
+    "noResults": "一致するスポットが見つかりません"
   },
   "esim": {
     "title": "eSIM購入",

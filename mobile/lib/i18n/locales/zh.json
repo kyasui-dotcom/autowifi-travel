@@ -69,7 +69,12 @@
     "requestNotes": "备注",
     "requestSubmit": "提交请求",
     "requestSent": "请求已提交",
-    "requestTitle": "请求新热点"
+    "requestTitle": "请求新热点",
+    "searchPlaceholder": "搜索热点、机场、SSID...",
+    "filterAll": "全部",
+    "countries": "个国家",
+    "resultCount": "{{count}}个结果",
+    "noResults": "未找到匹配的热点"
   },
   "esim": {
     "title": "购买eSIM",
