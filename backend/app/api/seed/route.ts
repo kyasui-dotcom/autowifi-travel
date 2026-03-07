@@ -880,6 +880,281 @@ const SEED_PATTERNS = [
     },
     notes: "Requires SoftBank/Y!mobile account.",
   },
+  // ===== Japan Airports (new) =====
+  {
+    spotId: "jp-cts-wifi", name: "New Chitose Airport", nameJa: "新千歳空港", nameZh: "新千岁机场", nameKo: "신치토세공항",
+    airportCode: "CTS", country: "JP", ssids: ["New_Chitose_Airport_Free_Wi-Fi"], portalType: "agree_only", tier: "free",
+    patternData: { agreeOnly: { actions: [
+      { description: "Accept terms", selector: "input[type='checkbox']", fallbackSelectors: [".agree", "#terms"], action: "check", delayMs: 300 },
+      { description: "Connect", selector: "button[type='submit'], input[type='submit']", fallbackSelectors: ["button:last-of-type"], action: "click", delayMs: 500 },
+    ], successCondition: { method: "http_probe", value: "http://connectivitycheck.gstatic.com/generate_204" } } },
+    notes: "New Chitose Airport, Hokkaido.",
+  },
+  {
+    spotId: "jp-sdj-wifi", name: "Sendai Airport", nameJa: "仙台空港", nameZh: "仙台机场", nameKo: "센다이공항",
+    airportCode: "SDJ", country: "JP", ssids: ["Sendai-Airport_Free_Wi-Fi"], portalType: "agree_only", tier: "free",
+    patternData: { agreeOnly: { actions: [
+      { description: "Accept terms", selector: "input[type='checkbox']", fallbackSelectors: [".agree", "#terms"], action: "check", delayMs: 300 },
+      { description: "Connect", selector: "button[type='submit'], input[type='submit']", fallbackSelectors: ["button:last-of-type"], action: "click", delayMs: 500 },
+    ], successCondition: { method: "http_probe", value: "http://connectivitycheck.gstatic.com/generate_204" } } },
+    notes: "Sendai Airport.",
+  },
+  {
+    spotId: "jp-itm-wifi", name: "Osaka Itami Airport", nameJa: "大阪伊丹空港", nameZh: "大阪伊丹机场", nameKo: "오사카 이타미공항",
+    airportCode: "ITM", country: "JP", ssids: ["Osaka-Airport_Free_Wi-Fi"], portalType: "agree_only", tier: "free",
+    patternData: { agreeOnly: { actions: [
+      { description: "Accept terms", selector: "input[type='checkbox']", fallbackSelectors: [".agree", "#terms"], action: "check", delayMs: 300 },
+      { description: "Connect", selector: "button[type='submit'], input[type='submit']", fallbackSelectors: ["button:last-of-type"], action: "click", delayMs: 500 },
+    ], successCondition: { method: "http_probe", value: "http://connectivitycheck.gstatic.com/generate_204" } } },
+    notes: "Osaka Itami Airport (domestic).",
+  },
+  {
+    spotId: "jp-oka-wifi", name: "Naha Airport", nameJa: "那覇空港", nameZh: "那霸机场", nameKo: "나하공항",
+    airportCode: "OKA", country: "JP", ssids: ["NAHA_AIRPORT_FREE_Wi-Fi"], portalType: "agree_only", tier: "free",
+    patternData: { agreeOnly: { actions: [
+      { description: "Accept terms", selector: "input[type='checkbox']", fallbackSelectors: [".agree"], action: "check", delayMs: 300 },
+      { description: "Connect", selector: "button[type='submit'], input[type='submit']", fallbackSelectors: ["button:last-of-type"], action: "click", delayMs: 500 },
+    ], successCondition: { method: "http_probe", value: "http://connectivitycheck.gstatic.com/generate_204" } } },
+    notes: "Naha Airport, Okinawa.",
+  },
+  {
+    spotId: "jp-kmj-wifi", name: "Kumamoto Airport", nameJa: "熊本空港", nameZh: "熊本机场", nameKo: "구마모토공항",
+    airportCode: "KMJ", country: "JP", ssids: ["Kumamoto-Airport_Free_Wi-Fi"], portalType: "agree_only", tier: "free",
+    patternData: { agreeOnly: { actions: [
+      { description: "Accept terms", selector: "input[type='checkbox']", fallbackSelectors: [".agree"], action: "check", delayMs: 300 },
+      { description: "Connect", selector: "button[type='submit'], input[type='submit']", fallbackSelectors: ["button:last-of-type"], action: "click", delayMs: 500 },
+    ], successCondition: { method: "http_probe", value: "http://connectivitycheck.gstatic.com/generate_204" } } },
+    notes: "Kumamoto Airport.",
+  },
+  {
+    spotId: "jp-hij-wifi", name: "Hiroshima Airport", nameJa: "広島空港", nameZh: "广岛机场", nameKo: "히로시마공항",
+    airportCode: "HIJ", country: "JP", ssids: ["Hiroshima-Airport_Free_Wi-Fi"], portalType: "agree_only", tier: "free",
+    patternData: { agreeOnly: { actions: [
+      { description: "Accept terms", selector: "input[type='checkbox']", fallbackSelectors: [".agree"], action: "check", delayMs: 300 },
+      { description: "Connect", selector: "button[type='submit'], input[type='submit']", fallbackSelectors: ["button:last-of-type"], action: "click", delayMs: 500 },
+    ], successCondition: { method: "http_probe", value: "http://connectivitycheck.gstatic.com/generate_204" } } },
+    notes: "Hiroshima Airport.",
+  },
+  {
+    spotId: "jp-kmq-wifi", name: "Komatsu Airport", nameJa: "小松空港", nameZh: "小松机场", nameKo: "고마쓰공항",
+    airportCode: "KMQ", country: "JP", ssids: ["Komatsu-Airport_Free_Wi-Fi"], portalType: "agree_only", tier: "free",
+    patternData: { agreeOnly: { actions: [
+      { description: "Accept terms", selector: "input[type='checkbox']", fallbackSelectors: [".agree"], action: "check", delayMs: 300 },
+      { description: "Connect", selector: "button[type='submit'], input[type='submit']", fallbackSelectors: ["button:last-of-type"], action: "click", delayMs: 500 },
+    ], successCondition: { method: "http_probe", value: "http://connectivitycheck.gstatic.com/generate_204" } } },
+    notes: "Komatsu Airport (Kanazawa area).",
+  },
+  {
+    spotId: "jp-kag-wifi", name: "Kagoshima Airport", nameJa: "鹿児島空港", nameZh: "鹿儿岛机场", nameKo: "가고시마공항",
+    airportCode: "KOJ", country: "JP", ssids: ["Kagoshima-Airport_Free_Wi-Fi"], portalType: "agree_only", tier: "free",
+    patternData: { agreeOnly: { actions: [
+      { description: "Accept terms", selector: "input[type='checkbox']", fallbackSelectors: [".agree"], action: "check", delayMs: 300 },
+      { description: "Connect", selector: "button[type='submit'], input[type='submit']", fallbackSelectors: ["button:last-of-type"], action: "click", delayMs: 500 },
+    ], successCondition: { method: "http_probe", value: "http://connectivitycheck.gstatic.com/generate_204" } } },
+    notes: "Kagoshima Airport.",
+  },
+  {
+    spotId: "jp-matsuyama-wifi", name: "Matsuyama Airport", nameJa: "松山空港", nameZh: "松山机场", nameKo: "마쓰야마공항",
+    airportCode: "MYJ", country: "JP", ssids: ["Matsuyama-Airport_Free_Wi-Fi"], portalType: "agree_only", tier: "free",
+    patternData: { agreeOnly: { actions: [
+      { description: "Accept terms", selector: "input[type='checkbox']", fallbackSelectors: [".agree"], action: "check", delayMs: 300 },
+      { description: "Connect", selector: "button[type='submit'], input[type='submit']", fallbackSelectors: ["button:last-of-type"], action: "click", delayMs: 500 },
+    ], successCondition: { method: "http_probe", value: "http://connectivitycheck.gstatic.com/generate_204" } } },
+    notes: "Matsuyama Airport, Ehime.",
+  },
+  // ===== Japan Transit & City WiFi =====
+  {
+    spotId: "jp-shinkansen-wifi", name: "Shinkansen Free WiFi", nameJa: "新幹線 Free Wi-Fi", nameZh: "新干线免费WiFi", nameKo: "신칸센 무료 WiFi",
+    airportCode: "", country: "JP", ssids: ["Shinkansen_Free_Wi-Fi", "Shinkansen Free Wi-Fi"], portalType: "registration", tier: "free",
+    patternData: { registration: { fields: [
+      { fieldId: "email", selector: "input[name='email'], input[type='email']", fallbackSelectors: ["input[type='text']:first-of-type"], valueSource: "profile.email", inputMethod: "set_value", delayMs: 500 },
+    ], postFillActions: [
+      { description: "Accept terms", selector: "input[type='checkbox']", fallbackSelectors: [".agree", "#terms"], action: "check", delayMs: 300 },
+      { description: "Submit", selector: "button[type='submit'], input[type='submit']", fallbackSelectors: ["button:last-of-type"], action: "click", delayMs: 500 },
+    ], successCondition: { method: "http_probe", value: "http://connectivitycheck.gstatic.com/generate_204" } } },
+    notes: "Tokaido/Sanyo/Tohoku Shinkansen.",
+  },
+  {
+    spotId: "jp-jr-west-wifi", name: "JR-WEST FREE Wi-Fi", nameJa: "JR西日本 Free Wi-Fi", nameZh: "JR西日本免费WiFi", nameKo: "JR서일본 무료 WiFi",
+    airportCode: "", country: "JP", ssids: ["JR-WEST_FREE_Wi-Fi"], portalType: "registration", tier: "free",
+    patternData: { registration: { fields: [
+      { fieldId: "email", selector: "input[name='email'], input[type='email']", fallbackSelectors: ["input[type='text']:first-of-type"], valueSource: "profile.email", inputMethod: "set_value", delayMs: 500 },
+    ], postFillActions: [
+      { description: "Accept terms", selector: "input[type='checkbox']", fallbackSelectors: [".agree", "#terms"], action: "check", delayMs: 300 },
+      { description: "Submit", selector: "button[type='submit'], input[type='submit']", fallbackSelectors: ["button:last-of-type"], action: "click", delayMs: 500 },
+    ], successCondition: { method: "http_probe", value: "http://connectivitycheck.gstatic.com/generate_204" } } },
+    notes: "Major JR West stations. 30 min sessions.",
+  },
+  {
+    spotId: "jp-osaka-metro-wifi", name: "Osaka Metro Free Wi-Fi", nameJa: "大阪メトロ Free Wi-Fi", nameZh: "大阪地铁免费WiFi", nameKo: "오사카 메트로 무료 WiFi",
+    airportCode: "", country: "JP", ssids: ["Osaka_Metro_Free_Wi-Fi", "OSAKA_Free_Wi-Fi"], portalType: "registration", tier: "free",
+    patternData: { registration: { fields: [
+      { fieldId: "email", selector: "input[name='email'], input[type='email']", fallbackSelectors: ["input[type='text']:first-of-type"], valueSource: "profile.email", inputMethod: "set_value", delayMs: 500 },
+    ], postFillActions: [
+      { description: "Accept terms", selector: "input[type='checkbox']", fallbackSelectors: [".agree", "#terms"], action: "check", delayMs: 300 },
+      { description: "Submit", selector: "button[type='submit'], input[type='submit']", fallbackSelectors: ["button:last-of-type"], action: "click", delayMs: 500 },
+    ], successCondition: { method: "http_probe", value: "http://connectivitycheck.gstatic.com/generate_204" } } },
+    notes: "All Osaka Metro stations.",
+  },
+  // ===== Japan City WiFi =====
+  {
+    spotId: "jp-kyoto-wifi", name: "KYOTO Wi-Fi", nameJa: "KYOTO Wi-Fi", nameZh: "京都WiFi", nameKo: "교토 WiFi",
+    airportCode: "", country: "JP", ssids: ["KYOTO_Wi-Fi"], portalType: "registration", tier: "free",
+    patternData: { registration: { fields: [
+      { fieldId: "email", selector: "input[name='email'], input[type='email']", fallbackSelectors: ["input[type='text']:first-of-type"], valueSource: "profile.email", inputMethod: "set_value", delayMs: 500 },
+    ], postFillActions: [
+      { description: "Accept terms", selector: "input[type='checkbox']", fallbackSelectors: [".agree", "#terms"], action: "check", delayMs: 300 },
+      { description: "Submit", selector: "button[type='submit'], input[type='submit']", fallbackSelectors: ["button:last-of-type"], action: "click", delayMs: 500 },
+    ], successCondition: { method: "http_probe", value: "http://connectivitycheck.gstatic.com/generate_204" } } },
+    notes: "Kyoto city. Bus stops, tourist spots, subway.",
+  },
+  {
+    spotId: "jp-tokyo-wifi", name: "FREE Wi-Fi & TOKYO", nameJa: "FREE Wi-Fi & TOKYO", nameZh: "东京免费WiFi", nameKo: "도쿄 무료 WiFi",
+    airportCode: "", country: "JP", ssids: ["FREE_Wi-Fi_and_TOKYO"], portalType: "registration", tier: "free",
+    patternData: { registration: { fields: [
+      { fieldId: "email", selector: "input[name='email'], input[type='email']", fallbackSelectors: ["input[type='text']:first-of-type"], valueSource: "profile.email", inputMethod: "set_value", delayMs: 500 },
+    ], postFillActions: [
+      { description: "Accept terms", selector: "input[type='checkbox']", fallbackSelectors: [".agree", "#terms"], action: "check", delayMs: 300 },
+      { description: "Submit", selector: "button[type='submit'], input[type='submit']", fallbackSelectors: ["button:last-of-type"], action: "click", delayMs: 500 },
+    ], successCondition: { method: "http_probe", value: "http://connectivitycheck.gstatic.com/generate_204" } } },
+    notes: "Tokyo Metropolitan Government WiFi.",
+  },
+  {
+    spotId: "jp-yokohama-wifi", name: "YOKOHAMA Free Wi-Fi", nameJa: "よこはまFree Wi-Fi", nameZh: "横滨免费WiFi", nameKo: "요코하마 무료 WiFi",
+    airportCode: "", country: "JP", ssids: ["YOKOHAMA_Free_Wi-Fi"], portalType: "registration", tier: "free",
+    patternData: { registration: { fields: [
+      { fieldId: "email", selector: "input[name='email'], input[type='email']", fallbackSelectors: ["input[type='text']:first-of-type"], valueSource: "profile.email", inputMethod: "set_value", delayMs: 500 },
+    ], postFillActions: [
+      { description: "Accept terms", selector: "input[type='checkbox']", fallbackSelectors: [".agree", "#terms"], action: "check", delayMs: 300 },
+      { description: "Submit", selector: "button[type='submit'], input[type='submit']", fallbackSelectors: ["button:last-of-type"], action: "click", delayMs: 500 },
+    ], successCondition: { method: "http_probe", value: "http://connectivitycheck.gstatic.com/generate_204" } } },
+    notes: "Yokohama city WiFi.",
+  },
+  {
+    spotId: "jp-nagoya-wifi", name: "Nagoya Free Wi-Fi", nameJa: "なごや Free Wi-Fi", nameZh: "名古屋免费WiFi", nameKo: "나고야 무료 WiFi",
+    airportCode: "", country: "JP", ssids: ["Nagoya_Free_Wi-Fi", "NAGOYA-Free-WiFi"], portalType: "registration", tier: "free",
+    patternData: { registration: { fields: [
+      { fieldId: "email", selector: "input[name='email'], input[type='email']", fallbackSelectors: ["input[type='text']:first-of-type"], valueSource: "profile.email", inputMethod: "set_value", delayMs: 500 },
+    ], postFillActions: [
+      { description: "Accept terms", selector: "input[type='checkbox']", fallbackSelectors: [".agree", "#terms"], action: "check", delayMs: 300 },
+      { description: "Submit", selector: "button[type='submit'], input[type='submit']", fallbackSelectors: ["button:last-of-type"], action: "click", delayMs: 500 },
+    ], successCondition: { method: "http_probe", value: "http://connectivitycheck.gstatic.com/generate_204" } } },
+    notes: "Nagoya city WiFi.",
+  },
+  {
+    spotId: "jp-sapporo-wifi", name: "Sapporo City Wi-Fi", nameJa: "Sapporo City Wi-Fi", nameZh: "札幌市WiFi", nameKo: "삿포로 시티 WiFi",
+    airportCode: "", country: "JP", ssids: ["Sapporo_City_Wi-Fi"], portalType: "registration", tier: "free",
+    patternData: { registration: { fields: [
+      { fieldId: "email", selector: "input[name='email'], input[type='email']", fallbackSelectors: ["input[type='text']:first-of-type"], valueSource: "profile.email", inputMethod: "set_value", delayMs: 500 },
+    ], postFillActions: [
+      { description: "Accept terms", selector: "input[type='checkbox']", fallbackSelectors: [".agree", "#terms"], action: "check", delayMs: 300 },
+      { description: "Submit", selector: "button[type='submit'], input[type='submit']", fallbackSelectors: ["button:last-of-type"], action: "click", delayMs: 500 },
+    ], successCondition: { method: "http_probe", value: "http://connectivitycheck.gstatic.com/generate_204" } } },
+    notes: "Sapporo city WiFi.",
+  },
+  {
+    spotId: "jp-fukuoka-wifi", name: "Fukuoka City Wi-Fi", nameJa: "Fukuoka City Wi-Fi", nameZh: "福冈市WiFi", nameKo: "후쿠오카 시티 WiFi",
+    airportCode: "", country: "JP", ssids: ["Fukuoka_City_Wi-Fi"], portalType: "registration", tier: "free",
+    patternData: { registration: { fields: [
+      { fieldId: "email", selector: "input[name='email'], input[type='email']", fallbackSelectors: ["input[type='text']:first-of-type"], valueSource: "profile.email", inputMethod: "set_value", delayMs: 500 },
+    ], postFillActions: [
+      { description: "Accept terms", selector: "input[type='checkbox']", fallbackSelectors: [".agree", "#terms"], action: "check", delayMs: 300 },
+      { description: "Submit", selector: "button[type='submit'], input[type='submit']", fallbackSelectors: ["button:last-of-type"], action: "click", delayMs: 500 },
+    ], successCondition: { method: "http_probe", value: "http://connectivitycheck.gstatic.com/generate_204" } } },
+    notes: "Fukuoka city WiFi.",
+  },
+  {
+    spotId: "jp-kobe-wifi", name: "KOBE Free Wi-Fi", nameJa: "KOBE Free Wi-Fi", nameZh: "神户免费WiFi", nameKo: "고베 무료 WiFi",
+    airportCode: "", country: "JP", ssids: ["KOBE_Free_Wi-Fi"], portalType: "registration", tier: "free",
+    patternData: { registration: { fields: [
+      { fieldId: "email", selector: "input[name='email'], input[type='email']", fallbackSelectors: ["input[type='text']:first-of-type"], valueSource: "profile.email", inputMethod: "set_value", delayMs: 500 },
+    ], postFillActions: [
+      { description: "Accept terms", selector: "input[type='checkbox']", fallbackSelectors: [".agree", "#terms"], action: "check", delayMs: 300 },
+      { description: "Submit", selector: "button[type='submit'], input[type='submit']", fallbackSelectors: ["button:last-of-type"], action: "click", delayMs: 500 },
+    ], successCondition: { method: "http_probe", value: "http://connectivitycheck.gstatic.com/generate_204" } } },
+    notes: "Kobe city WiFi.",
+  },
+  {
+    spotId: "jp-okinawa-wifi", name: "Okinawa Free Wi-Fi", nameJa: "沖縄 Free Wi-Fi", nameZh: "冲绳免费WiFi", nameKo: "오키나와 무료 WiFi",
+    airportCode: "", country: "JP", ssids: ["Okinawa_Free_Wi-Fi", "Be.Okinawa Free Wi-Fi"], portalType: "registration", tier: "free",
+    patternData: { registration: { fields: [
+      { fieldId: "email", selector: "input[name='email'], input[type='email']", fallbackSelectors: ["input[type='text']:first-of-type"], valueSource: "profile.email", inputMethod: "set_value", delayMs: 500 },
+    ], postFillActions: [
+      { description: "Accept terms", selector: "input[type='checkbox']", fallbackSelectors: [".agree", "#terms"], action: "check", delayMs: 300 },
+      { description: "Submit", selector: "button[type='submit'], input[type='submit']", fallbackSelectors: ["button:last-of-type"], action: "click", delayMs: 500 },
+    ], successCondition: { method: "http_probe", value: "http://connectivitycheck.gstatic.com/generate_204" } } },
+    notes: "Okinawa Prefecture WiFi.",
+  },
+  // ===== Japan Shops & Restaurants =====
+  {
+    spotId: "jp-aeon-wifi", name: "AEON Free Wi-Fi", nameJa: "イオン Free Wi-Fi", nameZh: "永旺免费WiFi", nameKo: "이온 무료 WiFi",
+    airportCode: "", country: "JP", ssids: ["AEON_Free_Wi-Fi", "AEON_MALL_Free_Wi-Fi"], portalType: "registration", tier: "free",
+    patternData: { registration: { fields: [
+      { fieldId: "email", selector: "input[name='email'], input[type='email']", fallbackSelectors: ["input[type='text']:first-of-type"], valueSource: "profile.email", inputMethod: "set_value", delayMs: 500 },
+    ], postFillActions: [
+      { description: "Accept terms", selector: "input[type='checkbox']", fallbackSelectors: [".agree", "#terms"], action: "check", delayMs: 300 },
+      { description: "Submit", selector: "button[type='submit'], input[type='submit']", fallbackSelectors: ["button:last-of-type"], action: "click", delayMs: 500 },
+    ], successCondition: { method: "http_probe", value: "http://connectivitycheck.gstatic.com/generate_204" } } },
+    notes: "AEON / AEON Mall. 600+ locations.",
+  },
+  {
+    spotId: "jp-uniqlo-wifi", name: "UNIQLO Free Wi-Fi", nameJa: "ユニクロ Free Wi-Fi", nameZh: "优衣库免费WiFi", nameKo: "유니클로 무료 WiFi",
+    airportCode: "", country: "JP", ssids: ["UNIQLO_Free_Wi-Fi"], portalType: "agree_only", tier: "free",
+    patternData: { agreeOnly: { actions: [
+      { description: "Accept terms", selector: "input[type='checkbox']", fallbackSelectors: [".agree", "#terms"], action: "check", delayMs: 300 },
+      { description: "Connect", selector: "button[type='submit'], input[type='submit']", fallbackSelectors: ["button:last-of-type"], action: "click", delayMs: 500 },
+    ], successCondition: { method: "http_probe", value: "http://connectivitycheck.gstatic.com/generate_204" } } },
+    notes: "UNIQLO flagship stores.",
+  },
+  {
+    spotId: "jp-komeda-wifi", name: "Komeda Coffee Wi-Fi", nameJa: "コメダ珈琲 Wi-Fi", nameZh: "Komeda咖啡WiFi", nameKo: "코메다 커피 WiFi",
+    airportCode: "", country: "JP", ssids: ["Komeda_Wi-Fi"], portalType: "agree_only", tier: "free",
+    patternData: { agreeOnly: { actions: [
+      { description: "Accept terms", selector: "input[type='checkbox']", fallbackSelectors: [".agree", "#terms"], action: "check", delayMs: 300 },
+      { description: "Connect", selector: "button[type='submit'], input[type='submit']", fallbackSelectors: ["button:last-of-type"], action: "click", delayMs: 500 },
+    ], successCondition: { method: "http_probe", value: "http://connectivitycheck.gstatic.com/generate_204" } } },
+    notes: "Komeda Coffee. 900+ locations.",
+  },
+  {
+    spotId: "jp-mos-wifi", name: "MOS BURGER Free Wi-Fi", nameJa: "モスバーガー Free Wi-Fi", nameZh: "摩斯汉堡免费WiFi", nameKo: "모스버거 무료 WiFi",
+    airportCode: "", country: "JP", ssids: ["MOS_BURGER_Free_Wi-Fi"], portalType: "agree_only", tier: "free",
+    patternData: { agreeOnly: { actions: [
+      { description: "Accept terms", selector: "input[type='checkbox']", fallbackSelectors: [".agree", "#terms"], action: "check", delayMs: 300 },
+      { description: "Connect", selector: "button[type='submit'], input[type='submit']", fallbackSelectors: ["button:last-of-type"], action: "click", delayMs: 500 },
+    ], successCondition: { method: "http_probe", value: "http://connectivitycheck.gstatic.com/generate_204" } } },
+    notes: "MOS BURGER. 1300+ locations.",
+  },
+  {
+    spotId: "jp-ministop-wifi", name: "MINISTOP Free Wi-Fi", nameJa: "ミニストップ Free Wi-Fi", nameZh: "迷你岛免费WiFi", nameKo: "미니스톱 무료 WiFi",
+    airportCode: "", country: "JP", ssids: ["MINISTOP_Wi-Fi"], portalType: "registration", tier: "free",
+    patternData: { registration: { fields: [
+      { fieldId: "email", selector: "input[name='email'], input[type='email']", fallbackSelectors: ["input[type='text']:first-of-type"], valueSource: "profile.email", inputMethod: "set_value", delayMs: 500 },
+    ], postFillActions: [
+      { description: "Accept terms", selector: "input[type='checkbox']", fallbackSelectors: [".agree", "#terms"], action: "check", delayMs: 300 },
+      { description: "Submit", selector: "button[type='submit'], input[type='submit']", fallbackSelectors: ["button:last-of-type"], action: "click", delayMs: 500 },
+    ], successCondition: { method: "http_probe", value: "http://connectivitycheck.gstatic.com/generate_204" } } },
+    notes: "MINISTOP convenience store.",
+  },
+  {
+    spotId: "jp-gusto-wifi", name: "Gusto Free Wi-Fi", nameJa: "ガスト Free Wi-Fi", nameZh: "Gusto免费WiFi", nameKo: "가스토 무료 WiFi",
+    airportCode: "", country: "JP", ssids: ["skylark_free_wifi", ".Wi-Fi(skylark)"], portalType: "agree_only", tier: "free",
+    patternData: { agreeOnly: { actions: [
+      { description: "Accept terms", selector: "input[type='checkbox']", fallbackSelectors: [".agree", "#terms"], action: "check", delayMs: 300 },
+      { description: "Connect", selector: "button[type='submit'], input[type='submit']", fallbackSelectors: ["button:last-of-type"], action: "click", delayMs: 500 },
+    ], successCondition: { method: "http_probe", value: "http://connectivitycheck.gstatic.com/generate_204" } } },
+    notes: "Gusto / Skylark group (Bamiyan, Jonathan's).",
+  },
+  {
+    spotId: "jp-japan-wifi", name: "Japan Connected Free Wi-Fi", nameJa: "Japan Connected Free Wi-Fi", nameZh: "日本连接免费WiFi", nameKo: "재팬 커넥티드 무료 WiFi",
+    airportCode: "", country: "JP", ssids: ["Japan_Free_Wi-Fi", "FREE_Wi-Fi_JAPAN"], portalType: "registration", tier: "free",
+    patternData: { registration: { fields: [
+      { fieldId: "email", selector: "input[name='email'], input[type='email']", fallbackSelectors: ["input[type='text']:first-of-type"], valueSource: "profile.email", inputMethod: "set_value", delayMs: 500 },
+    ], postFillActions: [
+      { description: "Accept terms", selector: "input[type='checkbox']", fallbackSelectors: [".agree", "#terms"], action: "check", delayMs: 300 },
+      { description: "Submit", selector: "button[type='submit'], input[type='submit']", fallbackSelectors: ["button:last-of-type"], action: "click", delayMs: 500 },
+    ], successCondition: { method: "http_probe", value: "http://connectivitycheck.gstatic.com/generate_204" } } },
+    notes: "NTT-BP. 200,000+ spots nationwide.",
+  },
 ];
 
 export async function POST() {
@@ -923,7 +1198,7 @@ export async function POST() {
     }
 
     await db.insert(patternBundleVersions).values({
-      version: 5,
+      version: 6,
       publishedAt: now,
     });
 

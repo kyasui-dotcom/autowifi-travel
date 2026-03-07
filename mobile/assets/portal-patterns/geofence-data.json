@@ -1,6 +1,6 @@
 {
-  "version": 1,
-  "updatedAt": "2026-03-06",
+  "version": 2,
+  "updatedAt": "2026-03-07",
   "regions": [
     {
       "spotId": "icn-airport-wifi",
@@ -134,6 +134,69 @@
       "longitude": 136.8128,
       "radius": 1500,
       "identifier": "geofence_jp-ngo-wifi"
+    },
+    {
+      "spotId": "jp-cts-wifi",
+      "latitude": 42.7752,
+      "longitude": 141.6925,
+      "radius": 1500,
+      "identifier": "geofence_jp-cts-wifi"
+    },
+    {
+      "spotId": "jp-sdj-wifi",
+      "latitude": 38.1397,
+      "longitude": 140.9170,
+      "radius": 1000,
+      "identifier": "geofence_jp-sdj-wifi"
+    },
+    {
+      "spotId": "jp-itm-wifi",
+      "latitude": 34.7855,
+      "longitude": 135.4380,
+      "radius": 1000,
+      "identifier": "geofence_jp-itm-wifi"
+    },
+    {
+      "spotId": "jp-oka-wifi",
+      "latitude": 26.1958,
+      "longitude": 127.6459,
+      "radius": 1000,
+      "identifier": "geofence_jp-oka-wifi"
+    },
+    {
+      "spotId": "jp-kmj-wifi",
+      "latitude": 32.8373,
+      "longitude": 130.8551,
+      "radius": 1000,
+      "identifier": "geofence_jp-kmj-wifi"
+    },
+    {
+      "spotId": "jp-hij-wifi",
+      "latitude": 34.4361,
+      "longitude": 132.9196,
+      "radius": 1000,
+      "identifier": "geofence_jp-hij-wifi"
+    },
+    {
+      "spotId": "jp-kmq-wifi",
+      "latitude": 36.3946,
+      "longitude": 136.4066,
+      "radius": 1000,
+      "identifier": "geofence_jp-kmq-wifi"
+    },
+    {
+      "spotId": "jp-kag-wifi",
+      "latitude": 31.8034,
+      "longitude": 130.7194,
+      "radius": 1000,
+      "identifier": "geofence_jp-kag-wifi"
+    },
+    {
+      "spotId": "jp-matsuyama-wifi",
+      "latitude": 33.8272,
+      "longitude": 132.6996,
+      "radius": 1000,
+      "identifier": "geofence_jp-matsuyama-wifi"
     }
   ]
 }
