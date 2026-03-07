@@ -900,6 +900,15 @@ const SEED_PATTERNS = [
     notes: "Sendai Airport.",
   },
   {
+    spotId: "jp-nrt-t3-wifi", name: "Narita Airport Terminal 3", nameJa: "成田空港 第3ターミナル", nameZh: "成田机场第3航站楼", nameKo: "나리타공항 제3터미널",
+    airportCode: "NRT", country: "JP", ssids: ["FreeWiFi-NARITA_T3"], portalType: "agree_only", tier: "free",
+    patternData: { agreeOnly: { actions: [
+      { description: "Accept terms", selector: "input[type='checkbox']", fallbackSelectors: [".agree"], action: "check", delayMs: 300 },
+      { description: "Connect", selector: "button[type='submit'], input[type='submit']", fallbackSelectors: ["button:last-of-type"], action: "click", delayMs: 500 },
+    ], successCondition: { method: "http_probe", value: "http://connectivitycheck.gstatic.com/generate_204" } } },
+    notes: "LCC terminal at Narita. Same NTT-BP system.",
+  },
+  {
     spotId: "jp-itm-wifi", name: "Osaka Itami Airport", nameJa: "大阪伊丹空港", nameZh: "大阪伊丹机场", nameKo: "오사카 이타미공항",
     airportCode: "ITM", country: "JP", ssids: ["Osaka-Airport_Free_Wi-Fi"], portalType: "agree_only", tier: "free",
     patternData: { agreeOnly: { actions: [
