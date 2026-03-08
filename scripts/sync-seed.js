@@ -9,6 +9,14 @@ const seedPath = path.join(__dirname, '..', 'backend', 'app', 'api', 'seed', 'ro
 const data = JSON.parse(fs.readFileSync(patternsPath, 'utf-8'));
 const seedContent = fs.readFileSync(seedPath, 'utf-8');
 
+// Default patternData based on portalType
+function defaultPatternData(portalType) {
+  if (portalType === 'agree_only') {
+    return { agreeOnly: { agreeButtonSelector: 'input[type="submit"], button[type="submit"], .btn-primary, a.btn' } };
+  }
+  return { registration: { emailSelector: 'input[type="email"], input[name*="mail"]', submitSelector: 'input[type="submit"], button[type="submit"]' } };
+}
+
 // Generate SEED_PATTERNS entries from patterns-v1.json
 const entries = data.patterns.map(p => {
   const obj = {
@@ -22,7 +30,7 @@ const entries = data.patterns.map(p => {
     ssids: p.ssids,
     portalType: p.portalType,
     tier: p.tier || 'free',
-    patternData: p.patternData,
+    patternData: p.patternData || defaultPatternData(p.portalType),
     notes: p.notes || null,
   };
   return '  ' + JSON.stringify(obj, null, 2).split('\n').join('\n  ');

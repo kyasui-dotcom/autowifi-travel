@@ -18,6 +18,11 @@ const SEED_PATTERNS = [
     ],
     "portalType": "agree_only",
     "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
     "notes": "ICN may vary between terminals. Some use agree-only, some require email."
   },
   {
@@ -34,6 +39,12 @@ const SEED_PATTERNS = [
     ],
     "portalType": "registration",
     "tier": "free",
+    "patternData": {
+      "registration": {
+        "emailSelector": "input[type=\"email\"], input[name*=\"mail\"]",
+        "submitSelector": "input[type=\"submit\"], button[type=\"submit\"]"
+      }
+    },
     "notes": null
   },
   {
@@ -51,6 +62,11 @@ const SEED_PATTERNS = [
     ],
     "portalType": "agree_only",
     "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
     "notes": null
   },
   {
@@ -67,6 +83,11 @@ const SEED_PATTERNS = [
     ],
     "portalType": "agree_only",
     "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
     "notes": null
   },
   {
@@ -83,6 +104,12 @@ const SEED_PATTERNS = [
     ],
     "portalType": "registration",
     "tier": "premium",
+    "patternData": {
+      "registration": {
+        "emailSelector": "input[type=\"email\"], input[name*=\"mail\"]",
+        "submitSelector": "input[type=\"submit\"], button[type=\"submit\"]"
+      }
+    },
     "notes": null
   },
   {
@@ -100,6 +127,12 @@ const SEED_PATTERNS = [
     ],
     "portalType": "registration",
     "tier": "premium",
+    "patternData": {
+      "registration": {
+        "emailSelector": "input[type=\"email\"], input[name*=\"mail\"]",
+        "submitSelector": "input[type=\"submit\"], button[type=\"submit\"]"
+      }
+    },
     "notes": null
   },
   {
@@ -116,6 +149,11 @@ const SEED_PATTERNS = [
     ],
     "portalType": "agree_only",
     "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
     "notes": null
   },
   {
@@ -133,6 +171,12 @@ const SEED_PATTERNS = [
     ],
     "portalType": "registration",
     "tier": "free",
+    "patternData": {
+      "registration": {
+        "emailSelector": "input[type=\"email\"], input[name*=\"mail\"]",
+        "submitSelector": "input[type=\"submit\"], button[type=\"submit\"]"
+      }
+    },
     "notes": null
   },
   {
@@ -150,6 +194,12 @@ const SEED_PATTERNS = [
     ],
     "portalType": "registration",
     "tier": "free",
+    "patternData": {
+      "registration": {
+        "emailSelector": "input[type=\"email\"], input[name*=\"mail\"]",
+        "submitSelector": "input[type=\"submit\"], button[type=\"submit\"]"
+      }
+    },
     "notes": null
   },
   {
@@ -166,6 +216,11 @@ const SEED_PATTERNS = [
     ],
     "portalType": "agree_only",
     "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
     "notes": null
   },
   {
@@ -182,6 +237,12 @@ const SEED_PATTERNS = [
     ],
     "portalType": "registration",
     "tier": "free",
+    "patternData": {
+      "registration": {
+        "emailSelector": "input[type=\"email\"], input[name*=\"mail\"]",
+        "submitSelector": "input[type=\"submit\"], button[type=\"submit\"]"
+      }
+    },
     "notes": null
   },
   {
@@ -198,6 +259,12 @@ const SEED_PATTERNS = [
     ],
     "portalType": "registration",
     "tier": "free",
+    "patternData": {
+      "registration": {
+        "emailSelector": "input[type=\"email\"], input[name*=\"mail\"]",
+        "submitSelector": "input[type=\"submit\"], button[type=\"submit\"]"
+      }
+    },
     "notes": "May require phone number in some terminals. Session varies."
   },
   {
@@ -214,6 +281,12 @@ const SEED_PATTERNS = [
     ],
     "portalType": "registration",
     "tier": "free",
+    "patternData": {
+      "registration": {
+        "emailSelector": "input[type=\"email\"], input[name*=\"mail\"]",
+        "submitSelector": "input[type=\"submit\"], button[type=\"submit\"]"
+      }
+    },
     "notes": "May require WeChat or phone number verification."
   },
   {
@@ -230,6 +303,12 @@ const SEED_PATTERNS = [
     ],
     "portalType": "registration",
     "tier": "free",
+    "patternData": {
+      "registration": {
+        "emailSelector": "input[type=\"email\"], input[name*=\"mail\"]",
+        "submitSelector": "input[type=\"submit\"], button[type=\"submit\"]"
+      }
+    },
     "notes": "May require WeChat or phone number verification."
   },
   {
@@ -247,6 +326,12 @@ const SEED_PATTERNS = [
     ],
     "portalType": "registration",
     "tier": "free",
+    "patternData": {
+      "registration": {
+        "emailSelector": "input[type=\"email\"], input[name*=\"mail\"]",
+        "submitSelector": "input[type=\"submit\"], button[type=\"submit\"]"
+      }
+    },
     "notes": null
   },
   {
@@ -263,6 +348,11 @@ const SEED_PATTERNS = [
     ],
     "portalType": "agree_only",
     "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
     "notes": null
   },
   {
@@ -279,6 +369,12 @@ const SEED_PATTERNS = [
     ],
     "portalType": "registration",
     "tier": "free",
+    "patternData": {
+      "registration": {
+        "emailSelector": "input[type=\"email\"], input[name*=\"mail\"]",
+        "submitSelector": "input[type=\"submit\"], button[type=\"submit\"]"
+      }
+    },
     "notes": null
   },
   {
@@ -296,6 +392,12 @@ const SEED_PATTERNS = [
     ],
     "portalType": "registration",
     "tier": "free",
+    "patternData": {
+      "registration": {
+        "emailSelector": "input[type=\"email\"], input[name*=\"mail\"]",
+        "submitSelector": "input[type=\"submit\"], button[type=\"submit\"]"
+      }
+    },
     "notes": null
   },
   {
@@ -331,6 +433,12 @@ const SEED_PATTERNS = [
     ],
     "portalType": "registration",
     "tier": "free",
+    "patternData": {
+      "registration": {
+        "emailSelector": "input[type=\"email\"], input[name*=\"mail\"]",
+        "submitSelector": "input[type=\"submit\"], button[type=\"submit\"]"
+      }
+    },
     "notes": "Email or SNS registration required. Session: 60 min."
   },
   {
@@ -346,6 +454,12 @@ const SEED_PATTERNS = [
     ],
     "portalType": "registration",
     "tier": "free",
+    "patternData": {
+      "registration": {
+        "emailSelector": "input[type=\"email\"], input[name*=\"mail\"]",
+        "submitSelector": "input[type=\"submit\"], button[type=\"submit\"]"
+      }
+    },
     "notes": "Email registration valid for 1 year. Session: 60 min, 5 times/day."
   },
   {
@@ -361,6 +475,12 @@ const SEED_PATTERNS = [
     ],
     "portalType": "registration",
     "tier": "free",
+    "patternData": {
+      "registration": {
+        "emailSelector": "input[type=\"email\"], input[name*=\"mail\"]",
+        "submitSelector": "input[type=\"submit\"], button[type=\"submit\"]"
+      }
+    },
     "notes": "NTT-BP operated. Email only, no SNS login. Session: 3 hours."
   },
   {
@@ -376,6 +496,12 @@ const SEED_PATTERNS = [
     ],
     "portalType": "registration",
     "tier": "free",
+    "patternData": {
+      "registration": {
+        "emailSelector": "input[type=\"email\"], input[name*=\"mail\"]",
+        "submitSelector": "input[type=\"submit\"], button[type=\"submit\"]"
+      }
+    },
     "notes": "NTT-BP operated. Email or SNS login. Session: 3 hours. Station WiFi only."
   },
   {
@@ -391,6 +517,12 @@ const SEED_PATTERNS = [
     ],
     "portalType": "registration",
     "tier": "free",
+    "patternData": {
+      "registration": {
+        "emailSelector": "input[type=\"email\"], input[name*=\"mail\"]",
+        "submitSelector": "input[type=\"submit\"], button[type=\"submit\"]"
+      }
+    },
     "notes": "NTT-BP operated. Same platform as Tokyo Metro and JR East."
   },
   {
@@ -406,6 +538,11 @@ const SEED_PATTERNS = [
     ],
     "portalType": "agree_only",
     "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
     "notes": "No registration needed. Just agree to terms. Available at T1, T2, T3."
   },
   {
@@ -421,6 +558,11 @@ const SEED_PATTERNS = [
     ],
     "portalType": "agree_only",
     "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
     "notes": "Wi2 operated. Session: ~5 hours. Signal may be weak in some areas."
   },
   {
@@ -436,6 +578,11 @@ const SEED_PATTERNS = [
     ],
     "portalType": "agree_only",
     "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
     "notes": "No registration needed. Available at T1, T2."
   },
   {
@@ -451,6 +598,11 @@ const SEED_PATTERNS = [
     ],
     "portalType": "agree_only",
     "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
     "notes": "No registration needed. Domestic and international terminals."
   },
   {
@@ -466,6 +618,11 @@ const SEED_PATTERNS = [
     ],
     "portalType": "agree_only",
     "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
     "notes": "No registration needed. Available throughout the airport."
   },
   {
@@ -521,6 +678,12 @@ const SEED_PATTERNS = [
     ],
     "portalType": "registration",
     "tier": "premium",
+    "patternData": {
+      "registration": {
+        "emailSelector": "input[type=\"email\"], input[name*=\"mail\"]",
+        "submitSelector": "input[type=\"submit\"], button[type=\"submit\"]"
+      }
+    },
     "notes": "Requires d-account (docomo ID). Available at convenience stores, cafes, stations."
   },
   {
@@ -537,6 +700,12 @@ const SEED_PATTERNS = [
     ],
     "portalType": "registration",
     "tier": "premium",
+    "patternData": {
+      "registration": {
+        "emailSelector": "input[type=\"email\"], input[name*=\"mail\"]",
+        "submitSelector": "input[type=\"submit\"], button[type=\"submit\"]"
+      }
+    },
     "notes": "Requires au ID. Available at cafes, stations, shopping centers."
   },
   {
@@ -553,6 +722,12 @@ const SEED_PATTERNS = [
     ],
     "portalType": "registration",
     "tier": "premium",
+    "patternData": {
+      "registration": {
+        "emailSelector": "input[type=\"email\"], input[name*=\"mail\"]",
+        "submitSelector": "input[type=\"submit\"], button[type=\"submit\"]"
+      }
+    },
     "notes": "Requires SoftBank/Y!mobile account. Available at cafes, stations, airports."
   },
   {
@@ -568,6 +743,11 @@ const SEED_PATTERNS = [
     ],
     "portalType": "agree_only",
     "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
     "notes": "Free WiFi at New Chitose Airport, Hokkaido. No registration required."
   },
   {
@@ -583,6 +763,11 @@ const SEED_PATTERNS = [
     ],
     "portalType": "agree_only",
     "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
     "notes": "Free WiFi at Sendai Airport."
   },
   {
@@ -598,6 +783,11 @@ const SEED_PATTERNS = [
     ],
     "portalType": "agree_only",
     "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
     "notes": "LCC terminal at Narita. Same NTT-BP system."
   },
   {
@@ -613,6 +803,11 @@ const SEED_PATTERNS = [
     ],
     "portalType": "agree_only",
     "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
     "notes": "Domestic flights terminal. Osaka Itami Airport free WiFi."
   },
   {
@@ -628,6 +823,11 @@ const SEED_PATTERNS = [
     ],
     "portalType": "agree_only",
     "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
     "notes": "Naha Airport, Okinawa. Free WiFi."
   },
   {
@@ -643,6 +843,11 @@ const SEED_PATTERNS = [
     ],
     "portalType": "agree_only",
     "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
     "notes": "Kumamoto Airport free WiFi."
   },
   {
@@ -658,6 +863,11 @@ const SEED_PATTERNS = [
     ],
     "portalType": "agree_only",
     "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
     "notes": "Hiroshima Airport free WiFi."
   },
   {
@@ -673,6 +883,11 @@ const SEED_PATTERNS = [
     ],
     "portalType": "agree_only",
     "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
     "notes": "Komatsu Airport (Kanazawa area) free WiFi."
   },
   {
@@ -688,6 +903,11 @@ const SEED_PATTERNS = [
     ],
     "portalType": "agree_only",
     "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
     "notes": "Kagoshima Airport free WiFi."
   },
   {
@@ -703,6 +923,11 @@ const SEED_PATTERNS = [
     ],
     "portalType": "agree_only",
     "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
     "notes": "Matsuyama Airport, Ehime free WiFi."
   },
   {
@@ -719,6 +944,12 @@ const SEED_PATTERNS = [
     ],
     "portalType": "registration",
     "tier": "free",
+    "patternData": {
+      "registration": {
+        "emailSelector": "input[type=\"email\"], input[name*=\"mail\"]",
+        "submitSelector": "input[type=\"submit\"], button[type=\"submit\"]"
+      }
+    },
     "notes": "Available on Tokaido/Sanyo/Tohoku Shinkansen. Email registration required."
   },
   {
@@ -734,6 +965,12 @@ const SEED_PATTERNS = [
     ],
     "portalType": "registration",
     "tier": "free",
+    "patternData": {
+      "registration": {
+        "emailSelector": "input[type=\"email\"], input[name*=\"mail\"]",
+        "submitSelector": "input[type=\"submit\"], button[type=\"submit\"]"
+      }
+    },
     "notes": "Available at major JR West stations (Osaka, Kyoto, Hiroshima, etc.). 30 min sessions."
   },
   {
@@ -750,6 +987,12 @@ const SEED_PATTERNS = [
     ],
     "portalType": "registration",
     "tier": "free",
+    "patternData": {
+      "registration": {
+        "emailSelector": "input[type=\"email\"], input[name*=\"mail\"]",
+        "submitSelector": "input[type=\"submit\"], button[type=\"submit\"]"
+      }
+    },
     "notes": "All Osaka Metro stations. 30 min sessions."
   },
   {
@@ -765,6 +1008,12 @@ const SEED_PATTERNS = [
     ],
     "portalType": "registration",
     "tier": "free",
+    "patternData": {
+      "registration": {
+        "emailSelector": "input[type=\"email\"], input[name*=\"mail\"]",
+        "submitSelector": "input[type=\"submit\"], button[type=\"submit\"]"
+      }
+    },
     "notes": "Kyoto city free WiFi. Available at bus stops, tourist spots, subway stations."
   },
   {
@@ -780,6 +1029,12 @@ const SEED_PATTERNS = [
     ],
     "portalType": "registration",
     "tier": "free",
+    "patternData": {
+      "registration": {
+        "emailSelector": "input[type=\"email\"], input[name*=\"mail\"]",
+        "submitSelector": "input[type=\"submit\"], button[type=\"submit\"]"
+      }
+    },
     "notes": "Tokyo Metropolitan Government free WiFi. Tourist spots, parks, government buildings."
   },
   {
@@ -795,6 +1050,12 @@ const SEED_PATTERNS = [
     ],
     "portalType": "registration",
     "tier": "free",
+    "patternData": {
+      "registration": {
+        "emailSelector": "input[type=\"email\"], input[name*=\"mail\"]",
+        "submitSelector": "input[type=\"submit\"], button[type=\"submit\"]"
+      }
+    },
     "notes": "Yokohama city free WiFi. Stations, tourist areas, Chinatown."
   },
   {
@@ -811,6 +1072,12 @@ const SEED_PATTERNS = [
     ],
     "portalType": "registration",
     "tier": "free",
+    "patternData": {
+      "registration": {
+        "emailSelector": "input[type=\"email\"], input[name*=\"mail\"]",
+        "submitSelector": "input[type=\"submit\"], button[type=\"submit\"]"
+      }
+    },
     "notes": "Nagoya city free WiFi. Subway stations, tourist spots."
   },
   {
@@ -826,6 +1093,12 @@ const SEED_PATTERNS = [
     ],
     "portalType": "registration",
     "tier": "free",
+    "patternData": {
+      "registration": {
+        "emailSelector": "input[type=\"email\"], input[name*=\"mail\"]",
+        "submitSelector": "input[type=\"submit\"], button[type=\"submit\"]"
+      }
+    },
     "notes": "Sapporo city free WiFi. Subway stations, tourist spots."
   },
   {
@@ -841,6 +1114,12 @@ const SEED_PATTERNS = [
     ],
     "portalType": "registration",
     "tier": "free",
+    "patternData": {
+      "registration": {
+        "emailSelector": "input[type=\"email\"], input[name*=\"mail\"]",
+        "submitSelector": "input[type=\"submit\"], button[type=\"submit\"]"
+      }
+    },
     "notes": "Fukuoka city free WiFi. Bus stops, tourist areas, subway stations."
   },
   {
@@ -856,6 +1135,12 @@ const SEED_PATTERNS = [
     ],
     "portalType": "registration",
     "tier": "free",
+    "patternData": {
+      "registration": {
+        "emailSelector": "input[type=\"email\"], input[name*=\"mail\"]",
+        "submitSelector": "input[type=\"submit\"], button[type=\"submit\"]"
+      }
+    },
     "notes": "Kobe city free WiFi. Port area, Sannomiya, tourist spots."
   },
   {
@@ -872,6 +1157,12 @@ const SEED_PATTERNS = [
     ],
     "portalType": "registration",
     "tier": "free",
+    "patternData": {
+      "registration": {
+        "emailSelector": "input[type=\"email\"], input[name*=\"mail\"]",
+        "submitSelector": "input[type=\"submit\"], button[type=\"submit\"]"
+      }
+    },
     "notes": "Okinawa Prefecture free WiFi. Hotels, tourist spots, monorail stations."
   },
   {
@@ -891,6 +1182,12 @@ const SEED_PATTERNS = [
     ],
     "portalType": "registration",
     "tier": "free",
+    "patternData": {
+      "registration": {
+        "emailSelector": "input[type=\"email\"], input[name*=\"mail\"]",
+        "submitSelector": "input[type=\"submit\"], button[type=\"submit\"]"
+      }
+    },
     "notes": "AEON / AEON Mall free WiFi. 600+ shopping malls nationwide."
   },
   {
@@ -906,6 +1203,11 @@ const SEED_PATTERNS = [
     ],
     "portalType": "agree_only",
     "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
     "notes": "UNIQLO flagship stores. Agree-only portal."
   },
   {
@@ -921,6 +1223,11 @@ const SEED_PATTERNS = [
     ],
     "portalType": "agree_only",
     "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
     "notes": "Komeda Coffee shops. 900+ locations. 60 min sessions."
   },
   {
@@ -936,6 +1243,11 @@ const SEED_PATTERNS = [
     ],
     "portalType": "agree_only",
     "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
     "notes": "MOS BURGER free WiFi. 1300+ locations."
   },
   {
@@ -951,6 +1263,12 @@ const SEED_PATTERNS = [
     ],
     "portalType": "registration",
     "tier": "free",
+    "patternData": {
+      "registration": {
+        "emailSelector": "input[type=\"email\"], input[name*=\"mail\"]",
+        "submitSelector": "input[type=\"submit\"], button[type=\"submit\"]"
+      }
+    },
     "notes": "MINISTOP convenience store free WiFi."
   },
   {
@@ -967,6 +1285,11 @@ const SEED_PATTERNS = [
     ],
     "portalType": "agree_only",
     "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
     "notes": "Gusto / Skylark group restaurants. Bamiyan, Jonathan's, etc. also use this SSID."
   },
   {
@@ -983,6 +1306,12 @@ const SEED_PATTERNS = [
     ],
     "portalType": "registration",
     "tier": "free",
+    "patternData": {
+      "registration": {
+        "emailSelector": "input[type=\"email\"], input[name*=\"mail\"]",
+        "submitSelector": "input[type=\"submit\"], button[type=\"submit\"]"
+      }
+    },
     "notes": "NTT-BP operated. Available at 200,000+ spots nationwide. Airports, stations, convenience stores, tourist spots."
   },
   {
@@ -999,6 +1328,11 @@ const SEED_PATTERNS = [
     ],
     "portalType": "agree_only",
     "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
     "notes": "LAX free WiFi. All terminals."
   },
   {
@@ -1015,6 +1349,11 @@ const SEED_PATTERNS = [
     ],
     "portalType": "agree_only",
     "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
     "notes": "JFK free WiFi. All terminals."
   },
   {
@@ -1031,6 +1370,11 @@ const SEED_PATTERNS = [
     ],
     "portalType": "agree_only",
     "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
     "notes": "SFO free WiFi. All terminals."
   },
   {
@@ -1047,6 +1391,11 @@ const SEED_PATTERNS = [
     ],
     "portalType": "agree_only",
     "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
     "notes": "Chicago O'Hare free WiFi."
   },
   {
@@ -1063,6 +1412,11 @@ const SEED_PATTERNS = [
     ],
     "portalType": "agree_only",
     "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
     "notes": "Atlanta airport free WiFi."
   },
   {
@@ -1079,6 +1433,11 @@ const SEED_PATTERNS = [
     ],
     "portalType": "agree_only",
     "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
     "notes": "DFW free WiFi."
   },
   {
@@ -1095,6 +1454,11 @@ const SEED_PATTERNS = [
     ],
     "portalType": "agree_only",
     "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
     "notes": "Sea-Tac free WiFi."
   },
   {
@@ -1111,6 +1475,11 @@ const SEED_PATTERNS = [
     ],
     "portalType": "agree_only",
     "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
     "notes": "Miami airport free WiFi."
   },
   {
@@ -1127,6 +1496,12 @@ const SEED_PATTERNS = [
     ],
     "portalType": "registration",
     "tier": "free",
+    "patternData": {
+      "registration": {
+        "emailSelector": "input[type=\"email\"], input[name*=\"mail\"]",
+        "submitSelector": "input[type=\"submit\"], button[type=\"submit\"]"
+      }
+    },
     "notes": "Don Mueang (LCC terminal). True Corp operated."
   },
   {
@@ -1143,6 +1518,12 @@ const SEED_PATTERNS = [
     ],
     "portalType": "registration",
     "tier": "free",
+    "patternData": {
+      "registration": {
+        "emailSelector": "input[type=\"email\"], input[name*=\"mail\"]",
+        "submitSelector": "input[type=\"submit\"], button[type=\"submit\"]"
+      }
+    },
     "notes": "Chiang Mai airport."
   },
   {
@@ -1159,6 +1540,12 @@ const SEED_PATTERNS = [
     ],
     "portalType": "registration",
     "tier": "free",
+    "patternData": {
+      "registration": {
+        "emailSelector": "input[type=\"email\"], input[name*=\"mail\"]",
+        "submitSelector": "input[type=\"submit\"], button[type=\"submit\"]"
+      }
+    },
     "notes": "Phuket airport."
   },
   {
@@ -1175,6 +1562,11 @@ const SEED_PATTERNS = [
     ],
     "portalType": "agree_only",
     "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
     "notes": "Bangkok BTS SkyTrain stations."
   },
   {
@@ -1191,6 +1583,11 @@ const SEED_PATTERNS = [
     ],
     "portalType": "agree_only",
     "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
     "notes": "Bangkok MRT subway stations."
   },
   {
@@ -1207,6 +1604,11 @@ const SEED_PATTERNS = [
     ],
     "portalType": "agree_only",
     "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
     "notes": "Hanoi Noi Bai airport."
   },
   {
@@ -1222,6 +1624,11 @@ const SEED_PATTERNS = [
     ],
     "portalType": "agree_only",
     "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
     "notes": "Da Nang airport."
   },
   {
@@ -1237,6 +1644,11 @@ const SEED_PATTERNS = [
     ],
     "portalType": "agree_only",
     "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
     "notes": "Nha Trang / Cam Ranh airport."
   },
   {
@@ -1253,6 +1665,12 @@ const SEED_PATTERNS = [
     ],
     "portalType": "registration",
     "tier": "free",
+    "patternData": {
+      "registration": {
+        "emailSelector": "input[type=\"email\"], input[name*=\"mail\"]",
+        "submitSelector": "input[type=\"submit\"], button[type=\"submit\"]"
+      }
+    },
     "notes": "Bali Denpasar airport. Telkom WiFi."
   },
   {
@@ -1269,6 +1687,12 @@ const SEED_PATTERNS = [
     ],
     "portalType": "registration",
     "tier": "free",
+    "patternData": {
+      "registration": {
+        "emailSelector": "input[type=\"email\"], input[name*=\"mail\"]",
+        "submitSelector": "input[type=\"submit\"], button[type=\"submit\"]"
+      }
+    },
     "notes": "Surabaya airport."
   },
   {
@@ -1285,6 +1709,12 @@ const SEED_PATTERNS = [
     ],
     "portalType": "registration",
     "tier": "free",
+    "patternData": {
+      "registration": {
+        "emailSelector": "input[type=\"email\"], input[name*=\"mail\"]",
+        "submitSelector": "input[type=\"submit\"], button[type=\"submit\"]"
+      }
+    },
     "notes": "Yogyakarta airport."
   },
   {
@@ -1301,6 +1731,12 @@ const SEED_PATTERNS = [
     ],
     "portalType": "registration",
     "tier": "free",
+    "patternData": {
+      "registration": {
+        "emailSelector": "input[type=\"email\"], input[name*=\"mail\"]",
+        "submitSelector": "input[type=\"submit\"], button[type=\"submit\"]"
+      }
+    },
     "notes": "Cebu airport."
   },
   {
@@ -1317,6 +1753,12 @@ const SEED_PATTERNS = [
     ],
     "portalType": "registration",
     "tier": "free",
+    "patternData": {
+      "registration": {
+        "emailSelector": "input[type=\"email\"], input[name*=\"mail\"]",
+        "submitSelector": "input[type=\"submit\"], button[type=\"submit\"]"
+      }
+    },
     "notes": "Clark airport."
   },
   {
@@ -1333,6 +1775,12 @@ const SEED_PATTERNS = [
     ],
     "portalType": "registration",
     "tier": "free",
+    "patternData": {
+      "registration": {
+        "emailSelector": "input[type=\"email\"], input[name*=\"mail\"]",
+        "submitSelector": "input[type=\"submit\"], button[type=\"submit\"]"
+      }
+    },
     "notes": "Penang airport."
   },
   {
@@ -1349,6 +1797,12 @@ const SEED_PATTERNS = [
     ],
     "portalType": "registration",
     "tier": "free",
+    "patternData": {
+      "registration": {
+        "emailSelector": "input[type=\"email\"], input[name*=\"mail\"]",
+        "submitSelector": "input[type=\"submit\"], button[type=\"submit\"]"
+      }
+    },
     "notes": "Kota Kinabalu airport."
   },
   {
@@ -1365,6 +1819,11 @@ const SEED_PATTERNS = [
     ],
     "portalType": "agree_only",
     "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
     "notes": "Kuala Lumpur LRT/MRT/Monorail."
   },
   {
@@ -1381,6 +1840,12 @@ const SEED_PATTERNS = [
     ],
     "portalType": "registration",
     "tier": "free",
+    "patternData": {
+      "registration": {
+        "emailSelector": "input[type=\"email\"], input[name*=\"mail\"]",
+        "submitSelector": "input[type=\"submit\"], button[type=\"submit\"]"
+      }
+    },
     "notes": "Singapore nationwide free WiFi. MRT stations, libraries, malls."
   },
   {
@@ -1397,6 +1862,11 @@ const SEED_PATTERNS = [
     ],
     "portalType": "agree_only",
     "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
     "notes": "Hong Kong MTR subway stations."
   },
   {
@@ -1414,6 +1884,11 @@ const SEED_PATTERNS = [
     ],
     "portalType": "agree_only",
     "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
     "notes": "Hong Kong government free WiFi. Parks, libraries, govt buildings."
   },
   {
@@ -1430,6 +1905,11 @@ const SEED_PATTERNS = [
     ],
     "portalType": "agree_only",
     "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
     "notes": "Kaohsiung airport."
   },
   {
@@ -1446,6 +1926,12 @@ const SEED_PATTERNS = [
     ],
     "portalType": "registration",
     "tier": "free",
+    "patternData": {
+      "registration": {
+        "emailSelector": "input[type=\"email\"], input[name*=\"mail\"]",
+        "submitSelector": "input[type=\"submit\"], button[type=\"submit\"]"
+      }
+    },
     "notes": "Taiwan government free WiFi. Available at 30,000+ hotspots."
   },
   {
@@ -1462,6 +1948,11 @@ const SEED_PATTERNS = [
     ],
     "portalType": "agree_only",
     "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
     "notes": "Kaohsiung Metro/MRT stations."
   },
   {
@@ -1478,6 +1969,11 @@ const SEED_PATTERNS = [
     ],
     "portalType": "agree_only",
     "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
     "notes": "Busan Gimhae airport."
   },
   {
@@ -1494,6 +1990,11 @@ const SEED_PATTERNS = [
     ],
     "portalType": "agree_only",
     "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
     "notes": "Jeju Island airport."
   },
   {
@@ -1510,6 +2011,11 @@ const SEED_PATTERNS = [
     ],
     "portalType": "agree_only",
     "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
     "notes": "Busan subway stations."
   },
   {
@@ -1526,6 +2032,11 @@ const SEED_PATTERNS = [
     ],
     "portalType": "agree_only",
     "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
     "notes": "Korean government free WiFi. Libraries, parks, subway areas."
   },
   {
@@ -1542,6 +2053,12 @@ const SEED_PATTERNS = [
     ],
     "portalType": "registration",
     "tier": "free",
+    "patternData": {
+      "registration": {
+        "emailSelector": "input[type=\"email\"], input[name*=\"mail\"]",
+        "submitSelector": "input[type=\"submit\"], button[type=\"submit\"]"
+      }
+    },
     "notes": "Shenzhen airport."
   },
   {
@@ -1558,6 +2075,12 @@ const SEED_PATTERNS = [
     ],
     "portalType": "registration",
     "tier": "free",
+    "patternData": {
+      "registration": {
+        "emailSelector": "input[type=\"email\"], input[name*=\"mail\"]",
+        "submitSelector": "input[type=\"submit\"], button[type=\"submit\"]"
+      }
+    },
     "notes": "Chengdu Tianfu new airport."
   },
   {
@@ -1574,6 +2097,12 @@ const SEED_PATTERNS = [
     ],
     "portalType": "registration",
     "tier": "free",
+    "patternData": {
+      "registration": {
+        "emailSelector": "input[type=\"email\"], input[name*=\"mail\"]",
+        "submitSelector": "input[type=\"submit\"], button[type=\"submit\"]"
+      }
+    },
     "notes": "Chongqing airport."
   },
   {
@@ -1590,6 +2119,12 @@ const SEED_PATTERNS = [
     ],
     "portalType": "registration",
     "tier": "free",
+    "patternData": {
+      "registration": {
+        "emailSelector": "input[type=\"email\"], input[name*=\"mail\"]",
+        "submitSelector": "input[type=\"submit\"], button[type=\"submit\"]"
+      }
+    },
     "notes": "Xiamen airport."
   },
   {
@@ -1606,6 +2141,12 @@ const SEED_PATTERNS = [
     ],
     "portalType": "registration",
     "tier": "free",
+    "patternData": {
+      "registration": {
+        "emailSelector": "input[type=\"email\"], input[name*=\"mail\"]",
+        "submitSelector": "input[type=\"submit\"], button[type=\"submit\"]"
+      }
+    },
     "notes": "China Railway high-speed trains (G/D trains)."
   },
   {
