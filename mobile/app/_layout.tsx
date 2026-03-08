@@ -11,8 +11,9 @@ import { useColorScheme } from '@/components/useColorScheme';
 import '@/lib/i18n';
 import { loadSavedLanguage } from '@/lib/i18n';
 
-// Register background geofence task at module level (required by expo-task-manager)
+// Register background tasks at module level (required by expo-task-manager)
 import '@/services/geofence-service';
+import '@/services/background-ssid-check';
 import { useGeofenceMonitor } from '@/hooks/useGeofenceMonitor';
 
 export {

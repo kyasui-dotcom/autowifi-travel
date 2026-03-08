@@ -17,7 +17,7 @@
       "infoPlist": {
         "NSLocationAlwaysAndWhenInUseUsageDescription": "AutoWiFi needs background location access to notify you when you're near a supported WiFi spot.",
         "NSLocationWhenInUseUsageDescription": "AutoWiFi needs location access to detect nearby WiFi spots.",
-        "UIBackgroundModes": ["location", "fetch"]
+        "UIBackgroundModes": ["location", "fetch", "processing"]
       }
     },
     "android": {

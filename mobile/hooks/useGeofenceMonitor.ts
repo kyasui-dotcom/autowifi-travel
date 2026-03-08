@@ -9,6 +9,12 @@ import {
   stopGeofenceMonitoring,
   setGeofenceEnabled,
 } from "@/services/geofence-service";
+import {
+  isSsidCheckEnabled,
+  setSsidCheckEnabled,
+  startSsidCheckMonitoring,
+  stopSsidCheckMonitoring,
+} from "@/services/background-ssid-check";
 
 // Configure foreground notification display
 Notifications.setNotificationHandler({
@@ -31,19 +37,23 @@ export function useGeofenceMonitor() {
   const notificationResponseListener =
     useRef<Notifications.Subscription | null>(null);
 
-  // Initialize geofence state from persisted setting
+  // Initialize geofence + SSID check state from persisted settings
   useEffect(() => {
-    isGeofenceEnabled().then((enabled) => {
-      if (enabled) {
-        setEnabled(true);
+    Promise.all([isGeofenceEnabled(), isSsidCheckEnabled()]).then(
+      ([geoEnabled, ssidEnabled]) => {
+        // If either is enabled, set the unified toggle on
+        if (geoEnabled || ssidEnabled) {
+          setEnabled(true);
+        }
       }
-    });
+    );
   }, [setEnabled]);
 
   // Start/stop monitoring based on enabled state
   useEffect(() => {
     if (!geofence.enabled) {
       stopGeofenceMonitoring().catch(() => {});
+      stopSsidCheckMonitoring().catch(() => {});
       return;
     }
 
@@ -55,15 +65,18 @@ export function useGeofenceMonitor() {
         setStatus("permission_denied");
         setEnabled(false);
         await setGeofenceEnabled(false);
+        await setSsidCheckEnabled(false);
         return;
       }
 
       try {
+        // Start both geofence and background SSID check
         const count = await startGeofenceMonitoring();
+        await startSsidCheckMonitoring();
         setActiveRegionCount(count);
         setStatus("monitoring");
       } catch (err) {
-        console.error("Failed to start geofence monitoring:", err);
+        console.error("Failed to start monitoring:", err);
         setStatus("error");
       }
     };
@@ -72,10 +85,11 @@ export function useGeofenceMonitor() {
 
     return () => {
       stopGeofenceMonitoring().catch(() => {});
+      stopSsidCheckMonitoring().catch(() => {});
     };
   }, [geofence.enabled, setStatus, setEnabled, setActiveRegionCount]);
 
-  // Listen for notification taps
+  // Listen for notification taps (both geofence and SSID check notifications)
   useEffect(() => {
     notificationResponseListener.current =
       Notifications.addNotificationResponseReceivedListener((response) => {
@@ -99,10 +113,11 @@ export function useGeofenceMonitor() {
     };
   }, [router, setLastTriggered]);
 
-  // Toggle function for settings UI
+  // Toggle function for settings UI (controls both geofence + SSID check)
   const toggleGeofence = useCallback(
     async (enable: boolean) => {
       await setGeofenceEnabled(enable);
+      await setSsidCheckEnabled(enable);
       setEnabled(enable);
     },
     [setEnabled]
