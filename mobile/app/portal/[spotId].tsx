@@ -34,7 +34,7 @@ export default function PortalScreen() {
   const { spotId } = useLocalSearchParams<{ spotId: string }>();
   const router = useRouter();
   const { t } = useTranslation();
-  const { profile } = useProfileStore();
+  const { profile, _hydrated } = useProfileStore();
   const { wifi, setStatus } = useWifiStore();
   const webViewRef = useRef<WebView>(null);
 
@@ -169,7 +169,7 @@ export default function PortalScreen() {
     );
   }
 
-  if (!profile) {
+  if (_hydrated && !profile) {
     return (
       <View style={styles.container}>
         <Text style={styles.errorText}>

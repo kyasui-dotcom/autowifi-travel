@@ -1,19 +1,35 @@
 import { create } from "zustand";
+import { persist, createJSONStorage } from "zustand/middleware";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import type { UserProfile, WifiState, PortalPattern, AutoReconnectState, AutoReconnectStatus, GeofenceState, GeofenceStatus } from "@/lib/types";
 
-// ===== User Profile Store =====
+// ===== User Profile Store (persisted to AsyncStorage) =====
 
 interface ProfileStore {
   profile: UserProfile | null;
+  _hydrated: boolean;
   setProfile: (profile: UserProfile) => void;
   clearProfile: () => void;
 }
 
-export const useProfileStore = create<ProfileStore>((set) => ({
-  profile: null,
-  setProfile: (profile) => set({ profile }),
-  clearProfile: () => set({ profile: null }),
-}));
+export const useProfileStore = create<ProfileStore>()(
+  persist(
+    (set) => ({
+      profile: null,
+      _hydrated: false,
+      setProfile: (profile) => set({ profile }),
+      clearProfile: () => set({ profile: null }),
+    }),
+    {
+      name: "autowifi_user_profile",
+      storage: createJSONStorage(() => AsyncStorage),
+      partialize: (state) => ({ profile: state.profile }),
+      onRehydrateStorage: () => () => {
+        useProfileStore.setState({ _hydrated: true });
+      },
+    }
+  )
+);
 
 // ===== WiFi State Store =====
 

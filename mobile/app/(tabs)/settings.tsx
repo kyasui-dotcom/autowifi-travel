@@ -9,15 +9,12 @@ import {
   Platform,
   Linking,
 } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useTranslation } from "react-i18next";
 import { Text, View } from "@/components/Themed";
 import { useProfileStore } from "@/lib/store";
 import { setLanguage, getCurrentLanguage, type SupportedLanguage } from "@/lib/i18n";
 import { useGeofenceMonitor } from "@/hooks/useGeofenceMonitor";
 import type { UserProfile } from "@/lib/types";
-
-const PROFILE_STORAGE_KEY = "autowifi_user_profile";
 
 export default function SettingsScreen() {
   const { t } = useTranslation();
@@ -34,26 +31,16 @@ export default function SettingsScreen() {
     toggleGeofence,
   } = useGeofenceMonitor();
 
+  // Sync text inputs when profile rehydrates from AsyncStorage
   useEffect(() => {
-    loadProfile();
-  }, []);
-
-  const loadProfile = async () => {
-    try {
-      const raw = await AsyncStorage.getItem(PROFILE_STORAGE_KEY);
-      if (raw) {
-        const p: UserProfile = JSON.parse(raw);
-        setFirstName(p.firstName);
-        setLastName(p.lastName);
-        setEmail(p.email);
-        setProfile(p);
-      }
-    } catch {
-      // ignore
+    if (profile) {
+      setFirstName(profile.firstName);
+      setLastName(profile.lastName);
+      setEmail(profile.email);
     }
-  };
+  }, [profile?.firstName, profile?.lastName, profile?.email]);
 
-  const handleSave = async () => {
+  const handleSave = () => {
     if (!firstName.trim() || !lastName.trim() || !email.trim()) {
       Alert.alert(t('settings.inputError'), t('settings.fillAll'));
       return;
@@ -71,17 +58,10 @@ export default function SettingsScreen() {
       email: email.trim(),
     };
 
-    try {
-      await AsyncStorage.setItem(
-        PROFILE_STORAGE_KEY,
-        JSON.stringify(newProfile)
-      );
-      setProfile(newProfile);
-      setSaved(true);
-      setTimeout(() => setSaved(false), 2000);
-    } catch {
-      Alert.alert(t('common.error'), t('settings.saveFailed'));
-    }
+    // persist middleware auto-saves to AsyncStorage
+    setProfile(newProfile);
+    setSaved(true);
+    setTimeout(() => setSaved(false), 2000);
   };
 
   const handleLanguageChange = async (lang: SupportedLanguage) => {

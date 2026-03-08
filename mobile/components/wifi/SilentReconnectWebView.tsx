@@ -22,13 +22,14 @@ export function SilentReconnectWebView({
   onComplete,
 }: SilentReconnectWebViewProps) {
   const webViewRef = useRef<WebView>(null);
-  const { profile } = useProfileStore();
+  const { profile, _hydrated } = useProfileStore();
   const { setReconnectStatus } = useReconnectStore();
   const [portalUrl, setPortalUrl] = useState<string | null>(null);
   const [injectionScript, setInjectionScript] = useState<string | null>(null);
   const completedRef = useRef(false);
 
   useEffect(() => {
+    if (!_hydrated) return; // Wait for store rehydration
     if (!profile) {
       onComplete(false);
       return;
@@ -47,7 +48,7 @@ export function SilentReconnectWebView({
     };
 
     init();
-  }, [pattern, profile, onComplete]);
+  }, [pattern, profile, _hydrated, onComplete]);
 
   const handleMessage = useCallback(
     async (event: WebViewMessageEvent) => {

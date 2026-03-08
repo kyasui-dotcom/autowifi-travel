@@ -60,7 +60,7 @@ export default function HomeScreen() {
   const { t } = useTranslation();
   const { wifi, setSSID, setMatchedPattern, setPortalUrl, setStatus } =
     useWifiStore();
-  const { profile } = useProfileStore();
+  const { profile, _hydrated } = useProfileStore();
   const { resetReconnect } = useReconnectStore();
   const [patterns, setPatterns] = useState<PortalPattern[]>([]);
   const [patternsLoading, setPatternsLoading] = useState(true);
@@ -287,8 +287,8 @@ export default function HomeScreen() {
         </View>
       )}
 
-      {/* Profile Warning */}
-      {!profile && (
+      {/* Profile Warning (only show after store hydration) */}
+      {_hydrated && !profile && (
         <View
           style={styles.warningCard}
           accessibilityRole="alert"
