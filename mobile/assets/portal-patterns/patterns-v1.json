@@ -1,6 +1,6 @@
 {
-  "version": 8,
-  "updatedAt": "2026-03-08",
+  "version": 10,
+  "updatedAt": "2026-03-09",
   "patterns": [
     {
       "spotId": "icn-airport-wifi",
@@ -5640,6 +5640,5942 @@
           "submitSelector": "input[type=\"submit\"], button[type=\"submit\"]"
         }
       }
+    },
+    {
+      "spotId": "gb-lhr-wifi",
+      "name": "London Heathrow Airport",
+      "nameJa": "ロンドン・ヒースロー空港",
+      "nameZh": "伦敦希思罗机场",
+      "nameKo": "런던 히드로 공항",
+      "airportCode": "LHR",
+      "country": "GB",
+      "ssids": [
+        "_Heathrow Wi-Fi",
+        "Heathrow Wi-Fi"
+      ],
+      "portalType": "registration",
+      "tier": "free",
+      "registration": {
+        "fields": [
+          {
+            "fieldId": "email",
+            "selector": "input[name='email'], input[type='email']",
+            "fallbackSelectors": [
+              "input[type='text']:first-of-type"
+            ],
+            "valueSource": "profile.email",
+            "inputMethod": "set_value",
+            "delayMs": 500
+          }
+        ],
+        "postFillActions": [
+          {
+            "description": "Accept terms",
+            "selector": "input[type='checkbox'], .terms-agree",
+            "fallbackSelectors": [
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 300
+          },
+          {
+            "description": "Submit",
+            "selector": "button[type='submit'], .connect-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Free WiFi with email registration. All terminals."
+    },
+    {
+      "spotId": "gb-lgw-wifi",
+      "name": "London Gatwick Airport",
+      "nameJa": "ロンドン・ガトウィック空港",
+      "nameZh": "伦敦盖特威克机场",
+      "nameKo": "런던 개트윅 공항",
+      "airportCode": "LGW",
+      "country": "GB",
+      "ssids": [
+        "Gatwick-WiFi",
+        "_Gatwick Wi-Fi"
+      ],
+      "portalType": "registration",
+      "tier": "free",
+      "registration": {
+        "fields": [
+          {
+            "fieldId": "email",
+            "selector": "input[name='email'], input[type='email']",
+            "fallbackSelectors": [
+              "input[type='text']:first-of-type"
+            ],
+            "valueSource": "profile.email",
+            "inputMethod": "set_value",
+            "delayMs": 500
+          }
+        ],
+        "postFillActions": [
+          {
+            "description": "Accept terms",
+            "selector": "input[type='checkbox'], .terms-agree",
+            "fallbackSelectors": [
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 300
+          },
+          {
+            "description": "Submit",
+            "selector": "button[type='submit'], .connect-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Free WiFi with email. Both terminals."
+    },
+    {
+      "spotId": "fr-cdg-wifi",
+      "name": "Paris Charles de Gaulle Airport",
+      "nameJa": "パリ・シャルル・ド・ゴール空港",
+      "nameZh": "巴黎戴高乐机场",
+      "nameKo": "파리 샤를 드 골 공항",
+      "airportCode": "CDG",
+      "country": "FR",
+      "ssids": [
+        "WIFI-AIRPORT",
+        "WIFI-ADP"
+      ],
+      "portalType": "registration",
+      "tier": "free",
+      "registration": {
+        "fields": [
+          {
+            "fieldId": "email",
+            "selector": "input[name='email'], input[type='email']",
+            "fallbackSelectors": [
+              "input[type='text']:first-of-type"
+            ],
+            "valueSource": "profile.email",
+            "inputMethod": "set_value",
+            "delayMs": 500
+          }
+        ],
+        "postFillActions": [
+          {
+            "description": "Accept terms",
+            "selector": "input[type='checkbox'], .terms-agree",
+            "fallbackSelectors": [
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 300
+          },
+          {
+            "description": "Submit",
+            "selector": "button[type='submit'], .connect-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Free unlimited WiFi. Operated by Hub One / Aeroports de Paris."
+    },
+    {
+      "spotId": "fr-ory-wifi",
+      "name": "Paris Orly Airport",
+      "nameJa": "パリ・オルリー空港",
+      "nameZh": "巴黎奥利机场",
+      "nameKo": "파리 오를리 공항",
+      "airportCode": "ORY",
+      "country": "FR",
+      "ssids": [
+        "WIFI-AIRPORT",
+        "WIFI-ADP"
+      ],
+      "portalType": "registration",
+      "tier": "free",
+      "registration": {
+        "fields": [
+          {
+            "fieldId": "email",
+            "selector": "input[name='email'], input[type='email']",
+            "fallbackSelectors": [
+              "input[type='text']:first-of-type"
+            ],
+            "valueSource": "profile.email",
+            "inputMethod": "set_value",
+            "delayMs": 500
+          }
+        ],
+        "postFillActions": [
+          {
+            "description": "Accept terms",
+            "selector": "input[type='checkbox'], .terms-agree",
+            "fallbackSelectors": [
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 300
+          },
+          {
+            "description": "Submit",
+            "selector": "button[type='submit'], .connect-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Same provider as CDG (Aeroports de Paris)."
+    },
+    {
+      "spotId": "de-fra-wifi",
+      "name": "Frankfurt Airport",
+      "nameJa": "フランクフルト空港",
+      "nameZh": "法兰克福机场",
+      "nameKo": "프랑크푸르트 공항",
+      "airportCode": "FRA",
+      "country": "DE",
+      "ssids": [
+        "Telekom_FlyNet",
+        "Airport-Free-WiFi"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Accept terms checkbox",
+            "selector": "input[type='checkbox']",
+            "fallbackSelectors": [
+              ".terms-checkbox",
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 500
+          },
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Free WiFi by Telekom. 24h unlimited."
+    },
+    {
+      "spotId": "de-muc-wifi",
+      "name": "Munich Airport",
+      "nameJa": "ミュンヘン空港",
+      "nameZh": "慕尼黑机场",
+      "nameKo": "뮌헨 공항",
+      "airportCode": "MUC",
+      "country": "DE",
+      "ssids": [
+        "Munich Airport Free WiFi",
+        ".MUC-Airport-Free"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Accept terms checkbox",
+            "selector": "input[type='checkbox']",
+            "fallbackSelectors": [
+              ".terms-checkbox",
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 500
+          },
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Free unlimited WiFi."
+    },
+    {
+      "spotId": "nl-ams-wifi",
+      "name": "Amsterdam Schiphol Airport",
+      "nameJa": "アムステルダム・スキポール空港",
+      "nameZh": "阿姆斯特丹史基浦机场",
+      "nameKo": "암스테르담 스히폴 공항",
+      "airportCode": "AMS",
+      "country": "NL",
+      "ssids": [
+        "Schiphol-Wifi",
+        "KPN"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Accept terms checkbox",
+            "selector": "input[type='checkbox']",
+            "fallbackSelectors": [
+              ".terms-checkbox",
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 500
+          },
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Free WiFi. Accept terms to connect."
+    },
+    {
+      "spotId": "es-mad-wifi",
+      "name": "Madrid Barajas Airport",
+      "nameJa": "マドリード・バラハス空港",
+      "nameZh": "马德里巴拉哈斯机场",
+      "nameKo": "마드리드 바라하스 공항",
+      "airportCode": "MAD",
+      "country": "ES",
+      "ssids": [
+        "Airport Free WiFi AENA",
+        "WiFi-AENA"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Accept terms checkbox",
+            "selector": "input[type='checkbox']",
+            "fallbackSelectors": [
+              ".terms-checkbox",
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 500
+          },
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Free 30-min WiFi by AENA. Renewable."
+    },
+    {
+      "spotId": "es-bcn-wifi",
+      "name": "Barcelona El Prat Airport",
+      "nameJa": "バルセロナ・エル・プラット空港",
+      "nameZh": "巴塞罗那普拉特机场",
+      "nameKo": "바르셀로나 엘프라트 공항",
+      "airportCode": "BCN",
+      "country": "ES",
+      "ssids": [
+        "Airport Free WiFi AENA",
+        "WiFi-AENA"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Accept terms checkbox",
+            "selector": "input[type='checkbox']",
+            "fallbackSelectors": [
+              ".terms-checkbox",
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 500
+          },
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Same AENA provider as Madrid."
+    },
+    {
+      "spotId": "it-fco-wifi",
+      "name": "Rome Fiumicino Airport",
+      "nameJa": "ローマ・フィウミチーノ空港",
+      "nameZh": "罗马菲乌米奇诺机场",
+      "nameKo": "로마 피우미치노 공항",
+      "airportCode": "FCO",
+      "country": "IT",
+      "ssids": [
+        "Airport Free WiFi",
+        "ADR Free WiFi"
+      ],
+      "portalType": "registration",
+      "tier": "free",
+      "registration": {
+        "fields": [
+          {
+            "fieldId": "email",
+            "selector": "input[name='email'], input[type='email']",
+            "fallbackSelectors": [
+              "input[type='text']:first-of-type"
+            ],
+            "valueSource": "profile.email",
+            "inputMethod": "set_value",
+            "delayMs": 500
+          }
+        ],
+        "postFillActions": [
+          {
+            "description": "Accept terms",
+            "selector": "input[type='checkbox'], .terms-agree",
+            "fallbackSelectors": [
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 300
+          },
+          {
+            "description": "Submit",
+            "selector": "button[type='submit'], .connect-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Free WiFi with email registration."
+    },
+    {
+      "spotId": "it-mxp-wifi",
+      "name": "Milan Malpensa Airport",
+      "nameJa": "ミラノ・マルペンサ空港",
+      "nameZh": "米兰马尔彭萨机场",
+      "nameKo": "밀라노 말펜사 공항",
+      "airportCode": "MXP",
+      "country": "IT",
+      "ssids": [
+        "Airport Free WiFi",
+        "SEA-WiFi"
+      ],
+      "portalType": "registration",
+      "tier": "free",
+      "registration": {
+        "fields": [
+          {
+            "fieldId": "email",
+            "selector": "input[name='email'], input[type='email']",
+            "fallbackSelectors": [
+              "input[type='text']:first-of-type"
+            ],
+            "valueSource": "profile.email",
+            "inputMethod": "set_value",
+            "delayMs": 500
+          }
+        ],
+        "postFillActions": [
+          {
+            "description": "Accept terms",
+            "selector": "input[type='checkbox'], .terms-agree",
+            "fallbackSelectors": [
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 300
+          },
+          {
+            "description": "Submit",
+            "selector": "button[type='submit'], .connect-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Operated by SEA Aeroporti di Milano."
+    },
+    {
+      "spotId": "ch-zrh-wifi",
+      "name": "Zurich Airport",
+      "nameJa": "チューリッヒ空港",
+      "nameZh": "苏黎世机场",
+      "nameKo": "취리히 공항",
+      "airportCode": "ZRH",
+      "country": "CH",
+      "ssids": [
+        "Zurich Airport Free WiFi"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Accept terms checkbox",
+            "selector": "input[type='checkbox']",
+            "fallbackSelectors": [
+              ".terms-checkbox",
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 500
+          },
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Unlimited free WiFi."
+    },
+    {
+      "spotId": "at-vie-wifi",
+      "name": "Vienna Airport",
+      "nameJa": "ウィーン空港",
+      "nameZh": "维也纳机场",
+      "nameKo": "비엔나 공항",
+      "airportCode": "VIE",
+      "country": "AT",
+      "ssids": [
+        "viennaairport",
+        "VIE Free WiFi"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Accept terms checkbox",
+            "selector": "input[type='checkbox']",
+            "fallbackSelectors": [
+              ".terms-checkbox",
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 500
+          },
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Free unlimited WiFi."
+    },
+    {
+      "spotId": "se-arn-wifi",
+      "name": "Stockholm Arlanda Airport",
+      "nameJa": "ストックホルム・アーランダ空港",
+      "nameZh": "斯德哥尔摩阿兰达机场",
+      "nameKo": "스톡홀름 알란다 공항",
+      "airportCode": "ARN",
+      "country": "SE",
+      "ssids": [
+        "Swedavia Free WiFi"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Accept terms checkbox",
+            "selector": "input[type='checkbox']",
+            "fallbackSelectors": [
+              ".terms-checkbox",
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 500
+          },
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Free WiFi by Swedavia."
+    },
+    {
+      "spotId": "dk-cph-wifi",
+      "name": "Copenhagen Airport",
+      "nameJa": "コペンハーゲン空港",
+      "nameZh": "哥本哈根机场",
+      "nameKo": "코펜하겐 공항",
+      "airportCode": "CPH",
+      "country": "DK",
+      "ssids": [
+        "CPH Airport Free WiFi",
+        "CPH-WiFi"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Accept terms checkbox",
+            "selector": "input[type='checkbox']",
+            "fallbackSelectors": [
+              ".terms-checkbox",
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 500
+          },
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Unlimited free WiFi."
+    },
+    {
+      "spotId": "fi-hel-wifi",
+      "name": "Helsinki-Vantaa Airport",
+      "nameJa": "ヘルシンキ・ヴァンター空港",
+      "nameZh": "赫尔辛基万塔机场",
+      "nameKo": "헬싱키 반타 공항",
+      "airportCode": "HEL",
+      "country": "FI",
+      "ssids": [
+        "HEL Airport Free WiFi",
+        "Helsinki Airport"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Free unlimited WiFi by Finavia."
+    },
+    {
+      "spotId": "pt-lis-wifi",
+      "name": "Lisbon Airport",
+      "nameJa": "リスボン空港",
+      "nameZh": "里斯本机场",
+      "nameKo": "리스본 공항",
+      "airportCode": "LIS",
+      "country": "PT",
+      "ssids": [
+        "ANA Free WiFi",
+        "ANA-WiFi"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Accept terms checkbox",
+            "selector": "input[type='checkbox']",
+            "fallbackSelectors": [
+              ".terms-checkbox",
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 500
+          },
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Free WiFi by ANA Aeroportos."
+    },
+    {
+      "spotId": "ie-dub-wifi",
+      "name": "Dublin Airport",
+      "nameJa": "ダブリン空港",
+      "nameZh": "都柏林机场",
+      "nameKo": "더블린 공항",
+      "airportCode": "DUB",
+      "country": "IE",
+      "ssids": [
+        "daa Free WiFi",
+        "dublinairport"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Accept terms checkbox",
+            "selector": "input[type='checkbox']",
+            "fallbackSelectors": [
+              ".terms-checkbox",
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 500
+          },
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Free WiFi by daa."
+    },
+    {
+      "spotId": "gr-ath-wifi",
+      "name": "Athens International Airport",
+      "nameJa": "アテネ国際空港",
+      "nameZh": "雅典国际机场",
+      "nameKo": "아테네 국제공항",
+      "airportCode": "ATH",
+      "country": "GR",
+      "ssids": [
+        "AIA Free WiFi",
+        "ATH-WiFi"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Accept terms checkbox",
+            "selector": "input[type='checkbox']",
+            "fallbackSelectors": [
+              ".terms-checkbox",
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 500
+          },
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Free WiFi at Athens International."
+    },
+    {
+      "spotId": "cz-prg-wifi",
+      "name": "Prague Airport",
+      "nameJa": "プラハ空港",
+      "nameZh": "布拉格机场",
+      "nameKo": "프라하 공항",
+      "airportCode": "PRG",
+      "country": "CZ",
+      "ssids": [
+        "PRG Free WiFi",
+        "Prague Airport WiFi"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Accept terms checkbox",
+            "selector": "input[type='checkbox']",
+            "fallbackSelectors": [
+              ".terms-checkbox",
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 500
+          },
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Free unlimited WiFi."
+    },
+    {
+      "spotId": "pl-waw-wifi",
+      "name": "Warsaw Chopin Airport",
+      "nameJa": "ワルシャワ・ショパン空港",
+      "nameZh": "华沙肖邦机场",
+      "nameKo": "바르샤바 쇼팽 공항",
+      "airportCode": "WAW",
+      "country": "PL",
+      "ssids": [
+        "FreeWiFi@WAW",
+        "Lotnisko-WiFi"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Accept terms checkbox",
+            "selector": "input[type='checkbox']",
+            "fallbackSelectors": [
+              ".terms-checkbox",
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 500
+          },
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Free WiFi at Chopin Airport."
+    },
+    {
+      "spotId": "tr-ist-wifi",
+      "name": "Istanbul Airport",
+      "nameJa": "イスタンブール空港",
+      "nameZh": "伊斯坦布尔机场",
+      "nameKo": "이스탄불 공항",
+      "airportCode": "IST",
+      "country": "TR",
+      "ssids": [
+        "Free-WiFi_iGA",
+        "iGA WiFi"
+      ],
+      "portalType": "registration",
+      "tier": "free",
+      "registration": {
+        "fields": [
+          {
+            "fieldId": "email",
+            "selector": "input[name='email'], input[type='email']",
+            "fallbackSelectors": [
+              "input[type='text']:first-of-type"
+            ],
+            "valueSource": "profile.email",
+            "inputMethod": "set_value",
+            "delayMs": 500
+          }
+        ],
+        "postFillActions": [
+          {
+            "description": "Accept terms",
+            "selector": "input[type='checkbox'], .terms-agree",
+            "fallbackSelectors": [
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 300
+          },
+          {
+            "description": "Submit",
+            "selector": "button[type='submit'], .connect-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Free WiFi with registration. Unlimited duration."
+    },
+    {
+      "spotId": "no-osl-wifi",
+      "name": "Oslo Gardermoen Airport",
+      "nameJa": "オスロ・ガーデモエン空港",
+      "nameZh": "奥斯陆加勒穆恩机场",
+      "nameKo": "오슬로 가르데르모엔 공항",
+      "airportCode": "OSL",
+      "country": "NO",
+      "ssids": [
+        "Avinor Free WiFi",
+        "OSL-WiFi"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Free WiFi by Avinor."
+    },
+    {
+      "spotId": "gb-network-rail-wifi",
+      "name": "UK Network Rail Station WiFi",
+      "nameJa": "イギリス鉄道駅 WiFi",
+      "nameZh": "英国火车站WiFi",
+      "nameKo": "영국 기차역 WiFi",
+      "country": "GB",
+      "ssids": [
+        "_Free Station WiFi",
+        "Network Rail WiFi"
+      ],
+      "portalType": "registration",
+      "tier": "free",
+      "registration": {
+        "fields": [
+          {
+            "fieldId": "email",
+            "selector": "input[name='email'], input[type='email']",
+            "fallbackSelectors": [
+              "input[type='text']:first-of-type"
+            ],
+            "valueSource": "profile.email",
+            "inputMethod": "set_value",
+            "delayMs": 500
+          }
+        ],
+        "postFillActions": [
+          {
+            "description": "Accept terms",
+            "selector": "input[type='checkbox'], .terms-agree",
+            "fallbackSelectors": [
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 300
+          },
+          {
+            "description": "Submit",
+            "selector": "button[type='submit'], .connect-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Major UK rail stations: Kings Cross, Paddington, Edinburgh Waverley, etc."
+    },
+    {
+      "spotId": "gb-tube-wifi",
+      "name": "London Underground WiFi",
+      "nameJa": "ロンドン地下鉄 WiFi",
+      "nameZh": "伦敦地铁WiFi",
+      "nameKo": "런던 지하철 WiFi",
+      "country": "GB",
+      "ssids": [
+        "Virgin Media WiFi",
+        "WiFi on the Tube"
+      ],
+      "portalType": "registration",
+      "tier": "free",
+      "registration": {
+        "fields": [
+          {
+            "fieldId": "email",
+            "selector": "input[name='email'], input[type='email']",
+            "fallbackSelectors": [
+              "input[type='text']:first-of-type"
+            ],
+            "valueSource": "profile.email",
+            "inputMethod": "set_value",
+            "delayMs": 500
+          }
+        ],
+        "postFillActions": [
+          {
+            "description": "Accept terms",
+            "selector": "input[type='checkbox'], .terms-agree",
+            "fallbackSelectors": [
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 300
+          },
+          {
+            "description": "Submit",
+            "selector": "button[type='submit'], .connect-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Available at Tube stations (not in tunnels). By Virgin Media."
+    },
+    {
+      "spotId": "de-db-wifi",
+      "name": "Deutsche Bahn (DB) WiFi",
+      "nameJa": "ドイツ鉄道 WiFi",
+      "nameZh": "德国铁路WiFi",
+      "nameKo": "독일 철도 WiFi",
+      "country": "DE",
+      "ssids": [
+        "WIFIonICE",
+        "WIFI@DB",
+        "Telekom"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Accept terms checkbox",
+            "selector": "input[type='checkbox']",
+            "fallbackSelectors": [
+              ".terms-checkbox",
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 500
+          },
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Free WiFi on ICE trains and major DB stations."
+    },
+    {
+      "spotId": "fr-sncf-wifi",
+      "name": "SNCF / TGV WiFi",
+      "nameJa": "フランス国鉄 WiFi",
+      "nameZh": "法国铁路WiFi",
+      "nameKo": "프랑스 국철 WiFi",
+      "country": "FR",
+      "ssids": [
+        "_WiFi_SNCF",
+        "TGV_WiFi",
+        "WiFi_INOUI"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Accept terms checkbox",
+            "selector": "input[type='checkbox']",
+            "fallbackSelectors": [
+              ".terms-checkbox",
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 500
+          },
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Free WiFi on TGV INOUI trains and major stations."
+    },
+    {
+      "spotId": "nl-ns-wifi",
+      "name": "NS Dutch Railways WiFi",
+      "nameJa": "オランダ鉄道 WiFi",
+      "nameZh": "荷兰铁路WiFi",
+      "nameKo": "네덜란드 철도 WiFi",
+      "country": "NL",
+      "ssids": [
+        "WiFi in de trein",
+        "NS-WiFi"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Free WiFi on Intercity and Sprinter trains."
+    },
+    {
+      "spotId": "it-trenitalia-wifi",
+      "name": "Trenitalia / Italo WiFi",
+      "nameJa": "イタリア鉄道 WiFi",
+      "nameZh": "意大利铁路WiFi",
+      "nameKo": "이탈리아 철도 WiFi",
+      "country": "IT",
+      "ssids": [
+        "Frecciarossa WiFi",
+        "Italo WiFi",
+        "WiFi Trenitalia"
+      ],
+      "portalType": "registration",
+      "tier": "free",
+      "registration": {
+        "fields": [
+          {
+            "fieldId": "email",
+            "selector": "input[name='email'], input[type='email']",
+            "fallbackSelectors": [
+              "input[type='text']:first-of-type"
+            ],
+            "valueSource": "profile.email",
+            "inputMethod": "set_value",
+            "delayMs": 500
+          }
+        ],
+        "postFillActions": [
+          {
+            "description": "Accept terms",
+            "selector": "input[type='checkbox'], .terms-agree",
+            "fallbackSelectors": [
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 300
+          },
+          {
+            "description": "Submit",
+            "selector": "button[type='submit'], .connect-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "WiFi on Frecciarossa and Italo high-speed trains."
+    },
+    {
+      "spotId": "es-renfe-wifi",
+      "name": "Renfe AVE WiFi",
+      "nameJa": "スペイン高速鉄道 WiFi",
+      "nameZh": "西班牙高铁WiFi",
+      "nameKo": "스페인 고속철도 WiFi",
+      "country": "ES",
+      "ssids": [
+        "PlayRenfe",
+        "Renfe_Viajeros"
+      ],
+      "portalType": "registration",
+      "tier": "free",
+      "registration": {
+        "fields": [
+          {
+            "fieldId": "email",
+            "selector": "input[name='email'], input[type='email']",
+            "fallbackSelectors": [
+              "input[type='text']:first-of-type"
+            ],
+            "valueSource": "profile.email",
+            "inputMethod": "set_value",
+            "delayMs": 500
+          }
+        ],
+        "postFillActions": [
+          {
+            "description": "Accept terms",
+            "selector": "input[type='checkbox'], .terms-agree",
+            "fallbackSelectors": [
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 300
+          },
+          {
+            "description": "Submit",
+            "selector": "button[type='submit'], .connect-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Free WiFi on AVE high-speed trains."
+    },
+    {
+      "spotId": "ch-sbb-wifi",
+      "name": "SBB Swiss Railways WiFi",
+      "nameJa": "スイス鉄道 WiFi",
+      "nameZh": "瑞士铁路WiFi",
+      "nameKo": "스위스 철도 WiFi",
+      "country": "CH",
+      "ssids": [
+        "SBB-FREE",
+        "SBB-Free-WiFi"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Free WiFi on IC trains and major stations."
+    },
+    {
+      "spotId": "fr-paris-wifi",
+      "name": "Paris WiFi",
+      "nameJa": "パリ市 WiFi",
+      "nameZh": "巴黎市WiFi",
+      "nameKo": "파리시 WiFi",
+      "country": "FR",
+      "ssids": [
+        "PARIS_WI-FI_",
+        "Paris Wi-Fi"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Accept terms checkbox",
+            "selector": "input[type='checkbox']",
+            "fallbackSelectors": [
+              ".terms-checkbox",
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 500
+          },
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Free city WiFi in parks, libraries, public buildings."
+    },
+    {
+      "spotId": "gb-sky-wifi",
+      "name": "Sky WiFi (UK)",
+      "nameJa": "Sky WiFi（イギリス）",
+      "nameZh": "Sky WiFi（英国）",
+      "nameKo": "Sky WiFi (영국)",
+      "country": "GB",
+      "ssids": [
+        "_Free Wi-Fi",
+        "Sky WiFi"
+      ],
+      "portalType": "registration",
+      "tier": "free",
+      "registration": {
+        "fields": [
+          {
+            "fieldId": "email",
+            "selector": "input[name='email'], input[type='email']",
+            "fallbackSelectors": [
+              "input[type='text']:first-of-type"
+            ],
+            "valueSource": "profile.email",
+            "inputMethod": "set_value",
+            "delayMs": 500
+          }
+        ],
+        "postFillActions": [
+          {
+            "description": "Accept terms",
+            "selector": "input[type='checkbox'], .terms-agree",
+            "fallbackSelectors": [
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 300
+          },
+          {
+            "description": "Submit",
+            "selector": "button[type='submit'], .connect-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Free WiFi at cafes, shops, and public spaces across the UK."
+    },
+    {
+      "spotId": "de-berlin-wifi",
+      "name": "Free WiFi Berlin",
+      "nameJa": "ベルリン市 WiFi",
+      "nameZh": "柏林市WiFi",
+      "nameKo": "베를린시 WiFi",
+      "country": "DE",
+      "ssids": [
+        "Free WiFi Berlin",
+        "berlin.freifunk.net"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "City of Berlin public WiFi hotspots."
+    },
+    {
+      "spotId": "ae-dxb-wifi",
+      "name": "Dubai International Airport",
+      "nameJa": "ドバイ国際空港",
+      "nameZh": "迪拜国际机场",
+      "nameKo": "두바이 국제공항",
+      "airportCode": "DXB",
+      "country": "AE",
+      "ssids": [
+        "DXB Free WiFi",
+        "DXB-Free-WiFi"
+      ],
+      "portalType": "registration",
+      "tier": "free",
+      "registration": {
+        "fields": [
+          {
+            "fieldId": "email",
+            "selector": "input[name='email'], input[type='email']",
+            "fallbackSelectors": [
+              "input[type='text']:first-of-type"
+            ],
+            "valueSource": "profile.email",
+            "inputMethod": "set_value",
+            "delayMs": 500
+          }
+        ],
+        "postFillActions": [
+          {
+            "description": "Accept terms",
+            "selector": "input[type='checkbox'], .terms-agree",
+            "fallbackSelectors": [
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 300
+          },
+          {
+            "description": "Submit",
+            "selector": "button[type='submit'], .connect-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Free WiFi with email registration. Unlimited."
+    },
+    {
+      "spotId": "ae-auh-wifi",
+      "name": "Abu Dhabi Airport",
+      "nameJa": "アブダビ空港",
+      "nameZh": "阿布扎比机场",
+      "nameKo": "아부다비 공항",
+      "airportCode": "AUH",
+      "country": "AE",
+      "ssids": [
+        "AUH Free WiFi",
+        "AUH-Free-WiFi"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Accept terms checkbox",
+            "selector": "input[type='checkbox']",
+            "fallbackSelectors": [
+              ".terms-checkbox",
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 500
+          },
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Free unlimited WiFi."
+    },
+    {
+      "spotId": "qa-doh-wifi",
+      "name": "Doha Hamad International Airport",
+      "nameJa": "ドーハ・ハマド国際空港",
+      "nameZh": "多哈哈马德国际机场",
+      "nameKo": "도하 하마드 국제공항",
+      "airportCode": "DOH",
+      "country": "QA",
+      "ssids": [
+        "HIA Free WiFi",
+        "HIA-Qatar"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Accept terms checkbox",
+            "selector": "input[type='checkbox']",
+            "fallbackSelectors": [
+              ".terms-checkbox",
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 500
+          },
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Unlimited free WiFi at Hamad International."
+    },
+    {
+      "spotId": "il-tlv-wifi",
+      "name": "Tel Aviv Ben Gurion Airport",
+      "nameJa": "テルアビブ・ベン・グリオン空港",
+      "nameZh": "特拉维夫本古里安机场",
+      "nameKo": "텔아비브 벤구리온 공항",
+      "airportCode": "TLV",
+      "country": "IL",
+      "ssids": [
+        "Ben Gurion FREE WiFi",
+        "IAAFREEWIFI"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Free WiFi at all terminals."
+    },
+    {
+      "spotId": "sa-ruh-wifi",
+      "name": "Riyadh King Khalid Airport",
+      "nameJa": "リヤド・キング・ハーリド空港",
+      "nameZh": "利雅得哈立德国王机场",
+      "nameKo": "리야드 킹할리드 공항",
+      "airportCode": "RUH",
+      "country": "SA",
+      "ssids": [
+        "KKIA Free WiFi",
+        "KKIA-WiFi"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Accept terms checkbox",
+            "selector": "input[type='checkbox']",
+            "fallbackSelectors": [
+              ".terms-checkbox",
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 500
+          },
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Free WiFi at King Khalid International."
+    },
+    {
+      "spotId": "sa-jed-wifi",
+      "name": "Jeddah King Abdulaziz Airport",
+      "nameJa": "ジェッダ空港",
+      "nameZh": "吉达阿卜杜勒阿齐兹国王机场",
+      "nameKo": "제다 킹 압둘아지즈 공항",
+      "airportCode": "JED",
+      "country": "SA",
+      "ssids": [
+        "KAIA Free WiFi",
+        "KAIA-WiFi"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Accept terms checkbox",
+            "selector": "input[type='checkbox']",
+            "fallbackSelectors": [
+              ".terms-checkbox",
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 500
+          },
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Free WiFi at King Abdulaziz International."
+    },
+    {
+      "spotId": "au-syd-wifi",
+      "name": "Sydney Airport",
+      "nameJa": "シドニー空港",
+      "nameZh": "悉尼机场",
+      "nameKo": "시드니 공항",
+      "airportCode": "SYD",
+      "country": "AU",
+      "ssids": [
+        "SydneyAirport_Free_WiFi",
+        "SYD Free WiFi"
+      ],
+      "portalType": "registration",
+      "tier": "free",
+      "registration": {
+        "fields": [
+          {
+            "fieldId": "email",
+            "selector": "input[name='email'], input[type='email']",
+            "fallbackSelectors": [
+              "input[type='text']:first-of-type"
+            ],
+            "valueSource": "profile.email",
+            "inputMethod": "set_value",
+            "delayMs": 500
+          }
+        ],
+        "postFillActions": [
+          {
+            "description": "Accept terms",
+            "selector": "input[type='checkbox'], .terms-agree",
+            "fallbackSelectors": [
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 300
+          },
+          {
+            "description": "Submit",
+            "selector": "button[type='submit'], .connect-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Free WiFi with email. Both domestic and international terminals."
+    },
+    {
+      "spotId": "au-mel-wifi",
+      "name": "Melbourne Airport",
+      "nameJa": "メルボルン空港",
+      "nameZh": "墨尔本机场",
+      "nameKo": "멜버른 공항",
+      "airportCode": "MEL",
+      "country": "AU",
+      "ssids": [
+        "Melbourne Airport Free WiFi",
+        "MEL-WiFi"
+      ],
+      "portalType": "registration",
+      "tier": "free",
+      "registration": {
+        "fields": [
+          {
+            "fieldId": "email",
+            "selector": "input[name='email'], input[type='email']",
+            "fallbackSelectors": [
+              "input[type='text']:first-of-type"
+            ],
+            "valueSource": "profile.email",
+            "inputMethod": "set_value",
+            "delayMs": 500
+          }
+        ],
+        "postFillActions": [
+          {
+            "description": "Accept terms",
+            "selector": "input[type='checkbox'], .terms-agree",
+            "fallbackSelectors": [
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 300
+          },
+          {
+            "description": "Submit",
+            "selector": "button[type='submit'], .connect-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Free WiFi with email registration."
+    },
+    {
+      "spotId": "au-bne-wifi",
+      "name": "Brisbane Airport",
+      "nameJa": "ブリスベン空港",
+      "nameZh": "布里斯班机场",
+      "nameKo": "브리즈번 공항",
+      "airportCode": "BNE",
+      "country": "AU",
+      "ssids": [
+        "BNE Free WiFi",
+        "Brisbane Airport WiFi"
+      ],
+      "portalType": "registration",
+      "tier": "free",
+      "registration": {
+        "fields": [
+          {
+            "fieldId": "email",
+            "selector": "input[name='email'], input[type='email']",
+            "fallbackSelectors": [
+              "input[type='text']:first-of-type"
+            ],
+            "valueSource": "profile.email",
+            "inputMethod": "set_value",
+            "delayMs": 500
+          }
+        ],
+        "postFillActions": [
+          {
+            "description": "Accept terms",
+            "selector": "input[type='checkbox'], .terms-agree",
+            "fallbackSelectors": [
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 300
+          },
+          {
+            "description": "Submit",
+            "selector": "button[type='submit'], .connect-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Free WiFi at Brisbane Airport."
+    },
+    {
+      "spotId": "nz-akl-wifi",
+      "name": "Auckland Airport",
+      "nameJa": "オークランド空港",
+      "nameZh": "奥克兰机场",
+      "nameKo": "오클랜드 공항",
+      "airportCode": "AKL",
+      "country": "NZ",
+      "ssids": [
+        "AucklandAirport Free WiFi",
+        "AKL-WiFi"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Accept terms checkbox",
+            "selector": "input[type='checkbox']",
+            "fallbackSelectors": [
+              ".terms-checkbox",
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 500
+          },
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Unlimited free WiFi."
+    },
+    {
+      "spotId": "nz-wlg-wifi",
+      "name": "Wellington Airport",
+      "nameJa": "ウェリントン空港",
+      "nameZh": "惠灵顿机场",
+      "nameKo": "웰링턴 공항",
+      "airportCode": "WLG",
+      "country": "NZ",
+      "ssids": [
+        "Wellington Airport Free WiFi",
+        "WLG-WiFi"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Free WiFi."
+    },
+    {
+      "spotId": "in-del-wifi",
+      "name": "Delhi Indira Gandhi Airport",
+      "nameJa": "デリー・インディラ・ガンディー空港",
+      "nameZh": "德里甘地机场",
+      "nameKo": "델리 인디라 간디 공항",
+      "airportCode": "DEL",
+      "country": "IN",
+      "ssids": [
+        "DIAL Free WiFi",
+        "DEL-WiFi"
+      ],
+      "portalType": "registration",
+      "tier": "free",
+      "registration": {
+        "fields": [
+          {
+            "fieldId": "email",
+            "selector": "input[name='email'], input[type='email']",
+            "fallbackSelectors": [
+              "input[type='text']:first-of-type"
+            ],
+            "valueSource": "profile.email",
+            "inputMethod": "set_value",
+            "delayMs": 500
+          }
+        ],
+        "postFillActions": [
+          {
+            "description": "Accept terms",
+            "selector": "input[type='checkbox'], .terms-agree",
+            "fallbackSelectors": [
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 300
+          },
+          {
+            "description": "Submit",
+            "selector": "button[type='submit'], .connect-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Free WiFi with mobile number or email. T1 and T3."
+    },
+    {
+      "spotId": "in-bom-wifi",
+      "name": "Mumbai Chhatrapati Shivaji Airport",
+      "nameJa": "ムンバイ空港",
+      "nameZh": "孟买贾特拉帕蒂·希瓦吉机场",
+      "nameKo": "뭄바이 공항",
+      "airportCode": "BOM",
+      "country": "IN",
+      "ssids": [
+        "MIAL Free WiFi",
+        "BOM-WiFi"
+      ],
+      "portalType": "registration",
+      "tier": "free",
+      "registration": {
+        "fields": [
+          {
+            "fieldId": "email",
+            "selector": "input[name='email'], input[type='email']",
+            "fallbackSelectors": [
+              "input[type='text']:first-of-type"
+            ],
+            "valueSource": "profile.email",
+            "inputMethod": "set_value",
+            "delayMs": 500
+          }
+        ],
+        "postFillActions": [
+          {
+            "description": "Accept terms",
+            "selector": "input[type='checkbox'], .terms-agree",
+            "fallbackSelectors": [
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 300
+          },
+          {
+            "description": "Submit",
+            "selector": "button[type='submit'], .connect-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Free WiFi with OTP verification. T1 and T2."
+    },
+    {
+      "spotId": "in-blr-wifi",
+      "name": "Bangalore Kempegowda Airport",
+      "nameJa": "バンガロール空港",
+      "nameZh": "班加罗尔机场",
+      "nameKo": "방갈로르 공항",
+      "airportCode": "BLR",
+      "country": "IN",
+      "ssids": [
+        "BIAL Free WiFi",
+        "BLR-WiFi"
+      ],
+      "portalType": "registration",
+      "tier": "free",
+      "registration": {
+        "fields": [
+          {
+            "fieldId": "email",
+            "selector": "input[name='email'], input[type='email']",
+            "fallbackSelectors": [
+              "input[type='text']:first-of-type"
+            ],
+            "valueSource": "profile.email",
+            "inputMethod": "set_value",
+            "delayMs": 500
+          }
+        ],
+        "postFillActions": [
+          {
+            "description": "Accept terms",
+            "selector": "input[type='checkbox'], .terms-agree",
+            "fallbackSelectors": [
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 300
+          },
+          {
+            "description": "Submit",
+            "selector": "button[type='submit'], .connect-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Free WiFi at Kempegowda International."
+    },
+    {
+      "spotId": "in-maa-wifi",
+      "name": "Chennai Airport",
+      "nameJa": "チェンナイ空港",
+      "nameZh": "金奈机场",
+      "nameKo": "첸나이 공항",
+      "airportCode": "MAA",
+      "country": "IN",
+      "ssids": [
+        "AAI Free WiFi",
+        "MAA-WiFi"
+      ],
+      "portalType": "registration",
+      "tier": "free",
+      "registration": {
+        "fields": [
+          {
+            "fieldId": "email",
+            "selector": "input[name='email'], input[type='email']",
+            "fallbackSelectors": [
+              "input[type='text']:first-of-type"
+            ],
+            "valueSource": "profile.email",
+            "inputMethod": "set_value",
+            "delayMs": 500
+          }
+        ],
+        "postFillActions": [
+          {
+            "description": "Accept terms",
+            "selector": "input[type='checkbox'], .terms-agree",
+            "fallbackSelectors": [
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 300
+          },
+          {
+            "description": "Submit",
+            "selector": "button[type='submit'], .connect-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Free WiFi by Airports Authority of India."
+    },
+    {
+      "spotId": "in-delhi-metro-wifi",
+      "name": "Delhi Metro WiFi",
+      "nameJa": "デリー地下鉄 WiFi",
+      "nameZh": "德里地铁WiFi",
+      "nameKo": "델리 메트로 WiFi",
+      "country": "IN",
+      "ssids": [
+        "DMRC_Free_WiFi",
+        "Delhi_Metro_WiFi"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Accept terms checkbox",
+            "selector": "input[type='checkbox']",
+            "fallbackSelectors": [
+              ".terms-checkbox",
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 500
+          },
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "WiFi at select Delhi Metro stations."
+    },
+    {
+      "spotId": "lk-cmb-wifi",
+      "name": "Colombo Bandaranaike Airport",
+      "nameJa": "コロンボ空港",
+      "nameZh": "科伦坡班达拉奈克机场",
+      "nameKo": "콜롬보 공항",
+      "airportCode": "CMB",
+      "country": "LK",
+      "ssids": [
+        "BIA Free WiFi",
+        "CMB-WiFi"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Accept terms checkbox",
+            "selector": "input[type='checkbox']",
+            "fallbackSelectors": [
+              ".terms-checkbox",
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 500
+          },
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Free WiFi at Bandaranaike International."
+    },
+    {
+      "spotId": "us-den-wifi",
+      "name": "Denver International Airport",
+      "nameJa": "デンバー国際空港",
+      "nameZh": "丹佛国际机场",
+      "nameKo": "덴버 국제공항",
+      "airportCode": "DEN",
+      "country": "US",
+      "ssids": [
+        "DEN Free WiFi",
+        "DENAirport"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Accept terms checkbox",
+            "selector": "input[type='checkbox']",
+            "fallbackSelectors": [
+              ".terms-checkbox",
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 500
+          },
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Free WiFi at Denver International."
+    },
+    {
+      "spotId": "us-iah-wifi",
+      "name": "Houston George Bush Airport",
+      "nameJa": "ヒューストン空港",
+      "nameZh": "休斯敦乔治·布什机场",
+      "nameKo": "휴스턴 공항",
+      "airportCode": "IAH",
+      "country": "US",
+      "ssids": [
+        "HAS Free WiFi",
+        "IAH-WiFi"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Accept terms checkbox",
+            "selector": "input[type='checkbox']",
+            "fallbackSelectors": [
+              ".terms-checkbox",
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 500
+          },
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Free WiFi by Houston Airport System."
+    },
+    {
+      "spotId": "us-bos-wifi",
+      "name": "Boston Logan Airport",
+      "nameJa": "ボストン・ローガン空港",
+      "nameZh": "波士顿洛根机场",
+      "nameKo": "보스턴 로건 공항",
+      "airportCode": "BOS",
+      "country": "US",
+      "ssids": [
+        "Logan Free WiFi",
+        "BOS-WiFi"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Accept terms checkbox",
+            "selector": "input[type='checkbox']",
+            "fallbackSelectors": [
+              ".terms-checkbox",
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 500
+          },
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Free WiFi at all terminals."
+    },
+    {
+      "spotId": "us-ewr-wifi",
+      "name": "Newark Liberty Airport",
+      "nameJa": "ニューアーク・リバティ空港",
+      "nameZh": "纽瓦克自由机场",
+      "nameKo": "뉴어크 리버티 공항",
+      "airportCode": "EWR",
+      "country": "US",
+      "ssids": [
+        "EWR Free WiFi",
+        "_Free WiFi"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Accept terms checkbox",
+            "selector": "input[type='checkbox']",
+            "fallbackSelectors": [
+              ".terms-checkbox",
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 500
+          },
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Free WiFi at Newark Liberty International."
+    },
+    {
+      "spotId": "ca-yyz-wifi",
+      "name": "Toronto Pearson Airport",
+      "nameJa": "トロント・ピアソン空港",
+      "nameZh": "多伦多皮尔逊机场",
+      "nameKo": "토론토 피어슨 공항",
+      "airportCode": "YYZ",
+      "country": "CA",
+      "ssids": [
+        "TorontoPearson Free WiFi",
+        "YYZ-WiFi"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Accept terms checkbox",
+            "selector": "input[type='checkbox']",
+            "fallbackSelectors": [
+              ".terms-checkbox",
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 500
+          },
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Free WiFi at all terminals."
+    },
+    {
+      "spotId": "ca-yvr-wifi",
+      "name": "Vancouver International Airport",
+      "nameJa": "バンクーバー国際空港",
+      "nameZh": "温哥华国际机场",
+      "nameKo": "밴쿠버 국제공항",
+      "airportCode": "YVR",
+      "country": "CA",
+      "ssids": [
+        "YVR Free WiFi",
+        "#YVR Free WiFi"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Accept terms checkbox",
+            "selector": "input[type='checkbox']",
+            "fallbackSelectors": [
+              ".terms-checkbox",
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 500
+          },
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Free WiFi at YVR."
+    },
+    {
+      "spotId": "ca-yul-wifi",
+      "name": "Montreal Trudeau Airport",
+      "nameJa": "モントリオール空港",
+      "nameZh": "蒙特利尔特鲁多机场",
+      "nameKo": "몬트리올 공항",
+      "airportCode": "YUL",
+      "country": "CA",
+      "ssids": [
+        "YUL Free WiFi",
+        "ADM-WiFi"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Accept terms checkbox",
+            "selector": "input[type='checkbox']",
+            "fallbackSelectors": [
+              ".terms-checkbox",
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 500
+          },
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Free WiFi at Montreal-Trudeau."
+    },
+    {
+      "spotId": "mx-mex-wifi",
+      "name": "Mexico City Airport",
+      "nameJa": "メキシコシティ空港",
+      "nameZh": "墨西哥城机场",
+      "nameKo": "멕시코시티 공항",
+      "airportCode": "MEX",
+      "country": "MX",
+      "ssids": [
+        "AICM Free WiFi",
+        "Internet Gratis AICM"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Accept terms checkbox",
+            "selector": "input[type='checkbox']",
+            "fallbackSelectors": [
+              ".terms-checkbox",
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 500
+          },
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Free WiFi at AICM. T1 and T2."
+    },
+    {
+      "spotId": "mx-cun-wifi",
+      "name": "Cancun Airport",
+      "nameJa": "カンクン空港",
+      "nameZh": "坎昆机场",
+      "nameKo": "칸쿤 공항",
+      "airportCode": "CUN",
+      "country": "MX",
+      "ssids": [
+        "Cancun Airport Free WiFi",
+        "CUN-WiFi"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Accept terms checkbox",
+            "selector": "input[type='checkbox']",
+            "fallbackSelectors": [
+              ".terms-checkbox",
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 500
+          },
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Free WiFi at Cancun International."
+    },
+    {
+      "spotId": "br-gru-wifi",
+      "name": "Sao Paulo Guarulhos Airport",
+      "nameJa": "サンパウロ・グアルーリョス空港",
+      "nameZh": "圣保罗瓜鲁柳斯机场",
+      "nameKo": "상파울루 과룰류스 공항",
+      "airportCode": "GRU",
+      "country": "BR",
+      "ssids": [
+        "GRU Airport Free WiFi",
+        "GRU-WiFi"
+      ],
+      "portalType": "registration",
+      "tier": "free",
+      "registration": {
+        "fields": [
+          {
+            "fieldId": "email",
+            "selector": "input[name='email'], input[type='email']",
+            "fallbackSelectors": [
+              "input[type='text']:first-of-type"
+            ],
+            "valueSource": "profile.email",
+            "inputMethod": "set_value",
+            "delayMs": 500
+          }
+        ],
+        "postFillActions": [
+          {
+            "description": "Accept terms",
+            "selector": "input[type='checkbox'], .terms-agree",
+            "fallbackSelectors": [
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 300
+          },
+          {
+            "description": "Submit",
+            "selector": "button[type='submit'], .connect-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Free WiFi with email. All terminals."
+    },
+    {
+      "spotId": "br-gig-wifi",
+      "name": "Rio de Janeiro Galeao Airport",
+      "nameJa": "リオデジャネイロ空港",
+      "nameZh": "里约热内卢加利昂机场",
+      "nameKo": "리우데자네이루 공항",
+      "airportCode": "GIG",
+      "country": "BR",
+      "ssids": [
+        "GIG Free WiFi",
+        "Galeao-WiFi"
+      ],
+      "portalType": "registration",
+      "tier": "free",
+      "registration": {
+        "fields": [
+          {
+            "fieldId": "email",
+            "selector": "input[name='email'], input[type='email']",
+            "fallbackSelectors": [
+              "input[type='text']:first-of-type"
+            ],
+            "valueSource": "profile.email",
+            "inputMethod": "set_value",
+            "delayMs": 500
+          }
+        ],
+        "postFillActions": [
+          {
+            "description": "Accept terms",
+            "selector": "input[type='checkbox'], .terms-agree",
+            "fallbackSelectors": [
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 300
+          },
+          {
+            "description": "Submit",
+            "selector": "button[type='submit'], .connect-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Free WiFi at Galeao International."
+    },
+    {
+      "spotId": "ar-eze-wifi",
+      "name": "Buenos Aires Ezeiza Airport",
+      "nameJa": "ブエノスアイレス空港",
+      "nameZh": "布宜诺斯艾利斯机场",
+      "nameKo": "부에노스아이레스 공항",
+      "airportCode": "EZE",
+      "country": "AR",
+      "ssids": [
+        "AA2000 Free WiFi",
+        "EZE-WiFi"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Accept terms checkbox",
+            "selector": "input[type='checkbox']",
+            "fallbackSelectors": [
+              ".terms-checkbox",
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 500
+          },
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Free WiFi by Aeropuertos Argentina 2000."
+    },
+    {
+      "spotId": "cl-scl-wifi",
+      "name": "Santiago Airport",
+      "nameJa": "サンティアゴ空港",
+      "nameZh": "圣地亚哥机场",
+      "nameKo": "산티아고 공항",
+      "airportCode": "SCL",
+      "country": "CL",
+      "ssids": [
+        "SCL Free WiFi",
+        "SCL-WiFi"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Accept terms checkbox",
+            "selector": "input[type='checkbox']",
+            "fallbackSelectors": [
+              ".terms-checkbox",
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 500
+          },
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Free WiFi at Arturo Merino Benitez International."
+    },
+    {
+      "spotId": "co-bog-wifi",
+      "name": "Bogota El Dorado Airport",
+      "nameJa": "ボゴタ空港",
+      "nameZh": "波哥大埃尔多拉多机场",
+      "nameKo": "보고타 엘도라도 공항",
+      "airportCode": "BOG",
+      "country": "CO",
+      "ssids": [
+        "ELDORADO Free WiFi",
+        "BOG-WiFi"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Accept terms checkbox",
+            "selector": "input[type='checkbox']",
+            "fallbackSelectors": [
+              ".terms-checkbox",
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 500
+          },
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Free WiFi at El Dorado International."
+    },
+    {
+      "spotId": "pe-lim-wifi",
+      "name": "Lima Jorge Chavez Airport",
+      "nameJa": "リマ空港",
+      "nameZh": "利马豪尔赫·查韦斯机场",
+      "nameKo": "리마 호르헤 차베스 공항",
+      "airportCode": "LIM",
+      "country": "PE",
+      "ssids": [
+        "LAP Free WiFi",
+        "LIM-WiFi"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Accept terms checkbox",
+            "selector": "input[type='checkbox']",
+            "fallbackSelectors": [
+              ".terms-checkbox",
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 500
+          },
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Free WiFi at Jorge Chavez International."
+    },
+    {
+      "spotId": "za-jnb-wifi",
+      "name": "Johannesburg O.R. Tambo Airport",
+      "nameJa": "ヨハネスブルグ空港",
+      "nameZh": "约翰内斯堡奥利弗·坦博机场",
+      "nameKo": "요하네스버그 공항",
+      "airportCode": "JNB",
+      "country": "ZA",
+      "ssids": [
+        "ACSA Free WiFi",
+        "JNB-WiFi"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Accept terms checkbox",
+            "selector": "input[type='checkbox']",
+            "fallbackSelectors": [
+              ".terms-checkbox",
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 500
+          },
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Free WiFi by Airports Company South Africa."
+    },
+    {
+      "spotId": "za-cpt-wifi",
+      "name": "Cape Town Airport",
+      "nameJa": "ケープタウン空港",
+      "nameZh": "开普敦机场",
+      "nameKo": "케이프타운 공항",
+      "airportCode": "CPT",
+      "country": "ZA",
+      "ssids": [
+        "ACSA Free WiFi",
+        "CPT-WiFi"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Accept terms checkbox",
+            "selector": "input[type='checkbox']",
+            "fallbackSelectors": [
+              ".terms-checkbox",
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 500
+          },
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Free WiFi by ACSA."
+    },
+    {
+      "spotId": "eg-cai-wifi",
+      "name": "Cairo International Airport",
+      "nameJa": "カイロ国際空港",
+      "nameZh": "开罗国际机场",
+      "nameKo": "카이로 국제공항",
+      "airportCode": "CAI",
+      "country": "EG",
+      "ssids": [
+        "CAI Free WiFi",
+        "Cairo Airport WiFi"
+      ],
+      "portalType": "registration",
+      "tier": "free",
+      "registration": {
+        "fields": [
+          {
+            "fieldId": "email",
+            "selector": "input[name='email'], input[type='email']",
+            "fallbackSelectors": [
+              "input[type='text']:first-of-type"
+            ],
+            "valueSource": "profile.email",
+            "inputMethod": "set_value",
+            "delayMs": 500
+          }
+        ],
+        "postFillActions": [
+          {
+            "description": "Accept terms",
+            "selector": "input[type='checkbox'], .terms-agree",
+            "fallbackSelectors": [
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 300
+          },
+          {
+            "description": "Submit",
+            "selector": "button[type='submit'], .connect-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Free WiFi with email. Terminals 2 and 3."
+    },
+    {
+      "spotId": "ma-cmn-wifi",
+      "name": "Casablanca Mohammed V Airport",
+      "nameJa": "カサブランカ空港",
+      "nameZh": "卡萨布兰卡机场",
+      "nameKo": "카사블랑카 공항",
+      "airportCode": "CMN",
+      "country": "MA",
+      "ssids": [
+        "ONDA Free WiFi",
+        "CMN-WiFi"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Accept terms checkbox",
+            "selector": "input[type='checkbox']",
+            "fallbackSelectors": [
+              ".terms-checkbox",
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 500
+          },
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Free WiFi by ONDA."
+    },
+    {
+      "spotId": "ke-nbo-wifi",
+      "name": "Nairobi Jomo Kenyatta Airport",
+      "nameJa": "ナイロビ空港",
+      "nameZh": "内罗毕乔莫·肯雅塔机场",
+      "nameKo": "나이로비 공항",
+      "airportCode": "NBO",
+      "country": "KE",
+      "ssids": [
+        "JKIA Free WiFi",
+        "NBO-WiFi"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Accept terms checkbox",
+            "selector": "input[type='checkbox']",
+            "fallbackSelectors": [
+              ".terms-checkbox",
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 500
+          },
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Free WiFi at JKIA."
+    },
+    {
+      "spotId": "et-add-wifi",
+      "name": "Addis Ababa Bole Airport",
+      "nameJa": "アディスアベバ空港",
+      "nameZh": "亚的斯亚贝巴博莱机场",
+      "nameKo": "아디스아바바 공항",
+      "airportCode": "ADD",
+      "country": "ET",
+      "ssids": [
+        "Bole Free WiFi",
+        "ADD-WiFi"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Free WiFi at Bole International. Major African hub."
+    },
+    {
+      "spotId": "in-railwire-wifi",
+      "name": "Indian Railways RailWire WiFi",
+      "nameJa": "インド鉄道 RailWire WiFi",
+      "nameZh": "印度铁路RailWire WiFi",
+      "nameKo": "인도 철도 RailWire WiFi",
+      "country": "IN",
+      "ssids": [
+        "RailWire",
+        "RailWire Free WiFi"
+      ],
+      "portalType": "registration",
+      "tier": "free",
+      "registration": {
+        "fields": [
+          {
+            "fieldId": "email",
+            "selector": "input[name='email'], input[type='email']",
+            "fallbackSelectors": [
+              "input[type='text']:first-of-type"
+            ],
+            "valueSource": "profile.email",
+            "inputMethod": "set_value",
+            "delayMs": 500
+          }
+        ],
+        "postFillActions": [
+          {
+            "description": "Accept terms",
+            "selector": "input[type='checkbox'], .terms-agree",
+            "fallbackSelectors": [
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 300
+          },
+          {
+            "description": "Submit",
+            "selector": "button[type='submit'], .connect-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Available at 6000+ Indian railway stations. Phone number registration."
+    },
+    {
+      "spotId": "th-true-wifi",
+      "name": "TrueMove H WiFi (Thailand)",
+      "nameJa": "TrueMove H WiFi（タイ）",
+      "nameZh": "TrueMove H WiFi（泰国）",
+      "nameKo": "TrueMove H WiFi (태국)",
+      "country": "TH",
+      "ssids": [
+        ".@TRUEWIFI",
+        "TrueWiFi",
+        "@TRUEWIFI"
+      ],
+      "portalType": "registration",
+      "tier": "free",
+      "registration": {
+        "fields": [
+          {
+            "fieldId": "email",
+            "selector": "input[name='email'], input[type='email']",
+            "fallbackSelectors": [
+              "input[type='text']:first-of-type"
+            ],
+            "valueSource": "profile.email",
+            "inputMethod": "set_value",
+            "delayMs": 500
+          }
+        ],
+        "postFillActions": [
+          {
+            "description": "Accept terms",
+            "selector": "input[type='checkbox'], .terms-agree",
+            "fallbackSelectors": [
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 300
+          },
+          {
+            "description": "Submit",
+            "selector": "button[type='submit'], .connect-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Thailand-wide WiFi at malls, cafes, transit. Registration with phone/email."
+    },
+    {
+      "spotId": "my-wifi-malaysia",
+      "name": "WiFi Malaysia (Government)",
+      "nameJa": "WiFi Malaysia（政府）",
+      "nameZh": "WiFi Malaysia（政府）",
+      "nameKo": "WiFi Malaysia (정부)",
+      "country": "MY",
+      "ssids": [
+        "Wireless@Unifi",
+        "@Unifi"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Accept terms checkbox",
+            "selector": "input[type='checkbox']",
+            "fallbackSelectors": [
+              ".terms-checkbox",
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 500
+          },
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Government-supported public WiFi in Malaysia."
+    },
+    {
+      "spotId": "jp-bamiyan-wifi",
+      "name": "Bamiyan Free WiFi",
+      "nameJa": "バーミヤン Free WiFi",
+      "nameZh": "巴米扬免费WiFi",
+      "nameKo": "바미얀 무료 WiFi",
+      "country": "JP",
+      "ssids": [
+        ".FREE_Wi-Fi_PASSPORT",
+        "Skylark_Free_Wi-Fi"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Accept terms checkbox",
+            "selector": "input[type='checkbox']",
+            "fallbackSelectors": [
+              ".terms-checkbox",
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 500
+          },
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Skylark group (same as Gusto). Chinese family restaurant."
+    },
+    {
+      "spotId": "jp-jonathan-wifi",
+      "name": "Jonathan's Free WiFi",
+      "nameJa": "ジョナサン Free WiFi",
+      "nameZh": "Jonathan's免费WiFi",
+      "nameKo": "조나단 무료 WiFi",
+      "country": "JP",
+      "ssids": [
+        ".FREE_Wi-Fi_PASSPORT",
+        "Skylark_Free_Wi-Fi"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Accept terms checkbox",
+            "selector": "input[type='checkbox']",
+            "fallbackSelectors": [
+              ".terms-checkbox",
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 500
+          },
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Skylark group. Family restaurant mainly in Kanto area."
+    },
+    {
+      "spotId": "jp-saizeriya-wifi",
+      "name": "Saizeriya Free WiFi",
+      "nameJa": "サイゼリヤ Free WiFi",
+      "nameZh": "萨莉亚免费WiFi",
+      "nameKo": "사이제리야 무료 WiFi",
+      "country": "JP",
+      "ssids": [
+        "Saizeriya_Free_Wi-Fi"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Accept terms checkbox",
+            "selector": "input[type='checkbox']",
+            "fallbackSelectors": [
+              ".terms-checkbox",
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 500
+          },
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Italian family restaurant. Available at most locations."
+    },
+    {
+      "spotId": "jp-dennys-wifi",
+      "name": "Denny's Japan Free WiFi",
+      "nameJa": "デニーズ Free WiFi",
+      "nameZh": "丹尼斯免费WiFi",
+      "nameKo": "데니스 무료 WiFi",
+      "country": "JP",
+      "ssids": [
+        "7SPOT",
+        "Dennys_Free_Wi-Fi"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Accept terms checkbox",
+            "selector": "input[type='checkbox']",
+            "fallbackSelectors": [
+              ".terms-checkbox",
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 500
+          },
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Seven & i group family restaurant."
+    },
+    {
+      "spotId": "jp-royalhost-wifi",
+      "name": "Royal Host Free WiFi",
+      "nameJa": "ロイヤルホスト Free WiFi",
+      "nameZh": "Royal Host免费WiFi",
+      "nameKo": "로얄 호스트 무료 WiFi",
+      "country": "JP",
+      "ssids": [
+        "RoyalHost_Free_Wi-Fi"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Accept terms checkbox",
+            "selector": "input[type='checkbox']",
+            "fallbackSelectors": [
+              ".terms-checkbox",
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 500
+          },
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Premium family restaurant. WiFi at most locations."
+    },
+    {
+      "spotId": "jp-sukiya-wifi",
+      "name": "Sukiya Free WiFi",
+      "nameJa": "すき家 Free WiFi",
+      "nameZh": "Sukiya免费WiFi",
+      "nameKo": "스키야 무료 WiFi",
+      "country": "JP",
+      "ssids": [
+        "sukiya_free_wifi"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Accept terms checkbox",
+            "selector": "input[type='checkbox']",
+            "fallbackSelectors": [
+              ".terms-checkbox",
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 500
+          },
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Largest gyudon chain. WiFi at major locations."
+    },
+    {
+      "spotId": "jp-yoshinoya-wifi",
+      "name": "Yoshinoya Free WiFi",
+      "nameJa": "吉野家 Free WiFi",
+      "nameZh": "吉野家免费WiFi",
+      "nameKo": "요시노야 무료 WiFi",
+      "country": "JP",
+      "ssids": [
+        "yoshinoya_free_wifi"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Accept terms checkbox",
+            "selector": "input[type='checkbox']",
+            "fallbackSelectors": [
+              ".terms-checkbox",
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 500
+          },
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Gyudon chain. WiFi at select locations."
+    },
+    {
+      "spotId": "jp-matsuya-wifi",
+      "name": "Matsuya Free WiFi",
+      "nameJa": "松屋 Free WiFi",
+      "nameZh": "松屋免费WiFi",
+      "nameKo": "마츠야 무료 WiFi",
+      "country": "JP",
+      "ssids": [
+        "matsuya_free_wifi",
+        "Matsuya_Free_Wi-Fi"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Accept terms checkbox",
+            "selector": "input[type='checkbox']",
+            "fallbackSelectors": [
+              ".terms-checkbox",
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 500
+          },
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Gyudon chain. WiFi at major locations."
+    },
+    {
+      "spotId": "jp-cocoichi-wifi",
+      "name": "CoCo Ichibanya Free WiFi",
+      "nameJa": "ココイチ Free WiFi",
+      "nameZh": "CoCo壹番屋免费WiFi",
+      "nameKo": "코코이치방야 무료 WiFi",
+      "country": "JP",
+      "ssids": [
+        "CoCo_ICHIBANYA_Free_Wi-Fi"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Accept terms checkbox",
+            "selector": "input[type='checkbox']",
+            "fallbackSelectors": [
+              ".terms-checkbox",
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 500
+          },
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Curry chain. WiFi at select locations."
+    },
+    {
+      "spotId": "jp-sanmaruku-wifi",
+      "name": "Saint Marc Cafe Free WiFi",
+      "nameJa": "サンマルクカフェ Free WiFi",
+      "nameZh": "圣马克咖啡免费WiFi",
+      "nameKo": "상마르크 카페 무료 WiFi",
+      "country": "JP",
+      "ssids": [
+        "SAINT_MARC_CAFE_Free_Wi-Fi",
+        "Wi2premium"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Accept terms checkbox",
+            "selector": "input[type='checkbox']",
+            "fallbackSelectors": [
+              ".terms-checkbox",
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 500
+          },
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Bakery cafe chain. WiFi via Wi2."
+    },
+    {
+      "spotId": "jp-pronto-wifi",
+      "name": "PRONTO Free WiFi",
+      "nameJa": "プロント Free WiFi",
+      "nameZh": "PRONTO免费WiFi",
+      "nameKo": "프론토 무료 WiFi",
+      "country": "JP",
+      "ssids": [
+        "PRONTO_FREE_Wi-Fi"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Accept terms checkbox",
+            "selector": "input[type='checkbox']",
+            "fallbackSelectors": [
+              ".terms-checkbox",
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 500
+          },
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Cafe/bar chain. Daytime cafe, nighttime bar."
+    },
+    {
+      "spotId": "jp-veloce-wifi",
+      "name": "Cafe Veloce Free WiFi",
+      "nameJa": "カフェ・ベローチェ Free WiFi",
+      "nameZh": "Veloce咖啡免费WiFi",
+      "nameKo": "카페 벨로체 무료 WiFi",
+      "country": "JP",
+      "ssids": [
+        "veloce_free_wifi",
+        "VELOCE_FREE_Wi-Fi"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Accept terms checkbox",
+            "selector": "input[type='checkbox']",
+            "fallbackSelectors": [
+              ".terms-checkbox",
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 500
+          },
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Budget cafe chain. WiFi at most locations."
+    },
+    {
+      "spotId": "jp-excelsior-wifi",
+      "name": "Excelsior Caffe Free WiFi",
+      "nameJa": "エクセルシオール カフェ Free WiFi",
+      "nameZh": "Excelsior Caffe免费WiFi",
+      "nameKo": "엑셀시오르 카페 무료 WiFi",
+      "country": "JP",
+      "ssids": [
+        "EXCELSIOR_CAFFE_Free_Wi-Fi"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Accept terms checkbox",
+            "selector": "input[type='checkbox']",
+            "fallbackSelectors": [
+              ".terms-checkbox",
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 500
+          },
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Doutor group premium cafe."
+    },
+    {
+      "spotId": "jp-yodobashi-wifi",
+      "name": "Yodobashi Camera Free WiFi",
+      "nameJa": "ヨドバシカメラ Free WiFi",
+      "nameZh": "友都八喜免费WiFi",
+      "nameKo": "요도바시 카메라 무료 WiFi",
+      "country": "JP",
+      "ssids": [
+        "Yodobashi_Free_Wi-Fi"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Accept terms checkbox",
+            "selector": "input[type='checkbox']",
+            "fallbackSelectors": [
+              ".terms-checkbox",
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 500
+          },
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Major electronics retailer. WiFi at all stores."
+    },
+    {
+      "spotId": "jp-biccamera-wifi",
+      "name": "Bic Camera Free WiFi",
+      "nameJa": "ビックカメラ Free WiFi",
+      "nameZh": "Bic Camera免费WiFi",
+      "nameKo": "빅 카메라 무료 WiFi",
+      "country": "JP",
+      "ssids": [
+        "BicCamera_Free_Wi-Fi",
+        "Bic_Camera_Free_Wi-Fi"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Accept terms checkbox",
+            "selector": "input[type='checkbox']",
+            "fallbackSelectors": [
+              ".terms-checkbox",
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 500
+          },
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Electronics retailer. WiFi at most stores."
+    },
+    {
+      "spotId": "jp-itoyokado-wifi",
+      "name": "Ito-Yokado Free WiFi",
+      "nameJa": "イトーヨーカドー Free WiFi",
+      "nameZh": "伊藤洋华堂免费WiFi",
+      "nameKo": "이토요카도 무료 WiFi",
+      "country": "JP",
+      "ssids": [
+        "7SPOT",
+        "IY_Free_Wi-Fi"
+      ],
+      "portalType": "registration",
+      "tier": "free",
+      "registration": {
+        "fields": [
+          {
+            "fieldId": "email",
+            "selector": "input[name='email'], input[type='email']",
+            "fallbackSelectors": [
+              "input[type='text']:first-of-type"
+            ],
+            "valueSource": "profile.email",
+            "inputMethod": "set_value",
+            "delayMs": 500
+          }
+        ],
+        "postFillActions": [
+          {
+            "description": "Accept terms",
+            "selector": "input[type='checkbox'], .terms-agree",
+            "fallbackSelectors": [
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 300
+          },
+          {
+            "description": "Submit",
+            "selector": "button[type='submit'], .connect-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Seven & i group supermarket. Via 7SPOT."
+    },
+    {
+      "spotId": "jp-parco-wifi",
+      "name": "PARCO Free WiFi",
+      "nameJa": "パルコ Free WiFi",
+      "nameZh": "PARCO免费WiFi",
+      "nameKo": "파르코 무료 WiFi",
+      "country": "JP",
+      "ssids": [
+        "PARCO_Free_Wi-Fi"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Accept terms checkbox",
+            "selector": "input[type='checkbox']",
+            "fallbackSelectors": [
+              ".terms-checkbox",
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 500
+          },
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Fashion mall. Shibuya, Ikebukuro, Nagoya, etc."
+    },
+    {
+      "spotId": "jp-loft-wifi",
+      "name": "Loft Free WiFi",
+      "nameJa": "ロフト Free WiFi",
+      "nameZh": "Loft免费WiFi",
+      "nameKo": "로프트 무료 WiFi",
+      "country": "JP",
+      "ssids": [
+        "Loft_Free_Wi-Fi"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Accept terms checkbox",
+            "selector": "input[type='checkbox']",
+            "fallbackSelectors": [
+              ".terms-checkbox",
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 500
+          },
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Lifestyle goods store. WiFi at major locations."
+    },
+    {
+      "spotId": "jp-seven-wifi",
+      "name": "Seven-Eleven 7SPOT WiFi",
+      "nameJa": "セブンイレブン 7SPOT WiFi",
+      "nameZh": "7-11 7SPOT WiFi",
+      "nameKo": "세븐일레븐 7SPOT WiFi",
+      "country": "JP",
+      "ssids": [
+        "7SPOT"
+      ],
+      "portalType": "registration",
+      "tier": "free",
+      "registration": {
+        "fields": [
+          {
+            "fieldId": "email",
+            "selector": "input[name='email'], input[type='email']",
+            "fallbackSelectors": [
+              "input[type='text']:first-of-type"
+            ],
+            "valueSource": "profile.email",
+            "inputMethod": "set_value",
+            "delayMs": 500
+          }
+        ],
+        "postFillActions": [
+          {
+            "description": "Accept terms",
+            "selector": "input[type='checkbox'], .terms-agree",
+            "fallbackSelectors": [
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 300
+          },
+          {
+            "description": "Submit",
+            "selector": "button[type='submit'], .connect-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "7SPOT requires email registration. Available at all 7-Eleven stores."
+    },
+    {
+      "spotId": "jp-hankyu-wifi",
+      "name": "Hankyu Railway Free WiFi",
+      "nameJa": "阪急電鉄 Free WiFi",
+      "nameZh": "阪急电铁免费WiFi",
+      "nameKo": "한큐 전철 무료 WiFi",
+      "country": "JP",
+      "ssids": [
+        "Hankyu_Free_Wi-Fi"
+      ],
+      "portalType": "registration",
+      "tier": "free",
+      "registration": {
+        "fields": [
+          {
+            "fieldId": "email",
+            "selector": "input[name='email'], input[type='email']",
+            "fallbackSelectors": [
+              "input[type='text']:first-of-type"
+            ],
+            "valueSource": "profile.email",
+            "inputMethod": "set_value",
+            "delayMs": 500
+          }
+        ],
+        "postFillActions": [
+          {
+            "description": "Accept terms",
+            "selector": "input[type='checkbox'], .terms-agree",
+            "fallbackSelectors": [
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 300
+          },
+          {
+            "description": "Submit",
+            "selector": "button[type='submit'], .connect-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Hankyu stations: Umeda, Kawaramachi, Kobe-Sannomiya, Takarazuka."
+    },
+    {
+      "spotId": "jp-hanshin-wifi",
+      "name": "Hanshin Railway Free WiFi",
+      "nameJa": "阪神電鉄 Free WiFi",
+      "nameZh": "阪神电铁免费WiFi",
+      "nameKo": "한신 전철 무료 WiFi",
+      "country": "JP",
+      "ssids": [
+        "Hanshin_Free_Wi-Fi"
+      ],
+      "portalType": "registration",
+      "tier": "free",
+      "registration": {
+        "fields": [
+          {
+            "fieldId": "email",
+            "selector": "input[name='email'], input[type='email']",
+            "fallbackSelectors": [
+              "input[type='text']:first-of-type"
+            ],
+            "valueSource": "profile.email",
+            "inputMethod": "set_value",
+            "delayMs": 500
+          }
+        ],
+        "postFillActions": [
+          {
+            "description": "Accept terms",
+            "selector": "input[type='checkbox'], .terms-agree",
+            "fallbackSelectors": [
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 300
+          },
+          {
+            "description": "Submit",
+            "selector": "button[type='submit'], .connect-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Hanshin stations: Umeda, Amagasaki, Koshien, Kobe."
+    },
+    {
+      "spotId": "jp-nankai-wifi",
+      "name": "Nankai Railway Free WiFi",
+      "nameJa": "南海電鉄 Free WiFi",
+      "nameZh": "南海电铁免费WiFi",
+      "nameKo": "난카이 전철 무료 WiFi",
+      "country": "JP",
+      "ssids": [
+        "Nankai_Free_Wi-Fi"
+      ],
+      "portalType": "registration",
+      "tier": "free",
+      "registration": {
+        "fields": [
+          {
+            "fieldId": "email",
+            "selector": "input[name='email'], input[type='email']",
+            "fallbackSelectors": [
+              "input[type='text']:first-of-type"
+            ],
+            "valueSource": "profile.email",
+            "inputMethod": "set_value",
+            "delayMs": 500
+          }
+        ],
+        "postFillActions": [
+          {
+            "description": "Accept terms",
+            "selector": "input[type='checkbox'], .terms-agree",
+            "fallbackSelectors": [
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 300
+          },
+          {
+            "description": "Submit",
+            "selector": "button[type='submit'], .connect-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Namba to Kansai Airport (Rapi:t). Major stations."
+    },
+    {
+      "spotId": "jp-kintetsu-wifi",
+      "name": "Kintetsu Railway Free WiFi",
+      "nameJa": "近鉄 Free WiFi",
+      "nameZh": "近铁免费WiFi",
+      "nameKo": "긴테츠 무료 WiFi",
+      "country": "JP",
+      "ssids": [
+        "Kintetsu_Free_Wi-Fi"
+      ],
+      "portalType": "registration",
+      "tier": "free",
+      "registration": {
+        "fields": [
+          {
+            "fieldId": "email",
+            "selector": "input[name='email'], input[type='email']",
+            "fallbackSelectors": [
+              "input[type='text']:first-of-type"
+            ],
+            "valueSource": "profile.email",
+            "inputMethod": "set_value",
+            "delayMs": 500
+          }
+        ],
+        "postFillActions": [
+          {
+            "description": "Accept terms",
+            "selector": "input[type='checkbox'], .terms-agree",
+            "fallbackSelectors": [
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 300
+          },
+          {
+            "description": "Submit",
+            "selector": "button[type='submit'], .connect-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Osaka-Namba to Nagoya/Nara/Ise. Major stations."
+    },
+    {
+      "spotId": "jp-keihan-wifi",
+      "name": "Keihan Railway Free WiFi",
+      "nameJa": "京阪電鉄 Free WiFi",
+      "nameZh": "京阪电铁免费WiFi",
+      "nameKo": "게이한 전철 무료 WiFi",
+      "country": "JP",
+      "ssids": [
+        "KEIHAN_FREE_Wi-Fi"
+      ],
+      "portalType": "registration",
+      "tier": "free",
+      "registration": {
+        "fields": [
+          {
+            "fieldId": "email",
+            "selector": "input[name='email'], input[type='email']",
+            "fallbackSelectors": [
+              "input[type='text']:first-of-type"
+            ],
+            "valueSource": "profile.email",
+            "inputMethod": "set_value",
+            "delayMs": 500
+          }
+        ],
+        "postFillActions": [
+          {
+            "description": "Accept terms",
+            "selector": "input[type='checkbox'], .terms-agree",
+            "fallbackSelectors": [
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 300
+          },
+          {
+            "description": "Submit",
+            "selector": "button[type='submit'], .connect-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Osaka (Yodoyabashi) to Kyoto (Demachiyanagi). Major stations."
+    },
+    {
+      "spotId": "jp-yurikamome-wifi",
+      "name": "Yurikamome Free WiFi",
+      "nameJa": "ゆりかもめ Free WiFi",
+      "nameZh": "百合海鸥号免费WiFi",
+      "nameKo": "유리카모메 무료 WiFi",
+      "country": "JP",
+      "ssids": [
+        "yurikamome_Free_Wi-Fi"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Accept terms checkbox",
+            "selector": "input[type='checkbox']",
+            "fallbackSelectors": [
+              ".terms-checkbox",
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 500
+          },
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Tokyo waterfront line: Shimbashi to Toyosu. Odaiba access."
+    },
+    {
+      "spotId": "jp-rinkai-wifi",
+      "name": "Rinkai Line Free WiFi",
+      "nameJa": "りんかい線 Free WiFi",
+      "nameZh": "临海线免费WiFi",
+      "nameKo": "린카이선 무료 WiFi",
+      "country": "JP",
+      "ssids": [
+        "Rinkai_Free_Wi-Fi",
+        "TWR_Free_Wi-Fi"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Accept terms checkbox",
+            "selector": "input[type='checkbox']",
+            "fallbackSelectors": [
+              ".terms-checkbox",
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 500
+          },
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Tokyo Waterfront Railway. Osaki to Shin-Kiba."
+    },
+    {
+      "spotId": "jp-tx-wifi",
+      "name": "Tsukuba Express Free WiFi",
+      "nameJa": "つくばエクスプレス Free WiFi",
+      "nameZh": "筑波快线免费WiFi",
+      "nameKo": "츠쿠바 익스프레스 무료 WiFi",
+      "country": "JP",
+      "ssids": [
+        "TX_Free_Wi-Fi"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Accept terms checkbox",
+            "selector": "input[type='checkbox']",
+            "fallbackSelectors": [
+              ".terms-checkbox",
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 500
+          },
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Akihabara to Tsukuba. All stations."
+    },
+    {
+      "spotId": "jp-nagoya-metro-wifi",
+      "name": "Nagoya Municipal Subway Free WiFi",
+      "nameJa": "名古屋市営地下鉄 Free WiFi",
+      "nameZh": "名古屋地铁免费WiFi",
+      "nameKo": "나고야 시영 지하철 무료 WiFi",
+      "country": "JP",
+      "ssids": [
+        "Nagoya_Subway_Free_Wi-Fi",
+        "NAGOYA-WiFi"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Accept terms checkbox",
+            "selector": "input[type='checkbox']",
+            "fallbackSelectors": [
+              ".terms-checkbox",
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 500
+          },
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Nagoya subway stations."
+    },
+    {
+      "spotId": "jp-fukuoka-metro-wifi",
+      "name": "Fukuoka City Subway Free WiFi",
+      "nameJa": "福岡市地下鉄 Free WiFi",
+      "nameZh": "福冈地铁免费WiFi",
+      "nameKo": "후쿠오카 지하철 무료 WiFi",
+      "country": "JP",
+      "ssids": [
+        "Fukuoka_City_Wi-Fi"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Accept terms checkbox",
+            "selector": "input[type='checkbox']",
+            "fallbackSelectors": [
+              ".terms-checkbox",
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 500
+          },
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Fukuoka subway: Kuko (Airport), Hakozaki, Nanakuma lines."
+    },
+    {
+      "spotId": "jp-toyoko-inn-wifi",
+      "name": "Toyoko Inn Free WiFi",
+      "nameJa": "東横イン Free WiFi",
+      "nameZh": "东横INN免费WiFi",
+      "nameKo": "도요코인 무료 WiFi",
+      "country": "JP",
+      "ssids": [
+        "TOYOKO-INN",
+        "toyoko-inn-wifi"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Budget hotel chain. 330+ locations nationwide. No portal on most."
+    },
+    {
+      "spotId": "jp-apa-hotel-wifi",
+      "name": "APA Hotel Free WiFi",
+      "nameJa": "アパホテル Free WiFi",
+      "nameZh": "APA酒店免费WiFi",
+      "nameKo": "APA 호텔 무료 WiFi",
+      "country": "JP",
+      "ssids": [
+        "APA_HOTEL",
+        "APA-HOTEL-WiFi"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Business hotel chain. 700+ locations. Room key auth on some."
+    },
+    {
+      "spotId": "jp-route-inn-wifi",
+      "name": "Route Inn Free WiFi",
+      "nameJa": "ルートイン Free WiFi",
+      "nameZh": "Route Inn免费WiFi",
+      "nameKo": "루트인 무료 WiFi",
+      "country": "JP",
+      "ssids": [
+        "ROUTE-INN",
+        "route-inn-wifi"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Business hotel chain. 300+ locations."
+    },
+    {
+      "spotId": "jp-super-hotel-wifi",
+      "name": "Super Hotel Free WiFi",
+      "nameJa": "スーパーホテル Free WiFi",
+      "nameZh": "Super Hotel免费WiFi",
+      "nameKo": "슈퍼 호텔 무료 WiFi",
+      "country": "JP",
+      "ssids": [
+        "SuperHotel_Free_Wi-Fi",
+        "SUPER_HOTEL"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Budget hotel chain. Natural hot springs at many locations."
+    },
+    {
+      "spotId": "jp-kawasaki-wifi",
+      "name": "Kawasaki Free WiFi",
+      "nameJa": "川崎 Free WiFi",
+      "nameZh": "川崎免费WiFi",
+      "nameKo": "가와사키 무료 WiFi",
+      "country": "JP",
+      "ssids": [
+        "KAWASAKI_Free_Wi-Fi"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Accept terms checkbox",
+            "selector": "input[type='checkbox']",
+            "fallbackSelectors": [
+              ".terms-checkbox",
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 500
+          },
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Kawasaki Station area and Lazona."
+    },
+    {
+      "spotId": "jp-chiba-wifi",
+      "name": "Chiba Free WiFi",
+      "nameJa": "千葉 Free WiFi",
+      "nameZh": "千叶免费WiFi",
+      "nameKo": "치바 무료 WiFi",
+      "country": "JP",
+      "ssids": [
+        "CHIBA_Free_Wi-Fi",
+        "Chiba_City_Wi-Fi"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Accept terms checkbox",
+            "selector": "input[type='checkbox']",
+            "fallbackSelectors": [
+              ".terms-checkbox",
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 500
+          },
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Chiba Station area, Makuhari Messe."
+    },
+    {
+      "spotId": "jp-niigata-wifi",
+      "name": "Niigata Free WiFi",
+      "nameJa": "新潟 Free WiFi",
+      "nameZh": "新潟免费WiFi",
+      "nameKo": "니가타 무료 WiFi",
+      "country": "JP",
+      "ssids": [
+        "NIIGATA_Free_Wi-Fi"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Accept terms checkbox",
+            "selector": "input[type='checkbox']",
+            "fallbackSelectors": [
+              ".terms-checkbox",
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 500
+          },
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Niigata Station, Bandai area."
+    },
+    {
+      "spotId": "jp-shizuoka-wifi",
+      "name": "Shizuoka Free WiFi",
+      "nameJa": "静岡 Free WiFi",
+      "nameZh": "静冈免费WiFi",
+      "nameKo": "시즈오카 무료 WiFi",
+      "country": "JP",
+      "ssids": [
+        "SHIZUOKA_Free_Wi-Fi"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Accept terms checkbox",
+            "selector": "input[type='checkbox']",
+            "fallbackSelectors": [
+              ".terms-checkbox",
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 500
+          },
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Shizuoka Station, Mt. Fuji area."
+    },
+    {
+      "spotId": "jp-matsumoto-wifi",
+      "name": "Matsumoto Free WiFi",
+      "nameJa": "松本 Free WiFi",
+      "nameZh": "松本免费WiFi",
+      "nameKo": "마츠모토 무료 WiFi",
+      "country": "JP",
+      "ssids": [
+        "MATSUMOTO_Free_Wi-Fi"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Accept terms checkbox",
+            "selector": "input[type='checkbox']",
+            "fallbackSelectors": [
+              ".terms-checkbox",
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 500
+          },
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Matsumoto Castle area, Kamikochi gateway."
+    },
+    {
+      "spotId": "jp-takayama-wifi",
+      "name": "Takayama Free WiFi",
+      "nameJa": "高山 Free WiFi",
+      "nameZh": "高山免费WiFi",
+      "nameKo": "다카야마 무료 WiFi",
+      "country": "JP",
+      "ssids": [
+        "TAKAYAMA_Free_Wi-Fi"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Accept terms checkbox",
+            "selector": "input[type='checkbox']",
+            "fallbackSelectors": [
+              ".terms-checkbox",
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 500
+          },
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Historic old town, Takayama Jinya area."
+    },
+    {
+      "spotId": "jp-hakodate-wifi",
+      "name": "Hakodate Free WiFi",
+      "nameJa": "函館 Free WiFi",
+      "nameZh": "函馆免费WiFi",
+      "nameKo": "하코다테 무료 WiFi",
+      "country": "JP",
+      "ssids": [
+        "HAKODATE_Free_Wi-Fi"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Accept terms checkbox",
+            "selector": "input[type='checkbox']",
+            "fallbackSelectors": [
+              ".terms-checkbox",
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 500
+          },
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Hakodate Station, Mt. Hakodate ropeway, Motomachi."
+    },
+    {
+      "spotId": "jp-kumamoto-wifi",
+      "name": "Kumamoto Free WiFi",
+      "nameJa": "熊本 Free WiFi",
+      "nameZh": "熊本免费WiFi",
+      "nameKo": "구마모토 무료 WiFi",
+      "country": "JP",
+      "ssids": [
+        "KUMAMOTO_Free_Wi-Fi"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Accept terms checkbox",
+            "selector": "input[type='checkbox']",
+            "fallbackSelectors": [
+              ".terms-checkbox",
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 500
+          },
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Kumamoto Castle area, Kumamoto Station."
+    },
+    {
+      "spotId": "jp-nagasaki-wifi",
+      "name": "Nagasaki Free WiFi",
+      "nameJa": "長崎 Free WiFi",
+      "nameZh": "长崎免费WiFi",
+      "nameKo": "나가사키 무료 WiFi",
+      "country": "JP",
+      "ssids": [
+        "NAGASAKI_Free_Wi-Fi"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Accept terms checkbox",
+            "selector": "input[type='checkbox']",
+            "fallbackSelectors": [
+              ".terms-checkbox",
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 500
+          },
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Nagasaki Station, Glover Garden, Peace Park."
+    },
+    {
+      "spotId": "jp-kagoshima-wifi",
+      "name": "Kagoshima Free WiFi",
+      "nameJa": "鹿児島 Free WiFi",
+      "nameZh": "鹿儿岛免费WiFi",
+      "nameKo": "가고시마 무료 WiFi",
+      "country": "JP",
+      "ssids": [
+        "KAGOSHIMA_Free_Wi-Fi"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Accept terms checkbox",
+            "selector": "input[type='checkbox']",
+            "fallbackSelectors": [
+              ".terms-checkbox",
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 500
+          },
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Kagoshima-Chuo Station, Sakurajima ferry terminal."
+    },
+    {
+      "spotId": "jp-ngs-wifi",
+      "name": "Nagasaki Airport Free WiFi",
+      "nameJa": "長崎空港 Free WiFi",
+      "nameZh": "长崎机场免费WiFi",
+      "nameKo": "나가사키 공항 무료 WiFi",
+      "airportCode": "NGS",
+      "country": "JP",
+      "ssids": [
+        "NAGASAKI-AIRPORT_Free_Wi-Fi"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Accept terms checkbox",
+            "selector": "input[type='checkbox']",
+            "fallbackSelectors": [
+              ".terms-checkbox",
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 500
+          },
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Nagasaki Airport terminal."
+    },
+    {
+      "spotId": "jp-okj-wifi",
+      "name": "Okayama Airport Free WiFi",
+      "nameJa": "岡山空港 Free WiFi",
+      "nameZh": "冈山机场免费WiFi",
+      "nameKo": "오카야마 공항 무료 WiFi",
+      "airportCode": "OKJ",
+      "country": "JP",
+      "ssids": [
+        "OKJ_Free_Wi-Fi",
+        "Okayama_Airport_Free_Wi-Fi"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Accept terms checkbox",
+            "selector": "input[type='checkbox']",
+            "fallbackSelectors": [
+              ".terms-checkbox",
+              "#agree",
+              ".checkbox"
+            ],
+            "action": "check",
+            "delayMs": 500
+          },
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Gateway to Kurashiki and Setouchi area."
+    },
+    {
+      "spotId": "jp-asj-wifi",
+      "name": "Amami Oshima Airport Free WiFi",
+      "nameJa": "奄美空港 Free WiFi",
+      "nameZh": "奄美大岛机场免费WiFi",
+      "nameKo": "아마미 공항 무료 WiFi",
+      "airportCode": "ASJ",
+      "country": "JP",
+      "ssids": [
+        "Amami_Airport_Free_Wi-Fi"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Amami Oshima island airport."
+    },
+    {
+      "spotId": "jp-ish-wifi",
+      "name": "Ishigaki Airport Free WiFi",
+      "nameJa": "石垣空港 Free WiFi",
+      "nameZh": "石垣机场免费WiFi",
+      "nameKo": "이시가키 공항 무료 WiFi",
+      "airportCode": "ISG",
+      "country": "JP",
+      "ssids": [
+        "ISG_Free_Wi-Fi",
+        "Ishigaki_Airport_Free_Wi-Fi"
+      ],
+      "portalType": "agree_only",
+      "tier": "free",
+      "agreeOnly": {
+        "actions": [
+          {
+            "description": "Click connect button",
+            "selector": "button[type='submit'], .btn-connect, .submit-btn, input[type='submit']",
+            "fallbackSelectors": [
+              "button:last-of-type",
+              "a.btn",
+              ".btn-primary"
+            ],
+            "action": "click",
+            "delayMs": 500
+          }
+        ],
+        "successCondition": {
+          "method": "http_probe",
+          "value": "http://connectivitycheck.gstatic.com/generate_204"
+        }
+      },
+      "patternVersion": 1,
+      "lastVerified": "2026-03-09",
+      "notes": "Okinawa Ishigaki island airport."
     }
   ]
 }
