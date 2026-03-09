@@ -1,6 +1,6 @@
 {
-  "version": 6,
-  "updatedAt": "2026-03-09",
+  "version": 10,
+  "updatedAt": "2026-03-10",
   "regions": [
     {
       "spotId": "icn-airport-wifi",
@@ -995,6 +995,510 @@
       "longitude": 47.9689,
       "radius": 1500,
       "identifier": "geofence_kw-kwi-wifi"
+    },
+    {
+      "spotId": "au-per-wifi",
+      "latitude": -31.9403,
+      "longitude": 115.967,
+      "radius": 2000,
+      "identifier": "geofence_au-per-wifi"
+    },
+    {
+      "spotId": "au-adl-wifi",
+      "latitude": -34.9461,
+      "longitude": 138.5311,
+      "radius": 1500,
+      "identifier": "geofence_au-adl-wifi"
+    },
+    {
+      "spotId": "nz-chc-wifi",
+      "latitude": -43.4894,
+      "longitude": 172.5322,
+      "radius": 1500,
+      "identifier": "geofence_nz-chc-wifi"
+    },
+    {
+      "spotId": "fj-nan-wifi",
+      "latitude": -17.7553,
+      "longitude": 177.4436,
+      "radius": 1500,
+      "identifier": "geofence_fj-nan-wifi"
+    },
+    {
+      "spotId": "mv-mle-wifi",
+      "latitude": 4.1918,
+      "longitude": 73.5294,
+      "radius": 1000,
+      "identifier": "geofence_mv-mle-wifi"
+    },
+    {
+      "spotId": "uz-tas-wifi",
+      "latitude": 41.2611,
+      "longitude": 69.2813,
+      "radius": 1500,
+      "identifier": "geofence_uz-tas-wifi"
+    },
+    {
+      "spotId": "kz-ala-wifi",
+      "latitude": 43.3521,
+      "longitude": 77.0405,
+      "radius": 2000,
+      "identifier": "geofence_kz-ala-wifi"
+    },
+    {
+      "spotId": "ge-tbs-wifi",
+      "latitude": 41.6692,
+      "longitude": 44.9547,
+      "radius": 1500,
+      "identifier": "geofence_ge-tbs-wifi"
+    },
+    {
+      "spotId": "be-bru-wifi",
+      "latitude": 50.9014,
+      "longitude": 4.4844,
+      "radius": 1500,
+      "identifier": "geofence_be-bru-wifi"
+    },
+    {
+      "spotId": "de-ber-wifi",
+      "latitude": 52.3667,
+      "longitude": 13.5033,
+      "radius": 2500,
+      "identifier": "geofence_de-ber-wifi"
+    },
+    {
+      "spotId": "de-ham-wifi",
+      "latitude": 53.6304,
+      "longitude": 9.9882,
+      "radius": 1500,
+      "identifier": "geofence_de-ham-wifi"
+    },
+    {
+      "spotId": "de-dus-wifi",
+      "latitude": 51.2895,
+      "longitude": 6.7668,
+      "radius": 1500,
+      "identifier": "geofence_de-dus-wifi"
+    },
+    {
+      "spotId": "it-nap-wifi",
+      "latitude": 40.886,
+      "longitude": 14.2908,
+      "radius": 1500,
+      "identifier": "geofence_it-nap-wifi"
+    },
+    {
+      "spotId": "it-vce-wifi",
+      "latitude": 45.5053,
+      "longitude": 12.3519,
+      "radius": 1500,
+      "identifier": "geofence_it-vce-wifi"
+    },
+    {
+      "spotId": "es-agp-wifi",
+      "latitude": 36.6749,
+      "longitude": -4.4991,
+      "radius": 1500,
+      "identifier": "geofence_es-agp-wifi"
+    },
+    {
+      "spotId": "es-pmis-wifi",
+      "latitude": 39.5517,
+      "longitude": 2.7388,
+      "radius": 1500,
+      "identifier": "geofence_es-pmis-wifi"
+    },
+    {
+      "spotId": "pt-opo-wifi",
+      "latitude": 41.2481,
+      "longitude": -8.6814,
+      "radius": 1500,
+      "identifier": "geofence_pt-opo-wifi"
+    },
+    {
+      "spotId": "gb-man-wifi",
+      "latitude": 53.3537,
+      "longitude": -2.275,
+      "radius": 2000,
+      "identifier": "geofence_gb-man-wifi"
+    },
+    {
+      "spotId": "gb-edi-wifi",
+      "latitude": 55.9508,
+      "longitude": -3.3615,
+      "radius": 1500,
+      "identifier": "geofence_gb-edi-wifi"
+    },
+    {
+      "spotId": "is-kef-wifi",
+      "latitude": 63.985,
+      "longitude": -22.6056,
+      "radius": 2000,
+      "identifier": "geofence_is-kef-wifi"
+    },
+    {
+      "spotId": "us-dtw-wifi",
+      "latitude": 42.2124,
+      "longitude": -83.3534,
+      "radius": 2500,
+      "identifier": "geofence_us-dtw-wifi"
+    },
+    {
+      "spotId": "us-clt-wifi",
+      "latitude": 35.214,
+      "longitude": -80.9431,
+      "radius": 2000,
+      "identifier": "geofence_us-clt-wifi"
+    },
+    {
+      "spotId": "us-fll-wifi",
+      "latitude": 26.0726,
+      "longitude": -80.1527,
+      "radius": 1500,
+      "identifier": "geofence_us-fll-wifi"
+    },
+    {
+      "spotId": "us-phl-wifi",
+      "latitude": 39.8721,
+      "longitude": -75.2411,
+      "radius": 2000,
+      "identifier": "geofence_us-phl-wifi"
+    },
+    {
+      "spotId": "us-pdx-wifi",
+      "latitude": 45.5898,
+      "longitude": -122.5951,
+      "radius": 1500,
+      "identifier": "geofence_us-pdx-wifi"
+    },
+    {
+      "spotId": "us-sna-wifi",
+      "latitude": 33.6762,
+      "longitude": -117.8674,
+      "radius": 1000,
+      "identifier": "geofence_us-sna-wifi"
+    },
+    {
+      "spotId": "pa-pty-wifi",
+      "latitude": 9.0714,
+      "longitude": -79.3835,
+      "radius": 2000,
+      "identifier": "geofence_pa-pty-wifi"
+    },
+    {
+      "spotId": "cr-sjo-wifi",
+      "latitude": 9.9939,
+      "longitude": -84.2088,
+      "radius": 1500,
+      "identifier": "geofence_cr-sjo-wifi"
+    },
+    {
+      "spotId": "uy-mvd-wifi",
+      "latitude": -34.8384,
+      "longitude": -56.0308,
+      "radius": 1500,
+      "identifier": "geofence_uy-mvd-wifi"
+    },
+    {
+      "spotId": "ec-uio-wifi",
+      "latitude": -0.1292,
+      "longitude": -78.3575,
+      "radius": 2000,
+      "identifier": "geofence_ec-uio-wifi"
+    },
+    {
+      "spotId": "do-sdq-wifi",
+      "latitude": 18.4297,
+      "longitude": -69.6689,
+      "radius": 1500,
+      "identifier": "geofence_do-sdq-wifi"
+    },
+    {
+      "spotId": "jm-kin-wifi",
+      "latitude": 17.9357,
+      "longitude": -76.7875,
+      "radius": 1500,
+      "identifier": "geofence_jm-kin-wifi"
+    },
+    {
+      "spotId": "tt-pos-wifi",
+      "latitude": 10.5953,
+      "longitude": -61.3372,
+      "radius": 1500,
+      "identifier": "geofence_tt-pos-wifi"
+    },
+    {
+      "spotId": "th-krabi-wifi",
+      "latitude": 8.0986,
+      "longitude": 98.9862,
+      "radius": 1000,
+      "identifier": "geofence_th-krabi-wifi"
+    },
+    {
+      "spotId": "th-samui-wifi",
+      "latitude": 9.5478,
+      "longitude": 100.0623,
+      "radius": 1000,
+      "identifier": "geofence_th-samui-wifi"
+    },
+    {
+      "spotId": "vn-phu-quoc-wifi",
+      "latitude": 10.1697,
+      "longitude": 103.9931,
+      "radius": 1000,
+      "identifier": "geofence_vn-phu-quoc-wifi"
+    },
+    {
+      "spotId": "my-langkawi-wifi",
+      "latitude": 6.3299,
+      "longitude": 99.7286,
+      "radius": 1000,
+      "identifier": "geofence_my-langkawi-wifi"
+    },
+    {
+      "spotId": "id-lombok-wifi",
+      "latitude": -8.7573,
+      "longitude": 116.2767,
+      "radius": 1500,
+      "identifier": "geofence_id-lombok-wifi"
+    },
+    {
+      "spotId": "id-makassar-wifi",
+      "latitude": -5.0616,
+      "longitude": 119.554,
+      "radius": 1500,
+      "identifier": "geofence_id-makassar-wifi"
+    },
+    {
+      "spotId": "tw-tsa-wifi",
+      "latitude": 25.0694,
+      "longitude": 121.5525,
+      "radius": 1000,
+      "identifier": "geofence_tw-tsa-wifi"
+    },
+    {
+      "spotId": "tw-rmq-wifi",
+      "latitude": 24.2648,
+      "longitude": 120.6208,
+      "radius": 1000,
+      "identifier": "geofence_tw-rmq-wifi"
+    },
+    {
+      "spotId": "tz-dar-wifi",
+      "latitude": -6.8781,
+      "longitude": 39.2026,
+      "radius": 1500,
+      "identifier": "geofence_tz-dar-wifi"
+    },
+    {
+      "spotId": "gh-acc-wifi",
+      "latitude": 5.6052,
+      "longitude": -0.1668,
+      "radius": 1500,
+      "identifier": "geofence_gh-acc-wifi"
+    },
+    {
+      "spotId": "sn-dss-wifi",
+      "latitude": 14.6706,
+      "longitude": -17.0731,
+      "radius": 2000,
+      "identifier": "geofence_sn-dss-wifi"
+    },
+    {
+      "spotId": "mu-mru-wifi",
+      "latitude": -20.4302,
+      "longitude": 57.6836,
+      "radius": 1500,
+      "identifier": "geofence_mu-mru-wifi"
+    },
+    {
+      "spotId": "jo-amm-wifi",
+      "latitude": 31.7226,
+      "longitude": 35.9932,
+      "radius": 2000,
+      "identifier": "geofence_jo-amm-wifi"
+    },
+    {
+      "spotId": "lb-bey-wifi",
+      "latitude": 33.8209,
+      "longitude": 35.4884,
+      "radius": 1000,
+      "identifier": "geofence_lb-bey-wifi"
+    },
+    {
+      "spotId": "mn-uln-wifi",
+      "latitude": 47.8432,
+      "longitude": 106.7666,
+      "radius": 2000,
+      "identifier": "geofence_mn-uln-wifi"
+    },
+    {
+      "spotId": "am-evn-wifi",
+      "latitude": 40.1473,
+      "longitude": 44.3959,
+      "radius": 1500,
+      "identifier": "geofence_am-evn-wifi"
+    },
+    {
+      "spotId": "cy-lca-wifi",
+      "latitude": 34.8754,
+      "longitude": 33.6249,
+      "radius": 1000,
+      "identifier": "geofence_cy-lca-wifi"
+    },
+    {
+      "spotId": "mt-mla-wifi",
+      "latitude": 35.8575,
+      "longitude": 14.4775,
+      "radius": 1000,
+      "identifier": "geofence_mt-mla-wifi"
+    },
+    {
+      "spotId": "ee-tll-wifi",
+      "latitude": 59.4133,
+      "longitude": 24.8328,
+      "radius": 1000,
+      "identifier": "geofence_ee-tll-wifi"
+    },
+    {
+      "spotId": "lv-rix-wifi",
+      "latitude": 56.9236,
+      "longitude": 23.9711,
+      "radius": 1500,
+      "identifier": "geofence_lv-rix-wifi"
+    },
+    {
+      "spotId": "lt-vno-wifi",
+      "latitude": 54.634,
+      "longitude": 25.2858,
+      "radius": 1000,
+      "identifier": "geofence_lt-vno-wifi"
+    },
+    {
+      "spotId": "sk-bts-wifi",
+      "latitude": 48.1702,
+      "longitude": 17.2127,
+      "radius": 1000,
+      "identifier": "geofence_sk-bts-wifi"
+    },
+    {
+      "spotId": "si-ljub-wifi",
+      "latitude": 46.2237,
+      "longitude": 14.4576,
+      "radius": 1000,
+      "identifier": "geofence_si-ljub-wifi"
+    },
+    {
+      "spotId": "rs-beg-wifi",
+      "latitude": 44.8184,
+      "longitude": 20.3091,
+      "radius": 1500,
+      "identifier": "geofence_rs-beg-wifi"
+    },
+    {
+      "spotId": "cn-wuhan-wifi",
+      "latitude": 30.7838,
+      "longitude": 114.2081,
+      "radius": 2000,
+      "identifier": "geofence_cn-wuhan-wifi"
+    },
+    {
+      "spotId": "cn-kunming-wifi",
+      "latitude": 24.9924,
+      "longitude": 102.7433,
+      "radius": 2000,
+      "identifier": "geofence_cn-kunming-wifi"
+    },
+    {
+      "spotId": "cn-xian-wifi",
+      "latitude": 34.4471,
+      "longitude": 108.7516,
+      "radius": 2000,
+      "identifier": "geofence_cn-xian-wifi"
+    },
+    {
+      "spotId": "cn-guilin-wifi",
+      "latitude": 25.2181,
+      "longitude": 110.039,
+      "radius": 1500,
+      "identifier": "geofence_cn-guilin-wifi"
+    },
+    {
+      "spotId": "cn-sanya-wifi",
+      "latitude": 18.3029,
+      "longitude": 109.412,
+      "radius": 1500,
+      "identifier": "geofence_cn-sanya-wifi"
+    },
+    {
+      "spotId": "in-hyderabad-wifi",
+      "latitude": 17.2403,
+      "longitude": 78.4294,
+      "radius": 2000,
+      "identifier": "geofence_in-hyderabad-wifi"
+    },
+    {
+      "spotId": "in-kolkata-wifi",
+      "latitude": 22.6547,
+      "longitude": 88.4467,
+      "radius": 2000,
+      "identifier": "geofence_in-kolkata-wifi"
+    },
+    {
+      "spotId": "in-ahmedabad-wifi",
+      "latitude": 23.0772,
+      "longitude": 72.6347,
+      "radius": 1500,
+      "identifier": "geofence_in-ahmedabad-wifi"
+    },
+    {
+      "spotId": "in-goa-wifi",
+      "latitude": 15.3808,
+      "longitude": 73.8314,
+      "radius": 1500,
+      "identifier": "geofence_in-goa-wifi"
+    },
+    {
+      "spotId": "za-dur-wifi",
+      "latitude": -29.6144,
+      "longitude": 31.1197,
+      "radius": 1500,
+      "identifier": "geofence_za-dur-wifi"
+    },
+    {
+      "spotId": "ug-ebb-wifi",
+      "latitude": 0.0424,
+      "longitude": 32.4435,
+      "radius": 1500,
+      "identifier": "geofence_ug-ebb-wifi"
+    },
+    {
+      "spotId": "rw-kgl-wifi",
+      "latitude": -1.9686,
+      "longitude": 30.1395,
+      "radius": 1500,
+      "identifier": "geofence_rw-kgl-wifi"
+    },
+    {
+      "spotId": "bt-pby-wifi",
+      "latitude": 27.4032,
+      "longitude": 89.4255,
+      "radius": 1000,
+      "identifier": "geofence_bt-pby-wifi"
+    },
+    {
+      "spotId": "lk-hri-wifi",
+      "latitude": 6.2848,
+      "longitude": 81.1241,
+      "radius": 1500,
+      "identifier": "geofence_lk-hri-wifi"
+    },
+    {
+      "spotId": "ru-svo-wifi",
+      "latitude": 55.9726,
+      "longitude": 37.4146,
+      "radius": 2000,
+      "identifier": "geofence_ru-svo-wifi"
     }
   ]
 }
