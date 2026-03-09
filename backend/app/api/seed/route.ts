@@ -5047,6 +5047,1372 @@ const SEED_PATTERNS = [
       }
     },
     "notes": "Okinawa Ishigaki island airport."
+  },
+  {
+    "spotId": "global-marriott-wifi",
+    "name": "Marriott Bonvoy WiFi",
+    "nameJa": "マリオット WiFi",
+    "nameZh": "万豪酒店WiFi",
+    "nameKo": "메리어트 WiFi",
+    "airportCode": null,
+    "country": "GLOBAL",
+    "ssids": [
+      "Marriott_GUEST",
+      "MarriottBonvoy_Guest",
+      "Marriott_Conference"
+    ],
+    "portalType": "registration",
+    "tier": "free",
+    "patternData": {
+      "registration": {
+        "emailSelector": "input[type=\"email\"], input[name*=\"mail\"]",
+        "submitSelector": "input[type=\"submit\"], button[type=\"submit\"]"
+      }
+    },
+    "notes": "Marriott, Sheraton, W, Westin, Ritz-Carlton. Room number + last name auth at some properties."
+  },
+  {
+    "spotId": "global-hilton-wifi",
+    "name": "Hilton WiFi",
+    "nameJa": "ヒルトン WiFi",
+    "nameZh": "希尔顿酒店WiFi",
+    "nameKo": "힐튼 WiFi",
+    "airportCode": null,
+    "country": "GLOBAL",
+    "ssids": [
+      "hhonors",
+      "HiltonGuest",
+      "Hilton_Guest"
+    ],
+    "portalType": "registration",
+    "tier": "free",
+    "patternData": {
+      "registration": {
+        "emailSelector": "input[type=\"email\"], input[name*=\"mail\"]",
+        "submitSelector": "input[type=\"submit\"], button[type=\"submit\"]"
+      }
+    },
+    "notes": "Hilton, DoubleTree, Hampton, Conrad. Honors member or room auth."
+  },
+  {
+    "spotId": "global-ihg-wifi",
+    "name": "IHG Hotels WiFi",
+    "nameJa": "IHG WiFi",
+    "nameZh": "IHG酒店WiFi",
+    "nameKo": "IHG WiFi",
+    "airportCode": null,
+    "country": "GLOBAL",
+    "ssids": [
+      "IHG Connect",
+      "IHG-Guest",
+      "Holiday Inn WiFi"
+    ],
+    "portalType": "registration",
+    "tier": "free",
+    "patternData": {
+      "registration": {
+        "emailSelector": "input[type=\"email\"], input[name*=\"mail\"]",
+        "submitSelector": "input[type=\"submit\"], button[type=\"submit\"]"
+      }
+    },
+    "notes": "Holiday Inn, Crowne Plaza, InterContinental, Kimpton."
+  },
+  {
+    "spotId": "global-hyatt-wifi",
+    "name": "Hyatt WiFi",
+    "nameJa": "ハイアット WiFi",
+    "nameZh": "凯悦酒店WiFi",
+    "nameKo": "하얏트 WiFi",
+    "airportCode": null,
+    "country": "GLOBAL",
+    "ssids": [
+      "Hyatt_Guest",
+      "HyattWiFi",
+      "Hyatt"
+    ],
+    "portalType": "registration",
+    "tier": "free",
+    "patternData": {
+      "registration": {
+        "emailSelector": "input[type=\"email\"], input[name*=\"mail\"]",
+        "submitSelector": "input[type=\"submit\"], button[type=\"submit\"]"
+      }
+    },
+    "notes": "Grand Hyatt, Park Hyatt, Andaz, Alila."
+  },
+  {
+    "spotId": "global-accor-wifi",
+    "name": "Accor Hotels WiFi",
+    "nameJa": "アコーホテル WiFi",
+    "nameZh": "雅高酒店WiFi",
+    "nameKo": "아코르 호텔 WiFi",
+    "airportCode": null,
+    "country": "GLOBAL",
+    "ssids": [
+      "Accor_Guest",
+      "AccorWiFi",
+      "Novotel_Guest",
+      "ibis_Guest"
+    ],
+    "portalType": "registration",
+    "tier": "free",
+    "patternData": {
+      "registration": {
+        "emailSelector": "input[type=\"email\"], input[name*=\"mail\"]",
+        "submitSelector": "input[type=\"submit\"], button[type=\"submit\"]"
+      }
+    },
+    "notes": "Sofitel, Novotel, ibis, Mercure, Pullman. Strong in Europe & Asia."
+  },
+  {
+    "spotId": "us-starbucks-wifi",
+    "name": "Starbucks WiFi (US)",
+    "nameJa": "スターバックス WiFi（米国）",
+    "nameZh": "星巴克WiFi（美国）",
+    "nameKo": "스타벅스 WiFi (미국)",
+    "airportCode": null,
+    "country": "US",
+    "ssids": [
+      "Google Starbucks",
+      "Starbucks WiFi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Free unlimited WiFi via Google at all US Starbucks."
+  },
+  {
+    "spotId": "kr-starbucks-wifi",
+    "name": "Starbucks WiFi (Korea)",
+    "nameJa": "スターバックス WiFi（韓国）",
+    "nameZh": "星巴克WiFi（韩国）",
+    "nameKo": "스타벅스 WiFi (한국)",
+    "airportCode": null,
+    "country": "KR",
+    "ssids": [
+      "KT_starbucks"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Starbucks Korea via KT. All stores."
+  },
+  {
+    "spotId": "cn-starbucks-wifi",
+    "name": "Starbucks WiFi (China)",
+    "nameJa": "スターバックス WiFi（中国）",
+    "nameZh": "星巴克WiFi（中国）",
+    "nameKo": "스타벅스 WiFi (중국)",
+    "airportCode": null,
+    "country": "CN",
+    "ssids": [
+      "Starbucks",
+      "STARBUCKS"
+    ],
+    "portalType": "registration",
+    "tier": "free",
+    "patternData": {
+      "registration": {
+        "emailSelector": "input[type=\"email\"], input[name*=\"mail\"]",
+        "submitSelector": "input[type=\"submit\"], button[type=\"submit\"]"
+      }
+    },
+    "notes": "Phone number registration required at China stores."
+  },
+  {
+    "spotId": "gb-starbucks-wifi",
+    "name": "Starbucks WiFi (UK)",
+    "nameJa": "スターバックス WiFi（イギリス）",
+    "nameZh": "星巴克WiFi（英国）",
+    "nameKo": "스타벅스 WiFi (영국)",
+    "airportCode": null,
+    "country": "GB",
+    "ssids": [
+      "Starbucks WiFi",
+      "BT Wi-fi Starbucks"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Free WiFi via BT at all UK Starbucks."
+  },
+  {
+    "spotId": "us-mcdonalds-wifi",
+    "name": "McDonald's WiFi (US)",
+    "nameJa": "マクドナルド WiFi（米国）",
+    "nameZh": "麦当劳WiFi（美国）",
+    "nameKo": "맥도날드 WiFi (미국)",
+    "airportCode": null,
+    "country": "US",
+    "ssids": [
+      "McDonald's Free WiFi",
+      "McDonalds Free WiFi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Free WiFi at most US McDonald's locations."
+  },
+  {
+    "spotId": "kr-mcdonalds-wifi",
+    "name": "McDonald's WiFi (Korea)",
+    "nameJa": "マクドナルド WiFi（韓国）",
+    "nameZh": "麦当劳WiFi（韩国）",
+    "nameKo": "맥도날드 WiFi (한국)",
+    "airportCode": null,
+    "country": "KR",
+    "ssids": [
+      "McDonald's_Free_WiFi",
+      "McDonalds_Free_WiFi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Free WiFi at Korea McDonald's."
+  },
+  {
+    "spotId": "us-linknyc-wifi",
+    "name": "LinkNYC Free WiFi",
+    "nameJa": "LinkNYC 無料WiFi",
+    "nameZh": "LinkNYC免费WiFi",
+    "nameKo": "LinkNYC 무료 WiFi",
+    "airportCode": null,
+    "country": "US",
+    "ssids": [
+      "LinkNYC Free Wi-Fi",
+      "LinkNYC"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "NYC street kiosks. High-speed free WiFi across Manhattan and boroughs."
+  },
+  {
+    "spotId": "us-nyc-subway-wifi",
+    "name": "NYC Subway WiFi",
+    "nameJa": "ニューヨーク地下鉄 WiFi",
+    "nameZh": "纽约地铁WiFi",
+    "nameKo": "뉴욕 지하철 WiFi",
+    "airportCode": null,
+    "country": "US",
+    "ssids": [
+      "TransitWirelessWiFi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Free WiFi at all NYC subway stations (not in tunnels)."
+  },
+  {
+    "spotId": "us-bart-wifi",
+    "name": "BART WiFi (San Francisco)",
+    "nameJa": "BART WiFi（サンフランシスコ）",
+    "nameZh": "BART WiFi（旧金山）",
+    "nameKo": "BART WiFi (샌프란시스코)",
+    "airportCode": null,
+    "country": "US",
+    "ssids": [
+      "BART_WiFi",
+      "BART Free WiFi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Bay Area Rapid Transit stations."
+  },
+  {
+    "spotId": "us-wmata-wifi",
+    "name": "DC Metro WiFi",
+    "nameJa": "ワシントンDC メトロ WiFi",
+    "nameZh": "华盛顿地铁WiFi",
+    "nameKo": "워싱턴 DC 메트로 WiFi",
+    "airportCode": null,
+    "country": "US",
+    "ssids": [
+      "Metro_WiFi",
+      "WMATA_Free_WiFi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Washington Metro stations."
+  },
+  {
+    "spotId": "us-iad-wifi",
+    "name": "Washington Dulles Airport",
+    "nameJa": "ワシントン・ダレス空港",
+    "nameZh": "华盛顿杜勒斯机场",
+    "nameKo": "워싱턴 덜레스 공항",
+    "airportCode": "IAD",
+    "country": "US",
+    "ssids": [
+      "IAD Free WiFi",
+      "USAirportWiFi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Free WiFi at Dulles International."
+  },
+  {
+    "spotId": "us-las-wifi",
+    "name": "Las Vegas Harry Reid Airport",
+    "nameJa": "ラスベガス空港",
+    "nameZh": "拉斯维加斯机场",
+    "nameKo": "라스베이거스 공항",
+    "airportCode": "LAS",
+    "country": "US",
+    "ssids": [
+      "LAS Free WiFi",
+      "_Free WiFi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Free WiFi at Harry Reid International."
+  },
+  {
+    "spotId": "us-msp-wifi",
+    "name": "Minneapolis-Saint Paul Airport",
+    "nameJa": "ミネアポリス空港",
+    "nameZh": "明尼阿波利斯机场",
+    "nameKo": "미니애폴리스 공항",
+    "airportCode": "MSP",
+    "country": "US",
+    "ssids": [
+      "MSP Free WiFi",
+      "MSP-WiFi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Free WiFi at MSP."
+  },
+  {
+    "spotId": "us-phx-wifi",
+    "name": "Phoenix Sky Harbor Airport",
+    "nameJa": "フェニックス空港",
+    "nameZh": "凤凰城机场",
+    "nameKo": "피닉스 공항",
+    "airportCode": "PHX",
+    "country": "US",
+    "ssids": [
+      "PHX Free WiFi",
+      "PHX-WiFi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Free WiFi at Sky Harbor."
+  },
+  {
+    "spotId": "kr-kt-wifi",
+    "name": "KT Free WiFi Zone",
+    "nameJa": "KT Free WiFi（韓国）",
+    "nameZh": "KT免费WiFi（韩国）",
+    "nameKo": "KT 무료 WiFi",
+    "airportCode": null,
+    "country": "KR",
+    "ssids": [
+      "KT-Free-WiFi",
+      "olleh_WiFi",
+      "KT_Free_WiFi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "KT public WiFi zones across Korea. Cafes, malls, public areas."
+  },
+  {
+    "spotId": "kr-skt-wifi",
+    "name": "SK Telecom T WiFi Zone",
+    "nameJa": "SKテレコム WiFi（韓国）",
+    "nameZh": "SKT WiFi（韩国）",
+    "nameKo": "SKT WiFi",
+    "airportCode": null,
+    "country": "KR",
+    "ssids": [
+      "T wifi zone",
+      "SKT-WiFi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "SK Telecom public WiFi. Available at malls, restaurants."
+  },
+  {
+    "spotId": "kr-lotte-wifi",
+    "name": "Lotte Department Store WiFi",
+    "nameJa": "ロッテ百貨店 WiFi",
+    "nameZh": "乐天百货WiFi",
+    "nameKo": "롯데백화점 WiFi",
+    "airportCode": null,
+    "country": "KR",
+    "ssids": [
+      "LOTTE_DEPT_Free_WiFi",
+      "Lotte_Free_WiFi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Lotte Department Store and Lotte Mall locations."
+  },
+  {
+    "spotId": "kr-shinsegae-wifi",
+    "name": "Shinsegae Department Store WiFi",
+    "nameJa": "新世界百貨店 WiFi",
+    "nameZh": "新世界百货WiFi",
+    "nameKo": "신세계백화점 WiFi",
+    "airportCode": null,
+    "country": "KR",
+    "ssids": [
+      "SHINSEGAE_Free_WiFi",
+      "Shinsegae_Guest"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Shinsegae Dept Store and Starfield Mall."
+  },
+  {
+    "spotId": "kr-coex-wifi",
+    "name": "COEX Mall WiFi",
+    "nameJa": "COEX WiFi",
+    "nameZh": "COEX WiFi",
+    "nameKo": "COEX WiFi",
+    "airportCode": null,
+    "country": "KR",
+    "ssids": [
+      "COEX_Free_WiFi",
+      "COEX_Guest"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "COEX Mall and Convention Center, Gangnam."
+  },
+  {
+    "spotId": "kr-ediya-wifi",
+    "name": "Ediya Coffee WiFi",
+    "nameJa": "イディヤコーヒー WiFi",
+    "nameZh": "易迪雅咖啡WiFi",
+    "nameKo": "이디야 커피 WiFi",
+    "airportCode": null,
+    "country": "KR",
+    "ssids": [
+      "EDIYA_Free_WiFi",
+      "ediya"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Korea's largest coffee chain by store count."
+  },
+  {
+    "spotId": "kr-twosome-wifi",
+    "name": "A Twosome Place WiFi",
+    "nameJa": "ツーサムプレイス WiFi",
+    "nameZh": "A Twosome Place WiFi",
+    "nameKo": "투썸플레이스 WiFi",
+    "airportCode": null,
+    "country": "KR",
+    "ssids": [
+      "TWOSOME_Free_WiFi",
+      "ATwosome"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Major Korean cafe chain."
+  },
+  {
+    "spotId": "kr-daegu-metro",
+    "name": "Daegu Metro WiFi",
+    "nameJa": "大邱地下鉄 WiFi",
+    "nameZh": "大邱地铁WiFi",
+    "nameKo": "대구 지하철 WiFi",
+    "airportCode": null,
+    "country": "KR",
+    "ssids": [
+      "Daegu_Metro_WiFi",
+      "DGMRT_Free_WiFi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Daegu Metropolitan Transit."
+  },
+  {
+    "spotId": "tw-tpe-metro-wifi",
+    "name": "Taipei MRT WiFi",
+    "nameJa": "台北MRT WiFi",
+    "nameZh": "台北捷运WiFi",
+    "nameKo": "타이베이 MRT WiFi",
+    "airportCode": null,
+    "country": "TW",
+    "ssids": [
+      "TPE-Free",
+      "Taipei Free"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Taipei Free WiFi available at all MRT stations."
+  },
+  {
+    "spotId": "tw-7eleven-wifi",
+    "name": "7-ELEVEN WiFi (Taiwan)",
+    "nameJa": "セブンイレブン WiFi（台湾）",
+    "nameZh": "7-11 WiFi（台湾）",
+    "nameKo": "세븐일레븐 WiFi (대만)",
+    "airportCode": null,
+    "country": "TW",
+    "ssids": [
+      "7-ELEVEN",
+      "7-11_Free_WiFi"
+    ],
+    "portalType": "registration",
+    "tier": "free",
+    "patternData": {
+      "registration": {
+        "emailSelector": "input[type=\"email\"], input[name*=\"mail\"]",
+        "submitSelector": "input[type=\"submit\"], button[type=\"submit\"]"
+      }
+    },
+    "notes": "7-ELEVEN is everywhere in Taiwan. Phone/email registration."
+  },
+  {
+    "spotId": "tw-familymart-wifi",
+    "name": "FamilyMart WiFi (Taiwan)",
+    "nameJa": "ファミリーマート WiFi（台湾）",
+    "nameZh": "全家WiFi（台湾）",
+    "nameKo": "패밀리마트 WiFi (대만)",
+    "airportCode": null,
+    "country": "TW",
+    "ssids": [
+      "FamilyMart_WiFi",
+      "Fami_Free_WiFi"
+    ],
+    "portalType": "registration",
+    "tier": "free",
+    "patternData": {
+      "registration": {
+        "emailSelector": "input[type=\"email\"], input[name*=\"mail\"]",
+        "submitSelector": "input[type=\"submit\"], button[type=\"submit\"]"
+      }
+    },
+    "notes": "FamilyMart Taiwan. Phone/email registration."
+  },
+  {
+    "spotId": "tw-taichung-wifi",
+    "name": "Taichung Free WiFi",
+    "nameJa": "台中市 WiFi",
+    "nameZh": "台中免费WiFi",
+    "nameKo": "타이중시 WiFi",
+    "airportCode": null,
+    "country": "TW",
+    "ssids": [
+      "Taichung Free",
+      "iTaichung"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Taichung city public WiFi."
+  },
+  {
+    "spotId": "cn-shanghai-metro-wifi",
+    "name": "Shanghai Metro WiFi",
+    "nameJa": "上海地下鉄 WiFi",
+    "nameZh": "上海地铁WiFi",
+    "nameKo": "상하이 지하철 WiFi",
+    "airportCode": null,
+    "country": "CN",
+    "ssids": [
+      "SH-Metro-Free",
+      "Metro_WiFi"
+    ],
+    "portalType": "registration",
+    "tier": "free",
+    "patternData": {
+      "registration": {
+        "emailSelector": "input[type=\"email\"], input[name*=\"mail\"]",
+        "submitSelector": "input[type=\"submit\"], button[type=\"submit\"]"
+      }
+    },
+    "notes": "Shanghai Metro stations. Phone number registration."
+  },
+  {
+    "spotId": "cn-beijing-metro-wifi",
+    "name": "Beijing Metro WiFi",
+    "nameJa": "北京地下鉄 WiFi",
+    "nameZh": "北京地铁WiFi",
+    "nameKo": "베이징 지하철 WiFi",
+    "airportCode": null,
+    "country": "CN",
+    "ssids": [
+      "MyWiFi",
+      "Beijing_Metro_WiFi"
+    ],
+    "portalType": "registration",
+    "tier": "free",
+    "patternData": {
+      "registration": {
+        "emailSelector": "input[type=\"email\"], input[name*=\"mail\"]",
+        "submitSelector": "input[type=\"submit\"], button[type=\"submit\"]"
+      }
+    },
+    "notes": "Beijing Metro WiFi. Chinese phone number may be required."
+  },
+  {
+    "spotId": "cn-hangzhou-wifi",
+    "name": "Hangzhou Public WiFi",
+    "nameJa": "杭州市 WiFi",
+    "nameZh": "杭州公共WiFi",
+    "nameKo": "항저우 WiFi",
+    "airportCode": null,
+    "country": "CN",
+    "ssids": [
+      "i-Hangzhou",
+      "Hangzhou_Free_WiFi"
+    ],
+    "portalType": "registration",
+    "tier": "free",
+    "patternData": {
+      "registration": {
+        "emailSelector": "input[type=\"email\"], input[name*=\"mail\"]",
+        "submitSelector": "input[type=\"submit\"], button[type=\"submit\"]"
+      }
+    },
+    "notes": "Hangzhou city WiFi. West Lake area, stations."
+  },
+  {
+    "spotId": "cn-nanjing-wifi",
+    "name": "Nanjing Airport",
+    "nameJa": "南京空港",
+    "nameZh": "南京禄口机场",
+    "nameKo": "난징 공항",
+    "airportCode": "NKG",
+    "country": "CN",
+    "ssids": [
+      "NKG_Free_WiFi",
+      "Airport-WiFi"
+    ],
+    "portalType": "registration",
+    "tier": "free",
+    "patternData": {
+      "registration": {
+        "emailSelector": "input[type=\"email\"], input[name*=\"mail\"]",
+        "submitSelector": "input[type=\"submit\"], button[type=\"submit\"]"
+      }
+    },
+    "notes": "Nanjing Lukou International Airport."
+  },
+  {
+    "spotId": "cn-haikou-wifi",
+    "name": "Haikou Meilan Airport",
+    "nameJa": "海口空港",
+    "nameZh": "海口美兰机场",
+    "nameKo": "하이커우 공항",
+    "airportCode": "HAK",
+    "country": "CN",
+    "ssids": [
+      "HAK_Free_WiFi",
+      "MeilanAirport"
+    ],
+    "portalType": "registration",
+    "tier": "free",
+    "patternData": {
+      "registration": {
+        "emailSelector": "input[type=\"email\"], input[name*=\"mail\"]",
+        "submitSelector": "input[type=\"submit\"], button[type=\"submit\"]"
+      }
+    },
+    "notes": "Hainan island gateway."
+  },
+  {
+    "spotId": "eu-eurostar-wifi",
+    "name": "Eurostar WiFi",
+    "nameJa": "ユーロスター WiFi",
+    "nameZh": "欧洲之星WiFi",
+    "nameKo": "유로스타 WiFi",
+    "airportCode": null,
+    "country": "EU",
+    "ssids": [
+      "Eurostar_WiFi",
+      "_Eurostar"
+    ],
+    "portalType": "registration",
+    "tier": "free",
+    "patternData": {
+      "registration": {
+        "emailSelector": "input[type=\"email\"], input[name*=\"mail\"]",
+        "submitSelector": "input[type=\"submit\"], button[type=\"submit\"]"
+      }
+    },
+    "notes": "London-Paris-Brussels-Amsterdam high-speed train."
+  },
+  {
+    "spotId": "eu-flixbus-wifi",
+    "name": "FlixBus WiFi",
+    "nameJa": "FlixBus WiFi",
+    "nameZh": "FlixBus WiFi",
+    "nameKo": "FlixBus WiFi",
+    "airportCode": null,
+    "country": "EU",
+    "ssids": [
+      "FlixBus",
+      "FlixBus WiFi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Europe-wide bus service. Free WiFi on all buses."
+  },
+  {
+    "spotId": "it-roma-wifi",
+    "name": "Roma WiFi",
+    "nameJa": "ローマ市 WiFi",
+    "nameZh": "罗马市WiFi",
+    "nameKo": "로마시 WiFi",
+    "airportCode": null,
+    "country": "IT",
+    "ssids": [
+      "Roma WiFi",
+      "RM_free_wifi"
+    ],
+    "portalType": "registration",
+    "tier": "free",
+    "patternData": {
+      "registration": {
+        "emailSelector": "input[type=\"email\"], input[name*=\"mail\"]",
+        "submitSelector": "input[type=\"submit\"], button[type=\"submit\"]"
+      }
+    },
+    "notes": "Rome city WiFi at major tourist areas."
+  },
+  {
+    "spotId": "es-barcelona-wifi",
+    "name": "Barcelona WiFi",
+    "nameJa": "バルセロナ市 WiFi",
+    "nameZh": "巴塞罗那市WiFi",
+    "nameKo": "바르셀로나시 WiFi",
+    "airportCode": null,
+    "country": "ES",
+    "ssids": [
+      "Barcelona WiFi",
+      "BCN_WiFi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Barcelona city WiFi. Ramblas, Placa Catalunya, beaches."
+  },
+  {
+    "spotId": "nl-amsterdam-wifi",
+    "name": "Amsterdam Free WiFi",
+    "nameJa": "アムステルダム市 WiFi",
+    "nameZh": "阿姆斯特丹市WiFi",
+    "nameKo": "암스테르담시 WiFi",
+    "airportCode": null,
+    "country": "NL",
+    "ssids": [
+      "Amsterdam Free WiFi",
+      "iAmsterdam"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Amsterdam city WiFi. Central Station, Museumplein area."
+  },
+  {
+    "spotId": "at-vienna-wifi",
+    "name": "Wien (Vienna) Free WiFi",
+    "nameJa": "ウィーン市 WiFi",
+    "nameZh": "维也纳市WiFi",
+    "nameKo": "비엔나시 WiFi",
+    "airportCode": null,
+    "country": "AT",
+    "ssids": [
+      "freewave@vienna",
+      "wien.at Free WiFi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Vienna city WiFi. Parks, public buildings, tourist spots."
+  },
+  {
+    "spotId": "cz-prague-wifi",
+    "name": "Prague Free WiFi",
+    "nameJa": "プラハ市 WiFi",
+    "nameZh": "布拉格市WiFi",
+    "nameKo": "프라하시 WiFi",
+    "airportCode": null,
+    "country": "CZ",
+    "ssids": [
+      "PraguePublicWifi",
+      "Prague Free WiFi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Prague city WiFi. Old Town, Wenceslas Square."
+  },
+  {
+    "spotId": "hu-bud-wifi",
+    "name": "Budapest Airport",
+    "nameJa": "ブダペスト空港",
+    "nameZh": "布达佩斯机场",
+    "nameKo": "부다페스트 공항",
+    "airportCode": "BUD",
+    "country": "HU",
+    "ssids": [
+      "BUD Free WiFi",
+      "Budapest Airport WiFi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Budapest Ferenc Liszt International Airport."
+  },
+  {
+    "spotId": "hr-zag-wifi",
+    "name": "Zagreb Airport",
+    "nameJa": "ザグレブ空港",
+    "nameZh": "萨格勒布机场",
+    "nameKo": "자그레브 공항",
+    "airportCode": "ZAG",
+    "country": "HR",
+    "ssids": [
+      "ZAG Free WiFi",
+      "Zagreb Airport WiFi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Zagreb Franjo Tudman Airport."
+  },
+  {
+    "spotId": "bg-sof-wifi",
+    "name": "Sofia Airport",
+    "nameJa": "ソフィア空港",
+    "nameZh": "索非亚机场",
+    "nameKo": "소피아 공항",
+    "airportCode": "SOF",
+    "country": "BG",
+    "ssids": [
+      "SOF Free WiFi",
+      "Sofia Airport WiFi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Sofia Airport."
+  },
+  {
+    "spotId": "ro-otp-wifi",
+    "name": "Bucharest Henri Coanda Airport",
+    "nameJa": "ブカレスト空港",
+    "nameZh": "布加勒斯特机场",
+    "nameKo": "부쿠레슈티 공항",
+    "airportCode": "OTP",
+    "country": "RO",
+    "ssids": [
+      "OTP Free WiFi",
+      "Bucharest Airport WiFi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Bucharest Otopeni Airport."
+  },
+  {
+    "spotId": "th-centralworld-wifi",
+    "name": "CentralWorld WiFi (Bangkok)",
+    "nameJa": "セントラルワールド WiFi",
+    "nameZh": "尚泰世界WiFi",
+    "nameKo": "센트럴월드 WiFi",
+    "airportCode": null,
+    "country": "TH",
+    "ssids": [
+      "CentralWorld_WiFi",
+      "Central_Free_WiFi"
+    ],
+    "portalType": "registration",
+    "tier": "free",
+    "patternData": {
+      "registration": {
+        "emailSelector": "input[type=\"email\"], input[name*=\"mail\"]",
+        "submitSelector": "input[type=\"submit\"], button[type=\"submit\"]"
+      }
+    },
+    "notes": "CentralWorld and Central Group malls in Thailand."
+  },
+  {
+    "spotId": "vn-lotte-wifi",
+    "name": "Lotte Mart WiFi (Vietnam)",
+    "nameJa": "ロッテマート WiFi（ベトナム）",
+    "nameZh": "乐天玛特WiFi（越南）",
+    "nameKo": "롯데마트 WiFi (베트남)",
+    "airportCode": null,
+    "country": "VN",
+    "ssids": [
+      "LOTTE_MART_Free_WiFi",
+      "LotteMart"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Lotte Mart stores in Ho Chi Minh, Hanoi, Da Nang."
+  },
+  {
+    "spotId": "id-jakartamrt-wifi",
+    "name": "Jakarta MRT WiFi",
+    "nameJa": "ジャカルタMRT WiFi",
+    "nameZh": "雅加达地铁WiFi",
+    "nameKo": "자카르타 MRT WiFi",
+    "airportCode": null,
+    "country": "ID",
+    "ssids": [
+      "MRT_Jakarta_WiFi",
+      "MRTJ_Free_WiFi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Jakarta MRT stations. Bundaran HI, Dukuh Atas, etc."
+  },
+  {
+    "spotId": "ph-sm-wifi",
+    "name": "SM Mall WiFi (Philippines)",
+    "nameJa": "SMモール WiFi（フィリピン）",
+    "nameZh": "SM商场WiFi（菲律宾）",
+    "nameKo": "SM 몰 WiFi (필리핀)",
+    "airportCode": null,
+    "country": "PH",
+    "ssids": [
+      "SM_Free_WiFi",
+      "SM-WiFi"
+    ],
+    "portalType": "registration",
+    "tier": "free",
+    "patternData": {
+      "registration": {
+        "emailSelector": "input[type=\"email\"], input[name*=\"mail\"]",
+        "submitSelector": "input[type=\"submit\"], button[type=\"submit\"]"
+      }
+    },
+    "notes": "SM Supermalls - largest mall chain in Philippines."
+  },
+  {
+    "spotId": "sg-jewel-wifi",
+    "name": "Jewel Changi Airport WiFi",
+    "nameJa": "ジュエル・チャンギ WiFi",
+    "nameZh": "星耀樟宜WiFi",
+    "nameKo": "주얼 창이 WiFi",
+    "airportCode": null,
+    "country": "SG",
+    "ssids": [
+      "Jewel_Free_WiFi",
+      "#WiFi@Changi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Jewel Changi Airport shopping complex."
+  },
+  {
+    "spotId": "kh-pnh-wifi",
+    "name": "Phnom Penh Airport",
+    "nameJa": "プノンペン空港",
+    "nameZh": "金边机场",
+    "nameKo": "프놈펜 공항",
+    "airportCode": "PNH",
+    "country": "KH",
+    "ssids": [
+      "PNH Free WiFi",
+      "PNH-WiFi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Phnom Penh International Airport."
+  },
+  {
+    "spotId": "kh-rep-wifi",
+    "name": "Siem Reap Airport",
+    "nameJa": "シェムリアップ空港",
+    "nameZh": "暹粒机场",
+    "nameKo": "시엠립 공항",
+    "airportCode": "REP",
+    "country": "KH",
+    "ssids": [
+      "REP Free WiFi",
+      "SiemReap_Airport_WiFi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Siem Reap-Angkor International. Gateway to Angkor Wat."
+  },
+  {
+    "spotId": "la-vte-wifi",
+    "name": "Vientiane Wattay Airport",
+    "nameJa": "ビエンチャン空港",
+    "nameZh": "万象瓦岱机场",
+    "nameKo": "비엔티안 공항",
+    "airportCode": "VTE",
+    "country": "LA",
+    "ssids": [
+      "VTE Free WiFi",
+      "Wattay_WiFi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Wattay International Airport, Vientiane."
+  },
+  {
+    "spotId": "mm-rgn-wifi",
+    "name": "Yangon Airport",
+    "nameJa": "ヤンゴン空港",
+    "nameZh": "仰光机场",
+    "nameKo": "양곤 공항",
+    "airportCode": "RGN",
+    "country": "MM",
+    "ssids": [
+      "RGN Free WiFi",
+      "YangonAirport_WiFi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Yangon International Airport."
+  },
+  {
+    "spotId": "np-ktm-wifi",
+    "name": "Kathmandu Airport",
+    "nameJa": "カトマンズ空港",
+    "nameZh": "加德满都机场",
+    "nameKo": "카트만두 공항",
+    "airportCode": "KTM",
+    "country": "NP",
+    "ssids": [
+      "TIA Free WiFi",
+      "KTM-WiFi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Tribhuvan International Airport."
+  },
+  {
+    "spotId": "bd-dac-wifi",
+    "name": "Dhaka Hazrat Shahjalal Airport",
+    "nameJa": "ダッカ空港",
+    "nameZh": "达卡机场",
+    "nameKo": "다카 공항",
+    "airportCode": "DAC",
+    "country": "BD",
+    "ssids": [
+      "HSIA Free WiFi",
+      "DAC-WiFi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Hazrat Shahjalal International Airport."
+  },
+  {
+    "spotId": "pk-isb-wifi",
+    "name": "Islamabad Airport",
+    "nameJa": "イスラマバード空港",
+    "nameZh": "伊斯兰堡机场",
+    "nameKo": "이슬라마바드 공항",
+    "airportCode": "ISB",
+    "country": "PK",
+    "ssids": [
+      "ISB Free WiFi",
+      "NewIslamabadAirport_WiFi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "New Islamabad International Airport."
+  },
+  {
+    "spotId": "ng-los-wifi",
+    "name": "Lagos Murtala Muhammed Airport",
+    "nameJa": "ラゴス空港",
+    "nameZh": "拉各斯机场",
+    "nameKo": "라고스 공항",
+    "airportCode": "LOS",
+    "country": "NG",
+    "ssids": [
+      "LOS Free WiFi",
+      "MMIA_WiFi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Lagos Murtala Muhammed International."
+  },
+  {
+    "spotId": "tn-tun-wifi",
+    "name": "Tunis-Carthage Airport",
+    "nameJa": "チュニス空港",
+    "nameZh": "突尼斯机场",
+    "nameKo": "튀니스 공항",
+    "airportCode": "TUN",
+    "country": "TN",
+    "ssids": [
+      "TUN Free WiFi",
+      "Tunis_Airport_WiFi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Tunis-Carthage International Airport."
+  },
+  {
+    "spotId": "om-mct-wifi",
+    "name": "Muscat Airport",
+    "nameJa": "マスカット空港",
+    "nameZh": "马斯喀特机场",
+    "nameKo": "무스카트 공항",
+    "airportCode": "MCT",
+    "country": "OM",
+    "ssids": [
+      "MCT Free WiFi",
+      "Muscat_Airport_WiFi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Muscat International Airport."
+  },
+  {
+    "spotId": "bh-bah-wifi",
+    "name": "Bahrain Airport",
+    "nameJa": "バーレーン空港",
+    "nameZh": "巴林机场",
+    "nameKo": "바레인 공항",
+    "airportCode": "BAH",
+    "country": "BH",
+    "ssids": [
+      "BAH Free WiFi",
+      "Bahrain_Airport_WiFi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Bahrain International Airport."
+  },
+  {
+    "spotId": "kw-kwi-wifi",
+    "name": "Kuwait Airport",
+    "nameJa": "クウェート空港",
+    "nameZh": "科威特机场",
+    "nameKo": "쿠웨이트 공항",
+    "airportCode": "KWI",
+    "country": "KW",
+    "ssids": [
+      "KWI Free WiFi",
+      "Kuwait_Airport_WiFi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Kuwait International Airport."
   }
 ];
 
@@ -5091,7 +6457,7 @@ export async function POST() {
     }
 
     await db.insert(patternBundleVersions).values({
-      version: 10,
+      version: 11,
       publishedAt: now,
     });
 
