@@ -159,6 +159,48 @@ export interface GeofenceBundle {
   regions: GeofenceRegion[];
 }
 
+// ===== Auto-Detected Portal Types =====
+
+export interface DetectedField {
+  selector: string;
+  fieldType: "email" | "password" | "firstName" | "lastName" | "fullName" | "phone" | "room" | "text" | "unknown";
+  inputType: string;
+  name: string;
+  placeholder: string;
+  required: boolean;
+  confidence: number;
+}
+
+export interface DetectedCheckbox {
+  selector: string;
+  label: string;
+  isTermsRelated: boolean;
+  checked: boolean;
+  confidence: number;
+}
+
+export interface DetectedAction {
+  selector: string;
+  text: string;
+  tagName: string;
+  type: string;
+  purpose: "agree" | "connect" | "submit" | "continue" | "free_access" | "action";
+  confidence: number;
+}
+
+export interface AutoDetectedPortal {
+  type: "portal_scan_result";
+  url: string;
+  title: string;
+  detectedType: "agree_only" | "registration" | "email_only" | "login" | "unknown";
+  fields: DetectedField[];
+  actions: DetectedAction[];
+  checkboxes: DetectedCheckbox[];
+  confidence: number;
+  rawFormCount: number;
+  language: string;
+}
+
 export type GeofenceStatus = "disabled" | "permission_denied" | "initializing" | "monitoring" | "error";
 
 export interface GeofenceState {

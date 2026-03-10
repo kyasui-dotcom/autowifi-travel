@@ -7,6 +7,10 @@ import { Text, View } from "@/components/Themed";
 import { useProfileStore, useWifiStore } from "@/lib/store";
 import { generateAutomationScript } from "@/services/portal-automator";
 import {
+  generateScannerScript,
+  generateAutoScript,
+} from "@/services/portal-auto-detector";
+import {
   getCredentials,
   saveCredentials,
 } from "@/services/credential-manager";
@@ -16,6 +20,7 @@ import { getPatternName } from "@/lib/i18n";
 import type {
   PortalPattern,
   AutomationMessage,
+  AutoDetectedPortal,
   SavedCredentials,
 } from "@/lib/types";
 
@@ -28,7 +33,10 @@ try {
   // Expo Go
 }
 
-type Phase = "loading" | "automating" | "verifying" | "success" | "failed" | "manual";
+type Phase = "loading" | "scanning" | "automating" | "verifying" | "success" | "failed" | "manual";
+
+// Special spotId used when no known pattern matches
+const AUTO_DETECT_SPOT = "__auto_detect__";
 
 export default function PortalScreen() {
   const { spotId } = useLocalSearchParams<{ spotId: string }>();
@@ -44,8 +52,15 @@ export default function PortalScreen() {
   const [injectionScript, setInjectionScript] = useState<string | null>(null);
   const [generatedPassword, setGeneratedPassword] = useState<string | undefined>();
   const [pattern, setPattern] = useState<PortalPattern | undefined>();
+  const [isAutoDetectMode, setIsAutoDetectMode] = useState(false);
+  const [scanResult, setScanResult] = useState<AutoDetectedPortal | null>(null);
 
   useEffect(() => {
+    if (spotId === AUTO_DETECT_SPOT) {
+      // Auto-detect mode: no known pattern, scan the portal page
+      setIsAutoDetectMode(true);
+      return;
+    }
     loadPatterns().then((patterns) => {
       setPattern(patterns.find((p) => p.spotId === spotId));
     });
@@ -63,8 +78,28 @@ export default function PortalScreen() {
     setLogs((prev) => [...prev.slice(-20), `[${time}] ${msg}`]);
   }, []);
 
+  // Auto-detect mode: inject scanner script
   useEffect(() => {
-    if (!pattern || !profile) return;
+    if (!isAutoDetectMode) return;
+
+    const init = async () => {
+      await forceWifiUsage(true);
+      setInjectionScript(generateScannerScript());
+      setPhase("scanning");
+      addLog("Scanning portal page structure...");
+
+      const url =
+        wifi.portalUrl ?? "http://connectivitycheck.gstatic.com/generate_204";
+      setPortalUrl(url);
+    };
+
+    init();
+    return () => { forceWifiUsage(false); };
+  }, [isAutoDetectMode, wifi.portalUrl]);
+
+  // Known pattern mode
+  useEffect(() => {
+    if (!pattern || !profile || isAutoDetectMode) return;
 
     const init = async () => {
       // Force WiFi usage to prevent Android from switching to mobile data
@@ -95,12 +130,34 @@ export default function PortalScreen() {
     return () => {
       forceWifiUsage(false);
     };
-  }, [pattern, profile, wifi.portalUrl]);
+  }, [pattern, profile, isAutoDetectMode, wifi.portalUrl]);
 
   const handleMessage = useCallback(
     async (event: WebViewMessageEvent) => {
       try {
-        const msg: AutomationMessage = JSON.parse(event.nativeEvent.data);
+        const parsed = JSON.parse(event.nativeEvent.data);
+
+        // Handle scan results from auto-detect mode
+        if (parsed.type === "portal_scan_result") {
+          const scan = parsed as AutoDetectedPortal;
+          setScanResult(scan);
+          addLog(`Scan: detected ${scan.detectedType} portal (${Math.round(scan.confidence * 100)}% confidence)`);
+          addLog(`  Fields: ${scan.fields.length}, Buttons: ${scan.actions.length}, Checkboxes: ${scan.checkboxes.length}`);
+
+          if (scan.confidence >= 0.5) {
+            // Generate and inject automation script
+            const autoScript = generateAutoScript(scan, profile?.email);
+            addLog("Injecting auto-detected automation script...");
+            webViewRef.current?.injectJavaScript(autoScript);
+          } else {
+            addLog("Low confidence — switching to manual mode");
+            setPhase("manual");
+          }
+          return;
+        }
+
+        // Handle automation status messages
+        const msg: AutomationMessage = parsed;
         addLog(`[${msg.status}] ${msg.detail}`);
 
         if (msg.status === "started") {
@@ -144,7 +201,7 @@ export default function PortalScreen() {
         // Non-JSON message from WebView, ignore
       }
     },
-    [addLog, pattern, generatedPassword, setStatus]
+    [addLog, pattern, profile, generatedPassword, setStatus]
   );
 
   const handleManualMode = () => {
@@ -159,7 +216,7 @@ export default function PortalScreen() {
     }
   };
 
-  if (!pattern) {
+  if (!pattern && !isAutoDetectMode) {
     return (
       <View style={styles.container}>
         <Text style={styles.errorText}>
@@ -183,10 +240,14 @@ export default function PortalScreen() {
     <View style={styles.container}>
       {/* Header */}
       <View style={styles.header}>
-        <Text style={styles.headerTitle}>{getPatternName(pattern)}</Text>
+        <Text style={styles.headerTitle}>
+          {isAutoDetectMode
+            ? (scanResult ? `Auto: ${scanResult.detectedType}` : t('portal.autoDetect'))
+            : getPatternName(pattern!)}
+        </Text>
         <View style={[styles.phaseBadge, styles[`phase_${phase}`]]}>
           <Text style={styles.phaseText}>
-            {t(`portal.phase.${phase}`)}
+            {phase === "scanning" ? t('portal.phase.scanning', { defaultValue: 'Scanning' }) : t(`portal.phase.${phase}`)}
           </Text>
         </View>
       </View>
@@ -194,6 +255,14 @@ export default function PortalScreen() {
       {/* WebView */}
       {portalUrl && (
         <View style={styles.webviewContainer}>
+          {phase === "scanning" && (
+            <View style={styles.overlay}>
+              <ActivityIndicator size="large" color="#FF9800" />
+              <Text style={styles.overlayText}>
+                {t('portal.phase.scanning', { defaultValue: 'Scanning portal...' })}
+              </Text>
+            </View>
+          )}
           {phase === "automating" && (
             <View style={styles.overlay}>
               <ActivityIndicator size="large" color="#2196F3" />
@@ -252,7 +321,7 @@ export default function PortalScreen() {
           </TouchableOpacity>
         )}
 
-        {(phase === "loading" || phase === "automating") && (
+        {(phase === "loading" || phase === "scanning" || phase === "automating") && (
           <TouchableOpacity
             style={styles.manualButton}
             onPress={handleManualMode}
@@ -301,6 +370,7 @@ const styles = StyleSheet.create({
     color: "#fff",
   },
   phase_loading: { backgroundColor: "#999" },
+  phase_scanning: { backgroundColor: "#FF9800" },
   phase_automating: { backgroundColor: "#2196F3" },
   phase_verifying: { backgroundColor: "#FF9800" },
   phase_success: { backgroundColor: "#4CAF50" },
