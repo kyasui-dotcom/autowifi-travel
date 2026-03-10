@@ -10421,6 +10421,1355 @@ const SEED_PATTERNS = [
       }
     },
     "notes": "Shimokitazawa district WiFi"
+  },
+  {
+    "spotId": "jp-gyukaku-wifi",
+    "name": "Gyukaku WiFi",
+    "nameJa": "牛角Wi-Fi",
+    "nameZh": "牛角WiFi",
+    "nameKo": "규카쿠 WiFi",
+    "airportCode": null,
+    "country": "JP",
+    "ssids": [
+      "GYUKAKU_Free_Wi-Fi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Gyukaku yakiniku chain"
+  },
+  {
+    "spotId": "jp-ootoya-wifi",
+    "name": "Ootoya WiFi",
+    "nameJa": "大戸屋Wi-Fi",
+    "nameZh": "大户屋WiFi",
+    "nameKo": "오오토야 WiFi",
+    "airportCode": null,
+    "country": "JP",
+    "ssids": [
+      "OOTOYA_Free_Wi-Fi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Ootoya teishoku chain"
+  },
+  {
+    "spotId": "jp-cocos-wifi",
+    "name": "Coco's WiFi",
+    "nameJa": "ココスWi-Fi",
+    "nameZh": "Cocos WiFi",
+    "nameKo": "코코스 WiFi",
+    "airportCode": null,
+    "country": "JP",
+    "ssids": [
+      "COCOS_Free_Wi-Fi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Coco's family restaurant chain"
+  },
+  {
+    "spotId": "jp-royal-host-wifi",
+    "name": "Royal Host WiFi",
+    "nameJa": "ロイヤルホストWi-Fi",
+    "nameZh": "Royal Host WiFi",
+    "nameKo": "로얄호스트 WiFi",
+    "airportCode": null,
+    "country": "JP",
+    "ssids": [
+      "ROYALHOST_Free_Wi-Fi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Royal Host family restaurant"
+  },
+  {
+    "spotId": "jp-ikinari-steak-wifi",
+    "name": "Ikinari Steak WiFi",
+    "nameJa": "いきなりステーキWi-Fi",
+    "nameZh": "Ikinari Steak WiFi",
+    "nameKo": "이키나리 스테이크 WiFi",
+    "airportCode": null,
+    "country": "JP",
+    "ssids": [
+      "IKINARI_STEAK_Wi-Fi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Ikinari Steak chain"
+  },
+  {
+    "spotId": "jp-pepper-lunch-wifi",
+    "name": "Pepper Lunch WiFi",
+    "nameJa": "ペッパーランチWi-Fi",
+    "nameZh": "Pepper Lunch WiFi",
+    "nameKo": "페퍼런치 WiFi",
+    "airportCode": null,
+    "country": "JP",
+    "ssids": [
+      "PEPPERLUNCH_Free_Wi-Fi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Pepper Lunch chain"
+  },
+  {
+    "spotId": "jp-seria-wifi",
+    "name": "Seria WiFi",
+    "nameJa": "セリアWi-Fi",
+    "nameZh": "Seria WiFi",
+    "nameKo": "세리아 WiFi",
+    "airportCode": null,
+    "country": "JP",
+    "ssids": [
+      "Seria_Free_Wi-Fi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Seria 100-yen chain"
+  },
+  {
+    "spotId": "jp-abc-mart-wifi",
+    "name": "ABC-MART WiFi",
+    "nameJa": "ABCマートWi-Fi",
+    "nameZh": "ABC-MART WiFi",
+    "nameKo": "ABC마트 WiFi",
+    "airportCode": null,
+    "country": "JP",
+    "ssids": [
+      "ABCMART_Free_Wi-Fi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "ABC-MART shoe stores"
+  },
+  {
+    "spotId": "jp-ueshima-wifi",
+    "name": "Ueshima Coffee WiFi",
+    "nameJa": "上島珈琲Wi-Fi",
+    "nameZh": "上岛咖啡WiFi",
+    "nameKo": "우에시마 WiFi",
+    "airportCode": null,
+    "country": "JP",
+    "ssids": [
+      "UESHIMA_Wi-Fi",
+      "UCC_Wi-Fi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Ueshima Coffee chain"
+  },
+  {
+    "spotId": "jp-yokohama-metro-wifi",
+    "name": "Yokohama Metro WiFi",
+    "nameJa": "横浜市営地下鉄Wi-Fi",
+    "nameZh": "横滨地铁WiFi",
+    "nameKo": "요코하마 지하철 WiFi",
+    "airportCode": null,
+    "country": "JP",
+    "ssids": [
+      "Yokohama_City_Wi-Fi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Yokohama municipal subway"
+  },
+  {
+    "spotId": "jp-sapporo-metro-wifi",
+    "name": "Sapporo Metro WiFi",
+    "nameJa": "札幌地下鉄Wi-Fi",
+    "nameZh": "札幌地铁WiFi",
+    "nameKo": "삿포로 지하철 WiFi",
+    "airportCode": null,
+    "country": "JP",
+    "ssids": [
+      "Sapporo_City_Wi-Fi",
+      "Sapporo_Subway_WiFi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Sapporo subway WiFi"
+  },
+  {
+    "spotId": "jp-enoshima-wifi",
+    "name": "Enoshima WiFi",
+    "nameJa": "江の島Wi-Fi",
+    "nameZh": "江之岛WiFi",
+    "nameKo": "에노시마 WiFi",
+    "airportCode": null,
+    "country": "JP",
+    "ssids": [
+      "ENOSHIMA_Free_Wi-Fi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Enoshima island WiFi"
+  },
+  {
+    "spotId": "jp-shirakawago-wifi",
+    "name": "Shirakawa-go WiFi",
+    "nameJa": "白川郷Wi-Fi",
+    "nameZh": "白川乡WiFi",
+    "nameKo": "시라카와고 WiFi",
+    "airportCode": null,
+    "country": "JP",
+    "ssids": [
+      "Shirakawago_Free_Wi-Fi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Shirakawa-go village WiFi"
+  },
+  {
+    "spotId": "jp-lalaport-wifi",
+    "name": "LaLaport WiFi",
+    "nameJa": "ららぽーとWi-Fi",
+    "nameZh": "LaLaport WiFi",
+    "nameKo": "라라포트 WiFi",
+    "airportCode": null,
+    "country": "JP",
+    "ssids": [
+      "LALAPORT_Free_Wi-Fi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "LaLaport shopping malls"
+  },
+  {
+    "spotId": "jp-usj-wifi",
+    "name": "USJ WiFi",
+    "nameJa": "USJ Wi-Fi",
+    "nameZh": "日本环球影城WiFi",
+    "nameKo": "USJ WiFi",
+    "airportCode": null,
+    "country": "JP",
+    "ssids": [
+      "USJ_Free_Wi-Fi",
+      "Universal_WiFi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Universal Studios Japan WiFi"
+  },
+  {
+    "spotId": "jp-tdl-wifi",
+    "name": "Tokyo Disney WiFi",
+    "nameJa": "東京ディズニーWi-Fi",
+    "nameZh": "东京迪士尼WiFi",
+    "nameKo": "도쿄 디즈니 WiFi",
+    "airportCode": null,
+    "country": "JP",
+    "ssids": [
+      "TDR_Free_Wi-Fi",
+      "Disney_Guest_WiFi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Tokyo Disneyland/DisneySea WiFi"
+  },
+  {
+    "spotId": "kr-daegu-metro-wifi",
+    "name": "Daegu Metro WiFi",
+    "nameJa": "大邱地下鉄WiFi",
+    "nameZh": "大邱地铁WiFi",
+    "nameKo": "대구 지하철 WiFi",
+    "airportCode": null,
+    "country": "KR",
+    "ssids": [
+      "Daegu_Metro_WiFi",
+      "DaeguMetro_Free"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Daegu metro WiFi"
+  },
+  {
+    "spotId": "kr-gwangju-wifi",
+    "name": "Gwangju WiFi",
+    "nameJa": "光州WiFi",
+    "nameZh": "光州WiFi",
+    "nameKo": "광주 WiFi",
+    "airportCode": null,
+    "country": "KR",
+    "ssids": [
+      "Gwangju_Free_WiFi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Gwangju city WiFi"
+  },
+  {
+    "spotId": "kr-daejeon-wifi",
+    "name": "Daejeon WiFi",
+    "nameJa": "大田WiFi",
+    "nameZh": "大田WiFi",
+    "nameKo": "대전 WiFi",
+    "airportCode": null,
+    "country": "KR",
+    "ssids": [
+      "Daejeon_Free_WiFi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Daejeon city WiFi"
+  },
+  {
+    "spotId": "kr-gangnam-wifi",
+    "name": "Gangnam WiFi",
+    "nameJa": "江南WiFi",
+    "nameZh": "江南WiFi",
+    "nameKo": "강남 WiFi",
+    "airportCode": null,
+    "country": "KR",
+    "ssids": [
+      "Gangnam_Free_WiFi",
+      "GN_WiFi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Gangnam district WiFi"
+  },
+  {
+    "spotId": "kr-hongdae-wifi",
+    "name": "Hongdae WiFi",
+    "nameJa": "弘大WiFi",
+    "nameZh": "弘大WiFi",
+    "nameKo": "홍대 WiFi",
+    "airportCode": null,
+    "country": "KR",
+    "ssids": [
+      "Hongdae_Free_WiFi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Hongdae area WiFi"
+  },
+  {
+    "spotId": "kr-paris-baguette-wifi",
+    "name": "Paris Baguette WiFi",
+    "nameJa": "パリバゲットWiFi",
+    "nameZh": "巴黎贝甜WiFi",
+    "nameKo": "파리바게뜨 WiFi",
+    "airportCode": null,
+    "country": "KR",
+    "ssids": [
+      "ParisBaguette_WiFi",
+      "PB_Free_WiFi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Paris Baguette bakery chain"
+  },
+  {
+    "spotId": "tw-kaohsiung-wifi",
+    "name": "Kaohsiung WiFi",
+    "nameJa": "高雄WiFi",
+    "nameZh": "高雄免费WiFi",
+    "nameKo": "가오슝 WiFi",
+    "airportCode": null,
+    "country": "TW",
+    "ssids": [
+      "Kaohsiung Free WiFi",
+      "KHH_WiFi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Kaohsiung city WiFi"
+  },
+  {
+    "spotId": "tw-hsinchu-wifi",
+    "name": "Hsinchu WiFi",
+    "nameJa": "新竹WiFi",
+    "nameZh": "新竹免费WiFi",
+    "nameKo": "신주 WiFi",
+    "airportCode": null,
+    "country": "TW",
+    "ssids": [
+      "Hsinchu Free WiFi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Hsinchu city WiFi"
+  },
+  {
+    "spotId": "tw-louisa-wifi",
+    "name": "Louisa Coffee WiFi",
+    "nameJa": "ルイサコーヒーWiFi",
+    "nameZh": "路易莎咖啡WiFi",
+    "nameKo": "루이사커피 WiFi",
+    "airportCode": null,
+    "country": "TW",
+    "ssids": [
+      "Louisa_WiFi",
+      "LouisaCoffee_Free"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Louisa Coffee chain (Taiwan)"
+  },
+  {
+    "spotId": "se-stockholm-wifi",
+    "name": "Stockholm WiFi",
+    "nameJa": "ストックホルムWiFi",
+    "nameZh": "斯德哥尔摩WiFi",
+    "nameKo": "스톡홀름 WiFi",
+    "airportCode": null,
+    "country": "SE",
+    "ssids": [
+      "Stockholm_Free_WiFi",
+      "SL_WiFi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Stockholm city/transit WiFi"
+  },
+  {
+    "spotId": "dk-copenhagen-wifi",
+    "name": "Copenhagen WiFi",
+    "nameJa": "コペンハーゲンWiFi",
+    "nameZh": "哥本哈根WiFi",
+    "nameKo": "코펜하겐 WiFi",
+    "airportCode": null,
+    "country": "DK",
+    "ssids": [
+      "Copenhagen_Free_WiFi",
+      "CPH_WiFi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Copenhagen city WiFi"
+  },
+  {
+    "spotId": "fi-helsinki-wifi",
+    "name": "Helsinki WiFi",
+    "nameJa": "ヘルシンキWiFi",
+    "nameZh": "赫尔辛基WiFi",
+    "nameKo": "헬싱키 WiFi",
+    "airportCode": null,
+    "country": "FI",
+    "ssids": [
+      "Helsinki_City_Open",
+      "HEL_WiFi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Helsinki city WiFi"
+  },
+  {
+    "spotId": "no-oslo-wifi",
+    "name": "Oslo WiFi",
+    "nameJa": "オスロWiFi",
+    "nameZh": "奥斯陆WiFi",
+    "nameKo": "오슬로 WiFi",
+    "airportCode": null,
+    "country": "NO",
+    "ssids": [
+      "Oslo_Free_WiFi",
+      "Oslo_Bynet"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Oslo city WiFi"
+  },
+  {
+    "spotId": "pl-krakow-wifi",
+    "name": "Krakow WiFi",
+    "nameJa": "クラクフWiFi",
+    "nameZh": "克拉科夫WiFi",
+    "nameKo": "크라쿠프 WiFi",
+    "airportCode": null,
+    "country": "PL",
+    "ssids": [
+      "Krakow_Free_WiFi",
+      "KRK_WiFi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Krakow city WiFi"
+  },
+  {
+    "spotId": "hu-budapest-wifi",
+    "name": "Budapest WiFi",
+    "nameJa": "ブダペストWiFi",
+    "nameZh": "布达佩斯WiFi",
+    "nameKo": "부다페스트 WiFi",
+    "airportCode": null,
+    "country": "HU",
+    "ssids": [
+      "Budapest_Free_WiFi",
+      "BKK_WiFi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Budapest city/transit WiFi"
+  },
+  {
+    "spotId": "gr-athens-wifi",
+    "name": "Athens WiFi",
+    "nameJa": "アテネWiFi",
+    "nameZh": "雅典WiFi",
+    "nameKo": "아테네 WiFi",
+    "airportCode": null,
+    "country": "GR",
+    "ssids": [
+      "Athens_Free_WiFi",
+      "Athens_WiFi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Athens city WiFi"
+  },
+  {
+    "spotId": "hr-zagreb-wifi",
+    "name": "Zagreb WiFi",
+    "nameJa": "ザグレブWiFi",
+    "nameZh": "萨格勒布WiFi",
+    "nameKo": "자그레브 WiFi",
+    "airportCode": null,
+    "country": "HR",
+    "ssids": [
+      "Zagreb_Free_WiFi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Zagreb city WiFi"
+  },
+  {
+    "spotId": "tr-istanbul-wifi",
+    "name": "Istanbul WiFi",
+    "nameJa": "イスタンブールWiFi",
+    "nameZh": "伊斯坦布尔WiFi",
+    "nameKo": "이스탄불 WiFi",
+    "airportCode": null,
+    "country": "TR",
+    "ssids": [
+      "Istanbul_Free_WiFi",
+      "IBB_WiFi",
+      "ibbWifi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Istanbul city WiFi"
+  },
+  {
+    "spotId": "cn-chengdu-wifi",
+    "name": "Chengdu WiFi",
+    "nameJa": "成都WiFi",
+    "nameZh": "成都免费WiFi",
+    "nameKo": "청두 WiFi",
+    "airportCode": null,
+    "country": "CN",
+    "ssids": [
+      "i-Chengdu",
+      "Chengdu_Free_WiFi"
+    ],
+    "portalType": "registration",
+    "tier": "free",
+    "patternData": {
+      "registration": {
+        "emailSelector": "input[type=\"email\"], input[name*=\"mail\"]",
+        "submitSelector": "input[type=\"submit\"], button[type=\"submit\"]"
+      }
+    },
+    "notes": "Chengdu city WiFi"
+  },
+  {
+    "spotId": "in-ccu-wifi",
+    "name": "Kolkata Airport WiFi",
+    "nameJa": "コルカタ空港WiFi",
+    "nameZh": "加尔各答机场WiFi",
+    "nameKo": "콜카타 공항 WiFi",
+    "airportCode": "CCU",
+    "country": "IN",
+    "ssids": [
+      "CCU Airport WiFi",
+      "CCU_Free"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Netaji Subhas Kolkata Airport"
+  },
+  {
+    "spotId": "in-jaipur-wifi",
+    "name": "Jaipur City WiFi",
+    "nameJa": "ジャイプールWiFi",
+    "nameZh": "斋浦尔WiFi",
+    "nameKo": "자이푸르 WiFi",
+    "airportCode": null,
+    "country": "IN",
+    "ssids": [
+      "Jaipur Free WiFi",
+      "Jaipur_Smart_City"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Jaipur city WiFi"
+  },
+  {
+    "spotId": "in-varanasi-wifi",
+    "name": "Varanasi WiFi",
+    "nameJa": "バラナシWiFi",
+    "nameZh": "瓦拉纳西WiFi",
+    "nameKo": "바라나시 WiFi",
+    "airportCode": null,
+    "country": "IN",
+    "ssids": [
+      "Varanasi Free WiFi",
+      "VNS_WiFi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Varanasi city WiFi"
+  },
+  {
+    "spotId": "vn-nhatrang-wifi",
+    "name": "Nha Trang WiFi",
+    "nameJa": "ニャチャンWiFi",
+    "nameZh": "芽庄WiFi",
+    "nameKo": "나트랑 WiFi",
+    "airportCode": null,
+    "country": "VN",
+    "ssids": [
+      "NhaTrang Free WiFi",
+      "NhaTrang_WiFi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Nha Trang city WiFi"
+  },
+  {
+    "spotId": "vn-dalat-wifi",
+    "name": "Da Lat WiFi",
+    "nameJa": "ダラットWiFi",
+    "nameZh": "大叻WiFi",
+    "nameKo": "달랏 WiFi",
+    "airportCode": null,
+    "country": "VN",
+    "ssids": [
+      "DaLat Free WiFi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Da Lat city WiFi"
+  },
+  {
+    "spotId": "id-yogya-wifi",
+    "name": "Yogyakarta WiFi",
+    "nameJa": "ジョグジャカルタWiFi",
+    "nameZh": "日惹WiFi",
+    "nameKo": "족자카르타 WiFi",
+    "airportCode": null,
+    "country": "ID",
+    "ssids": [
+      "Jogja Free WiFi",
+      "Jogja_WiFi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Yogyakarta city WiFi"
+  },
+  {
+    "spotId": "ph-boracay-wifi",
+    "name": "Boracay WiFi",
+    "nameJa": "ボラカイWiFi",
+    "nameZh": "长滩岛WiFi",
+    "nameKo": "보라카이 WiFi",
+    "airportCode": null,
+    "country": "PH",
+    "ssids": [
+      "Boracay Free WiFi",
+      "Boracay_WiFi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Boracay island WiFi"
+  },
+  {
+    "spotId": "kh-siem-reap-wifi",
+    "name": "Siem Reap WiFi",
+    "nameJa": "シェムリアップWiFi",
+    "nameZh": "暹粒WiFi",
+    "nameKo": "씨엠립 WiFi",
+    "airportCode": null,
+    "country": "KH",
+    "ssids": [
+      "SiemReap Free WiFi",
+      "REP_WiFi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Siem Reap (Angkor Wat area) WiFi"
+  },
+  {
+    "spotId": "la-vientiane-wifi",
+    "name": "Vientiane WiFi",
+    "nameJa": "ビエンチャンWiFi",
+    "nameZh": "万象WiFi",
+    "nameKo": "비엔티안 WiFi",
+    "airportCode": null,
+    "country": "LA",
+    "ssids": [
+      "Vientiane Free WiFi",
+      "VTE_WiFi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Vientiane city WiFi"
+  },
+  {
+    "spotId": "mm-yangon-wifi",
+    "name": "Yangon WiFi",
+    "nameJa": "ヤンゴンWiFi",
+    "nameZh": "仰光WiFi",
+    "nameKo": "양곤 WiFi",
+    "airportCode": null,
+    "country": "MM",
+    "ssids": [
+      "Yangon Free WiFi",
+      "YGN_WiFi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Yangon city WiFi"
+  },
+  {
+    "spotId": "us-mia-metro-wifi",
+    "name": "Miami Metrorail WiFi",
+    "nameJa": "マイアミメトロWiFi",
+    "nameZh": "迈阿密地铁WiFi",
+    "nameKo": "마이애미 메트로 WiFi",
+    "airportCode": null,
+    "country": "US",
+    "ssids": [
+      "MiamiDade_Free_WiFi",
+      "MDT_WiFi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Miami-Dade transit WiFi"
+  },
+  {
+    "spotId": "us-portland-wifi",
+    "name": "Portland WiFi",
+    "nameJa": "ポートランドWiFi",
+    "nameZh": "波特兰WiFi",
+    "nameKo": "포틀랜드 WiFi",
+    "airportCode": null,
+    "country": "US",
+    "ssids": [
+      "Portland Free WiFi",
+      "PDX_City_WiFi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Portland city WiFi"
+  },
+  {
+    "spotId": "us-austin-wifi",
+    "name": "Austin WiFi",
+    "nameJa": "オースティンWiFi",
+    "nameZh": "奥斯汀WiFi",
+    "nameKo": "오스틴 WiFi",
+    "airportCode": null,
+    "country": "US",
+    "ssids": [
+      "Austin Free WiFi",
+      "ATX_WiFi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Austin city WiFi"
+  },
+  {
+    "spotId": "us-denver-wifi",
+    "name": "Denver WiFi",
+    "nameJa": "デンバーWiFi",
+    "nameZh": "丹佛WiFi",
+    "nameKo": "덴버 WiFi",
+    "airportCode": null,
+    "country": "US",
+    "ssids": [
+      "Denver_Free_WiFi",
+      "Mile_High_WiFi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Denver city WiFi"
+  },
+  {
+    "spotId": "ca-vancouver-wifi",
+    "name": "Vancouver WiFi",
+    "nameJa": "バンクーバーWiFi",
+    "nameZh": "温哥华WiFi",
+    "nameKo": "밴쿠버 WiFi",
+    "airportCode": null,
+    "country": "CA",
+    "ssids": [
+      "#VanWiFi",
+      "Vancouver_Free_WiFi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Vancouver city WiFi"
+  },
+  {
+    "spotId": "ca-montreal-wifi",
+    "name": "Montreal WiFi",
+    "nameJa": "モントリオールWiFi",
+    "nameZh": "蒙特利尔WiFi",
+    "nameKo": "몬트리올 WiFi",
+    "airportCode": null,
+    "country": "CA",
+    "ssids": [
+      "MTL WiFi",
+      "Montreal_Free_WiFi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Montreal city WiFi"
+  },
+  {
+    "spotId": "mx-cancun-wifi",
+    "name": "Cancun WiFi",
+    "nameJa": "カンクンWiFi",
+    "nameZh": "坎昆WiFi",
+    "nameKo": "칸쿤 WiFi",
+    "airportCode": null,
+    "country": "MX",
+    "ssids": [
+      "Cancun Free WiFi",
+      "CUN_WiFi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Cancun tourist area WiFi"
+  },
+  {
+    "spotId": "br-saopaulo-metro-wifi",
+    "name": "SP Metro WiFi",
+    "nameJa": "サンパウロメトロWiFi",
+    "nameZh": "圣保罗地铁WiFi",
+    "nameKo": "상파울루 메트로 WiFi",
+    "airportCode": null,
+    "country": "BR",
+    "ssids": [
+      "SP_Free_WiFi",
+      "Metro_SP_WiFi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "São Paulo metro WiFi"
+  },
+  {
+    "spotId": "cl-santiago-wifi",
+    "name": "Santiago WiFi",
+    "nameJa": "サンティアゴWiFi",
+    "nameZh": "圣地亚哥WiFi",
+    "nameKo": "산티아고 WiFi",
+    "airportCode": null,
+    "country": "CL",
+    "ssids": [
+      "Santiago WiFi",
+      "SCL_WiFi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Santiago city WiFi"
+  },
+  {
+    "spotId": "ar-mendoza-wifi",
+    "name": "Mendoza WiFi",
+    "nameJa": "メンドーサWiFi",
+    "nameZh": "门多萨WiFi",
+    "nameKo": "멘도사 WiFi",
+    "airportCode": null,
+    "country": "AR",
+    "ssids": [
+      "Mendoza Free WiFi",
+      "MDZ_WiFi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Mendoza city WiFi"
+  },
+  {
+    "spotId": "eg-cairo-wifi",
+    "name": "Cairo WiFi",
+    "nameJa": "カイロWiFi",
+    "nameZh": "开罗WiFi",
+    "nameKo": "카이로 WiFi",
+    "airportCode": null,
+    "country": "EG",
+    "ssids": [
+      "Cairo Free WiFi",
+      "CAI_WiFi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Cairo city WiFi"
+  },
+  {
+    "spotId": "ma-marrakech-wifi",
+    "name": "Marrakech WiFi",
+    "nameJa": "マラケシュWiFi",
+    "nameZh": "马拉喀什WiFi",
+    "nameKo": "마라케시 WiFi",
+    "airportCode": null,
+    "country": "MA",
+    "ssids": [
+      "Marrakech Free WiFi",
+      "RAK_WiFi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Marrakech city WiFi"
+  },
+  {
+    "spotId": "ke-nairobi-wifi",
+    "name": "Nairobi WiFi",
+    "nameJa": "ナイロビWiFi",
+    "nameZh": "内罗毕WiFi",
+    "nameKo": "나이로비 WiFi",
+    "airportCode": null,
+    "country": "KE",
+    "ssids": [
+      "Nairobi Free WiFi",
+      "NBO_WiFi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Nairobi city WiFi"
+  },
+  {
+    "spotId": "za-durban-wifi",
+    "name": "Durban WiFi",
+    "nameJa": "ダーバンWiFi",
+    "nameZh": "德班WiFi",
+    "nameKo": "더반 WiFi",
+    "airportCode": null,
+    "country": "ZA",
+    "ssids": [
+      "Durban Free WiFi",
+      "DUR_City_WiFi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Durban city WiFi"
+  },
+  {
+    "spotId": "ae-abudhabi-wifi",
+    "name": "Abu Dhabi WiFi",
+    "nameJa": "アブダビWiFi",
+    "nameZh": "阿布扎比WiFi",
+    "nameKo": "아부다비 WiFi",
+    "airportCode": null,
+    "country": "AE",
+    "ssids": [
+      "AbuDhabi Free WiFi",
+      "AUH_City_WiFi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Abu Dhabi city WiFi"
+  },
+  {
+    "spotId": "il-telaviv-wifi",
+    "name": "Tel Aviv WiFi",
+    "nameJa": "テルアビブWiFi",
+    "nameZh": "特拉维夫WiFi",
+    "nameKo": "텔아비브 WiFi",
+    "airportCode": null,
+    "country": "IL",
+    "ssids": [
+      "FREE_TLV",
+      "TelAviv_WiFi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Tel Aviv city WiFi"
+  },
+  {
+    "spotId": "sa-riyadh-wifi",
+    "name": "Riyadh WiFi",
+    "nameJa": "リヤドWiFi",
+    "nameZh": "利雅得WiFi",
+    "nameKo": "리야드 WiFi",
+    "airportCode": null,
+    "country": "SA",
+    "ssids": [
+      "Riyadh Free WiFi",
+      "RUH_WiFi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Riyadh city WiFi"
+  },
+  {
+    "spotId": "ng-lagos-wifi",
+    "name": "Lagos WiFi",
+    "nameJa": "ラゴスWiFi",
+    "nameZh": "拉各斯WiFi",
+    "nameKo": "라고스 WiFi",
+    "airportCode": null,
+    "country": "NG",
+    "ssids": [
+      "Lagos Free WiFi",
+      "LOS_WiFi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Lagos city WiFi"
+  },
+  {
+    "spotId": "tz-zanzibar-wifi",
+    "name": "Zanzibar WiFi",
+    "nameJa": "ザンジバルWiFi",
+    "nameZh": "桑给巴尔WiFi",
+    "nameKo": "잔지바르 WiFi",
+    "airportCode": null,
+    "country": "TZ",
+    "ssids": [
+      "Zanzibar Free WiFi",
+      "ZNZ_WiFi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Zanzibar island WiFi"
+  },
+  {
+    "spotId": "jo-amman-wifi",
+    "name": "Amman WiFi",
+    "nameJa": "アンマンWiFi",
+    "nameZh": "安曼WiFi",
+    "nameKo": "암만 WiFi",
+    "airportCode": null,
+    "country": "JO",
+    "ssids": [
+      "Amman Free WiFi",
+      "AMM_WiFi"
+    ],
+    "portalType": "agree_only",
+    "tier": "free",
+    "patternData": {
+      "agreeOnly": {
+        "agreeButtonSelector": "input[type=\"submit\"], button[type=\"submit\"], .btn-primary, a.btn"
+      }
+    },
+    "notes": "Amman city WiFi"
   }
 ];
 
@@ -10465,7 +11814,7 @@ export async function POST() {
     }
 
     await db.insert(patternBundleVersions).values({
-      version: 17,
+      version: 18,
       publishedAt: now,
     });
 

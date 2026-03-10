@@ -1,5 +1,5 @@
 {
-  "version": 10,
+  "version": 11,
   "updatedAt": "2026-03-10",
   "regions": [
     {
@@ -1499,6 +1499,13 @@
       "longitude": 37.4146,
       "radius": 2000,
       "identifier": "geofence_ru-svo-wifi"
+    },
+    {
+      "spotId": "in-ccu-wifi",
+      "latitude": 22.6544,
+      "longitude": 88.4467,
+      "radius": 2000,
+      "identifier": "geofence_in-ccu-wifi"
     }
   ]
 }
