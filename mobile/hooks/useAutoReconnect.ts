@@ -24,6 +24,7 @@ export function useAutoReconnect() {
 
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const appStateRef = useRef<AppStateStatus>(AppState.currentState);
+  const isCheckingRef = useRef(false);
 
   const performCheck = useCallback(async () => {
     // Only check when status is "connected" (portal was already passed)

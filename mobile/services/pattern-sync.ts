@@ -8,6 +8,7 @@ const VERSION_KEY = "autowifi_patterns_version";
 const LAST_SYNC_KEY = "autowifi_patterns_last_sync";
 const FETCH_TIMEOUT_MS = 8000;
 const MAX_RETRIES = 2;
+const MAX_CACHE_SIZE_BYTES = 4 * 1024 * 1024; // 4MB
 
 function isValidPatternArray(data: unknown): data is PortalPattern[] {
   if (!Array.isArray(data)) return false;
@@ -57,10 +58,27 @@ export async function loadPatterns(): Promise<PortalPattern[]> {
     const res = await fetchWithRetry(url);
     const data: PatternBundle = await res.json();
     if (data.patterns.length > 0 && isValidPatternArray(data.patterns)) {
-      await AsyncStorage.setItem(
-        PATTERNS_CACHE_KEY,
-        JSON.stringify(data.patterns)
-      );
+      const cacheData = JSON.stringify(data.patterns);
+      if (cacheData.length <= MAX_CACHE_SIZE_BYTES) {
+        await AsyncStorage.setItem(PATTERNS_CACHE_KEY, cacheData);
+      } else {
+        // Keep only the most recent patterns to fit within limit
+        const sorted = [...data.patterns].sort(
+          (a, b) => b.patternVersion - a.patternVersion
+        );
+        const truncated: PortalPattern[] = [];
+        let size = 0;
+        for (const p of sorted) {
+          const entry = JSON.stringify(p);
+          if (size + entry.length > MAX_CACHE_SIZE_BYTES * 0.9) break;
+          truncated.push(p);
+          size += entry.length;
+        }
+        await AsyncStorage.setItem(
+          PATTERNS_CACHE_KEY,
+          JSON.stringify(truncated)
+        );
+      }
       await AsyncStorage.setItem(VERSION_KEY, String(data.version));
       await AsyncStorage.setItem(LAST_SYNC_KEY, new Date().toISOString());
       return data.patterns;

@@ -11,7 +11,9 @@
     "db:generate": "npx drizzle-kit generate",
     "db:push": "npx drizzle-kit push",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "dependencies": {
     "@opennextjs/cloudflare": "^1.17.1",
@@ -22,12 +24,15 @@
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20260305.1",
+    "@types/jest": "^30.0.0",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "drizzle-kit": "^0.31.9",
     "eslint": "^9",
     "eslint-config-next": "16.1.6",
+    "jest": "^30.3.0",
+    "ts-jest": "^29.4.6",
     "typescript": "^5"
   }
 }

@@ -75,7 +75,7 @@ function generateFieldCode(
   return `
     await delay(${field.delayMs ?? 200});
     {
-      const el = findEl('${escapeJs(field.selector)}', ${fallbacks});
+      const el = await findElWithRetry('${escapeJs(field.selector)}', ${fallbacks});
       if (el) {
         ${fillCode}
         report('field_filled', '${field.fieldId}');
@@ -128,7 +128,7 @@ function generateActionCode(action: ActionStep): string {
     await delay(${action.delayMs ?? 300});
     ${waitCode}
     {
-      const el = findEl('${escapeJs(action.selector)}', ${fallbacks});
+      const el = await findElWithRetry('${escapeJs(action.selector)}', ${fallbacks});
       if (el) {
         ${actionCode}
         report('action_done', '${desc}');
@@ -192,6 +192,16 @@ export function generateAutomationScript(
         return new Promise(r => setTimeout(r, ms));
       }
 
+      async function findElWithRetry(selector, fallbacks, retries) {
+        retries = retries || 3;
+        for (var attempt = 0; attempt < retries; attempt++) {
+          var el = findEl(selector, fallbacks);
+          if (el && el.offsetParent !== null && !el.disabled) return el;
+          if (attempt < retries - 1) await delay(500);
+        }
+        return findEl(selector, fallbacks);
+      }
+
       async function runAutomation() {
         try {
           report('started', 'Beginning automation');
@@ -199,6 +209,7 @@ export function generateAutomationScript(
 
   // Pre-actions
   if (pattern.preActions) {
+    scriptParts.push(`          _automationPhase = 'pre_actions';`);
     for (const action of pattern.preActions) {
       scriptParts.push(generateActionCode(action));
     }
@@ -217,10 +228,12 @@ export function generateAutomationScript(
     : pattern.registration;
 
   if (flow && pattern.portalType !== "agree_only") {
+    scriptParts.push(`          _automationPhase = 'fields';`);
     for (const field of flow.fields) {
       const value = resolveValue(field, profile, savedCredentials, generatedPassword);
       scriptParts.push(generateFieldCode(field, value));
     }
+    scriptParts.push(`          _automationPhase = 'post_actions';`);
     for (const action of flow.postFillActions) {
       scriptParts.push(generateActionCode(action));
     }
@@ -233,6 +246,7 @@ export function generateAutomationScript(
 
   // Close IIFE
   scriptParts.push(`
+          _automationPhase = 'complete';
           report('completed', 'Automation finished');
         } catch (err) {
           report('error', err.message || 'Unknown error');
@@ -240,8 +254,9 @@ export function generateAutomationScript(
       }
 
       // Timeout guard: abort if automation takes >30s
+      var _automationPhase = 'init';
       var _automationTimer = setTimeout(function() {
-        report('error', 'Automation timed out after 30s');
+        report('error', 'Automation timed out after 30s during: ' + _automationPhase);
       }, 30000);
 
       setTimeout(function() {
