@@ -7,6 +7,7 @@
     "directory": ".open-next/assets",
     "binding": "ASSETS"
   },
+  "workers_dev": true,
   "vars": {
     "AIRALO_MOCK_MODE": "true"
   },
