@@ -43,12 +43,16 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
 
-  return generatePageMetadata({
-    locale: locale as Locale,
-    path: "/order/cancel",
-    title: "Payment Cancelled | AutoWiFi eSIM",
-    description: "Your payment was cancelled. No charges were made.",
-  });
+  return {
+    ...await generatePageMetadata({
+      locale: locale as Locale,
+      path: "/order/cancel",
+      title: "Payment Cancelled | AutoWiFi eSIM",
+      description: "Your payment was cancelled. No charges were made.",
+      noIndex: true,
+    }),
+    robots: { index: false, follow: false },
+  };
 }
 
 export default async function OrderCancelPage({

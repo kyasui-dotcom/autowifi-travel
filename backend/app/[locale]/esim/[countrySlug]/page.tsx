@@ -5,7 +5,7 @@ import { generatePageMetadata } from "@/lib/seo";
 import { getCountryBySlug, getCountryName, getAllCountries } from "@/lib/countries";
 import { getAiraloClient } from "@/lib/airalo";
 import { getEnv } from "@/lib/env";
-import { ProductJsonLd } from "@/lib/components/JsonLd";
+import { ProductJsonLd, BreadcrumbJsonLd } from "@/lib/components/JsonLd";
 import type { Locale } from "@/lib/i18n/config";
 import styles from "./page.module.css";
 
@@ -151,8 +151,18 @@ export default async function CountryPackagesPage({
     // Packages unavailable - will show empty state
   }
 
+  const BASE_URL = "https://autowifi-travel.com";
+
   return (
     <>
+      <BreadcrumbJsonLd
+        items={[
+          { name: labels.breadcrumbHome, url: `${BASE_URL}/${locale}` },
+          { name: labels.breadcrumbEsim, url: `${BASE_URL}/${locale}/esim` },
+          { name: countryName, url: `${BASE_URL}/${locale}/esim/${countrySlug}` },
+        ]}
+      />
+
       {/* Header */}
       <div className={styles.pageHeader}>
         <div className={styles.pageHeaderInner}>

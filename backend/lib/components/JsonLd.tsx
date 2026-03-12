@@ -108,3 +108,78 @@ export function WebSiteJsonLd({
 
   return <JsonLd data={data} />;
 }
+
+// ── BreadcrumbList JSON-LD ──────────────────────────────────
+
+interface BreadcrumbItem {
+  name: string;
+  url: string;
+}
+
+export interface BreadcrumbJsonLdProps {
+  items: BreadcrumbItem[];
+}
+
+export function BreadcrumbJsonLd({ items }: BreadcrumbJsonLdProps) {
+  const data = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: items.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.name,
+      item: item.url,
+    })),
+  };
+
+  return <JsonLd data={data} />;
+}
+
+// ── Organization JSON-LD ────────────────────────────────────
+
+export function OrganizationJsonLd() {
+  const data = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'AutoWiFi Travel',
+    url: 'https://autowifi-travel.com',
+    logo: 'https://autowifi-travel.com/icon.png',
+    description: 'Affordable travel eSIM for 200+ countries. Stay connected wherever you go.',
+    contactPoint: {
+      '@type': 'ContactPoint',
+      email: 'support@autowifi.travel',
+      contactType: 'customer service',
+      availableLanguage: ['English', 'Japanese', 'Korean', 'Chinese'],
+    },
+  };
+
+  return <JsonLd data={data} />;
+}
+
+// ── FAQ JSON-LD ─────────────────────────────────────────────
+
+interface FaqItem {
+  question: string;
+  answer: string;
+}
+
+export interface FaqJsonLdProps {
+  items: FaqItem[];
+}
+
+export function FaqJsonLd({ items }: FaqJsonLdProps) {
+  const data = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: items.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.answer,
+      },
+    })),
+  };
+
+  return <JsonLd data={data} />;
+}

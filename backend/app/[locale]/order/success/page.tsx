@@ -63,12 +63,16 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
 
-  return generatePageMetadata({
-    locale: locale as Locale,
-    path: "/order/success",
-    title: "Order Confirmed | AutoWiFi eSIM",
-    description: "Your eSIM order has been confirmed. Check your email for activation instructions.",
-  });
+  return {
+    ...await generatePageMetadata({
+      locale: locale as Locale,
+      path: "/order/success",
+      title: "Order Confirmed | AutoWiFi eSIM",
+      description: "Your eSIM order has been confirmed. Check your email for activation instructions.",
+      noIndex: true,
+    }),
+    robots: { index: false, follow: false },
+  };
 }
 
 export default async function OrderSuccessPage({

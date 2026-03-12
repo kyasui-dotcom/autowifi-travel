@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { LOCALES, type Locale } from '@/lib/i18n/config';
 
 function getBaseUrl(): string {
-  return process.env.NEXT_PUBLIC_BASE_URL ?? 'https://www.autowifi.travel';
+  return process.env.NEXT_PUBLIC_BASE_URL ?? 'https://autowifi-travel.com';
 }
 
 interface PageMetadataOptions {

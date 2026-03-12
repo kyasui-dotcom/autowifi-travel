@@ -3,6 +3,7 @@ import Script from "next/script";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { generatePageMetadata } from "@/lib/seo";
+import { OrganizationJsonLd } from "@/lib/components/JsonLd";
 import styles from "./layout.module.css";
 
 const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
@@ -140,8 +141,11 @@ export default async function LocaleLayout({
         {GSC_VERIFICATION && (
           <meta name="google-site-verification" content={GSC_VERIFICATION} />
         )}
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
       </head>
       <body>
+        <OrganizationJsonLd />
         <div className={styles.pageWrapper}>
           <Header locale={validLocale} />
           <main className={styles.main}>{children}</main>

@@ -106,12 +106,16 @@ export async function generateMetadata({
   const country = getCountryBySlug(countrySlug);
   const countryName = country ? getCountryName(country, locale) : countrySlug;
 
-  return generatePageMetadata({
-    locale: locale as Locale,
-    path: `/esim/${countrySlug}/checkout`,
-    title: `Checkout - ${countryName} eSIM | AutoWiFi eSIM`,
-    description: `Complete your purchase of a ${countryName} eSIM plan.`,
-  });
+  return {
+    ...await generatePageMetadata({
+      locale: locale as Locale,
+      path: `/esim/${countrySlug}/checkout`,
+      title: `Checkout - ${countryName} eSIM | AutoWiFi eSIM`,
+      description: `Complete your purchase of a ${countryName} eSIM plan.`,
+      noIndex: true,
+    }),
+    robots: { index: false, follow: false },
+  };
 }
 
 export default async function CheckoutPage({

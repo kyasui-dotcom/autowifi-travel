@@ -25,14 +25,22 @@ function getPreferredLocale(request: NextRequest): string {
 }
 
 export function middleware(request: NextRequest) {
-  const { pathname } = request.nextUrl;
+  const { pathname, host } = request.nextUrl;
+
+  // www → non-www redirect (SEO canonical)
+  if (host === "www.autowifi-travel.com") {
+    const url = request.nextUrl.clone();
+    url.host = "autowifi-travel.com";
+    return NextResponse.redirect(url, 301);
+  }
 
   // Pass through API routes, Next.js internals, and static files
   if (
     pathname.startsWith("/api/") ||
     pathname.startsWith("/_next/") ||
     pathname.startsWith("/favicon.ico") ||
-    pathname.match(/\.(svg|png|jpg|jpeg|gif|webp|ico|css|js|woff|woff2|ttf|eot)$/)
+    pathname.startsWith("/google") ||
+    pathname.match(/\.(svg|png|jpg|jpeg|gif|webp|ico|css|js|woff|woff2|ttf|eot|html|xml|txt)$/)
   ) {
     return NextResponse.next();
   }
