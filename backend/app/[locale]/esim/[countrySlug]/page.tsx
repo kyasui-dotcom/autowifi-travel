@@ -9,6 +9,9 @@ import { ProductJsonLd, BreadcrumbJsonLd } from "@/lib/components/JsonLd";
 import type { Locale } from "@/lib/i18n/config";
 import styles from "./page.module.css";
 
+// Force SSR so Cloudflare context (Airalo API secrets) is available at request time
+export const dynamic = "force-dynamic";
+
 const LABELS: Record<string, {
   esimPlans: string;
   data: string;

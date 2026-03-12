@@ -10,6 +10,9 @@ import type { Locale } from "@/lib/i18n/config";
 import CheckoutForm from "./CheckoutForm";
 import styles from "./page.module.css";
 
+// Force SSR so Cloudflare context (D1 database) is available at request time
+export const dynamic = "force-dynamic";
+
 const LABELS: Record<string, {
   checkout: string;
   back: string;
