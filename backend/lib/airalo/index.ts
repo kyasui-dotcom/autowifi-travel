@@ -22,7 +22,7 @@ export function getAiraloClient(env: {
   }
 
   return createAiraloClient(
-    env.AIRALO_BASE_URL ?? "https://partners-api.airalo.com",
+    env.AIRALO_BASE_URL || "https://partners-api.airalo.com",
     env.AIRALO_CLIENT_ID,
     env.AIRALO_CLIENT_SECRET ?? ""
   );
