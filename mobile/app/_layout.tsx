@@ -95,6 +95,12 @@ function RootLayoutNav({ isFirstLaunch }: { isFirstLaunch: boolean }) {
             headerShown: true,
           }}
         />
+        <Stack.Screen
+          name="esim"
+          options={{
+            headerShown: false,
+          }}
+        />
         <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
       </Stack>
     </ThemeProvider>

@@ -69,6 +69,64 @@ export const connectionReports = sqliteTable("connection_reports", {
     .$defaultFn(() => new Date().toISOString()),
 });
 
+export const esimPackages = sqliteTable(
+  "esim_packages",
+  {
+    id: integer("id").primaryKey({ autoIncrement: true }),
+    airaloPackageId: text("airalo_package_id").notNull().unique(),
+    countryCode: text("country_code").notNull(),
+    title: text("title").notNull(),
+    description: text("description"),
+    dataAmount: text("data_amount").notNull(),
+    validityDays: integer("validity_days").notNull(),
+    priceUsd: integer("price_usd").notNull(),
+    operatorTitle: text("operator_title"),
+    type: text("type").notNull(),
+    isActive: integer("is_active", { mode: "boolean" }).notNull().default(true),
+    cachedAt: text("cached_at")
+      .notNull()
+      .$defaultFn(() => new Date().toISOString()),
+    createdAt: text("created_at")
+      .notNull()
+      .$defaultFn(() => new Date().toISOString()),
+    updatedAt: text("updated_at")
+      .notNull()
+      .$defaultFn(() => new Date().toISOString()),
+  },
+  (table) => [uniqueIndex("airalo_package_id_idx").on(table.airaloPackageId)]
+);
+
+export const esimOrders = sqliteTable(
+  "esim_orders",
+  {
+    id: integer("id").primaryKey({ autoIncrement: true }),
+    orderId: text("order_id").notNull().unique(),
+    email: text("email").notNull(),
+    airaloPackageId: text("airalo_package_id").notNull(),
+    packageTitle: text("package_title").notNull(),
+    countryCode: text("country_code").notNull(),
+    priceUsd: integer("price_usd").notNull(),
+    quantity: integer("quantity").notNull().default(1),
+    status: text("status").notNull().default("pending"),
+    stripeCheckoutSessionId: text("stripe_checkout_session_id").unique(),
+    stripePaymentIntentId: text("stripe_payment_intent_id"),
+    airaloOrderId: text("airalo_order_id"),
+    airaloSimIccid: text("airalo_sim_iccid"),
+    qrCodeUrl: text("qr_code_url"),
+    installationInstructions: text("installation_instructions", {
+      mode: "json",
+    }),
+    errorDetail: text("error_detail"),
+    createdAt: text("created_at")
+      .notNull()
+      .$defaultFn(() => new Date().toISOString()),
+    updatedAt: text("updated_at")
+      .notNull()
+      .$defaultFn(() => new Date().toISOString()),
+  },
+  (table) => [uniqueIndex("order_id_idx").on(table.orderId)]
+);
+
 export const spotRequests = sqliteTable("spot_requests", {
   id: integer("id").primaryKey({ autoIncrement: true }),
   spotName: text("spot_name").notNull(),

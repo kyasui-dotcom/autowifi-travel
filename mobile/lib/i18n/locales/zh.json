@@ -80,10 +80,57 @@
     "title": "购买eSIM",
     "subtitle": "在Airalo购买目的地的eSIM。\n即使没有免费WiFi也能保持连接。",
     "viewEsim": "查看eSIM →",
+    "viewPackages": "套餐 →",
+    "myOrders": "我的订单",
     "spotCount": "{{count}}个WiFi热点",
     "countryEsim": "{{country}}的eSIM",
     "openBrowser": "在浏览器中打开",
     "noUrl": "未指定URL",
+    "searchPlaceholder": "搜索国家...",
+    "resultCount": "{{count}}个国家",
+    "noResults": "没有匹配的国家",
+    "noPackages": "暂无可用套餐",
+    "packagesFor": "{{country}} eSIM套餐",
+    "package": {
+      "data": "数据量",
+      "validity": "有效期",
+      "days": "{{count}}天",
+      "operator": "运营商",
+      "country": "适用国家",
+      "price": "价格",
+      "title": "套餐名"
+    },
+    "checkout": {
+      "title": "结账",
+      "emailLabel": "邮箱（eSIM发送地址）",
+      "emailPlaceholder": "example@email.com",
+      "invalidEmail": "请输入有效的邮箱地址",
+      "buyNow": "以{{price}}购买",
+      "failed": "结账失败",
+      "stripeNote": "将跳转至安全支付页面（Stripe）"
+    },
+    "order": {
+      "status": {
+        "pending": "待付款",
+        "paid": "已付款",
+        "ordered": "处理中",
+        "completed": "已完成",
+        "failed": "失败",
+        "refunded": "已退款"
+      },
+      "processing": "正在处理订单...",
+      "packageInfo": "套餐信息",
+      "date": "下单时间",
+      "qrCode": "二维码",
+      "qrHint": "请在另一台设备上扫描此二维码以安装eSIM",
+      "instructions": "设置步骤",
+      "dataUsage": "数据使用量",
+      "notFound": "未找到订单"
+    },
+    "orders": {
+      "needProfile": "请先设置个人资料以查看订单历史",
+      "empty": "暂无订单"
+    },
     "countries": {
       "KR": "韩国",
       "SG": "新加坡",

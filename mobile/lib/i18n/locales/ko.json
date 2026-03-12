@@ -80,10 +80,57 @@
     "title": "eSIM 구매",
     "subtitle": "Airalo에서 여행지의 eSIM을 구매하세요.\n무료 WiFi를 사용할 수 없는 곳에서도 안심하세요.",
     "viewEsim": "eSIM 보기 →",
+    "viewPackages": "플랜 →",
+    "myOrders": "주문 내역",
     "spotCount": "WiFi 스팟 {{count}}건",
     "countryEsim": "{{country}} eSIM",
     "openBrowser": "브라우저에서 열기",
     "noUrl": "URL이 지정되지 않았습니다",
+    "searchPlaceholder": "국가 검색...",
+    "resultCount": "{{count}}개국",
+    "noResults": "일치하는 국가가 없습니다",
+    "noPackages": "이용 가능한 플랜이 없습니다",
+    "packagesFor": "{{country}} eSIM 플랜",
+    "package": {
+      "data": "데이터",
+      "validity": "유효기간",
+      "days": "{{count}}일",
+      "operator": "통신사",
+      "country": "대상 국가",
+      "price": "가격",
+      "title": "플랜명"
+    },
+    "checkout": {
+      "title": "결제",
+      "emailLabel": "이메일 (eSIM 전송용)",
+      "emailPlaceholder": "example@email.com",
+      "invalidEmail": "유효한 이메일 주소를 입력해주세요",
+      "buyNow": "{{price}}에 구매",
+      "failed": "결제에 실패했습니다",
+      "stripeNote": "안전한 결제 페이지로 이동합니다 (Stripe)"
+    },
+    "order": {
+      "status": {
+        "pending": "결제 대기",
+        "paid": "결제 완료",
+        "ordered": "발급 중",
+        "completed": "완료",
+        "failed": "실패",
+        "refunded": "환불됨"
+      },
+      "processing": "주문 처리 중...",
+      "packageInfo": "플랜 정보",
+      "date": "주문일",
+      "qrCode": "QR 코드",
+      "qrHint": "다른 기기에서 이 QR 코드를 스캔하여 eSIM을 설치하세요",
+      "instructions": "설정 방법",
+      "dataUsage": "데이터 사용량",
+      "notFound": "주문을 찾을 수 없습니다"
+    },
+    "orders": {
+      "needProfile": "주문 내역을 보려면 프로필을 설정해주세요",
+      "empty": "주문 내역이 없습니다"
+    },
     "countries": {
       "KR": "한국",
       "SG": "싱가포르",

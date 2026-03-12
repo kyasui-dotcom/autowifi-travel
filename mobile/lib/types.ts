@@ -201,6 +201,55 @@ export interface AutoDetectedPortal {
   language: string;
 }
 
+// ===== eSIM Types =====
+
+export interface EsimPackage {
+  id: number;
+  airaloPackageId: string;
+  countryCode: string;
+  title: string;
+  description?: string;
+  dataAmount: string;
+  validityDays: number;
+  priceUsd: number; // cents
+  operatorTitle?: string;
+  type: "local" | "regional" | "global";
+}
+
+export type EsimOrderStatus =
+  | "pending"
+  | "paid"
+  | "ordered"
+  | "completed"
+  | "failed"
+  | "refunded";
+
+export interface EsimOrder {
+  orderId: string;
+  email: string;
+  airaloPackageId: string;
+  packageTitle: string;
+  countryCode: string;
+  priceUsd: number; // cents
+  quantity: number;
+  status: EsimOrderStatus;
+  qrCodeUrl?: string | null;
+  installationInstructions?: {
+    language: string;
+    steps: { step: number; title: string; description: string }[];
+  } | null;
+  airaloSimIccid?: string | null;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface EsimUsage {
+  total: number;
+  remaining: number;
+  percentage: number;
+  status: string;
+}
+
 export type GeofenceStatus = "disabled" | "permission_denied" | "initializing" | "monitoring" | "error";
 
 export interface GeofenceState {

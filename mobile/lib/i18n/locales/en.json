@@ -80,10 +80,57 @@
     "title": "Buy eSIM",
     "subtitle": "Purchase eSIMs for your destination on Airalo.\nStay connected even without free WiFi.",
     "viewEsim": "View eSIM →",
+    "viewPackages": "Plans →",
+    "myOrders": "My Orders",
     "spotCount": "{{count}} WiFi spots",
     "countryEsim": "eSIM for {{country}}",
     "openBrowser": "Open in Browser",
     "noUrl": "No URL specified",
+    "searchPlaceholder": "Search countries...",
+    "resultCount": "{{count}} countries found",
+    "noResults": "No matching countries",
+    "noPackages": "No plans available",
+    "packagesFor": "eSIM Plans for {{country}}",
+    "package": {
+      "data": "Data",
+      "validity": "Validity",
+      "days": "{{count}} days",
+      "operator": "Operator",
+      "country": "Country",
+      "price": "Price",
+      "title": "Plan"
+    },
+    "checkout": {
+      "title": "Checkout",
+      "emailLabel": "Email (for eSIM delivery)",
+      "emailPlaceholder": "example@email.com",
+      "invalidEmail": "Please enter a valid email address",
+      "buyNow": "Buy for {{price}}",
+      "failed": "Checkout failed",
+      "stripeNote": "You will be redirected to a secure payment page (Stripe)"
+    },
+    "order": {
+      "status": {
+        "pending": "Pending",
+        "paid": "Paid",
+        "ordered": "Processing",
+        "completed": "Completed",
+        "failed": "Failed",
+        "refunded": "Refunded"
+      },
+      "processing": "Processing your order...",
+      "packageInfo": "Package Info",
+      "date": "Order Date",
+      "qrCode": "QR Code",
+      "qrHint": "Scan this QR code from another device to install the eSIM",
+      "instructions": "Setup Instructions",
+      "dataUsage": "Data Usage",
+      "notFound": "Order not found"
+    },
+    "orders": {
+      "needProfile": "Set up your profile to view order history",
+      "empty": "No orders yet"
+    },
     "countries": {
       "KR": "South Korea",
       "SG": "Singapore",

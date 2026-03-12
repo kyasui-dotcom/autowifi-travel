@@ -1,4 +1,10 @@
-import { StyleSheet, FlatList, TouchableOpacity } from "react-native";
+import { useState, useMemo } from "react";
+import {
+  StyleSheet,
+  FlatList,
+  TouchableOpacity,
+  TextInput,
+} from "react-native";
 import { Text, View } from "@/components/Themed";
 import { useRouter } from "expo-router";
 import { useTranslation } from "react-i18next";
@@ -6,22 +12,6 @@ import patternsData from "@/assets/portal-patterns/patterns-v1.json";
 import type { PortalPattern } from "@/lib/types";
 
 const patterns = patternsData.patterns as PortalPattern[];
-
-// Country code -> Airalo URL slug mapping
-const airaloSlugs: Record<string, string> = {
-  KR: "south-korea",
-  SG: "singapore",
-  US: "united-states",
-  HK: "hong-kong",
-  TW: "taiwan",
-  TH: "thailand",
-  CN: "china",
-  VN: "vietnam",
-  PH: "philippines",
-  ID: "indonesia",
-  MY: "malaysia",
-  JP: "japan",
-};
 
 const countryFlags: Record<string, string> = {
   KR: "\u{1F1F0}\u{1F1F7}",
@@ -38,7 +28,6 @@ const countryFlags: Record<string, string> = {
   JP: "\u{1F1EF}\u{1F1F5}",
 };
 
-// Get unique countries from patterns (preserving order, overseas first)
 function getCountries(): string[] {
   const seen = new Set<string>();
   const overseas: string[] = [];
@@ -57,40 +46,34 @@ function getCountries(): string[] {
   return [...overseas, ...domestic];
 }
 
-function buildAiraloUrl(countryCode: string): string {
-  const slug = airaloSlugs[countryCode] ?? countryCode.toLowerCase();
-  return `https://www.airalo.com/${slug}-esim`;
-}
-
 function CountryCard({
   countryCode,
   onPress,
 }: {
   countryCode: string;
-  onPress: (url: string, name: string) => void;
+  onPress: (countryCode: string) => void;
 }) {
   const { t } = useTranslation();
   const flag = countryFlags[countryCode] ?? "";
   const name = t(`esim.countries.${countryCode}`);
   const spotCount = patterns.filter((p) => p.country === countryCode).length;
 
-  const handlePress = () => {
-    onPress(buildAiraloUrl(countryCode), name);
-  };
-
   return (
-    <TouchableOpacity style={styles.card} onPress={handlePress}>
+    <TouchableOpacity
+      style={styles.card}
+      onPress={() => onPress(countryCode)}
+    >
       <View style={styles.cardLeft}>
         <Text style={styles.flag}>{flag}</Text>
         <View style={styles.cardInfo}>
           <Text style={styles.countryName}>{name}</Text>
           <Text style={styles.spotCount}>
-            {t('esim.spotCount', { count: spotCount })}
+            {t("esim.spotCount", { count: spotCount })}
           </Text>
         </View>
       </View>
       <View style={styles.cardRight}>
-        <Text style={styles.esimLabel}>{t('esim.viewEsim')}</Text>
+        <Text style={styles.esimLabel}>{t("esim.viewPackages")}</Text>
       </View>
     </TouchableOpacity>
   );
@@ -98,31 +81,70 @@ function CountryCard({
 
 export default function EsimScreen() {
   const { t } = useTranslation();
+  const [searchQuery, setSearchQuery] = useState("");
   const countries = getCountries();
   const router = useRouter();
 
-  const handleCountryPress = (url: string, name: string) => {
+  const filteredCountries = useMemo(() => {
+    if (!searchQuery.trim()) return countries;
+    const q = searchQuery.trim().toLowerCase();
+    return countries.filter((code) => {
+      const name = t(`esim.countries.${code}`).toLowerCase();
+      return name.includes(q) || code.toLowerCase().includes(q);
+    });
+  }, [countries, searchQuery, t]);
+
+  const handleCountryPress = (countryCode: string) => {
     router.push({
-      pathname: "/esim-webview",
-      params: { url, title: t('esim.countryEsim', { country: name }) },
+      pathname: "/esim/packages",
+      params: { country: countryCode },
     });
   };
 
   return (
     <View style={styles.container}>
       <FlatList
-        data={countries}
+        data={filteredCountries}
         keyExtractor={(item) => item}
         renderItem={({ item }) => (
           <CountryCard countryCode={item} onPress={handleCountryPress} />
         )}
         ListHeaderComponent={
           <View style={styles.header}>
-            <Text style={styles.title}>{t('esim.title')}</Text>
-            <Text style={styles.subtitle}>{t('esim.subtitle')}</Text>
+            <View style={styles.headerRow}>
+              <Text style={styles.title}>{t("esim.title")}</Text>
+              <TouchableOpacity
+                style={styles.ordersButton}
+                onPress={() => router.push("/esim/orders")}
+              >
+                <Text style={styles.ordersButtonText}>
+                  {t("esim.myOrders")}
+                </Text>
+              </TouchableOpacity>
+            </View>
+            <Text style={styles.subtitle}>{t("esim.subtitle")}</Text>
+            <TextInput
+              style={styles.searchInput}
+              value={searchQuery}
+              onChangeText={setSearchQuery}
+              placeholder={t("esim.searchPlaceholder")}
+              placeholderTextColor="#999"
+              clearButtonMode="while-editing"
+              autoCorrect={false}
+            />
+            {searchQuery.trim() !== "" && (
+              <Text style={styles.resultCount}>
+                {t("esim.resultCount", { count: filteredCountries.length })}
+              </Text>
+            )}
           </View>
         }
         contentContainerStyle={styles.listContent}
+        ListEmptyComponent={
+          <View style={styles.emptyContainer}>
+            <Text style={styles.emptyText}>{t("esim.noResults")}</Text>
+          </View>
+        }
       />
     </View>
   );
@@ -138,10 +160,26 @@ const styles = StyleSheet.create({
   header: {
     marginBottom: 16,
   },
+  headerRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 4,
+  },
   title: {
     fontSize: 20,
     fontWeight: "bold",
-    marginBottom: 4,
+  },
+  ordersButton: {
+    backgroundColor: "#2196F3",
+    borderRadius: 8,
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+  },
+  ordersButtonText: {
+    color: "#fff",
+    fontSize: 13,
+    fontWeight: "bold",
   },
   subtitle: {
     fontSize: 13,
@@ -189,5 +227,29 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 13,
     fontWeight: "bold",
+  },
+  searchInput: {
+    borderWidth: 1,
+    borderColor: "rgba(150, 150, 150, 0.3)",
+    borderRadius: 10,
+    paddingHorizontal: 14,
+    paddingVertical: 10,
+    fontSize: 15,
+    marginTop: 12,
+    marginBottom: 4,
+  },
+  resultCount: {
+    fontSize: 12,
+    opacity: 0.5,
+    marginTop: 4,
+    marginBottom: 4,
+  },
+  emptyContainer: {
+    alignItems: "center",
+    paddingVertical: 32,
+  },
+  emptyText: {
+    fontSize: 14,
+    opacity: 0.5,
   },
 });

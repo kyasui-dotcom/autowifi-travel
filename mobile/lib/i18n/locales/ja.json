@@ -80,10 +80,57 @@
     "title": "eSIM購入",
     "subtitle": "渡航先のeSIMをAiraloで購入できます。\nフリーWiFiが使えない場所でも安心。",
     "viewEsim": "eSIMを見る →",
+    "viewPackages": "プラン →",
+    "myOrders": "注文履歴",
     "spotCount": "WiFiスポット {{count}}件",
     "countryEsim": "{{country}}のeSIM",
     "openBrowser": "ブラウザで開く",
     "noUrl": "URLが指定されていません",
+    "searchPlaceholder": "国名で検索...",
+    "resultCount": "{{count}}件の国",
+    "noResults": "一致する国がありません",
+    "noPackages": "利用可能なプランがありません",
+    "packagesFor": "{{country}}のeSIMプラン",
+    "package": {
+      "data": "データ量",
+      "validity": "有効期間",
+      "days": "{{count}}日間",
+      "operator": "通信事業者",
+      "country": "対象国",
+      "price": "価格",
+      "title": "プラン名"
+    },
+    "checkout": {
+      "title": "購入手続き",
+      "emailLabel": "メールアドレス（eSIM送付先）",
+      "emailPlaceholder": "example@email.com",
+      "invalidEmail": "有効なメールアドレスを入力してください",
+      "buyNow": "{{price}} で購入",
+      "failed": "購入手続きに失敗しました",
+      "stripeNote": "安全な決済ページに移動します（Stripe）"
+    },
+    "order": {
+      "status": {
+        "pending": "決済待ち",
+        "paid": "決済完了",
+        "ordered": "発行中",
+        "completed": "完了",
+        "failed": "失敗",
+        "refunded": "返金済み"
+      },
+      "processing": "処理中です...",
+      "packageInfo": "プラン情報",
+      "date": "注文日時",
+      "qrCode": "QRコード",
+      "qrHint": "別の端末でこのQRコードをスキャンしてeSIMをインストールしてください",
+      "instructions": "設定手順",
+      "dataUsage": "データ使用量",
+      "notFound": "注文が見つかりません"
+    },
+    "orders": {
+      "needProfile": "注文履歴を見るにはプロフィールを設定してください",
+      "empty": "注文履歴はありません"
+    },
     "countries": {
       "KR": "韓国",
       "SG": "シンガポール",

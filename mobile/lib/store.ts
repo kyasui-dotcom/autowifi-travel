@@ -1,7 +1,20 @@
-import { create } from "zustand";
-import { persist, createJSONStorage } from "zustand/middleware";
+import { create, type StateCreator } from "zustand";
+import { persist, createJSONStorage, type StateStorage } from "zustand/middleware";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import type { UserProfile, WifiState, PortalPattern, AutoReconnectState, AutoReconnectStatus, GeofenceState, GeofenceStatus } from "@/lib/types";
+import type { UserProfile, WifiState, PortalPattern, AutoReconnectState, AutoReconnectStatus, GeofenceState, GeofenceStatus, EsimOrder } from "@/lib/types";
+
+// SSR-safe storage wrapper: falls back to no-op when window is not available
+const safeStorage = createJSONStorage(() => {
+  if (typeof window === "undefined") {
+    const noop: StateStorage = {
+      getItem: () => null,
+      setItem: () => {},
+      removeItem: () => {},
+    };
+    return noop;
+  }
+  return AsyncStorage;
+});
 
 // ===== User Profile Store (persisted to AsyncStorage) =====
 
@@ -22,7 +35,7 @@ export const useProfileStore = create<ProfileStore>()(
     }),
     {
       name: "autowifi_user_profile",
-      storage: createJSONStorage(() => AsyncStorage),
+      storage: safeStorage,
       partialize: (state) => ({ profile: state.profile }),
       onRehydrateStorage: () => () => {
         useProfileStore.setState({ _hydrated: true });
@@ -131,3 +144,41 @@ export const useGeofenceStore = create<GeofenceStore>((set) => ({
     })),
   resetGeofence: () => set({ geofence: initialGeofenceState }),
 }));
+
+// ===== eSIM Orders Store (persisted to AsyncStorage) =====
+
+interface EsimStore {
+  orders: EsimOrder[];
+  currentOrderId: string | null;
+  setOrders: (orders: EsimOrder[]) => void;
+  addOrder: (order: EsimOrder) => void;
+  updateOrder: (orderId: string, updates: Partial<EsimOrder>) => void;
+  setCurrentOrderId: (id: string | null) => void;
+}
+
+export const useEsimStore = create<EsimStore>()(
+  persist(
+    (set) => ({
+      orders: [],
+      currentOrderId: null,
+      setOrders: (orders) => set({ orders }),
+      addOrder: (order) =>
+        set((s) => ({ orders: [order, ...s.orders] })),
+      updateOrder: (orderId, updates) =>
+        set((s) => ({
+          orders: s.orders.map((o) =>
+            o.orderId === orderId ? { ...o, ...updates } : o
+          ),
+        })),
+      setCurrentOrderId: (id) => set({ currentOrderId: id }),
+    }),
+    {
+      name: "autowifi_esim_orders",
+      storage: safeStorage,
+      partialize: (state) => ({
+        orders: state.orders,
+        currentOrderId: state.currentOrderId,
+      }),
+    }
+  )
+);
