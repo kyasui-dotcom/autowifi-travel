@@ -24,6 +24,8 @@ jobs:
       - run: npm ci
 
       - run: npx @opennextjs/cloudflare build
+        env:
+          NEXT_PUBLIC_GA_MEASUREMENT_ID: G-T7F9FLLXDX
 
       - run: npx wrangler deploy
         env:
