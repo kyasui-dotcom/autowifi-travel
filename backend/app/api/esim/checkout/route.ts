@@ -10,6 +10,8 @@ export async function POST(request: NextRequest) {
     const body = (await request.json()) as {
       packageId?: string;
       email?: string;
+      source?: "web" | "app";
+      locale?: string;
     };
 
     if (!body.packageId || !body.email) {
@@ -47,11 +49,21 @@ export async function POST(request: NextRequest) {
     const orderId = crypto.randomUUID();
 
     // Create Stripe Checkout Session
-    const scheme = env.APP_DEEP_LINK_SCHEME ?? "autowifi";
-    const successUrl =
-      env.APP_SUCCESS_URL ??
-      `${scheme}://esim/order-detail?orderId=${orderId}&status=success`;
-    const cancelUrl = `${scheme}://esim/order-detail?orderId=${orderId}&status=cancel`;
+    let successUrl: string;
+    let cancelUrl: string;
+
+    if (body.source === "web" && env.WEB_BASE_URL) {
+      const locale = body.locale ?? "en";
+      const base = env.WEB_BASE_URL.replace(/\/$/, "");
+      successUrl = `${base}/${locale}/order/success?orderId=${orderId}`;
+      cancelUrl = `${base}/${locale}/order/cancel?orderId=${orderId}`;
+    } else {
+      const scheme = env.APP_DEEP_LINK_SCHEME ?? "autowifi";
+      successUrl =
+        env.APP_SUCCESS_URL ??
+        `${scheme}://esim/order-detail?orderId=${orderId}&status=success`;
+      cancelUrl = `${scheme}://esim/order-detail?orderId=${orderId}&status=cancel`;
+    }
 
     const stripe = createStripeClient(env.STRIPE_SECRET_KEY);
     const session = await stripe.createCheckoutSession({

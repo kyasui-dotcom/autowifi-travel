@@ -1,0 +1,62 @@
+{
+  "landing": {
+    "heroTitle": "旅行用eSIM — どこでもつながる",
+    "heroSubtitle": "世界中どこでも快適にネット接続。即時開通、物理SIM不要。",
+    "cta": "eSIMプランを見る",
+    "valueProps": {
+      "instantActivation": "即時開通",
+      "instantActivationDesc": "数分でeSIMを有効化。店舗に行く必要なし — スキャンして接続するだけ。",
+      "globalCoverage": "グローバル対応",
+      "globalCoverageDesc": "190以上の国と地域で安定した現地データプランをご利用いただけます。",
+      "affordable": "お手頃価格",
+      "affordableDesc": "ローミング料金と比べて最大90%節約。必要な分だけお支払い。"
+    },
+    "popularDestinations": "人気の渡航先"
+  },
+  "esim": {
+    "countryListTitle": "渡航先を選択",
+    "searchPlaceholder": "国名で検索...",
+    "packagesFor": "{{country}}のeSIMパッケージ",
+    "noPackages": "この渡航先のパッケージはまだありません。"
+  },
+  "package": {
+    "data": "データ容量",
+    "validity": "有効期間",
+    "days": "日間",
+    "operator": "通信事業者",
+    "buyNow": "購入する",
+    "price": "価格",
+    "perDay": "/日"
+  },
+  "checkout": {
+    "title": "お支払い",
+    "emailLabel": "メールアドレス",
+    "emailPlaceholder": "you@example.com",
+    "invalidEmail": "有効なメールアドレスを入力してください。",
+    "processing": "処理中...",
+    "stripeNote": "Stripeによる安全な決済"
+  },
+  "order": {
+    "successTitle": "ご注文確定！",
+    "successMessage": "eSIMの詳細をメールでお送りしました。受信トレイをご確認ください。",
+    "cancelTitle": "注文キャンセル",
+    "cancelMessage": "ご注文はキャンセルされました。請求は発生していません。",
+    "viewOrder": "注文詳細を見る"
+  },
+  "common": {
+    "home": "ホーム",
+    "esim": "eSIM",
+    "languages": {
+      "en": "英語",
+      "ja": "日本語",
+      "ko": "韓国語",
+      "zh": "中国語"
+    }
+  },
+  "seo": {
+    "defaultTitle": "旅行用eSIM — 190以上の国で即時モバイルデータ",
+    "defaultDescription": "旅行用プリペイドeSIMをオンラインで購入。即時開通、お手頃なデータプラン、世界中で利用可能。",
+    "countryTitle": "{{country}} eSIM — {{price}}からのプリペイドデータプラン",
+    "countryDescription": "{{country}}用プリペイドeSIMを購入。{{price}}からの即時モバイルデータ。ローミング料金なし。"
+  }
+}

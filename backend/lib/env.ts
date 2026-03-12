@@ -10,6 +10,7 @@ interface AppEnv {
   STRIPE_WEBHOOK_SECRET?: string;
   APP_DEEP_LINK_SCHEME?: string;
   APP_SUCCESS_URL?: string;
+  WEB_BASE_URL?: string;
 }
 
 export async function getEnv(): Promise<AppEnv> {

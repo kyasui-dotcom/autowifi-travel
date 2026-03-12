@@ -1,0 +1,62 @@
+{
+  "landing": {
+    "heroTitle": "旅行eSIM — 随时随地保持连接",
+    "heroSubtitle": "无论身在何处，畅享网络连接。即时激活，无需实体SIM卡。",
+    "cta": "浏览eSIM套餐",
+    "valueProps": {
+      "instantActivation": "即时激活",
+      "instantActivationDesc": "几分钟内激活eSIM。无需前往门店 — 扫码即可连接。",
+      "globalCoverage": "全球覆盖",
+      "globalCoverageDesc": "在190多个国家和地区享受稳定的本地数据套餐。",
+      "affordable": "价格实惠",
+      "affordableDesc": "与漫游费相比节省高达90%。按需付费，不多花一分钱。"
+    },
+    "popularDestinations": "热门目的地"
+  },
+  "esim": {
+    "countryListTitle": "选择目的地",
+    "searchPlaceholder": "搜索国家...",
+    "packagesFor": "{{country}} eSIM套餐",
+    "noPackages": "该目的地暂无可用套餐。"
+  },
+  "package": {
+    "data": "流量",
+    "validity": "有效期",
+    "days": "天",
+    "operator": "运营商",
+    "buyNow": "立即购买",
+    "price": "价格",
+    "perDay": "/天"
+  },
+  "checkout": {
+    "title": "结算",
+    "emailLabel": "电子邮箱",
+    "emailPlaceholder": "you@example.com",
+    "invalidEmail": "请输入有效的电子邮箱地址。",
+    "processing": "处理中...",
+    "stripeNote": "由Stripe提供安全支付"
+  },
+  "order": {
+    "successTitle": "订单已确认！",
+    "successMessage": "eSIM详细信息已发送至您的邮箱，请查收。",
+    "cancelTitle": "订单已取消",
+    "cancelMessage": "您的订单已取消，未产生任何费用。",
+    "viewOrder": "查看订单详情"
+  },
+  "common": {
+    "home": "首页",
+    "esim": "eSIM",
+    "languages": {
+      "en": "英语",
+      "ja": "日语",
+      "ko": "韩语",
+      "zh": "中文"
+    }
+  },
+  "seo": {
+    "defaultTitle": "旅行eSIM — 190多个国家即时移动数据",
+    "defaultDescription": "在线购买旅行预付费eSIM。即时激活，实惠的数据套餐，全球覆盖。",
+    "countryTitle": "{{country}} eSIM — {{price}}起的预付费数据套餐",
+    "countryDescription": "购买{{country}}预付费eSIM。{{price}}起即时移动数据，无漫游费。"
+  }
+}

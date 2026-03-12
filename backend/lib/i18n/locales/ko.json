@@ -1,0 +1,62 @@
+{
+  "landing": {
+    "heroTitle": "여행용 eSIM — 어디서든 연결",
+    "heroSubtitle": "전 세계 어디서나 편리하게 인터넷 연결. 즉시 활성화, 물리적 SIM 불필요.",
+    "cta": "eSIM 요금제 보기",
+    "valueProps": {
+      "instantActivation": "즉시 활성화",
+      "instantActivationDesc": "몇 분 만에 eSIM 활성화. 매장 방문 없이 스캔하고 연결하세요.",
+      "globalCoverage": "글로벌 커버리지",
+      "globalCoverageDesc": "190개 이상의 국가에서 안정적인 현지 데이터 요금제를 이용하세요.",
+      "affordable": "합리적인 가격",
+      "affordableDesc": "로밍 요금 대비 최대 90% 절약. 필요한 데이터만 결제하세요."
+    },
+    "popularDestinations": "인기 여행지"
+  },
+  "esim": {
+    "countryListTitle": "여행지 선택",
+    "searchPlaceholder": "국가 검색...",
+    "packagesFor": "{{country}} eSIM 패키지",
+    "noPackages": "이 여행지의 패키지는 아직 없습니다."
+  },
+  "package": {
+    "data": "데이터",
+    "validity": "유효 기간",
+    "days": "일",
+    "operator": "통신사",
+    "buyNow": "구매하기",
+    "price": "가격",
+    "perDay": "/일"
+  },
+  "checkout": {
+    "title": "결제",
+    "emailLabel": "이메일 주소",
+    "emailPlaceholder": "you@example.com",
+    "invalidEmail": "유효한 이메일 주소를 입력해 주세요.",
+    "processing": "처리 중...",
+    "stripeNote": "Stripe를 통한 안전한 결제"
+  },
+  "order": {
+    "successTitle": "주문 확인!",
+    "successMessage": "eSIM 정보가 이메일로 발송되었습니다. 받은편지함을 확인해 주세요.",
+    "cancelTitle": "주문 취소",
+    "cancelMessage": "주문이 취소되었습니다. 결제가 이루어지지 않았습니다.",
+    "viewOrder": "주문 상세 보기"
+  },
+  "common": {
+    "home": "홈",
+    "esim": "eSIM",
+    "languages": {
+      "en": "영어",
+      "ja": "일본어",
+      "ko": "한국어",
+      "zh": "중국어"
+    }
+  },
+  "seo": {
+    "defaultTitle": "여행용 eSIM — 190개 이상의 국가에서 즉시 모바일 데이터",
+    "defaultDescription": "여행용 선불 eSIM을 온라인으로 구매하세요. 즉시 활성화, 합리적인 데이터 요금제, 글로벌 커버리지.",
+    "countryTitle": "{{country}} eSIM — {{price}}부터 선불 데이터 요금제",
+    "countryDescription": "{{country}}용 선불 eSIM 구매. {{price}}부터 즉시 모바일 데이터. 로밍 요금 없음."
+  }
+}

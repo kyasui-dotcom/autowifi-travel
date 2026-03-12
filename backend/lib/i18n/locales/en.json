@@ -1,0 +1,62 @@
+{
+  "landing": {
+    "heroTitle": "Travel eSIM for Every Destination",
+    "heroSubtitle": "Stay connected wherever you go. Instant activation, no physical SIM needed.",
+    "cta": "Browse eSIM Plans",
+    "valueProps": {
+      "instantActivation": "Instant Activation",
+      "instantActivationDesc": "Activate your eSIM in minutes. No store visits, no waiting — just scan and connect.",
+      "globalCoverage": "Global Coverage",
+      "globalCoverageDesc": "Stay online in 190+ countries with reliable local and regional data plans.",
+      "affordable": "Affordable Plans",
+      "affordableDesc": "Save up to 90% compared to roaming fees. Pay only for the data you need."
+    },
+    "popularDestinations": "Popular Destinations"
+  },
+  "esim": {
+    "countryListTitle": "Choose Your Destination",
+    "searchPlaceholder": "Search countries...",
+    "packagesFor": "eSIM Packages for {{country}}",
+    "noPackages": "No packages available for this destination yet."
+  },
+  "package": {
+    "data": "Data",
+    "validity": "Validity",
+    "days": "days",
+    "operator": "Operator",
+    "buyNow": "Buy Now",
+    "price": "Price",
+    "perDay": "/day"
+  },
+  "checkout": {
+    "title": "Checkout",
+    "emailLabel": "Email Address",
+    "emailPlaceholder": "you@example.com",
+    "invalidEmail": "Please enter a valid email address.",
+    "processing": "Processing...",
+    "stripeNote": "Secure payment powered by Stripe."
+  },
+  "order": {
+    "successTitle": "Order Confirmed!",
+    "successMessage": "Your eSIM details have been sent to your email. Check your inbox to get started.",
+    "cancelTitle": "Order Cancelled",
+    "cancelMessage": "Your order has been cancelled. No charges were made.",
+    "viewOrder": "View Order Details"
+  },
+  "common": {
+    "home": "Home",
+    "esim": "eSIM",
+    "languages": {
+      "en": "English",
+      "ja": "Japanese",
+      "ko": "Korean",
+      "zh": "Chinese"
+    }
+  },
+  "seo": {
+    "defaultTitle": "Travel eSIM — Instant Mobile Data for 190+ Countries",
+    "defaultDescription": "Buy prepaid travel eSIMs online. Instant activation, affordable data plans, and global coverage for your next trip.",
+    "countryTitle": "{{country}} eSIM — Prepaid Data Plans from {{price}}",
+    "countryDescription": "Buy a prepaid eSIM for {{country}}. Get instant mobile data with plans starting from {{price}}. No roaming fees."
+  }
+}
