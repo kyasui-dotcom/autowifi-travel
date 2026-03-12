@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getDb } from "@/lib/db";
 import { esimPackages, esimOrders } from "@/lib/db/schema";
 import { createStripeClient } from "@/lib/stripe/client";
+import { getAiraloClient } from "@/lib/airalo";
 import { getEnv } from "@/lib/env";
 import { eq } from "drizzle-orm";
 
@@ -31,12 +32,36 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Find the package
-    const [pkg] = await db
+    // Find the package in D1 cache first
+    let pkg: {
+      title: string;
+      priceUsd: number;
+      countryCode: string;
+      airaloPackageId: string;
+    } | null = null;
+
+    const [cachedPkg] = await db
       .select()
       .from(esimPackages)
       .where(eq(esimPackages.airaloPackageId, body.packageId))
       .limit(1);
+
+    if (cachedPkg) {
+      pkg = cachedPkg;
+    } else {
+      // Fallback: fetch from Airalo API directly
+      const client = getAiraloClient(env);
+      const allPackages = await client.getPackages();
+      const found = allPackages.find((p) => p.id === body.packageId);
+      if (found) {
+        pkg = {
+          title: found.title,
+          priceUsd: Math.round(found.price * 100),
+          countryCode: found.operator.countries[0]?.country_code ?? "",
+          airaloPackageId: found.id,
+        };
+      }
+    }
 
     if (!pkg) {
       return NextResponse.json(

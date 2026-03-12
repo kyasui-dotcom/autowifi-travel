@@ -3,9 +3,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { generatePageMetadata } from "@/lib/seo";
 import { getCountryBySlug, getCountryName } from "@/lib/countries";
-import { getDb } from "@/lib/db";
-import { esimPackages } from "@/lib/db/schema";
-import { eq } from "drizzle-orm";
+import { getAiraloClient } from "@/lib/airalo";
+import { getEnv } from "@/lib/env";
 import type { Locale } from "@/lib/i18n/config";
 import CheckoutForm from "./CheckoutForm";
 import styles from "./page.module.css";
@@ -136,20 +135,31 @@ export default async function CheckoutPage({
   const labels = LABELS[locale] ?? LABELS.en;
   const countryName = getCountryName(country, locale);
 
-  // Fetch package from DB
-  const db = await getDb();
-  const [pkg] = await db
-    .select()
-    .from(esimPackages)
-    .where(eq(esimPackages.id, Number(packageId)))
-    .limit(1);
+  // Fetch package from Airalo API
+  let pkg: { title: string; data: string; validity: number; price: number; airaloPackageId: string } | null = null;
+  try {
+    const env = await getEnv();
+    const client = getAiraloClient(env);
+    const packages = await client.getPackages(country.code);
+    const found = packages.find((p) => p.id === packageId);
+    if (found) {
+      pkg = {
+        title: found.title,
+        data: found.data,
+        validity: found.validity,
+        price: found.price,
+        airaloPackageId: found.id,
+      };
+    }
+  } catch {
+    // API error
+  }
 
   if (!pkg) {
     notFound();
   }
 
-  // priceUsd is stored in cents
-  const priceDisplay = (pkg.priceUsd / 100).toFixed(2);
+  const priceDisplay = pkg.price.toFixed(2);
 
   return (
     <div className={styles.container}>
@@ -190,12 +200,12 @@ export default async function CheckoutPage({
 
             <div className={styles.summaryRow}>
               <span className={styles.summaryLabel}>{labels.data}</span>
-              <span className={styles.summaryValue}>{pkg.dataAmount}</span>
+              <span className={styles.summaryValue}>{pkg.data}</span>
             </div>
 
             <div className={styles.summaryRow}>
               <span className={styles.summaryLabel}>{labels.validity}</span>
-              <span className={styles.summaryValue}>{pkg.validityDays} {labels.days}</span>
+              <span className={styles.summaryValue}>{pkg.validity} {labels.days}</span>
             </div>
 
             <div className={styles.summaryTotal}>
