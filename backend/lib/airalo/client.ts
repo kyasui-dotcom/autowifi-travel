@@ -5,7 +5,7 @@ import type {
   AiraloInstruction,
   AiraloUsageResponse,
   AiraloTokenResponse,
-  AiraloPackagesResponse,
+  AiraloPackagesRawResponse,
   AiraloInstructionsResponse,
 } from "./types";
 
@@ -73,8 +73,41 @@ export function createAiraloClient(
       if (countryCode) params.set("filter[country]", countryCode);
       params.set("limit", "100");
       const res = await authFetch(`/v2/packages?${params}`);
-      const json = (await res.json()) as AiraloPackagesResponse;
-      return json.data;
+      const json = (await res.json()) as AiraloPackagesRawResponse;
+
+      // Flatten nested structure: data[].operators[].packages[] → AiraloPackage[]
+      const packages: AiraloPackage[] = [];
+      for (const country of json.data) {
+        for (const operator of country.operators) {
+          for (const pkg of operator.packages) {
+            if (pkg.type !== "sim") continue; // skip topup packages
+            const dataStr = pkg.is_unlimited
+              ? "Unlimited"
+              : pkg.amount >= 1024
+                ? `${Math.round(pkg.amount / 1024)} GB`
+                : `${pkg.amount} MB`;
+            packages.push({
+              id: pkg.id,
+              slug: country.slug,
+              title: pkg.title,
+              data: dataStr,
+              validity: pkg.day,
+              price: pkg.price,
+              operator: {
+                title: operator.title,
+                countries: [
+                  {
+                    country_code: country.country_code,
+                    title: country.title,
+                  },
+                ],
+              },
+              type: operator.type,
+            });
+          }
+        }
+      }
+      return packages;
     },
 
     async createOrder(

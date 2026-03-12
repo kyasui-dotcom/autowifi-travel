@@ -6,6 +6,7 @@ export interface AiraloTokenResponse {
   };
 }
 
+// Flattened package used internally in our app
 export interface AiraloPackage {
   id: string;
   slug: string;
@@ -18,6 +19,44 @@ export interface AiraloPackage {
     countries: { country_code: string; title: string }[];
   };
   type: string; // "local", "regional", "global"
+}
+
+// --- Raw Airalo API response types ---
+export interface AiraloRawPackage {
+  id: string;
+  type: string;
+  price: number;
+  amount: number; // MB
+  day: number;
+  is_unlimited: boolean;
+  title: string;
+  short_info: string | null;
+}
+
+export interface AiraloRawOperator {
+  id: number;
+  title: string;
+  type: string; // "local", "regional", "global"
+  is_prepaid: boolean;
+  plan_type: string;
+  coverages: { name: string; code: string }[];
+  packages: AiraloRawPackage[];
+}
+
+export interface AiraloRawCountry {
+  slug: string;
+  country_code: string;
+  title: string;
+  operators: AiraloRawOperator[];
+}
+
+export interface AiraloPackagesRawResponse {
+  data: AiraloRawCountry[];
+  meta?: {
+    current_page: number;
+    last_page: number;
+    total: number;
+  };
 }
 
 export interface AiraloPackagesResponse {
