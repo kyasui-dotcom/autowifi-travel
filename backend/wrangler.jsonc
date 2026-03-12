@@ -10,6 +10,10 @@
   "vars": {
     "AIRALO_MOCK_MODE": "true"
   },
+  "routes": [
+    { "pattern": "autowifi-travel.com/*", "zone_name": "autowifi-travel.com" },
+    { "pattern": "www.autowifi-travel.com/*", "zone_name": "autowifi-travel.com" }
+  ],
   "d1_databases": [
     {
       "binding": "DB",
