@@ -9,7 +9,7 @@
   },
   "workers_dev": true,
   "vars": {
-    "AIRALO_MOCK_MODE": "true"
+    "AIRALO_MOCK_MODE": "false"
   },
   "routes": [
     { "pattern": "autowifi-travel.com/*", "zone_name": "autowifi-travel.com" },
