@@ -48,6 +48,26 @@
   color: var(--color-primary);
 }
 
+.navLinkDisabled {
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  color: var(--color-gray-400);
+  cursor: default;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.comingSoonBadge {
+  font-size: 10px;
+  background: var(--color-gray-200);
+  color: var(--color-gray-500);
+  padding: 1px 6px;
+  border-radius: 8px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
 .localeSwitcher {
   display: flex;
   gap: var(--space-xs);

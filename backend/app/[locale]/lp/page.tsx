@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { generatePageMetadata } from "@/lib/seo";
+import { WebSiteJsonLd } from "@/lib/components/JsonLd";
+import type { Locale } from "@/lib/i18n/config";
 import styles from "./page.module.css";
 
 const SUPPORTED_LOCALES = ["en", "ja", "ko", "zh"] as const;
-type Locale = (typeof SUPPORTED_LOCALES)[number];
 
 interface Content {
   title: string;
@@ -133,16 +135,12 @@ export async function generateMetadata({
   const { locale } = await params;
   const loc = (SUPPORTED_LOCALES.includes(locale as Locale) ? locale : "en") as Locale;
   const c = CONTENT[loc];
-  return {
+  return generatePageMetadata({
+    locale: loc,
+    path: "/lp",
     title: `${c.title} - Smart Airport WiFi Connection`,
     description: c.tagline,
-    openGraph: {
-      title: c.title,
-      description: c.tagline,
-      type: "website",
-      url: `https://autowifi-travel.com/${loc}/lp`,
-    },
-  };
+  });
 }
 
 export default async function LandingPage({
@@ -156,6 +154,12 @@ export default async function LandingPage({
 
   return (
     <div style={{ background: "#f8fafc" }}>
+      <WebSiteJsonLd
+        name="AutoWiFi Travel"
+        url={`https://autowifi-travel.com/${loc}/lp`}
+        description={c.tagline}
+      />
+
       {/* Hero */}
       <section className={styles.hero}>
         <div className={styles.heroIcon}>📶</div>

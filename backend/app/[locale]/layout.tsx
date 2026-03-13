@@ -59,9 +59,10 @@ function Header({ locale }: { locale: Locale }) {
           <Link href={`/${locale}/esim`} className={styles.navLink}>
             {labels.esim}
           </Link>
-          <Link href={`/${locale}/lp`} className={styles.navLink}>
+          <span className={styles.navLinkDisabled}>
             {labels.app}
-          </Link>
+            <span className={styles.comingSoonBadge}>Coming Soon</span>
+          </span>
           <Link href={`/${locale}/guide/wifi-vs-esim`} className={styles.navLink}>
             {labels.guide}
           </Link>
@@ -98,7 +99,7 @@ function Footer({ locale }: { locale: Locale }) {
           <h4>Product</h4>
           <ul className={styles.footerLinks}>
             <li><Link href={`/${locale}/esim`}>{labels.esim}</Link></li>
-            <li><Link href={`/${locale}/lp`}>{labels.app}</Link></li>
+            <li><span style={{ color: 'var(--color-gray-500)' }}>{labels.app} (Coming Soon)</span></li>
             <li><Link href={`/${locale}/guide/wifi-vs-esim`}>{labels.guide}</Link></li>
             <li><Link href={`/${locale}/esim/japan`}>Japan eSIM</Link></li>
             <li><Link href={`/${locale}/esim/south-korea`}>Korea eSIM</Link></li>

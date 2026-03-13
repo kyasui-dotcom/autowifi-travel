@@ -393,7 +393,7 @@ export async function generateMetadata({
   const c = CONTENT[(locale as Locale) || "en"];
   return generatePageMetadata({
     locale: locale as Locale,
-    path: "guide/wifi-vs-esim",
+    path: "/guide/wifi-vs-esim",
     title: c.title,
     description: c.intro.slice(0, 160),
   });

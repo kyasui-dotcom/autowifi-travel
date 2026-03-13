@@ -163,6 +163,7 @@ export default async function LandingPage({
         name="AutoWiFi eSIM"
         url="https://autowifi-travel.com"
         description={content.heroSubtitle}
+        searchUrl="https://autowifi-travel.com/en/esim?q={search_term_string}"
       />
       <FaqJsonLd items={faq} />
 

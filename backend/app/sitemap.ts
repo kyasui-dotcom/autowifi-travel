@@ -9,6 +9,7 @@ function alternates(path: string): Record<string, string> {
   for (const loc of LOCALES) {
     langs[loc] = `${BASE_URL}/${loc}${path}`;
   }
+  langs["x-default"] = `${BASE_URL}/en${path}`;
   return langs;
 }
 
@@ -49,6 +50,28 @@ export default function sitemap(): MetadataRoute.Sitemap {
         alternates: { languages: alternates(`/esim/${country.slug}`) },
       });
     }
+  }
+
+  // Guide articles
+  for (const locale of LOCALES) {
+    entries.push({
+      url: `${BASE_URL}/${locale}/guide/wifi-vs-esim`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.7,
+      alternates: { languages: alternates("/guide/wifi-vs-esim") },
+    });
+  }
+
+  // App landing pages
+  for (const locale of LOCALES) {
+    entries.push({
+      url: `${BASE_URL}/${locale}/lp`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.6,
+      alternates: { languages: alternates("/lp") },
+    });
   }
 
   return entries;

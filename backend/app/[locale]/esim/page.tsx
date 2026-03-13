@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { generatePageMetadata } from "@/lib/seo";
 import { getAllCountries, getCountryName } from "@/lib/countries";
+import { ItemListJsonLd } from "@/lib/components/JsonLd";
 import type { Locale } from "@/lib/i18n/config";
 import CountrySearch from "./CountrySearch";
 import styles from "./page.module.css";
@@ -81,8 +82,18 @@ export default async function EsimListingPage({
     continent: c.continent,
   }));
 
+  const BASE_URL = "https://autowifi-travel.com";
+
   return (
     <>
+      <ItemListJsonLd
+        items={countries.map((c, i) => ({
+          name: c.name,
+          url: `${BASE_URL}/${locale}/esim/${c.slug}`,
+          position: i + 1,
+        }))}
+      />
+
       <div className={styles.pageHeader}>
         <h1 className={styles.pageTitle}>{content.title}</h1>
         <p className={styles.pageSubtitle}>{content.subtitle}</p>

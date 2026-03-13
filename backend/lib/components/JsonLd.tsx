@@ -156,6 +156,33 @@ export function OrganizationJsonLd() {
   return <JsonLd data={data} />;
 }
 
+// ── ItemList JSON-LD (for listing pages) ────────────────────
+
+interface ItemListItem {
+  name: string;
+  url: string;
+  position?: number;
+}
+
+export interface ItemListJsonLdProps {
+  items: ItemListItem[];
+}
+
+export function ItemListJsonLd({ items }: ItemListJsonLdProps) {
+  const data = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    itemListElement: items.map((item, index) => ({
+      '@type': 'ListItem',
+      position: item.position ?? index + 1,
+      name: item.name,
+      url: item.url,
+    })),
+  };
+
+  return <JsonLd data={data} />;
+}
+
 // ── FAQ JSON-LD ─────────────────────────────────────────────
 
 interface FaqItem {
