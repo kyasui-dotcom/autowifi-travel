@@ -22,6 +22,8 @@ interface Content {
   langTitle: string;
   footerText: string;
   downloadCta: string;
+  downloadApple: string;
+  comingSoon: string;
 }
 
 const CONTENT: Record<Locale, Content> = {
@@ -46,7 +48,9 @@ const CONTENT: Record<Locale, Content> = {
     esimCta: "Browse eSIM Plans →",
     langTitle: "Multilingual Support",
     footerText: "AutoWiFi Travel. Built for travelers, by travelers.",
-    downloadCta: "Download on Google Play",
+    downloadCta: "Google Play",
+    downloadApple: "App Store",
+    comingSoon: "Coming Soon",
   },
   ja: {
     title: "AutoWiFi Travel",
@@ -69,7 +73,9 @@ const CONTENT: Record<Locale, Content> = {
     esimCta: "eSIMプランを見る →",
     langTitle: "多言語対応",
     footerText: "AutoWiFi Travel - 旅行者のための、旅行者によるアプリ。",
-    downloadCta: "Google Playでダウンロード",
+    downloadCta: "Google Play",
+    downloadApple: "App Store",
+    comingSoon: "近日公開",
   },
   ko: {
     title: "AutoWiFi Travel",
@@ -92,7 +98,9 @@ const CONTENT: Record<Locale, Content> = {
     esimCta: "eSIM 플랜 보기 →",
     langTitle: "다국어 지원",
     footerText: "AutoWiFi Travel - 여행자를 위한, 여행자에 의한 앱.",
-    downloadCta: "Google Play에서 다운로드",
+    downloadCta: "Google Play",
+    downloadApple: "App Store",
+    comingSoon: "출시 예정",
   },
   zh: {
     title: "AutoWiFi Travel",
@@ -115,7 +123,9 @@ const CONTENT: Record<Locale, Content> = {
     esimCta: "查看eSIM套餐 →",
     langTitle: "多语言支持",
     footerText: "AutoWiFi Travel - 为旅行者打造，由旅行者创建。",
-    downloadCta: "在Google Play下载",
+    downloadCta: "Google Play",
+    downloadApple: "App Store",
+    comingSoon: "即将推出",
   },
 };
 
@@ -171,14 +181,16 @@ export default async function LandingPage({
           ))}
         </div>
         <div className={styles.ctaButtons}>
-          <a
-            href="https://play.google.com/store/apps/details?id=com.autowifi.travel"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.playButton}
-          >
-            ▶ {c.downloadCta}
-          </a>
+          <span className={styles.storeButton}>
+            <span className={styles.storeIcon}>▶</span>
+            {c.downloadCta}
+            <span className={styles.comingSoonTag}>{c.comingSoon}</span>
+          </span>
+          <span className={styles.storeButton}>
+            <span className={styles.storeIcon}>&#x1F34E;</span>
+            {c.downloadApple}
+            <span className={styles.comingSoonTag}>{c.comingSoon}</span>
+          </span>
         </div>
       </section>
 
