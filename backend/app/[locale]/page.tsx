@@ -65,6 +65,8 @@ const PAGE_CONTENT: Record<string, {
   globalDesc: string;
   affordable: string;
   affordableDesc: string;
+  stepsTitle: string;
+  steps: { num: string; icon: string; title: string; desc: string }[];
   popularTitle: string;
   viewPlans: string;
   faqTitle: string;
@@ -80,6 +82,12 @@ const PAGE_CONTENT: Record<string, {
     globalDesc: "Coverage across every continent. One solution for all your international travel data needs.",
     affordable: "Affordable Plans",
     affordableDesc: "Competitive pricing with flexible data packages. Pay only for what you need, when you need it.",
+    stepsTitle: "Get Started in 3 Simple Steps",
+    steps: [
+      { num: "1", icon: "\u{1F50D}", title: "Choose Your Plan", desc: "Select your destination and pick a data plan that fits your trip. Plans start from just a few dollars." },
+      { num: "2", icon: "\u{1F4F2}", title: "Scan the QR Code", desc: "After purchase, scan the QR code from your phone's Settings to install the eSIM. It takes less than a minute." },
+      { num: "3", icon: "\u{2708}\u{FE0F}", title: "Travel & Connect", desc: "Arrive at your destination and turn on data. You're instantly connected - no SIM swapping needed." },
+    ],
     popularTitle: "Popular Destinations",
     viewPlans: "View plans",
     faqTitle: "Frequently Asked Questions",
@@ -95,6 +103,12 @@ const PAGE_CONTENT: Record<string, {
     globalDesc: "全大陸をカバー。海外旅行のデータ通信はこれ一つで解決。",
     affordable: "お手頃な料金",
     affordableDesc: "柔軟なデータパッケージで競争力のある価格設定。必要な分だけお支払い。",
+    stepsTitle: "かんたん3ステップで利用開始",
+    steps: [
+      { num: "1", icon: "\u{1F50D}", title: "プランを選ぶ", desc: "渡航先を選んで、旅行に合ったデータプランを選択。数ドルからのプランをご用意。" },
+      { num: "2", icon: "\u{1F4F2}", title: "QRコードをスキャン", desc: "購入後、スマホの設定からQRコードをスキャンしてeSIMをインストール。1分もかかりません。" },
+      { num: "3", icon: "\u{2708}\u{FE0F}", title: "渡航先で即接続", desc: "現地に到着したらデータをONにするだけ。SIMカードの差し替え不要で、すぐにネットが使えます。" },
+    ],
     popularTitle: "人気の渡航先",
     viewPlans: "プランを見る",
     faqTitle: "よくある質問",
@@ -110,6 +124,12 @@ const PAGE_CONTENT: Record<string, {
     globalDesc: "모든 대륙을 커버합니다. 해외 여행 데이터 솔루션 하나로 해결.",
     affordable: "합리적인 요금",
     affordableDesc: "유연한 데이터 패키지로 경쟁력 있는 가격. 필요한 만큼만 결제하세요.",
+    stepsTitle: "간단 3단계로 시작하기",
+    steps: [
+      { num: "1", icon: "\u{1F50D}", title: "플랜 선택", desc: "여행지를 선택하고 여행에 맞는 데이터 플랜을 고르세요. 몇 달러부터 시작하는 플랜이 준비되어 있습니다." },
+      { num: "2", icon: "\u{1F4F2}", title: "QR 코드 스캔", desc: "구매 후 휴대폰 설정에서 QR 코드를 스캔하여 eSIM을 설치하세요. 1분이면 충분합니다." },
+      { num: "3", icon: "\u{2708}\u{FE0F}", title: "여행 & 연결", desc: "목적지에 도착하면 데이터를 켜세요. SIM 교체 없이 즉시 연결됩니다." },
+    ],
     popularTitle: "인기 여행지",
     viewPlans: "플랜 보기",
     faqTitle: "자주 묻는 질문",
@@ -125,6 +145,12 @@ const PAGE_CONTENT: Record<string, {
     globalDesc: "覆盖全球各大洲。一个方案满足您所有的国际旅行数据需求。",
     affordable: "实惠的价格",
     affordableDesc: "灵活的数据套餐，具有竞争力的定价。按需付费。",
+    stepsTitle: "简单3步开始使用",
+    steps: [
+      { num: "1", icon: "\u{1F50D}", title: "选择套餐", desc: "选择目的地，挑选适合您旅程的数据套餐。套餐价格低至几美元。" },
+      { num: "2", icon: "\u{1F4F2}", title: "扫描二维码", desc: "购买后，在手机设置中扫描二维码安装eSIM。不到一分钟即可完成。" },
+      { num: "3", icon: "\u{2708}\u{FE0F}", title: "出发即连接", desc: "到达目的地后开启数据即可。无需更换SIM卡，立即上网。" },
+    ],
     popularTitle: "热门目的地",
     viewPlans: "查看套餐",
     faqTitle: "常见问题",
@@ -196,6 +222,23 @@ export default async function LandingPage({
             <span className={styles.valuePropIcon}>&#x1F4B0;</span>
             <h3 className={styles.valuePropTitle}>{content.affordable}</h3>
             <p className={styles.valuePropDescription}>{content.affordableDesc}</p>
+          </div>
+        </div>
+      </section>
+
+      {/* How It Works - 3 Steps */}
+      <section className={styles.steps}>
+        <div className={styles.stepsInner}>
+          <h2 className={styles.stepsSectionTitle}>{content.stepsTitle}</h2>
+          <div className={styles.stepsGrid}>
+            {content.steps.map((step, i) => (
+              <div key={i} className={styles.stepCard}>
+                <div className={styles.stepNum}>{step.num}</div>
+                <div className={styles.stepIcon}>{step.icon}</div>
+                <h3 className={styles.stepTitle}>{step.title}</h3>
+                <p className={styles.stepDesc}>{step.desc}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
