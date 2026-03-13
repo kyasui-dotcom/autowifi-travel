@@ -8,10 +8,26 @@ import {
 import { Text, View } from "@/components/Themed";
 import { useRouter } from "expo-router";
 import { useTranslation } from "react-i18next";
+import i18next from "i18next";
 import patternsData from "@/assets/portal-patterns/patterns-v1.json";
 import type { PortalPattern } from "@/lib/types";
 
 const patterns = patternsData.patterns as PortalPattern[];
+
+const countrySlugs: Record<string, string> = {
+  KR: "south-korea",
+  SG: "singapore",
+  US: "united-states",
+  HK: "hong-kong",
+  TW: "taiwan",
+  TH: "thailand",
+  CN: "china",
+  VN: "vietnam",
+  PH: "philippines",
+  ID: "indonesia",
+  MY: "malaysia",
+  JP: "japan",
+};
 
 const countryFlags: Record<string, string> = {
   KR: "\u{1F1F0}\u{1F1F7}",
@@ -95,9 +111,13 @@ export default function EsimScreen() {
   }, [countries, searchQuery, t]);
 
   const handleCountryPress = (countryCode: string) => {
+    const lang = i18next.language || "en";
+    const slug = countrySlugs[countryCode] || countryCode.toLowerCase();
+    const url = `https://autowifi-travel.com/${lang}/esim/${slug}`;
+    const name = t(`esim.countries.${countryCode}`);
     router.push({
-      pathname: "/esim/packages",
-      params: { country: countryCode },
+      pathname: "/esim-webview",
+      params: { url, title: `${name} eSIM` },
     });
   };
 
