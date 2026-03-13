@@ -371,7 +371,7 @@ const CONTENT: Record<Locale, PageContent> = {
     faqTitle: "常见问题",
     faqs: [
       { q: "eSIM和SIM卡有什么区别？", a: "SIM卡是需要插入手机的物理芯片，而eSIM是内置在手机中的数字SIM。通过QR码下载配置信息即可使用，还能在多个套餐间切换。" },
-      { q: "哪些手机支持eSIM？", a: "iPhone XS及以后、Google Pixel 3及以后、Samsung Galaxy S20及以后等2018年后发布的大多数智能手机都支持。可以在手机的"设置 > 蜂窝网络"中查看是否有eSIM选项。" },
+      { q: "哪些手机支持eSIM？", a: "iPhone XS及以后、Google Pixel 3及以后、Samsung Galaxy S20及以后等2018年后发布的大多数智能手机都支持。可以在手机的「设置 > 蜂窝网络」中查看是否有eSIM选项。" },
       { q: "可以同时使用随身WiFi和eSIM吗？", a: "可以。但大多数情况下，eSIM的热点功能即可满足电脑等其他设备的上网需求，通常只需eSIM就够了。" },
       { q: "eSIM多少钱？", a: "根据目的地和流量不同，从1GB/7天约30元到无限流量/30天约300元不等。大多数情况下，eSIM比随身WiFi的日租更实惠。" },
     ],
