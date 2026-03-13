@@ -1,6 +1,6 @@
 /* Page Header */
 .pageHeader {
-  background: linear-gradient(135deg, #be185d 0%, #e05297 100%);
+  background: linear-gradient(135deg, #0284c7 0%, #0ea5e9 100%);
   color: var(--color-white);
   padding: var(--space-2xl) var(--space-lg);
 }
@@ -167,7 +167,7 @@
 }
 
 .buyButton:hover {
-  background: var(--color-primary-hover, #c73d80);
+  background: var(--color-primary-hover, #0284c7);
 }
 
 /* No Packages */
