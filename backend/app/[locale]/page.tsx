@@ -84,8 +84,8 @@ const PAGE_CONTENT: Record<string, {
     affordableDesc: "Competitive pricing with flexible data packages. Pay only for what you need, when you need it.",
     stepsTitle: "Get Started in 3 Simple Steps",
     steps: [
-      { num: "1", icon: "\u{1F50D}", title: "Choose Your Plan", desc: "Select your destination and pick a data plan that fits your trip. Plans start from just a few dollars." },
-      { num: "2", icon: "\u{1F4F2}", title: "Scan the QR Code", desc: "After purchase, scan the QR code from your phone's Settings to install the eSIM. It takes less than a minute." },
+      { num: "1", icon: "\u{1F6D2}", title: "Buy a Plan", desc: "Choose your destination and purchase an eSIM data plan. Plans start from just a few dollars with instant delivery." },
+      { num: "2", icon: "\u{1F4F2}", title: "Scan the QR Code", desc: "Scan the QR code from your phone's Settings to install the eSIM. It takes less than a minute." },
       { num: "3", icon: "\u{2708}\u{FE0F}", title: "Travel & Connect", desc: "Arrive at your destination and turn on data. You're instantly connected - no SIM swapping needed." },
     ],
     popularTitle: "Popular Destinations",
@@ -105,7 +105,7 @@ const PAGE_CONTENT: Record<string, {
     affordableDesc: "柔軟なデータパッケージで競争力のある価格設定。必要な分だけお支払い。",
     stepsTitle: "かんたん3ステップで利用開始",
     steps: [
-      { num: "1", icon: "\u{1F50D}", title: "プランを選ぶ", desc: "渡航先を選んで、旅行に合ったデータプランを選択。数ドルからのプランをご用意。" },
+      { num: "1", icon: "\u{1F6D2}", title: "プランを購入", desc: "渡航先を選んで、旅行に合ったeSIMデータプランを購入。数ドルからのプランをご用意、即時配信。" },
       { num: "2", icon: "\u{1F4F2}", title: "QRコードをスキャン", desc: "購入後、スマホの設定からQRコードをスキャンしてeSIMをインストール。1分もかかりません。" },
       { num: "3", icon: "\u{2708}\u{FE0F}", title: "渡航先で即接続", desc: "現地に到着したらデータをONにするだけ。SIMカードの差し替え不要で、すぐにネットが使えます。" },
     ],
@@ -126,7 +126,7 @@ const PAGE_CONTENT: Record<string, {
     affordableDesc: "유연한 데이터 패키지로 경쟁력 있는 가격. 필요한 만큼만 결제하세요.",
     stepsTitle: "간단 3단계로 시작하기",
     steps: [
-      { num: "1", icon: "\u{1F50D}", title: "플랜 선택", desc: "여행지를 선택하고 여행에 맞는 데이터 플랜을 고르세요. 몇 달러부터 시작하는 플랜이 준비되어 있습니다." },
+      { num: "1", icon: "\u{1F6D2}", title: "플랜 구매", desc: "여행지를 선택하고 eSIM 데이터 플랜을 구매하세요. 몇 달러부터 시작하며 즉시 배송됩니다." },
       { num: "2", icon: "\u{1F4F2}", title: "QR 코드 스캔", desc: "구매 후 휴대폰 설정에서 QR 코드를 스캔하여 eSIM을 설치하세요. 1분이면 충분합니다." },
       { num: "3", icon: "\u{2708}\u{FE0F}", title: "여행 & 연결", desc: "목적지에 도착하면 데이터를 켜세요. SIM 교체 없이 즉시 연결됩니다." },
     ],
@@ -147,7 +147,7 @@ const PAGE_CONTENT: Record<string, {
     affordableDesc: "灵活的数据套餐，具有竞争力的定价。按需付费。",
     stepsTitle: "简单3步开始使用",
     steps: [
-      { num: "1", icon: "\u{1F50D}", title: "选择套餐", desc: "选择目的地，挑选适合您旅程的数据套餐。套餐价格低至几美元。" },
+      { num: "1", icon: "\u{1F6D2}", title: "购买套餐", desc: "选择目的地，购买eSIM数据套餐。价格低至几美元，即买即发。" },
       { num: "2", icon: "\u{1F4F2}", title: "扫描二维码", desc: "购买后，在手机设置中扫描二维码安装eSIM。不到一分钟即可完成。" },
       { num: "3", icon: "\u{2708}\u{FE0F}", title: "出发即连接", desc: "到达目的地后开启数据即可。无需更换SIM卡，立即上网。" },
     ],
