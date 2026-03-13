@@ -217,8 +217,6 @@ export default async function LandingPage({
       <section className={styles.esim}>
         <h2>{c.esimTitle}</h2>
         <p>{c.esimDesc}</p>
-        <div className={styles.esimBadge}>🛜 Powered by Airalo eSIM</div>
-        <br />
         <Link href={`/${loc}/esim`} className={styles.esimCta}>
           {c.esimCta}
         </Link>
