@@ -1,20 +1,20 @@
 :root {
   /* ── Brand colors ─────────────────────────────────────── */
-  --color-primary: #2563eb;
-  --color-primary-hover: #1d4ed8;
-  --color-primary-light: #dbeafe;
-  --color-secondary: #10b981;
-  --color-secondary-hover: #059669;
-  --color-secondary-light: #d1fae5;
-  --color-accent: #f59e0b;
-  --color-accent-hover: #d97706;
-  --color-accent-light: #fef3c7;
+  --color-primary: #e05297;
+  --color-primary-hover: #c73d80;
+  --color-primary-light: #fce4f0;
+  --color-secondary: #8b5cf6;
+  --color-secondary-hover: #7c3aed;
+  --color-secondary-light: #ede9fe;
+  --color-accent: #f472b6;
+  --color-accent-hover: #ec4899;
+  --color-accent-light: #fdf2f8;
 
   /* ── Status ─────────────────────────────────────────── */
   --color-success: #10b981;
   --color-error: #ef4444;
   --color-warning: #f59e0b;
-  --color-info: #3b82f6;
+  --color-info: #e05297;
 
   /* ── Neutrals ───────────────────────────────────────── */
   --color-white: #ffffff;
@@ -44,7 +44,7 @@
   /* ── Borders ─────────────────────────────────────────── */
   --border-default: #e5e7eb;
   --border-light: #f3f4f6;
-  --border-focus: #2563eb;
+  --border-focus: #e05297;
 
   /* ── Spacing scale ──────────────────────────────────── */
   --space-xs: 0.25rem;   /* 4px  */
@@ -93,15 +93,15 @@
     --foreground: #ededed;
 
     /* ── Dark mode brand colors ────────────────────────── */
-    --color-primary: #3b82f6;
-    --color-primary-hover: #60a5fa;
-    --color-primary-light: #1e3a5f;
-    --color-secondary: #34d399;
-    --color-secondary-hover: #6ee7b7;
-    --color-secondary-light: #064e3b;
-    --color-accent: #fbbf24;
-    --color-accent-hover: #fcd34d;
-    --color-accent-light: #451a03;
+    --color-primary: #f472b6;
+    --color-primary-hover: #f9a8d4;
+    --color-primary-light: #4a1942;
+    --color-secondary: #a78bfa;
+    --color-secondary-hover: #c4b5fd;
+    --color-secondary-light: #2e1065;
+    --color-accent: #f9a8d4;
+    --color-accent-hover: #fbcfe8;
+    --color-accent-light: #500724;
 
     /* ── Dark mode surfaces ────────────────────────────── */
     --bg-surface: #111111;
@@ -118,7 +118,7 @@
     /* ── Dark mode borders ─────────────────────────────── */
     --border-default: #374151;
     --border-light: #1f2937;
-    --border-focus: #3b82f6;
+    --border-focus: #f472b6;
 
     /* ── Dark mode shadows ─────────────────────────────── */
     --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);

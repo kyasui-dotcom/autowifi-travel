@@ -19,11 +19,11 @@ const LOCALE_LABELS: Record<Locale, string> = {
   zh: "ZH",
 };
 
-const NAV_LABELS: Record<Locale, { home: string; esim: string; brandDescription: string }> = {
-  en: { home: "Home", esim: "eSIM Plans", brandDescription: "Affordable travel eSIM for 200+ countries. Stay connected wherever you go." },
-  ja: { home: "ホーム", esim: "eSIMプラン", brandDescription: "200以上の国と地域で使えるお手頃なトラベルeSIM。どこでもつながる。" },
-  ko: { home: "홈", esim: "eSIM 플랜", brandDescription: "200개 이상의 국가에서 사용 가능한 여행용 eSIM. 어디서나 연결." },
-  zh: { home: "首页", esim: "eSIM套餐", brandDescription: "覆盖200多个国家的旅行eSIM。随时随地保持连接。" },
+const NAV_LABELS: Record<Locale, { home: string; esim: string; app: string; brandDescription: string }> = {
+  en: { home: "Home", esim: "eSIM Plans", app: "WiFi App", brandDescription: "Affordable travel eSIM for 200+ countries. Stay connected wherever you go." },
+  ja: { home: "ホーム", esim: "eSIMプラン", app: "WiFiアプリ", brandDescription: "200以上の国と地域で使えるお手頃なトラベルeSIM。どこでもつながる。" },
+  ko: { home: "홈", esim: "eSIM 플랜", app: "WiFi 앱", brandDescription: "200개 이상의 국가에서 사용 가능한 여행용 eSIM. 어디서나 연결." },
+  zh: { home: "首页", esim: "eSIM套餐", app: "WiFi应用", brandDescription: "覆盖200多个国家的旅行eSIM。随时随地保持连接。" },
 };
 
 export async function generateMetadata({
@@ -59,6 +59,9 @@ function Header({ locale }: { locale: Locale }) {
           <Link href={`/${locale}/esim`} className={styles.navLink}>
             {labels.esim}
           </Link>
+          <Link href={`/${locale}/lp`} className={styles.navLink}>
+            {labels.app}
+          </Link>
 
           <div className={styles.localeSwitcher}>
             {SUPPORTED_LOCALES.map((loc) => (
@@ -92,6 +95,7 @@ function Footer({ locale }: { locale: Locale }) {
           <h4>Product</h4>
           <ul className={styles.footerLinks}>
             <li><Link href={`/${locale}/esim`}>{labels.esim}</Link></li>
+            <li><Link href={`/${locale}/lp`}>{labels.app}</Link></li>
             <li><Link href={`/${locale}/esim/japan`}>Japan eSIM</Link></li>
             <li><Link href={`/${locale}/esim/south-korea`}>Korea eSIM</Link></li>
           </ul>
