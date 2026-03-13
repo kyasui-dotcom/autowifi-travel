@@ -1,0 +1,190 @@
+.hero {
+  background: linear-gradient(135deg, #0ea5e9 0%, #2563eb 50%, #7c3aed 100%);
+  color: white;
+  padding: 80px 20px 60px;
+  text-align: center;
+}
+.heroIcon { font-size: 72px; margin-bottom: 16px; }
+.hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 12px; }
+.tagline { font-size: 1.2rem; opacity: 0.9; max-width: 500px; margin: 0 auto 32px; }
+.badges { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.badge {
+  background: rgba(255,255,255,0.2);
+  backdrop-filter: blur(8px);
+  padding: 8px 18px;
+  border-radius: 50px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+/* Stats */
+.stats {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  padding: 40px 20px;
+  flex-wrap: wrap;
+  background: white;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+.stat { text-align: center; }
+.statNum { font-size: 2.2rem; font-weight: 800; color: #2563eb; }
+.statLabel { font-size: 0.9rem; color: #64748b; margin-top: 4px; }
+
+/* Features */
+.features {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 60px 20px;
+}
+.features h2 {
+  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 40px;
+  color: #1e293b;
+}
+.featureGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 24px;
+}
+.featureCard {
+  background: white;
+  border-radius: 16px;
+  padding: 28px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  transition: transform 0.2s;
+}
+.featureCard:hover { transform: translateY(-4px); }
+.featureIcon { font-size: 36px; margin-bottom: 12px; }
+.featureCard h3 { font-size: 1.1rem; margin-bottom: 8px; color: #1e293b; }
+.featureCard p { font-size: 0.95rem; color: #64748b; }
+
+/* Countries */
+.countries {
+  background: white;
+  padding: 60px 20px;
+}
+.countries h2 {
+  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 12px;
+  color: #1e293b;
+}
+.subtitle {
+  text-align: center;
+  color: #64748b;
+  margin-bottom: 32px;
+}
+.countryGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  max-width: 700px;
+  margin: 0 auto;
+}
+.countryTag {
+  background: #f1f5f9;
+  padding: 10px 20px;
+  border-radius: 50px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #334155;
+}
+
+/* eSIM CTA */
+.esim {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 60px 20px;
+  text-align: center;
+}
+.esim h2 { font-size: 1.8rem; margin-bottom: 12px; color: #1e293b; }
+.esim p { color: #64748b; max-width: 500px; margin: 0 auto 24px; }
+.esimBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #f97316, #ef4444);
+  color: white;
+  padding: 12px 28px;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 1rem;
+}
+.esimCta {
+  display: inline-block;
+  margin-top: 20px;
+  background: #0ea5e9;
+  color: white;
+  padding: 14px 32px;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1.1rem;
+  transition: background 0.2s;
+}
+.esimCta:hover { background: #0284c7; }
+
+/* Languages */
+.languages {
+  background: white;
+  padding: 60px 20px;
+  text-align: center;
+}
+.languages h2 { font-size: 1.8rem; margin-bottom: 24px; color: #1e293b; }
+.langGrid {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.langCard {
+  background: #f8fafc;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 16px 28px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #334155;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 40px 20px;
+  color: #94a3b8;
+  font-size: 0.85rem;
+}
+.footer a { color: #2563eb; text-decoration: none; }
+
+/* Google Play Button */
+.ctaButtons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 24px;
+  flex-wrap: wrap;
+}
+.playButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #000;
+  color: white;
+  padding: 12px 28px;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: background 0.2s;
+}
+.playButton:hover { background: #333; }
+
+@media (max-width: 600px) {
+  .hero h1 { font-size: 1.8rem; }
+  .tagline { font-size: 1rem; }
+  .stats { gap: 24px; }
+  .statNum { font-size: 1.6rem; }
+}
