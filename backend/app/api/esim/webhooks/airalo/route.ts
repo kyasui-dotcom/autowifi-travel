@@ -5,6 +5,14 @@ import { getAiraloClient } from "@/lib/airalo";
 import { getEnv } from "@/lib/env";
 import { eq } from "drizzle-orm";
 
+export async function GET() {
+  return NextResponse.json({ status: "ok" });
+}
+
+export async function HEAD() {
+  return new NextResponse(null, { status: 200 });
+}
+
 export async function POST(request: NextRequest) {
   try {
     const env = await getEnv();
