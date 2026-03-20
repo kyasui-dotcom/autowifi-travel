@@ -10,10 +10,34 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
+      - name: Resolve production domain via DoH
+        id: resolve
+        run: |
+          set -euo pipefail
+          response="$(curl -fsS \
+            -H 'accept: application/dns-json' \
+            'https://cloudflare-dns.com/dns-query?name=autowifi-travel.com&type=A')"
+
+          ip="$(node -e '
+            const payload = JSON.parse(process.argv[1]);
+            const answers = Array.isArray(payload.Answer) ? payload.Answer : [];
+            const match = answers.find((entry) => entry.type === 1 && entry.data);
+            if (!match) process.exit(1);
+            process.stdout.write(match.data);
+          ' "$response")"
+
+          if [ -z "$ip" ]; then
+            echo "Failed to resolve autowifi-travel.com" >&2
+            exit 1
+          fi
+
+          echo "ip=$ip" >> "$GITHUB_OUTPUT"
+
       - name: Trigger production package sync
         run: |
           set -euo pipefail
           curl -fsS -L --max-time 300 \
+            --resolve "autowifi-travel.com:443:${{ steps.resolve.outputs.ip }}" \
             -o /tmp/airalo-packages.json \
             "https://autowifi-travel.com/api/esim/packages"
 
