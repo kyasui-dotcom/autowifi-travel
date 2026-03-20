@@ -5,6 +5,7 @@ export interface AppEnv {
   AIRALO_CLIENT_ID?: string;
   AIRALO_CLIENT_SECRET?: string;
   AIRALO_BASE_URL?: string;
+  AIRALO_WEBHOOK_BASE_URL?: string;
   AIRALO_MOCK_MODE?: string;
   STRIPE_SECRET_KEY?: string;
   STRIPE_WEBHOOK_SECRET?: string;
