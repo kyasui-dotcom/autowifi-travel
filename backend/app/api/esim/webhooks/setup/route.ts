@@ -112,7 +112,7 @@ export async function POST(request: NextRequest) {
       `${webhookBaseUrl.replace(/\/$/, "")}/api/esim/webhooks/airalo`;
     const creditLimitLevels = body.credit_limit_levels?.length
       ? body.credit_limit_levels
-      : [50, 20];
+      : [50];
 
     const results: Record<string, unknown> = {};
 
