@@ -1,6 +1,6 @@
 import { getCloudflareContext } from "@opennextjs/cloudflare";
 
-interface AppEnv {
+export interface AppEnv {
   DB: D1Database;
   AIRALO_CLIENT_ID?: string;
   AIRALO_CLIENT_SECRET?: string;
@@ -11,6 +11,10 @@ interface AppEnv {
   APP_DEEP_LINK_SCHEME?: string;
   APP_SUCCESS_URL?: string;
   WEB_BASE_URL?: string;
+  CRON_SECRET?: string;
+  RESEND_API_KEY?: string;
+  AIRALO_WEBHOOK_SECRET?: string;
+  ADMIN_EMAIL?: string;
 }
 
 export async function getEnv(): Promise<AppEnv> {

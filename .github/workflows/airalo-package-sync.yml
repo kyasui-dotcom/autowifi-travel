@@ -1,0 +1,33 @@
+name: Sync Airalo Packages
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "*/30 * * * *"
+
+jobs:
+  sync-packages:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Trigger production package sync
+        run: |
+          set -euo pipefail
+          curl -fsS -L --max-time 300 \
+            -o /tmp/airalo-packages.json \
+            "https://autowifi-travel.com/api/esim/packages"
+
+      - name: Verify package payload
+        run: |
+          node <<'EOF'
+          const fs = require("node:fs");
+          const payload = JSON.parse(
+            fs.readFileSync("/tmp/airalo-packages.json", "utf8")
+          );
+
+          if (!Array.isArray(payload.packages) || payload.packages.length === 0) {
+            throw new Error("Package sync returned no packages.");
+          }
+
+          console.log(`Synced ${payload.packages.length} packages.`);
+          EOF
