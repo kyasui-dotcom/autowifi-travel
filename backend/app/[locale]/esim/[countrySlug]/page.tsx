@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { generatePageMetadata } from "@/lib/seo";
+import { generatePageMetadata, getBaseUrl } from "@/lib/seo";
 import { getCountryBySlug, getCountryName, getAllCountries } from "@/lib/countries";
 import { getAiraloClient } from "@/lib/airalo";
 import { getEnv } from "@/lib/env";
@@ -154,17 +154,19 @@ export default async function CountryPackagesPage({
     // Packages unavailable - will show empty state
   }
 
-  const BASE_URL = "https://autowifi-travel.com";
+  const BASE_URL = getBaseUrl();
+  const countryPageUrl = `${BASE_URL}/${locale}/esim/${countrySlug}`;
+  const productImageUrl = `${BASE_URL}/opengraph-image`;
 
   return (
     <>
-      <BreadcrumbJsonLd
-        items={[
-          { name: labels.breadcrumbHome, url: `${BASE_URL}/${locale}` },
-          { name: labels.breadcrumbEsim, url: `${BASE_URL}/${locale}/esim` },
-          { name: countryName, url: `${BASE_URL}/${locale}/esim/${countrySlug}` },
-        ]}
-      />
+        <BreadcrumbJsonLd
+          items={[
+            { name: labels.breadcrumbHome, url: `${BASE_URL}/${locale}` },
+            { name: labels.breadcrumbEsim, url: `${BASE_URL}/${locale}/esim` },
+            { name: countryName, url: countryPageUrl },
+          ]}
+        />
 
       {/* Header */}
       <div className={styles.pageHeader}>
@@ -198,10 +200,14 @@ export default async function CountryPackagesPage({
                 <ProductJsonLd
                   name={`${countryName} eSIM - ${pkg.title}`}
                   description={`${pkg.data} data plan for ${countryName}, valid for ${pkg.validity} days`}
+                  image={productImageUrl}
                   sku={pkg.id}
+                  mpn={pkg.id}
                   price={pkg.price}
                   priceCurrency="USD"
-                  url={`/${locale}/esim/${countrySlug}/${pkg.id}/checkout`}
+                  seller="AutoWiFi Travel"
+                  brand="AutoWiFi Travel"
+                  url={`${countryPageUrl}#plan-${pkg.id}`}
                 />
 
                 <div className={styles.packageHeader}>

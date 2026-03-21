@@ -1,4 +1,7 @@
 import React from 'react';
+import { getBaseUrl } from '@/lib/seo';
+
+const DEFAULT_PRICE_VALID_UNTIL = '2027-12-31';
 
 // ── Generic renderer ────────────────────────────────────────
 
@@ -25,13 +28,16 @@ export function JsonLd({ data }: JsonLdProps) {
 interface ProductJsonLdProps {
   name: string;
   description: string;
-  image?: string;
+  image?: string | string[];
   sku: string;
   priceCurrency: string;
   price: number;
   availability?: 'InStock' | 'OutOfStock';
   seller?: string;
   url: string;
+  brand?: string;
+  mpn?: string;
+  priceValidUntil?: string;
 }
 
 export function ProductJsonLd({
@@ -44,27 +50,40 @@ export function ProductJsonLd({
   availability = 'InStock',
   seller,
   url,
+  brand,
+  mpn,
+  priceValidUntil,
 }: ProductJsonLdProps) {
+  const baseUrl = getBaseUrl();
+  const normalizedImage = image ?? `${baseUrl}/opengraph-image`;
+  const resolvedBrand = brand ?? seller ?? 'AutoWiFi Travel';
+  const resolvedPriceValidUntil = priceValidUntil ?? DEFAULT_PRICE_VALID_UNTIL;
+
   const data: Record<string, unknown> = {
     '@context': 'https://schema.org',
     '@type': 'Product',
     name,
     description,
     sku,
+    mpn: mpn ?? sku,
+    brand: {
+      '@type': 'Brand',
+      name: resolvedBrand,
+    },
+    category: 'Travel eSIM',
+    image: normalizedImage,
     url,
     offers: {
       '@type': 'Offer',
       priceCurrency,
       price: price.toFixed(2),
+      priceValidUntil: resolvedPriceValidUntil,
       availability: `https://schema.org/${availability}`,
+      itemCondition: 'https://schema.org/NewCondition',
       url,
       ...(seller ? { seller: { '@type': 'Organization', name: seller } } : {}),
     },
   };
-
-  if (image) {
-    data.image = image;
-  }
 
   return <JsonLd data={data} />;
 }
@@ -143,7 +162,7 @@ export function OrganizationJsonLd() {
     '@type': 'Organization',
     name: 'AutoWiFi Travel',
     url: 'https://autowifi-travel.com',
-    logo: 'https://autowifi-travel.com/icon.png',
+    logo: 'https://autowifi-travel.com/favicon.ico',
     description: 'Affordable travel eSIM for 200+ countries. Stay connected wherever you go.',
     contactPoint: {
       '@type': 'ContactPoint',
