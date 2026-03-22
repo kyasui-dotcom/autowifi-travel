@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import styles from "./page.module.css";
 
 interface Country {
@@ -17,6 +16,7 @@ interface CountrySearchProps {
   labels: {
     searchPlaceholder: string;
     noResults: string;
+    continents: Record<string, string>;
   };
 }
 
@@ -65,17 +65,17 @@ export default function CountrySearch({ countries, locale, labels }: CountrySear
 
         {sortedContinents.map((continent) => (
           <section key={continent} className={styles.continentSection}>
-            <h2 className={styles.continentTitle}>{continent}</h2>
+            <h2 className={styles.continentTitle}>{labels.continents[continent] ?? continent}</h2>
             <div className={styles.countriesGrid}>
               {grouped[continent].map((country) => (
-                <Link
+                <a
                   key={country.slug}
                   href={`/${locale}/esim/${country.slug}`}
                   className={styles.countryCard}
                 >
                   <span className={styles.countryFlag}>{country.flag}</span>
                   <span className={styles.countryName}>{country.name}</span>
-                </Link>
+                </a>
               ))}
             </div>
           </section>
