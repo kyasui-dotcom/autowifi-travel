@@ -1,0 +1,79 @@
+.container {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 2rem 1rem 4rem;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin-bottom: 1.5rem;
+}
+
+.breadcrumb a {
+  color: #0284c7;
+  text-decoration: none;
+}
+
+.breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+.hero {
+  background: linear-gradient(135deg, #e0f2fe, #f0f9ff);
+  border: 1px solid #bae6fd;
+  border-radius: 1rem;
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+.title {
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  line-height: 1.2;
+  margin-bottom: 0.75rem;
+  color: #0f172a;
+}
+
+.description {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: #334155;
+}
+
+.updatedAt {
+  display: block;
+  margin-top: 0.75rem;
+  font-size: 0.875rem;
+  color: #64748b;
+}
+
+.section {
+  margin-bottom: 2rem;
+}
+
+.sectionTitle {
+  font-size: 1.25rem;
+  line-height: 1.4;
+  color: #0f172a;
+  margin-bottom: 0.75rem;
+}
+
+.paragraph {
+  color: #334155;
+  line-height: 1.85;
+  margin-bottom: 0.9rem;
+}
+
+.list {
+  margin: 0;
+  padding-left: 1.25rem;
+  color: #334155;
+  line-height: 1.8;
+}
+
+.list li + li {
+  margin-top: 0.5rem;
+}

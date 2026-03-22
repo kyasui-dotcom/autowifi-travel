@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { BreadcrumbJsonLd } from "./JsonLd";
+import { ArticleJsonLd, BreadcrumbJsonLd, FaqJsonLd } from "./JsonLd";
 import styles from "./article.module.css";
 
 export type Locale = "en" | "ja" | "ko" | "zh";
@@ -46,36 +46,20 @@ interface Props {
 
 export default function ArticleLayout({ locale, slug, content: c, relatedArticles, relatedTitle }: Props) {
   const baseUrl = "https://autowifi-travel.com";
-  const faqJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: c.faqs.map((faq) => ({
-      "@type": "Question",
-      name: faq.q,
-      acceptedAnswer: { "@type": "Answer", text: faq.a },
-    })),
-  };
-
-  const articleJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    headline: c.title,
-    description: c.intro.slice(0, 160),
-    author: { "@type": "Organization", name: "AutoWiFi Travel" },
-    publisher: { "@type": "Organization", name: "AutoWiFi Travel" },
-    datePublished: c.datePublished || "2026-03-13",
-    dateModified: c.dateModified || new Date().toISOString().split("T")[0],
-  };
+  const articleUrl = `${baseUrl}/${locale}/guide/${slug}`;
+  const articleImageUrl = `${baseUrl}/opengraph-image`;
 
   return (
     <div className={styles.container}>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+      <FaqJsonLd items={c.faqs.map((faq) => ({ question: faq.q, answer: faq.a }))} />
+      <ArticleJsonLd
+        title={c.title}
+        description={c.intro}
+        url={articleUrl}
+        image={articleImageUrl}
+        locale={locale}
+        datePublished={c.datePublished || "2026-03-13"}
+        dateModified={c.dateModified || new Date().toISOString().split("T")[0]}
       />
       <BreadcrumbJsonLd
         items={[

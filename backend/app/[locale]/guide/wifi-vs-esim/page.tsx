@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { generatePageMetadata } from "@/lib/seo";
+import { ArticleJsonLd, BreadcrumbJsonLd, FaqJsonLd } from "@/lib/components/JsonLd";
+import { generatePageMetadata, getBaseUrl } from "@/lib/seo";
 import styles from "./page.module.css";
 
-const SUPPORTED_LOCALES = ["en", "ja", "ko", "zh"] as const;
-type Locale = (typeof SUPPORTED_LOCALES)[number];
+type Locale = "en" | "ja" | "ko" | "zh";
 
 interface ComparisonRow {
   category: string;
@@ -421,44 +421,35 @@ export default async function WifiVsEsimPage({
   const { locale } = await params;
   const loc = (locale as Locale) || "en";
   const c = CONTENT[loc];
-
-  const faqJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: c.faqs.map((faq) => ({
-      "@type": "Question",
-      name: faq.q,
-      acceptedAnswer: { "@type": "Answer", text: faq.a },
-    })),
-  };
-
-  const articleJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    headline: c.title,
-    description: c.intro.slice(0, 160),
-    author: { "@type": "Organization", name: "AutoWiFi Travel" },
-    publisher: { "@type": "Organization", name: "AutoWiFi Travel" },
-    datePublished: "2026-03-13",
-    dateModified: "2026-03-13",
-  };
+  const baseUrl = getBaseUrl();
+  const articleUrl = `${baseUrl}/${loc}/guide/wifi-vs-esim`;
+  const articleImageUrl = `${baseUrl}/opengraph-image`;
 
   return (
     <div className={styles.container}>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      <ArticleJsonLd
+        title={c.title}
+        description={c.intro}
+        url={articleUrl}
+        image={articleImageUrl}
+        locale={loc}
+        datePublished="2026-03-13"
+        dateModified="2026-03-13"
       />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+      <FaqJsonLd items={c.faqs.map((faq) => ({ question: faq.q, answer: faq.a }))} />
+      <BreadcrumbJsonLd
+        items={[
+          { name: c.breadcrumbHome, url: `${baseUrl}/${loc}` },
+          { name: c.breadcrumbGuide, url: `${baseUrl}/${loc}/guide` },
+          { name: c.breadcrumbCurrent, url: articleUrl },
+        ]}
       />
 
       {/* Breadcrumb */}
       <nav className={styles.breadcrumb}>
         <Link href={`/${loc}`}>{c.breadcrumbHome}</Link>
         <span className={styles.breadcrumbSep}>/</span>
-        <span>{c.breadcrumbGuide}</span>
+        <Link href={`/${loc}/guide`}>{c.breadcrumbGuide}</Link>
         <span className={styles.breadcrumbSep}>/</span>
         <span>{c.breadcrumbCurrent}</span>
       </nav>
