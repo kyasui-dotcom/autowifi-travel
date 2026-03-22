@@ -17,6 +17,99 @@
   opacity: 0.9;
 }
 
+.comparisonSection {
+  background: linear-gradient(180deg, #f8fbff 0%, #ffffff 100%);
+  border-bottom: 1px solid #dbeafe;
+}
+
+.comparisonInner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.comparisonTitle {
+  font-size: clamp(1.5rem, 2.2vw, 2rem);
+  font-weight: 700;
+  color: var(--color-gray-900);
+  margin-bottom: var(--space-sm);
+}
+
+.comparisonIntro {
+  color: var(--color-gray-700);
+  line-height: 1.8;
+  margin-bottom: var(--space-lg);
+  max-width: 860px;
+}
+
+.comparisonTableWrapper {
+  overflow-x: auto;
+  background: #ffffff;
+  border: 1px solid #dbeafe;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.comparisonTable {
+  width: 100%;
+  min-width: 860px;
+  border-collapse: collapse;
+}
+
+.comparisonTable thead th {
+  text-align: left;
+  background: #eff6ff;
+  color: #0f172a;
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  padding: var(--space-md);
+  border-bottom: 1px solid #dbeafe;
+}
+
+.comparisonTable tbody td {
+  padding: var(--space-md);
+  border-bottom: 1px solid var(--color-gray-100);
+  color: var(--color-gray-800);
+  vertical-align: top;
+}
+
+.comparisonTable tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.comparisonDestination {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--color-gray-900);
+  font-weight: 700;
+}
+
+.comparisonDestination:hover {
+  color: var(--color-primary);
+}
+
+.comparisonFlag {
+  font-size: 1.4rem;
+  line-height: 1;
+}
+
+.comparisonNote {
+  display: block;
+  color: var(--color-gray-700);
+  line-height: 1.7;
+  margin-bottom: 0.55rem;
+}
+
+.comparisonLink {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.comparisonLink:hover {
+  text-decoration: underline;
+}
+
 /* Search */
 .searchWrapper {
   max-width: var(--max-width);
@@ -119,5 +212,10 @@
 
   .pageTitle {
     font-size: var(--font-size-2xl);
+  }
+
+  .comparisonInner {
+    padding-top: var(--space-lg);
+    padding-bottom: var(--space-lg);
   }
 }
