@@ -94,6 +94,131 @@ const LABELS: Record<string, {
   },
 };
 
+const COUNTRY_PAGE_UI: Record<string, {
+  eyebrow: string;
+  heroSubtitle: (countryName: string) => string;
+  primaryCta: string;
+  secondaryCta: string;
+  plansAvailable: string;
+  startingAt: string;
+  longestCoverage: string;
+  refreshSoon: string;
+  installTitle: string;
+  installBody: (countryName: string) => string;
+  plansEyebrow: string;
+  plansTitle: (countryName: string) => string;
+  plansLead: string;
+  compareEyebrow: string;
+  resourcesEyebrow: string;
+  faqEyebrow: string;
+  pricePerDay: string;
+  idealFor: string;
+  badgeCheapest: string;
+  badgeBestValue: string;
+  badgeLongest: string;
+}> = {
+  en: {
+    eyebrow: "Travel eSIM",
+    heroSubtitle: (countryName) =>
+      `Choose a ${countryName} plan you can install before departure so you land with data ready for maps, messages, and work.`,
+    primaryCta: "View plans",
+    secondaryCta: "Compare plans",
+    plansAvailable: "Plans available",
+    startingAt: "Starting at",
+    longestCoverage: "Longest coverage",
+    refreshSoon: "Inventory updates automatically",
+    installTitle: "Install before departure",
+    installBody: (countryName) =>
+      `Set up your ${countryName} eSIM in advance, then switch on mobile data after arrival to get online faster.`,
+    plansEyebrow: "Pick your plan",
+    plansTitle: (countryName) => `Choose the best ${countryName} eSIM for your trip`,
+    plansLead: "Compare data size, trip length, and daily cost at a glance.",
+    compareEyebrow: "Side-by-side view",
+    resourcesEyebrow: "Before you buy",
+    faqEyebrow: "Common questions",
+    pricePerDay: "Price / day",
+    idealFor: "Best for",
+    badgeCheapest: "Lowest price",
+    badgeBestValue: "Best value",
+    badgeLongest: "Longest stay",
+  },
+  ja: {
+    eyebrow: "旅行用eSIM",
+    heroSubtitle: (countryName) =>
+      `${countryName}到着後すぐに地図や連絡手段を使えるよう、出発前に入れておけるプランを選べます。`,
+    primaryCta: "プランを見る",
+    secondaryCta: "比較表を見る",
+    plansAvailable: "掲載プラン数",
+    startingAt: "最安料金",
+    longestCoverage: "最長利用期間",
+    refreshSoon: "在庫と料金は自動更新",
+    installTitle: "出発前に設定可能",
+    installBody: (countryName) =>
+      `${countryName}到着前にeSIMを入れておけば、現地ではモバイルデータをONにするだけで使い始めやすくなります。`,
+    plansEyebrow: "おすすめプラン",
+    plansTitle: (countryName) => `${countryName}旅行に合うeSIMを選ぶ`,
+    plansLead: "容量、旅行日数、1日あたりの価格を見比べながら選べます。",
+    compareEyebrow: "比較しやすく整理",
+    resourcesEyebrow: "購入前に確認",
+    faqEyebrow: "よくある質問",
+    pricePerDay: "1日あたり",
+    idealFor: "向いている使い方",
+    badgeCheapest: "最安",
+    badgeBestValue: "バランス重視",
+    badgeLongest: "長期向け",
+  },
+  ko: {
+    eyebrow: "여행용 eSIM",
+    heroSubtitle: (countryName) =>
+      `${countryName} 도착 직후 지도, 메신저, 업무용 앱을 바로 쓸 수 있도록 출발 전에 설치할 수 있는 플랜을 골라보세요.`,
+    primaryCta: "플랜 보기",
+    secondaryCta: "비교표 보기",
+    plansAvailable: "판매 중인 플랜",
+    startingAt: "최저가",
+    longestCoverage: "최장 사용 기간",
+    refreshSoon: "재고와 가격은 자동 업데이트",
+    installTitle: "출발 전에 설치 가능",
+    installBody: (countryName) =>
+      `${countryName} eSIM을 미리 설치해 두면 현지 도착 후 데이터만 켜도 빠르게 연결할 수 있습니다.`,
+    plansEyebrow: "추천 플랜",
+    plansTitle: (countryName) => `${countryName} 여행에 맞는 eSIM 고르기`,
+    plansLead: "데이터 용량, 여행 기간, 하루 기준 비용을 한눈에 비교하세요.",
+    compareEyebrow: "한눈에 비교",
+    resourcesEyebrow: "구매 전에 확인",
+    faqEyebrow: "자주 묻는 질문",
+    pricePerDay: "1일 기준",
+    idealFor: "추천 용도",
+    badgeCheapest: "최저가",
+    badgeBestValue: "가성비",
+    badgeLongest: "장기 체류",
+  },
+  zh: {
+    eyebrow: "旅行 eSIM",
+    heroSubtitle: (countryName) =>
+      `出发前就能为${countryName}安装 eSIM，落地后可更快打开地图、消息和常用应用。`,
+    primaryCta: "查看套餐",
+    secondaryCta: "查看对比",
+    plansAvailable: "可选套餐",
+    startingAt: "最低价格",
+    longestCoverage: "最长有效期",
+    refreshSoon: "库存与价格自动更新",
+    installTitle: "出发前即可安装",
+    installBody: (countryName) =>
+      `提前安装${countryName} eSIM，到达后开启蜂窝数据即可更快联网。`,
+    plansEyebrow: "推荐套餐",
+    plansTitle: (countryName) => `挑选适合${countryName}行程的 eSIM`,
+    plansLead: "可快速比较流量、天数和日均价格。",
+    compareEyebrow: "并排对比",
+    resourcesEyebrow: "购买前先看",
+    faqEyebrow: "常见问题",
+    pricePerDay: "日均价格",
+    idealFor: "适合场景",
+    badgeCheapest: "最低价",
+    badgeBestValue: "性价比",
+    badgeLongest: "长期出行",
+  },
+};
+
 interface CountryPackage {
   id: string;
   title: string;
@@ -308,6 +433,44 @@ function buildPackageComparisonRows(locale: string, packages: CountryPackage[]):
       pricePerDay: pkg.price / Math.max(pkg.validity, 1),
       bestFor: getPackageUseCase(locale, pkg),
     }));
+}
+
+function formatUsd(locale: string, value: number): string {
+  return new Intl.NumberFormat(toLocaleTag(locale), {
+    style: "currency",
+    currency: "USD",
+    maximumFractionDigits: 2,
+  }).format(value);
+}
+
+function getPackageBadge({
+  locale,
+  packageId,
+  cheapestId,
+  bestValueId,
+  longestId,
+}: {
+  locale: string;
+  packageId: string;
+  cheapestId?: string;
+  bestValueId?: string;
+  longestId?: string;
+}): string | null {
+  const ui = COUNTRY_PAGE_UI[locale] ?? COUNTRY_PAGE_UI.en;
+
+  if (packageId === cheapestId) {
+    return ui.badgeCheapest;
+  }
+
+  if (packageId === bestValueId) {
+    return ui.badgeBestValue;
+  }
+
+  if (packageId === longestId) {
+    return ui.badgeLongest;
+  }
+
+  return null;
 }
 
 const COUNTRY_COMPARISON_TEXT: Record<string, {
@@ -1007,6 +1170,45 @@ export default async function CountryPackagesPage({
   const comparisonText =
     COUNTRY_COMPARISON_TEXT[locale] ?? COUNTRY_COMPARISON_TEXT.en;
   const relatedLinks = getRelatedLinks(locale, countryName, countrySlug);
+  const ui = COUNTRY_PAGE_UI[locale] ?? COUNTRY_PAGE_UI.en;
+  const cheapestPackage = packages.reduce<CountryPackage | null>(
+    (current, pkg) => (!current || pkg.price < current.price ? pkg : current),
+    null,
+  );
+  const longestPackage = packages.reduce<CountryPackage | null>(
+    (current, pkg) =>
+      !current || pkg.validity > current.validity ? pkg : current,
+    null,
+  );
+  const bestValuePackage = comparisonRows.reduce<PackageComparisonRow | null>(
+    (current, row) =>
+      !current || row.pricePerDay < current.pricePerDay ? row : current,
+    null,
+  );
+  const heroStats = [
+    {
+      label: ui.plansAvailable,
+      value: String(packages.length),
+      detail:
+        packages.length > 0
+          ? formatAvailablePlans(locale, packages.length)
+          : ui.refreshSoon,
+    },
+    {
+      label: ui.startingAt,
+      value: cheapestPackage ? formatUsd(locale, cheapestPackage.price) : "—",
+      detail: cheapestPackage
+        ? `${cheapestPackage.data} / ${cheapestPackage.validity} ${labels.days}`
+        : ui.refreshSoon,
+    },
+    {
+      label: ui.longestCoverage,
+      value: longestPackage
+        ? `${longestPackage.validity} ${labels.days}`
+        : "—",
+      detail: longestPackage ? longestPackage.title : ui.refreshSoon,
+    },
+  ];
 
   return (
     <>
@@ -1028,84 +1230,152 @@ export default async function CountryPackagesPage({
       />
       <FaqJsonLd items={seoContent.faqItems} />
 
-      {/* Header */}
-      <div className={styles.pageHeader}>
+      <header className={styles.pageHeader}>
         <div className={styles.pageHeaderInner}>
-          <span className={styles.countryFlag}>{country.flag}</span>
-          <div className={styles.headerText}>
-            <h1>{countryName} {labels.esimPlans}</h1>
-            <p>
-              {packages.length > 0
-                ? formatAvailablePlans(locale, packages.length)
-                : ""}
-            </p>
+          <nav className={styles.breadcrumb}>
+            <a href={`/${locale}`}>{labels.breadcrumbHome}</a>
+            <span className={styles.breadcrumbSep}>/</span>
+            <a href={`/${locale}/esim`}>{labels.breadcrumbEsim}</a>
+            <span className={styles.breadcrumbSep}>/</span>
+            <span>{countryName}</span>
+          </nav>
+
+          <div className={styles.heroGrid}>
+            <div className={styles.heroCopy}>
+              <span className={styles.pageEyebrow}>{ui.eyebrow}</span>
+              <div className={styles.heroTitleRow}>
+                <span className={styles.countryFlag}>{country.flag}</span>
+                <div className={styles.headerText}>
+                  <h1>{countryName} {labels.esimPlans}</h1>
+                  <p className={styles.heroSubtitle}>
+                    {ui.heroSubtitle(countryName)}
+                  </p>
+                </div>
+              </div>
+
+              <div className={styles.heroActions}>
+                {packages.length > 0 && (
+                  <a href="#plans" className={styles.primaryAction}>
+                    {ui.primaryCta}
+                  </a>
+                )}
+                {comparisonRows.length > 0 && (
+                  <a href="#comparison" className={styles.secondaryAction}>
+                    {ui.secondaryCta}
+                  </a>
+                )}
+              </div>
+            </div>
+
+            <aside className={styles.heroPanel}>
+              <div className={styles.statGrid}>
+                {heroStats.map((stat) => (
+                  <div key={stat.label} className={styles.statCard}>
+                    <span className={styles.statLabel}>{stat.label}</span>
+                    <strong className={styles.statValue}>{stat.value}</strong>
+                    <span className={styles.statDetail}>{stat.detail}</span>
+                  </div>
+                ))}
+              </div>
+              <div className={styles.heroNote}>
+                <strong>{ui.installTitle}</strong>
+                <p>{ui.installBody(countryName)}</p>
+              </div>
+            </aside>
           </div>
         </div>
-      </div>
-
-      {/* Breadcrumb */}
-      <nav className={styles.breadcrumb}>
-        <a href={`/${locale}`}>{labels.breadcrumbHome}</a>
-        <span className={styles.breadcrumbSep}>/</span>
-        <a href={`/${locale}/esim`}>{labels.breadcrumbEsim}</a>
-        <span className={styles.breadcrumbSep}>/</span>
-        <span>{countryName}</span>
-      </nav>
+      </header>
 
       <div className={styles.container}>
         {packages.length > 0 ? (
-          <div className={styles.packagesGrid}>
-            {packages.map((pkg) => (
-              <div key={pkg.id} id={`plan-${pkg.id}`} className={styles.packageCard}>
-                <ProductJsonLd
-                  name={`${countryName} eSIM - ${pkg.title}`}
-                  description={getProductDescription(locale, countryName, pkg)}
-                  image={productImageUrl}
-                  sku={pkg.id}
-                  mpn={pkg.id}
-                  price={pkg.price}
-                  priceCurrency="USD"
-                  seller="AutoWiFi Travel"
-                  brand="AutoWiFi Travel"
-                  url={`${countryPageUrl}#plan-${pkg.id}`}
-                />
-
-                <div className={styles.packageHeader}>
-                  <div className={styles.packageOperator}>{pkg.operator}</div>
-                  <div className={styles.packageTitle}>{pkg.title}</div>
-                </div>
-
-                <div className={styles.packageBody}>
-                  <div className={styles.packageDetails}>
-                    <div className={styles.packageDetail}>
-                      <span className={styles.packageDetailLabel}>{labels.data}</span>
-                      <span className={styles.packageDetailValue}>{pkg.data}</span>
-                    </div>
-                    <div className={styles.packageDetail}>
-                      <span className={styles.packageDetailLabel}>{labels.validity}</span>
-                      <span className={styles.packageDetailValue}>
-                        {pkg.validity} {labels.days}
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className={styles.packagePrice}>
-                    <span className={styles.priceAmount}>
-                      ${pkg.price.toFixed(2)}
-                    </span>
-                    <span className={styles.priceCurrency}>USD</span>
-                  </div>
-
-                  <a
-                    href={`/${locale}/esim/${countrySlug}/${pkg.id}/checkout`}
-                    className={styles.buyButton}
-                  >
-                    {labels.buyNow}
-                  </a>
-                </div>
+          <section id="plans" className={styles.sectionBlock}>
+            <div className={styles.sectionTop}>
+              <div>
+                <span className={styles.sectionEyebrow}>{ui.plansEyebrow}</span>
+                <h2 className={styles.sectionTitle}>{ui.plansTitle(countryName)}</h2>
               </div>
-            ))}
-          </div>
+              <p className={styles.sectionLead}>{ui.plansLead}</p>
+            </div>
+
+            <div className={styles.packagesGrid}>
+              {packages.map((pkg) => {
+                const badge = getPackageBadge({
+                  locale,
+                  packageId: pkg.id,
+                  cheapestId: cheapestPackage?.id,
+                  bestValueId: bestValuePackage?.id,
+                  longestId: longestPackage?.id,
+                });
+                const dailyRate = pkg.price / Math.max(pkg.validity, 1);
+
+                return (
+                  <div key={pkg.id} id={`plan-${pkg.id}`} className={styles.packageCard}>
+                    <ProductJsonLd
+                      name={`${countryName} eSIM - ${pkg.title}`}
+                      description={getProductDescription(locale, countryName, pkg)}
+                      image={productImageUrl}
+                      sku={pkg.id}
+                      mpn={pkg.id}
+                      price={pkg.price}
+                      priceCurrency="USD"
+                      seller="AutoWiFi Travel"
+                      brand="AutoWiFi Travel"
+                      url={`${countryPageUrl}#plan-${pkg.id}`}
+                    />
+
+                    <div className={styles.packageHeader}>
+                      <div className={styles.packageMeta}>
+                        {badge && (
+                          <span className={styles.packageBadge}>{badge}</span>
+                        )}
+                        <div className={styles.packageOperator}>{pkg.operator}</div>
+                      </div>
+                      <div className={styles.packageTitle}>{pkg.title}</div>
+                    </div>
+
+                    <div className={styles.packageBody}>
+                      <div className={styles.packageDetails}>
+                        <div className={styles.packageDetail}>
+                          <span className={styles.packageDetailLabel}>{labels.data}</span>
+                          <span className={styles.packageDetailValue}>{pkg.data}</span>
+                        </div>
+                        <div className={styles.packageDetail}>
+                          <span className={styles.packageDetailLabel}>{labels.validity}</span>
+                          <span className={styles.packageDetailValue}>
+                            {pkg.validity} {labels.days}
+                          </span>
+                        </div>
+                      </div>
+
+                      <div className={styles.packageUseCase}>
+                        <span className={styles.packageUseCaseLabel}>{ui.idealFor}</span>
+                        <strong>{getPackageUseCase(locale, pkg)}</strong>
+                      </div>
+
+                      <div className={styles.packagePriceRow}>
+                        <div className={styles.packagePrice}>
+                          <span className={styles.priceAmount}>
+                            ${pkg.price.toFixed(2)}
+                          </span>
+                          <span className={styles.priceCurrency}>USD</span>
+                        </div>
+                        <span className={styles.packageDailyRate}>
+                          {ui.pricePerDay}: ${dailyRate.toFixed(2)}
+                        </span>
+                      </div>
+
+                      <a
+                        href={`/${locale}/esim/${countrySlug}/${pkg.id}/checkout`}
+                        className={styles.buyButton}
+                      >
+                        {labels.buyNow}
+                      </a>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </section>
         ) : (
           <div className={styles.noPackages}>
             <span className={styles.noPackagesIcon}>&#x1F4E6;</span>
@@ -1118,7 +1388,8 @@ export default async function CountryPackagesPage({
         )}
 
         {comparisonRows.length > 0 && (
-          <section className={styles.comparisonSection}>
+          <section id="comparison" className={styles.comparisonSection}>
+            <span className={styles.sectionEyebrow}>{ui.compareEyebrow}</span>
             <h2 className={styles.sectionTitle}>{comparisonText.title}</h2>
             <p className={styles.comparisonIntro}>
               {comparisonText.intro(countryName)}
@@ -1184,6 +1455,7 @@ export default async function CountryPackagesPage({
         </section>
 
         <section className={styles.resourcesSection}>
+          <span className={styles.sectionEyebrow}>{ui.resourcesEyebrow}</span>
           <h2 className={styles.sectionTitle}>{relatedLinks.title}</h2>
           <div className={styles.resourceGrid}>
             {relatedLinks.links.map((link) => (
@@ -1197,6 +1469,7 @@ export default async function CountryPackagesPage({
         </section>
 
         <section className={styles.faqSection}>
+          <span className={styles.sectionEyebrow}>{ui.faqEyebrow}</span>
           <h2 className={styles.sectionTitle}>{seoContent.faqTitle}</h2>
           <div className={styles.faqList}>
             {seoContent.faqItems.map((item) => (

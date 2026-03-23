@@ -1,20 +1,159 @@
+/* Breadcrumb */
+.breadcrumb {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 1rem var(--space-lg) 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: var(--font-size-sm);
+  color: var(--color-gray-500);
+}
+
+.breadcrumbLink {
+  color: #dbeafe;
+  font-weight: 600;
+}
+
+.breadcrumbSep {
+  color: rgba(255, 255, 255, 0.68);
+}
+
 /* Page Header */
 .pageHeader {
-  background: linear-gradient(135deg, #0284c7 0%, #0ea5e9 100%);
+  background:
+    radial-gradient(circle at top right, rgba(255, 255, 255, 0.2), transparent 32%),
+    linear-gradient(135deg, #0369a1 0%, #0284c7 42%, #38bdf8 100%);
   color: var(--color-white);
-  padding: var(--space-2xl) var(--space-lg);
+  padding: 0 0 var(--space-2xl);
+}
+
+.pageHeaderInner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--space-lg) var(--space-lg) 0;
   text-align: center;
 }
 
-.pageTitle {
-  font-size: var(--font-size-3xl);
+.pageEyebrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.45rem 0.85rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.14);
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 0.82rem;
   font-weight: 700;
-  margin-bottom: var(--space-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.pageTitle {
+  font-size: clamp(2.3rem, 4.2vw, 3.8rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  margin: 1rem auto 0.85rem;
+  max-width: 760px;
 }
 
 .pageSubtitle {
-  font-size: var(--font-size-lg);
-  opacity: 0.9;
+  font-size: clamp(1rem, 1.8vw, 1.18rem);
+  opacity: 0.92;
+  max-width: 760px;
+  margin: 0 auto;
+  line-height: 1.8;
+}
+
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.9rem;
+  margin-top: var(--space-xl);
+}
+
+.primaryAction,
+.secondaryAction {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0.8rem 1.2rem;
+  border-radius: 999px;
+  font-weight: 700;
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    background-color 0.18s ease;
+}
+
+.primaryAction {
+  background: #ffffff;
+  color: #0f172a;
+  box-shadow: 0 16px 34px rgba(15, 23, 42, 0.14);
+}
+
+.secondaryAction {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+}
+
+.primaryAction:hover,
+.secondaryAction:hover,
+.countryCard:hover,
+.comparisonTableWrapper:hover {
+  transform: translateY(-2px);
+}
+
+.statRow {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-md);
+  margin-top: var(--space-xl);
+}
+
+.statCard {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 1rem 1.1rem;
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.statValue {
+  font-size: 1.35rem;
+  font-weight: 800;
+}
+
+.statLabel {
+  font-size: var(--font-size-sm);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.sectionTop {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 0.75rem;
+}
+
+.sectionEyebrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.35rem 0.8rem;
+  border-radius: 999px;
+  background: #e0f2fe;
+  color: #0369a1;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .comparisonSection {
@@ -46,8 +185,11 @@
   overflow-x: auto;
   background: #ffffff;
   border: 1px solid #dbeafe;
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
+  border-radius: 1.15rem;
+  box-shadow: 0 20px 40px rgba(2, 132, 199, 0.08);
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease;
 }
 
 .comparisonTable {
@@ -83,6 +225,7 @@
   gap: 0.6rem;
   color: var(--color-gray-900);
   font-weight: 700;
+  margin-bottom: 0.35rem;
 }
 
 .comparisonDestination:hover {
@@ -104,6 +247,8 @@
 .comparisonLink {
   color: var(--color-primary);
   font-weight: 600;
+  display: inline-flex;
+  align-items: center;
 }
 
 .comparisonLink:hover {
@@ -111,6 +256,29 @@
 }
 
 /* Search */
+.searchSection {
+  background: #ffffff;
+}
+
+.searchSectionInner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--space-xl) var(--space-lg) 0;
+}
+
+.searchTitle {
+  font-size: clamp(1.4rem, 2.2vw, 2rem);
+  color: var(--color-gray-900);
+  font-weight: 700;
+}
+
+.searchLead {
+  margin-top: 0.7rem;
+  max-width: 760px;
+  color: var(--color-gray-700);
+  line-height: 1.8;
+}
+
 .searchWrapper {
   max-width: var(--max-width);
   margin: 0 auto;
@@ -120,18 +288,23 @@
 
 .searchInput {
   width: 100%;
-  padding: var(--space-md) var(--space-lg);
+  padding: 1rem var(--space-lg);
   padding-left: 48px;
   border: 2px solid var(--color-gray-200);
-  border-radius: var(--radius-full);
+  border-radius: 1rem;
   font-size: var(--font-size-base);
   font-family: var(--font-sans);
   outline: none;
-  transition: border-color 0.2s;
+  background: #ffffff;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.06);
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
 }
 
 .searchInput:focus {
   border-color: var(--color-primary);
+  box-shadow: 0 16px 36px rgba(14, 165, 233, 0.14);
 }
 
 .searchIcon {
@@ -141,6 +314,24 @@
   color: var(--color-gray-400);
   font-size: var(--font-size-lg);
   pointer-events: none;
+}
+
+.searchMeta {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 0.8rem;
+}
+
+.searchResults {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  background: #eff6ff;
+  color: #0369a1;
+  font-size: 0.85rem;
+  font-weight: 700;
 }
 
 /* Continent sections */
@@ -154,13 +345,34 @@
   margin-bottom: var(--space-2xl);
 }
 
+.continentHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  margin-bottom: var(--space-md);
+  padding-bottom: var(--space-sm);
+  border-bottom: 2px solid var(--color-gray-100);
+}
+
 .continentTitle {
   font-size: var(--font-size-2xl);
   font-weight: 700;
   color: var(--color-gray-900);
-  margin-bottom: var(--space-md);
-  padding-bottom: var(--space-sm);
-  border-bottom: 2px solid var(--color-gray-100);
+}
+
+.continentCount {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.1rem;
+  height: 2.1rem;
+  padding: 0 0.65rem;
+  border-radius: 999px;
+  background: #eff6ff;
+  color: #0369a1;
+  font-size: 0.9rem;
+  font-weight: 800;
 }
 
 .countriesGrid {
@@ -172,19 +384,29 @@
 .countryCard {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: var(--space-md);
-  padding: var(--space-md) var(--space-lg);
+  padding: 1rem 1.15rem;
   background: var(--color-white);
   border: 1px solid var(--color-gray-100);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
-  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+  border-radius: 1rem;
+  box-shadow: 0 16px 28px rgba(15, 23, 42, 0.05);
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s,
+    border-color 0.2s;
 }
 
 .countryCard:hover {
   transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
-  border-color: var(--color-primary-light);
+  box-shadow: 0 22px 34px rgba(14, 165, 233, 0.14);
+  border-color: #bae6fd;
+}
+
+.countryIdentity {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
 }
 
 .countryFlag {
@@ -194,8 +416,15 @@
 
 .countryName {
   font-size: var(--font-size-base);
-  font-weight: 500;
-  color: var(--color-gray-800);
+  font-weight: 700;
+  color: var(--color-gray-900);
+}
+
+.countryCta {
+  white-space: nowrap;
+  color: var(--color-primary);
+  font-size: 0.9rem;
+  font-weight: 700;
 }
 
 .noResults {
@@ -214,8 +443,27 @@
     font-size: var(--font-size-2xl);
   }
 
+  .heroActions,
+  .statRow {
+    grid-template-columns: 1fr;
+    flex-direction: column;
+  }
+
+  .heroActions {
+    align-items: stretch;
+  }
+
+  .primaryAction,
+  .secondaryAction {
+    width: 100%;
+  }
+
   .comparisonInner {
     padding-top: var(--space-lg);
     padding-bottom: var(--space-lg);
+  }
+
+  .continentHeader {
+    align-items: flex-start;
   }
 }

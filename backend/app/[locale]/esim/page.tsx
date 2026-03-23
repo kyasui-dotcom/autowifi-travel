@@ -47,40 +47,110 @@ const CONTINENT_LABELS: Record<string, Record<string, string>> = {
 };
 
 const PAGE_CONTENT: Record<string, {
+  eyebrow: string;
   title: string;
   subtitle: string;
+  primaryCta: string;
+  secondaryCta: string;
+  primaryHref: string;
+  secondaryHref: string;
+  stats: {
+    countries: string;
+    compare: string;
+    activation: string;
+  };
+  searchTitle: string;
+  searchLead: string;
+  searchResultsLabel: string;
+  searchCardCta: string;
   searchPlaceholder: string;
   noResults: string;
   metaTitle: string;
   metaDescription: string;
 }> = {
   en: {
+    eyebrow: "Travel eSIM finder",
     title: "eSIM Plans by Country",
-    subtitle: "Choose your destination and find the perfect data plan",
+    subtitle: "Choose your destination, compare popular routes, and move from research to purchase in a few clicks.",
+    primaryCta: "Find your country",
+    secondaryCta: "How eSIM setup works",
+    primaryHref: "#country-search",
+    secondaryHref: "/guide/how-to-setup-esim",
+    stats: {
+      countries: "countries ready to browse",
+      compare: "popular routes compared",
+      activation: "instant QR delivery",
+    },
+    searchTitle: "Search countries and jump straight to plans",
+    searchLead: "Use search when you already know the destination, or browse by continent if you are still comparing options.",
+    searchResultsLabel: "matching destinations",
+    searchCardCta: "Open plans",
     searchPlaceholder: "Search countries...",
     noResults: "No countries found matching your search.",
     metaTitle: "eSIM Plans for 200+ Countries | AutoWiFi eSIM",
     metaDescription: "Browse affordable eSIM data plans for over 200 countries. Instant activation, no physical SIM needed.",
   },
   ja: {
+    eyebrow: "海外旅行eSIM検索",
     title: "国別eSIMプラン",
-    subtitle: "渡航先を選んで最適なデータプランを見つけましょう",
+    subtitle: "渡航先を探し、主要ルートを比較し、そのまま購入ページまで迷わず進める構成にしています。",
+    primaryCta: "渡航先を探す",
+    secondaryCta: "設定方法を見る",
+    primaryHref: "#country-search",
+    secondaryHref: "/guide/how-to-setup-esim",
+    stats: {
+      countries: "以上の国を掲載",
+      compare: "主要渡航先を比較",
+      activation: "QRコードで即時開通",
+    },
+    searchTitle: "国名からすぐにプランを探す",
+    searchLead: "渡航先が決まっている場合は検索、まだ迷っている場合は地域別一覧から選ぶと比較しやすいです。",
+    searchResultsLabel: "件の候補",
+    searchCardCta: "プランを見る",
     searchPlaceholder: "国名で検索...",
     noResults: "検索に一致する国が見つかりませんでした。",
     metaTitle: "200以上の国のeSIMプラン | AutoWiFi eSIM",
     metaDescription: "200以上の国のお手頃なeSIMデータプランをご覧ください。即時アクティベーション、物理SIM不要。",
   },
   ko: {
+    eyebrow: "여행 eSIM 찾기",
     title: "국가별 eSIM 플랜",
-    subtitle: "목적지를 선택하고 완벽한 데이터 플랜을 찾으세요",
+    subtitle: "목적지를 찾고, 인기 노선을 비교하고, 바로 구매 페이지까지 자연스럽게 이동할 수 있도록 구성했습니다.",
+    primaryCta: "목적지 찾기",
+    secondaryCta: "설정 가이드 보기",
+    primaryHref: "#country-search",
+    secondaryHref: "/guide/how-to-setup-esim",
+    stats: {
+      countries: "개 이상 국가 제공",
+      compare: "인기 여행지 비교",
+      activation: "QR 즉시 개통",
+    },
+    searchTitle: "국가를 검색해 바로 플랜 보기",
+    searchLead: "이미 여행지가 정해졌다면 검색을, 아직 비교 중이라면 대륙별 목록을 먼저 보는 편이 빠릅니다.",
+    searchResultsLabel: "개 검색 결과",
+    searchCardCta: "플랜 보기",
     searchPlaceholder: "국가 검색...",
     noResults: "검색과 일치하는 국가가 없습니다.",
     metaTitle: "200개 이상 국가의 eSIM 플랜 | AutoWiFi eSIM",
     metaDescription: "200개 이상 국가의 합리적인 eSIM 데이터 플랜을 찾아보세요. 즉시 활성화, 물리적 SIM 불필요.",
   },
   zh: {
+    eyebrow: "旅行 eSIM 选择器",
     title: "各国eSIM套餐",
-    subtitle: "选择您的目的地，找到完美的数据套餐",
+    subtitle: "先找目的地，再对比热门线路，然后顺着页面直接进入购买流程，减少选择成本。",
+    primaryCta: "查找目的地",
+    secondaryCta: "查看安装方法",
+    primaryHref: "#country-search",
+    secondaryHref: "/guide/how-to-setup-esim",
+    stats: {
+      countries: "多个国家可选",
+      compare: "热门目的地已对比",
+      activation: "扫码即可开通",
+    },
+    searchTitle: "搜索国家并直接进入套餐页",
+    searchLead: "如果目的地已经确定，可以直接搜索；如果还在比较，先按洲浏览会更快。",
+    searchResultsLabel: "个匹配目的地",
+    searchCardCta: "查看套餐",
     searchPlaceholder: "搜索国家...",
     noResults: "未找到匹配的国家。",
     metaTitle: "200多个国家的eSIM套餐 | AutoWiFi eSIM",
@@ -224,6 +294,12 @@ export default async function EsimListingPage({
   }));
   const featuredComparison =
     FEATURED_COMPARISON[locale] ?? FEATURED_COMPARISON.en;
+  const primaryHref = content.primaryHref.startsWith("/")
+    ? `/${locale}${content.primaryHref}`
+    : content.primaryHref;
+  const secondaryHref = content.secondaryHref.startsWith("/")
+    ? `/${locale}${content.secondaryHref}`
+    : content.secondaryHref;
 
   const BASE_URL = "https://autowifi-travel.com";
 
@@ -251,19 +327,47 @@ export default async function EsimListingPage({
         ]}
       />
 
-      <nav style={{ maxWidth: "1200px", margin: "0 auto", padding: "1rem 1rem 0", fontSize: "0.875rem", color: "#6b7280" }}>
-        <Link href={`/${locale}`} style={{ color: "#6366f1", textDecoration: "none" }}>{bl.home}</Link>
-        <span style={{ margin: "0 0.5rem" }}>/</span>
+      <nav className={styles.breadcrumb}>
+        <Link href={`/${locale}`} className={styles.breadcrumbLink}>{bl.home}</Link>
+        <span className={styles.breadcrumbSep}>/</span>
         <span>{bl.esim}</span>
       </nav>
 
       <div className={styles.pageHeader}>
-        <h1 className={styles.pageTitle}>{content.title}</h1>
-        <p className={styles.pageSubtitle}>{content.subtitle}</p>
+        <div className={styles.pageHeaderInner}>
+          <span className={styles.pageEyebrow}>{content.eyebrow}</span>
+          <h1 className={styles.pageTitle}>{content.title}</h1>
+          <p className={styles.pageSubtitle}>{content.subtitle}</p>
+          <div className={styles.heroActions}>
+            <Link href={primaryHref} className={styles.primaryAction}>
+              {content.primaryCta} &rarr;
+            </Link>
+            <Link href={secondaryHref} className={styles.secondaryAction}>
+              {content.secondaryCta} &rarr;
+            </Link>
+          </div>
+          <div className={styles.statRow}>
+            <div className={styles.statCard}>
+              <span className={styles.statValue}>{countries.length}+</span>
+              <span className={styles.statLabel}>{content.stats.countries}</span>
+            </div>
+            <div className={styles.statCard}>
+              <span className={styles.statValue}>{featuredComparison.rows.length}</span>
+              <span className={styles.statLabel}>{content.stats.compare}</span>
+            </div>
+            <div className={styles.statCard}>
+              <span className={styles.statValue}>24/7</span>
+              <span className={styles.statLabel}>{content.stats.activation}</span>
+            </div>
+          </div>
+        </div>
       </div>
 
       <section className={styles.comparisonSection}>
         <div className={styles.comparisonInner}>
+          <div className={styles.sectionTop}>
+            <span className={styles.sectionEyebrow}>{content.title}</span>
+          </div>
           <h2 className={styles.comparisonTitle}>{featuredComparison.title}</h2>
           <p className={styles.comparisonIntro}>{featuredComparison.intro}</p>
           <div className={styles.comparisonTableWrapper}>
@@ -308,10 +412,24 @@ export default async function EsimListingPage({
         </div>
       </section>
 
+      <section id="country-search" className={styles.searchSection}>
+        <div className={styles.searchSectionInner}>
+          <div className={styles.sectionTop}>
+            <span className={styles.sectionEyebrow}>{content.eyebrow}</span>
+          </div>
+          <h2 className={styles.searchTitle}>{content.searchTitle}</h2>
+          <p className={styles.searchLead}>{content.searchLead}</p>
+        </div>
+      </section>
+
       <CountrySearch
         countries={countries}
         locale={locale}
         labels={{
+          searchTitle: content.searchTitle,
+          searchLead: content.searchLead,
+          resultsLabel: content.searchResultsLabel,
+          cardCta: content.searchCardCta,
           searchPlaceholder: content.searchPlaceholder,
           noResults: content.noResults,
           continents: CONTINENT_LABELS[locale] ?? CONTINENT_LABELS.en,

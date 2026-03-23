@@ -14,6 +14,10 @@ interface CountrySearchProps {
   countries: Country[];
   locale: string;
   labels: {
+    searchTitle: string;
+    searchLead: string;
+    resultsLabel: string;
+    cardCta: string;
     searchPlaceholder: string;
     noResults: string;
     continents: Record<string, string>;
@@ -44,6 +48,7 @@ export default function CountrySearch({ countries, locale, labels }: CountrySear
   const sortedContinents = Object.keys(grouped).sort(
     (a, b) => continentOrder.indexOf(a) - continentOrder.indexOf(b)
   );
+  const resultCount = filtered.length;
 
   return (
     <>
@@ -56,6 +61,11 @@ export default function CountrySearch({ countries, locale, labels }: CountrySear
           value={query}
           onChange={(e) => setQuery(e.target.value)}
         />
+        <div className={styles.searchMeta}>
+          <span className={styles.searchResults}>
+            {resultCount} {labels.resultsLabel}
+          </span>
+        </div>
       </div>
 
       <div className={styles.container}>
@@ -65,7 +75,10 @@ export default function CountrySearch({ countries, locale, labels }: CountrySear
 
         {sortedContinents.map((continent) => (
           <section key={continent} className={styles.continentSection}>
-            <h2 className={styles.continentTitle}>{labels.continents[continent] ?? continent}</h2>
+            <div className={styles.continentHeader}>
+              <h2 className={styles.continentTitle}>{labels.continents[continent] ?? continent}</h2>
+              <span className={styles.continentCount}>{grouped[continent].length}</span>
+            </div>
             <div className={styles.countriesGrid}>
               {grouped[continent].map((country) => (
                 <a
@@ -73,8 +86,13 @@ export default function CountrySearch({ countries, locale, labels }: CountrySear
                   href={`/${locale}/esim/${country.slug}`}
                   className={styles.countryCard}
                 >
-                  <span className={styles.countryFlag}>{country.flag}</span>
-                  <span className={styles.countryName}>{country.name}</span>
+                  <div className={styles.countryIdentity}>
+                    <span className={styles.countryFlag}>{country.flag}</span>
+                    <span className={styles.countryName}>{country.name}</span>
+                  </div>
+                  <span className={styles.countryCta}>
+                    {labels.cardCta} &rarr;
+                  </span>
                 </a>
               ))}
             </div>
