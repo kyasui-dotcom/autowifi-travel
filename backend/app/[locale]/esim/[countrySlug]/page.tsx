@@ -1410,15 +1410,15 @@ export default async function CountryPackagesPage({
                 <tbody>
                   {comparisonRows.map((row) => (
                     <tr key={row.id}>
-                      <td>{row.title}</td>
-                      <td>{row.data}</td>
-                      <td>
+                      <td data-label={comparisonText.headers.plan}>{row.title}</td>
+                      <td data-label={comparisonText.headers.data}>{row.data}</td>
+                      <td data-label={comparisonText.headers.validity}>
                         {row.validity} {labels.days}
                       </td>
-                      <td>${row.price.toFixed(2)}</td>
-                      <td>${row.pricePerDay.toFixed(2)}</td>
-                      <td>{row.bestFor}</td>
-                      <td>
+                      <td data-label={comparisonText.headers.price}>${row.price.toFixed(2)}</td>
+                      <td data-label={comparisonText.headers.pricePerDay}>${row.pricePerDay.toFixed(2)}</td>
+                      <td data-label={comparisonText.headers.bestFor}>{row.bestFor}</td>
+                      <td data-label={comparisonText.headers.action}>
                         <a
                           href={`/${locale}/esim/${countrySlug}/${row.id}/checkout`}
                           className={styles.comparisonAction}

@@ -21,6 +21,7 @@
 
 /* Page Header */
 .pageHeader {
+  overflow: hidden;
   background:
     radial-gradient(circle at top right, rgba(255, 255, 255, 0.2), transparent 32%),
     linear-gradient(135deg, #0369a1 0%, #0284c7 42%, #38bdf8 100%);
@@ -461,6 +462,70 @@
   .comparisonInner {
     padding-top: var(--space-lg);
     padding-bottom: var(--space-lg);
+  }
+
+  .comparisonTableWrapper {
+    overflow: visible;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .comparisonTable {
+    min-width: 0;
+    display: block;
+  }
+
+  .comparisonTable thead {
+    display: none;
+  }
+
+  .comparisonTable tbody {
+    display: grid;
+    gap: var(--space-md);
+  }
+
+  .comparisonTable tbody tr {
+    display: block;
+    padding: var(--space-lg);
+    border: 1px solid #dbeafe;
+    border-radius: 1.2rem;
+    background: #ffffff;
+    box-shadow: 0 14px 28px rgba(2, 132, 199, 0.08);
+  }
+
+  .comparisonTable tbody td {
+    display: grid;
+    gap: 0.35rem;
+    padding: 0 0 0.85rem;
+    border-bottom: 1px solid #e2e8f0;
+  }
+
+  .comparisonTable tbody td:last-child {
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+  .comparisonTable tbody td::before {
+    content: attr(data-label);
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #64748b;
+  }
+
+  .comparisonTable tbody td:first-child::before {
+    content: none;
+  }
+
+  .comparisonDestination {
+    margin-bottom: 0;
+  }
+
+  .searchMeta {
+    justify-content: flex-start;
   }
 
   .continentHeader {

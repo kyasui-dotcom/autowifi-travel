@@ -388,16 +388,16 @@ export default async function EsimListingPage({
 
                   return (
                     <tr key={row.slug}>
-                      <td>
+                      <td data-label={featuredComparison.headers.destination}>
                         <Link href={`/${locale}/esim/${row.slug}`} className={styles.comparisonDestination}>
                           <span className={styles.comparisonFlag}>{country.flag}</span>
                           <span>{country.name}</span>
                         </Link>
                       </td>
-                      <td>{row.idealFor}</td>
-                      <td>{row.tripLength}</td>
-                      <td>{row.dataNeed}</td>
-                      <td>
+                      <td data-label={featuredComparison.headers.idealFor}>{row.idealFor}</td>
+                      <td data-label={featuredComparison.headers.tripLength}>{row.tripLength}</td>
+                      <td data-label={featuredComparison.headers.dataNeed}>{row.dataNeed}</td>
+                      <td data-label={featuredComparison.headers.note}>
                         <span className={styles.comparisonNote}>{row.note}</span>
                         <Link href={`/${locale}/esim/${row.slug}`} className={styles.comparisonLink}>
                           {featuredComparison.linkLabel}

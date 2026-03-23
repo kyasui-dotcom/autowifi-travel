@@ -686,4 +686,61 @@
   .noPackages {
     padding: var(--space-lg);
   }
+
+  .comparisonTableWrapper {
+    overflow: visible;
+    border: none;
+    border-radius: 0;
+  }
+
+  .comparisonTable {
+    min-width: 0;
+    display: block;
+  }
+
+  .comparisonTable thead {
+    display: none;
+  }
+
+  .comparisonTable tbody {
+    display: grid;
+    gap: var(--space-md);
+  }
+
+  .comparisonTable tbody tr {
+    display: block;
+    padding: var(--space-lg);
+    border: 1px solid #dbeafe;
+    border-radius: 1.2rem;
+    background: #f8fbff;
+  }
+
+  .comparisonTable tbody td {
+    display: grid;
+    gap: 0.35rem;
+    padding: 0 0 0.85rem;
+    border-bottom: 1px solid #d8e6f5;
+  }
+
+  .comparisonTable tbody td:last-child {
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+  .comparisonTable tbody td::before {
+    content: attr(data-label);
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #64748b;
+  }
+
+  .comparisonTable tbody td:first-child::before {
+    content: none;
+  }
+
+  .comparisonAction {
+    width: 100%;
+  }
 }
