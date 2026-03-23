@@ -3,6 +3,7 @@ import Script from "next/script";
 import { OrganizationJsonLd } from "@/lib/components/JsonLd";
 import WebVitals from "@/lib/components/WebVitals";
 import { getBaseUrl } from "@/lib/seo";
+import "../globals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL(getBaseUrl()),

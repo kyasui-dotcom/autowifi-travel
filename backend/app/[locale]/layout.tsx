@@ -6,6 +6,7 @@ import { notFound } from "next/navigation";
 import { generatePageMetadata } from "@/lib/seo";
 import { OrganizationJsonLd } from "@/lib/components/JsonLd";
 import WebVitals from "@/lib/components/WebVitals";
+import "../globals.css";
 import styles from "./layout.module.css";
 
 export const viewport: Viewport = {
