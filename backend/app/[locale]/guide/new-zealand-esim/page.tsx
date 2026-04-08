@@ -4,34 +4,42 @@ import { generatePageMetadata } from "@/lib/seo";
 
 const RELATED_ARTICLES: Record<Locale, { articles: RelatedArticle[]; title: string }> = {
   ja: {
-    title: "関連ガイド",
+    title: "ロードトリップと国立公園前に見たいガイド",
     articles: [
       { slug: "australia-esim", title: "オーストラリアeSIMガイド" },
-      { slug: "travel-data-usage-tips", title: "旅行中のデータ使用量の目安" },
+      { slug: "iceland-esim", title: "アイスランドeSIMガイド" },
+      { slug: "esim-for-road-trips", title: "ロードトリップ向けeSIMガイド" },
+      { slug: "travel-internet-options", title: "海外旅行のネット接続方法" },
       { slug: "esim-troubleshooting", title: "eSIMトラブルシューティング" },
     ],
   },
   en: {
-    title: "Related Guides",
+    title: "Compare More Before You Drive Through Remote New Zealand",
     articles: [
       { slug: "australia-esim", title: "Australia eSIM Guide" },
-      { slug: "travel-data-usage-tips", title: "Travel Data Usage Tips" },
+      { slug: "iceland-esim", title: "Iceland eSIM Guide" },
+      { slug: "esim-for-road-trips", title: "Best eSIM for Road Trips" },
+      { slug: "travel-internet-options", title: "Travel Internet Options" },
       { slug: "esim-troubleshooting", title: "eSIM Troubleshooting" },
     ],
   },
   ko: {
-    title: "관련 가이드",
+    title: "로드트립과 국립공원 이동 전에 함께 볼 가이드",
     articles: [
       { slug: "australia-esim", title: "호주 eSIM 가이드" },
-      { slug: "travel-data-usage-tips", title: "여행 중 데이터 사용량 팁" },
+      { slug: "iceland-esim", title: "아이슬란드 eSIM 가이드" },
+      { slug: "esim-for-road-trips", title: "로드트립용 eSIM 가이드" },
+      { slug: "travel-internet-options", title: "여행 인터넷 옵션 비교" },
       { slug: "esim-troubleshooting", title: "eSIM 문제 해결" },
     ],
   },
   zh: {
-    title: "相关指南",
+    title: "自驾和国家公园出发前值得继续比较",
     articles: [
       { slug: "australia-esim", title: "澳大利亚eSIM指南" },
-      { slug: "travel-data-usage-tips", title: "旅行数据用量指南" },
+      { slug: "iceland-esim", title: "冰岛eSIM指南" },
+      { slug: "esim-for-road-trips", title: "自驾旅行eSIM指南" },
+      { slug: "travel-internet-options", title: "旅行上网方式对比" },
       { slug: "esim-troubleshooting", title: "eSIM故障排除" },
     ],
   },

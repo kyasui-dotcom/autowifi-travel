@@ -6,33 +6,33 @@ const RELATED_ARTICLES: Record<Locale, { articles: RelatedArticle[]; title: stri
   ja: {
     title: "関連ガイド",
     articles: [
-      { slug: "italy-esim", title: "イタリアeSIMガイド" },
-      { slug: "turkey-esim", title: "トルコeSIMガイド" },
-      { slug: "europe-travel-connectivity", title: "ヨーロッパ旅行の通信ガイド" },
+      { slug: "best-esim-for-europe", title: "ヨーロッパeSIMおすすめ比較" },
+      { slug: "croatia-esim", title: "クロアチアeSIMガイド" },
+      { slug: "hawaii-esim", title: "ハワイeSIMガイド" },
     ],
   },
   en: {
     title: "Related Guides",
     articles: [
-      { slug: "italy-esim", title: "Italy eSIM Guide" },
-      { slug: "turkey-esim", title: "Turkey eSIM Guide" },
-      { slug: "europe-travel-connectivity", title: "Europe Travel Connectivity Guide" },
+      { slug: "best-esim-for-europe", title: "Best eSIM for Europe 2026" },
+      { slug: "croatia-esim", title: "Croatia eSIM Guide 2026" },
+      { slug: "hawaii-esim", title: "Hawaii eSIM Guide 2026" },
     ],
   },
   ko: {
     title: "관련 가이드",
     articles: [
-      { slug: "italy-esim", title: "이탈리아 eSIM 가이드" },
-      { slug: "turkey-esim", title: "터키 eSIM 가이드" },
-      { slug: "europe-travel-connectivity", title: "유럽 여행 통신 가이드" },
+      { slug: "best-esim-for-europe", title: "유럽 eSIM 추천 비교" },
+      { slug: "croatia-esim", title: "크로아티아 eSIM 가이드" },
+      { slug: "hawaii-esim", title: "하와이 eSIM 가이드" },
     ],
   },
   zh: {
     title: "相关指南",
     articles: [
-      { slug: "italy-esim", title: "意大利eSIM指南" },
-      { slug: "turkey-esim", title: "土耳其eSIM指南" },
-      { slug: "europe-travel-connectivity", title: "欧洲旅行通信指南" },
+      { slug: "best-esim-for-europe", title: "欧洲eSIM推荐比较" },
+      { slug: "croatia-esim", title: "克罗地亚eSIM指南" },
+      { slug: "hawaii-esim", title: "夏威夷eSIM指南" },
     ],
   },
 };

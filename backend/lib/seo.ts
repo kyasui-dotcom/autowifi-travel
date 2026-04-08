@@ -1,8 +1,154 @@
 import type { Metadata } from 'next';
 import { LOCALES, type Locale } from '@/lib/i18n/config';
 
-function getBaseUrl(): string {
+export function getBaseUrl(): string {
   return process.env.NEXT_PUBLIC_BASE_URL ?? 'https://autowifi-travel.com';
+}
+
+export const DEFAULT_OG_IMAGE_PATH = '/og-default.png';
+
+export function getDefaultOgImageUrl(baseUrl: string = getBaseUrl()): string {
+  return `${baseUrl}${DEFAULT_OG_IMAGE_PATH}`;
+}
+
+export function getGuideOgImageUrl({
+  baseUrl = getBaseUrl(),
+  locale,
+  path,
+  title,
+  description,
+  kindLabel = "Travel Article",
+  footerLabel,
+  theme,
+}: {
+  baseUrl?: string;
+  locale: Locale;
+  path: string;
+  title: string;
+  description: string;
+  kindLabel?: string;
+  footerLabel?: string;
+  theme?: string;
+}): string {
+  const slug = path.split("/").filter(Boolean).pop() ?? "guide";
+  const params = new URLSearchParams({
+    locale,
+    slug,
+    title,
+    description,
+    kindLabel,
+    footerLabel: footerLabel ?? slug,
+  });
+  if (theme) {
+    params.set("theme", theme);
+  }
+  return `${baseUrl}/api/og/guide?${params.toString()}`;
+}
+
+function formatGuideFooterLabel(slug: string): string {
+  const tokenMap: Record<string, string> = {
+    esim: "eSIM",
+    wifi: "Wi-Fi",
+    uk: "UK",
+    usa: "USA",
+    eu: "EU",
+    qr: "QR",
+    ios: "iOS",
+    android: "Android",
+    "5g": "5G",
+    x: "X",
+    ai: "AI",
+  };
+
+  return slug
+    .split("-")
+    .map((token) => tokenMap[token.toLowerCase()] ?? `${token.charAt(0).toUpperCase()}${token.slice(1)}`)
+    .join(" ");
+}
+
+function inferGuideOgPresentation(path: string, title: string) {
+  const slug = path.split("/").filter(Boolean).pop() ?? "guide";
+  const lowerSlug = slug.toLowerCase();
+  const lowerTitle = title.toLowerCase();
+
+  const isReview =
+    lowerSlug.endsWith("-review") || lowerSlug.includes("-review-");
+  const isComparison =
+    lowerSlug.includes("-vs-") ||
+    lowerSlug.startsWith("best-") ||
+    lowerSlug.startsWith("cheapest-") ||
+    lowerSlug.includes("compare") ||
+    lowerSlug.includes("comparison");
+  const isHowTo =
+    lowerSlug.includes("setup") ||
+    lowerSlug.includes("compatible") ||
+    lowerSlug.includes("troubleshooting") ||
+    lowerSlug.includes("activation") ||
+    lowerSlug.includes("security");
+  const isMinorTravel =
+    lowerSlug.includes("walk") ||
+    lowerSlug.includes("neighborhood") ||
+    lowerSlug.includes("tram") ||
+    lowerSlug.includes("day-trip") ||
+    lowerSlug.includes("side-streets");
+  const isCountryGuide =
+    lowerSlug.endsWith("-esim") &&
+    !lowerSlug.startsWith("esim-") &&
+    !lowerSlug.includes("international-esim") &&
+    !lowerSlug.includes("global-esim") &&
+    !lowerSlug.includes("digital-nomad-esim") &&
+    !lowerSlug.includes("family-travel-esim") &&
+    !lowerSlug.includes("cruise-travel-esim") &&
+    !lowerSlug.includes("travel-esim-with-phone-number") &&
+    !lowerSlug.includes("esim-for-") &&
+    !lowerSlug.includes("best-esim-") &&
+    !lowerSlug.includes("cheapest-esim-");
+
+  if (isReview) {
+    return {
+      kindLabel: "Provider Review",
+      footerLabel: formatGuideFooterLabel(slug),
+      theme: "review",
+    };
+  }
+
+  if (isComparison) {
+    return {
+      kindLabel: "Comparison Guide",
+      footerLabel: formatGuideFooterLabel(slug),
+      theme: "comparison",
+    };
+  }
+
+  if (isHowTo) {
+    return {
+      kindLabel: "How-To Guide",
+      footerLabel: formatGuideFooterLabel(slug),
+      theme: "howto",
+    };
+  }
+
+  if (isMinorTravel) {
+    return {
+      kindLabel: "Minor Travel Guide",
+      footerLabel: formatGuideFooterLabel(slug),
+      theme: "travel",
+    };
+  }
+
+  if (isCountryGuide || lowerTitle.includes(" eSIM guide")) {
+    return {
+      kindLabel: "Country eSIM Guide",
+      footerLabel: formatGuideFooterLabel(slug),
+      theme: "country",
+    };
+  }
+
+  return {
+    kindLabel: "Travel Guide",
+    footerLabel: formatGuideFooterLabel(slug),
+    theme: "travel",
+  };
 }
 
 interface PageMetadataOptions {
@@ -11,6 +157,7 @@ interface PageMetadataOptions {
   locale: Locale;
   path: string;
   ogImage?: string;
+  openGraphType?: "website" | "article";
   noIndex?: boolean;
 }
 
@@ -24,11 +171,28 @@ export function generatePageMetadata({
   locale,
   path,
   ogImage,
+  openGraphType,
   noIndex = false,
 }: PageMetadataOptions): Metadata {
   const baseUrl = getBaseUrl();
   const canonicalUrl = `${baseUrl}/${locale}${path}`;
-  const image = ogImage ?? `${baseUrl}/og-default.png`;
+  const inferredOpenGraphType =
+    openGraphType ??
+    (path.startsWith("/guide/") && path !== "/guide/minor-travel-guides"
+      ? "article"
+      : "website");
+  const image =
+    ogImage ??
+    (inferredOpenGraphType === "article"
+      ? getGuideOgImageUrl({
+          baseUrl,
+          locale,
+          path,
+          title,
+          description,
+          ...inferGuideOgPresentation(path, title),
+        })
+      : getDefaultOgImageUrl(baseUrl));
 
   const languages: Record<string, string> = {};
   for (const loc of LOCALES) {
@@ -51,7 +215,7 @@ export function generatePageMetadata({
       url: canonicalUrl,
       siteName: 'AutoWifi Travel eSIM',
       locale: localeToOg(locale),
-      type: 'website',
+      type: inferredOpenGraphType,
       images: [
         {
           url: image,

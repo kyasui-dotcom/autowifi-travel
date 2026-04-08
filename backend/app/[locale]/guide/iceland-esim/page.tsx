@@ -1,6 +1,49 @@
 import type { Metadata } from "next";
-import ArticleLayout, { type Locale, type ArticleContent } from "@/lib/components/ArticleLayout";
+import ArticleLayout, { type Locale, type ArticleContent, type RelatedArticle } from "@/lib/components/ArticleLayout";
 import { generatePageMetadata } from "@/lib/seo";
+
+const RELATED: Record<Locale, { title: string; articles: RelatedArticle[] }> = {
+  ja: {
+    title: "リングロードや郊外移動前に比較したいガイド",
+    articles: [
+      { slug: "esim-for-road-trips", title: "ロードトリップ向けeSIMガイド" },
+      { slug: "new-zealand-esim", title: "ニュージーランドeSIMガイド" },
+      { slug: "australia-esim", title: "オーストラリアeSIMガイド" },
+      { slug: "travel-internet-options", title: "海外旅行のネット接続方法" },
+      { slug: "how-much-data-do-i-need-for-travel", title: "旅行に必要なデータ容量の目安" },
+    ],
+  },
+  en: {
+    title: "Compare More Before You Drive the Ring Road",
+    articles: [
+      { slug: "esim-for-road-trips", title: "Best eSIM for Road Trips" },
+      { slug: "new-zealand-esim", title: "New Zealand eSIM Guide" },
+      { slug: "australia-esim", title: "Australia eSIM Guide" },
+      { slug: "travel-internet-options", title: "Travel Internet Options" },
+      { slug: "how-much-data-do-i-need-for-travel", title: "How Much Data Do I Need for Travel?" },
+    ],
+  },
+  ko: {
+    title: "링로드와 외곽 이동 전에 함께 볼 가이드",
+    articles: [
+      { slug: "esim-for-road-trips", title: "로드트립용 eSIM 가이드" },
+      { slug: "new-zealand-esim", title: "뉴질랜드 eSIM 가이드" },
+      { slug: "australia-esim", title: "호주 eSIM 가이드" },
+      { slug: "travel-internet-options", title: "여행 인터넷 옵션 비교" },
+      { slug: "how-much-data-do-i-need-for-travel", title: "여행에 필요한 데이터 용량" },
+    ],
+  },
+  zh: {
+    title: "环岛与偏远路段出发前值得继续比较",
+    articles: [
+      { slug: "esim-for-road-trips", title: "自驾旅行eSIM指南" },
+      { slug: "new-zealand-esim", title: "新西兰eSIM指南" },
+      { slug: "australia-esim", title: "澳大利亚eSIM指南" },
+      { slug: "travel-internet-options", title: "旅行上网方式对比" },
+      { slug: "how-much-data-do-i-need-for-travel", title: "旅行需要多少流量？" },
+    ],
+  },
+};
 
 const CONTENT: Record<Locale, ArticleContent> = {
   ja: {
@@ -114,5 +157,5 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function Page({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const loc = (locale as Locale) || "en";
-  return <ArticleLayout locale={loc} slug="iceland-esim" content={CONTENT[loc]} />;
+  return <ArticleLayout locale={loc} slug="iceland-esim" content={CONTENT[loc]} relatedArticles={RELATED[loc].articles} relatedTitle={RELATED[loc].title} />;
 }
