@@ -6,7 +6,7 @@ const CONTENT: Record<Locale, ArticleContent> = {
   ja: {
     title: "eSIM対応スマートフォン一覧【2026年最新版】",
     subtitle: "iPhone・Samsung・Google Pixel・その他メーカーの対応機種を網羅",
-    intro: "eSIMを使うには対応スマートフォンが必要です。この記事では、主要メーカー別にeSIM対応機種を完全リストアップしました。お使いのスマートフォンが対応しているか、すぐに確認できます。2018年以降に発売されたスマートフォンの多くが対応しており、対応機種は年々増加しています。",
+    intro: "eSIMを使うには対応スマートフォンが必要です。この記事では、主要メーカー別にeSIM対応機種を完全リストアップしました。お使いのスマートフォンが対応しているか、すぐに確認できます。2018年以降に発売されたスマートフォンの多くが対応しており、対応機種は年々増加しています。本記事ではiPhone・Samsung・Google Pixel・その他メーカーの対応機種を網羅・iPhone（Apple）のeSIM対応機種・Samsung GalaxyのeSIM対応機種などを2026年時点の情報に基づき、旅行者目線で具体的に解説しています。",
     sections: [
       {
         title: "iPhone（Apple）のeSIM対応機種",

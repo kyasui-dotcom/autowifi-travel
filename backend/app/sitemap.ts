@@ -123,6 +123,8 @@ const GUIDE_DATES: Record<string, string> = {
     "osaka-sumiyoshi-retro-tram-route": "2026-04-07",
     "kyoto-saga-arashiyama-morning-backstreets": "2026-04-07",
     "kyoto-nishijin-machiya-lanes": "2026-04-07",
+    "kanazawa-higashi-chaya-morning-walk": "2026-04-08",
+    "kanazawa-kenrokuen-garden-walk": "2026-04-08",
     "travel-esim-with-phone-number": SITE_UPDATED,
     "esim-fair-use-policy": SITE_UPDATED,
     "regional-esim-vs-country-esim": SITE_UPDATED,
@@ -140,21 +142,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const countries = getAllCountries();
   const entries: MetadataRoute.Sitemap = [];
 
-  entries.push({
-    url: `${BASE_URL}/`,
-    lastModified: new Date(SITE_UPDATED),
-    changeFrequency: "weekly",
-    priority: 1.0,
-    alternates: {
-      languages: {
-        en: `${BASE_URL}/en`,
-        ja: `${BASE_URL}/ja`,
-        ko: `${BASE_URL}/ko`,
-        zh: `${BASE_URL}/zh`,
-        "x-default": `${BASE_URL}/`,
-      },
-    },
-  });
+  // Note: root `/` is a 301 redirect to `/en/`, so it is intentionally
+  // excluded from the sitemap. hreflang alternates below cover discovery.
 
   // Landing pages — one entry per locale with hreflang alternates
   for (const locale of LOCALES) {

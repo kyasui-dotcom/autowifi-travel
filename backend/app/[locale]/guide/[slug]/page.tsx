@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { generatePageMetadata, getBaseUrl, getDefaultOgImageUrl } from "@/lib/seo";
+import { generatePageMetadata, getBaseUrl, getDefaultOgImageUrl, getGuideOgImageUrl } from "@/lib/seo";
 import type { Locale } from "@/lib/i18n/config";
 import { ArticleJsonLd, BreadcrumbJsonLd, FaqJsonLd } from "@/lib/components/JsonLd";
 import ContentTrustPanel from "@/lib/components/ContentTrustPanel";
@@ -76,6 +76,8 @@ const GUIDE_DATES: Record<string, { published: string; modified: string }> = {
   "osaka-sumiyoshi-retro-tram-route": { published: "2026-04-07", modified: "2026-04-08" },
   "kyoto-saga-arashiyama-morning-backstreets": { published: "2026-04-07", modified: "2026-04-08" },
   "kyoto-nishijin-machiya-lanes": { published: "2026-04-07", modified: "2026-04-08" },
+  "kanazawa-higashi-chaya-morning-walk": { published: "2026-04-08", modified: "2026-04-08" },
+  "kanazawa-kenrokuen-garden-walk": { published: "2026-04-08", modified: "2026-04-08" },
   "travel-esim-with-phone-number": { published: "2026-04-04", modified: "2026-04-04" },
   "esim-fair-use-policy": { published: "2026-04-04", modified: "2026-04-04" },
   "regional-esim-vs-country-esim": { published: "2026-04-04", modified: "2026-04-04" },
@@ -885,9 +887,87 @@ export async function generateMetadata({
   });
 }
 
+// Photo files that are reused across multiple priority guides. Each shared
+// file is assigned to a single "owner" slug — every other slug that previously
+// shared the same physical photo will get a unique per-slug OG-generated
+// thumbnail instead, eliminating cross-article photo duplication.
+const PHOTO_OWNERS: Record<string, string> = {
+  "/guide/quiet-tokyo-neighborhoods/yanaka-street.jpg": "quiet-tokyo-neighborhoods",
+  "/guide/quiet-tokyo-neighborhoods/kiyosumi-garden.jpg": "monzen-nakacho-fukagawa-walk",
+  "/guide/kuramae-walk/kuramae-shrine.jpg": "kuramae-walk",
+  "/guide/yanaka-nezu-sendagi-walk/nezu-shrine.jpg": "yanaka-nezu-sendagi-walk",
+  "/guide/yanaka-nezu-sendagi-walk/yanaka-ginza.jpg": "yanaka-cemetery-and-cafe-walk",
+  "/guide/tokyo-tram-line-stops/toden-arakawa-asukayama.jpg": "tokyo-tram-line-stops",
+  "/guide/rainy-day-tokyo-neighborhoods/yomisedori.jpg": "rainy-day-tokyo-neighborhoods",
+};
+
+function buildOgGuideImage(
+  slug: string,
+  locale: string,
+  title: string,
+  description: string,
+): GuideMediaImage {
+  const baseUrl = getBaseUrl();
+  const abs = getGuideOgImageUrl({
+    baseUrl,
+    locale: locale as Locale,
+    path: `/guide/${slug}`,
+    title,
+    description,
+    kindLabel: "Travel Article",
+    footerLabel: title,
+  });
+  const src = abs.startsWith(baseUrl) ? abs.slice(baseUrl.length) : abs;
+  return {
+    src,
+    alt: title,
+    width: 1200,
+    height: 630,
+  };
+}
+
+function dedupeHeroImage(
+  slug: string,
+  locale: string,
+  title: string,
+  description: string,
+  heroImage: GuideMediaImage | undefined,
+): GuideMediaImage | undefined {
+  if (!heroImage) return heroImage;
+  const owner = PHOTO_OWNERS[heroImage.src];
+  if (owner && owner !== slug) {
+    return buildOgGuideImage(slug, locale, title, description);
+  }
+  return heroImage;
+}
+
+function dedupeGallery(
+  slug: string,
+  gallery: GuideMediaImage[] | undefined,
+  heroImage: GuideMediaImage | undefined,
+): GuideMediaImage[] | undefined {
+  if (!gallery || gallery.length === 0) return gallery;
+  const seen = new Set<string>();
+  if (heroImage) seen.add(heroImage.src);
+  const result: GuideMediaImage[] = [];
+  for (const img of gallery) {
+    // Drop gallery images that duplicate the hero or appear earlier in the list,
+    // and drop shared photos owned by another slug.
+    const owner = PHOTO_OWNERS[img.src];
+    if (owner && owner !== slug) continue;
+    if (seen.has(img.src)) continue;
+    seen.add(img.src);
+    result.push(img);
+  }
+  return result;
+}
+
 function renderGuideImage(image: GuideMediaImage, priority = false) {
   const imageSrc = getGuideImageUrl(image.src);
-  const shouldBypassOptimization = shouldProxyGuideImage(image.src) || /^https?:\/\//.test(image.src);
+  const shouldBypassOptimization =
+    shouldProxyGuideImage(image.src) ||
+    /^https?:\/\//.test(image.src) ||
+    image.src.startsWith("/api/");
 
   return (
     <figure
@@ -964,8 +1044,22 @@ export default async function GuideArticlePage({
 
   const BASE_URL = getBaseUrl();
   const articleUrl = `${BASE_URL}/${locale}/guide/${slug}`;
-  const articleImageUrl = content.heroImage
-    ? getGuideImageUrl(content.heroImage.src, { absolute: true, baseUrl: BASE_URL })
+
+  // Deduplicate photos so each article has its own visual identity. Shared
+  // photo files are kept only on their owner slug; everywhere else we fall
+  // back to a per-slug generated OG image.
+  const dedupedHero = dedupeHeroImage(slug, locale, content.title, content.description, content.heroImage);
+  const dedupedGallery = dedupeGallery(slug, content.gallery, dedupedHero);
+  const renderContent: typeof content = {
+    ...content,
+    heroImage: dedupedHero,
+    gallery: dedupedGallery,
+  };
+
+  const articleImageUrl = dedupedHero
+    ? (/^https?:\/\//.test(dedupedHero.src)
+        ? dedupedHero.src
+        : getGuideImageUrl(dedupedHero.src, { absolute: true, baseUrl: BASE_URL }))
     : getDefaultOgImageUrl(BASE_URL);
   const isMinorTravelGuide = MINOR_TRAVEL_GUIDE_SLUGS.includes(
     slug as (typeof MINOR_TRAVEL_GUIDE_SLUGS)[number]
@@ -1033,16 +1127,16 @@ export default async function GuideArticlePage({
 
       <ContentTrustPanel locale={locale as Locale} updatedAt={dates.modified} />
 
-      {content.heroImage ? (
+      {renderContent.heroImage ? (
         <section style={{ marginBottom: "2rem" }}>
-          {renderGuideImage(content.heroImage, true)}
+          {renderGuideImage(renderContent.heroImage, true)}
         </section>
       ) : null}
 
-      {content.gallery?.length ? (
+      {renderContent.gallery?.length ? (
         <section style={{ marginBottom: "2.25rem" }}>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "1rem" }}>
-            {content.gallery.map((image) => renderGuideImage(image))}
+            {renderContent.gallery.map((image) => renderGuideImage(image))}
           </div>
         </section>
       ) : null}

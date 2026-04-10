@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { generatePageMetadata, getGuideOgImageUrl } from "@/lib/seo";
+import { generatePageMetadata, getBaseUrl, getGuideOgImageUrl } from "@/lib/seo";
 import {
   BreadcrumbJsonLd,
   CollectionPageJsonLd,
   FaqJsonLd,
   ItemListJsonLd,
 } from "@/lib/components/JsonLd";
+import ContentTrustPanel from "@/lib/components/ContentTrustPanel";
 import { getExtraGuideItems } from "@/lib/guides/extraGuides";
 import { getPriorityGuideContent } from "@/lib/guides/priorityGuideContent";
 import type { GuideLocale } from "@/lib/guides/extraGuides";
@@ -57,6 +58,8 @@ const PUBLISHED_GUIDE_SLUGS = [
   "osaka-sumiyoshi-retro-tram-route",
   "kyoto-saga-arashiyama-morning-backstreets",
   "kyoto-nishijin-machiya-lanes",
+  "kanazawa-higashi-chaya-morning-walk",
+  "kanazawa-kenrokuen-garden-walk",
 ] as const;
 
 type GuideCard = {
@@ -71,7 +74,7 @@ type GuideCard = {
   };
 };
 
-const LAST_MODIFIED = "2026-04-07";
+const LAST_MODIFIED = new Date().toISOString().slice(0, 10);
 
 const CONTENT: Record<
   Locale,
@@ -514,17 +517,37 @@ const CONTENT: Record<
 
 function getGuideCards(locale: Locale): GuideCard[] {
   const extraGuideItems = getExtraGuideItems(locale);
+  const baseUrl = getBaseUrl();
 
+  // Generate per-slug unique OG thumbnails so every card has a distinct image
+  // and never points at a missing physical file. This eliminates both the
+  // broken-thumbnail and duplicate-photo issues on the index page in one shot.
   return PUBLISHED_GUIDE_SLUGS.flatMap((slug) => {
     const guide = extraGuideItems.find((item) => item.slug === slug);
     if (!guide) return [];
 
-    const priority = getPriorityGuideContent(slug, locale as GuideLocale);
+    const ogAbs = getGuideOgImageUrl({
+      baseUrl,
+      locale,
+      path: `/guide/${slug}`,
+      title: guide.title,
+      description: guide.desc,
+      kindLabel: "Travel Article",
+      footerLabel: guide.title,
+    });
+    // Use a same-origin relative path so next/image doesn't require remotePatterns
+    const ogSrc = ogAbs.startsWith(baseUrl) ? ogAbs.slice(baseUrl.length) : ogAbs;
+
     return [{
       slug,
       title: guide.title,
       desc: guide.desc,
-      image: priority?.heroImage,
+      image: {
+        src: ogSrc,
+        alt: guide.title,
+        width: 1200,
+        height: 630,
+      },
     }];
   });
 }
@@ -606,6 +629,8 @@ export default async function MinorTravelGuidesPage({
         }))}
       />
 
+      <ContentTrustPanel locale={loc} updatedAt={LAST_MODIFIED} />
+
       <header className={styles.hero}>
         <h1 className={styles.heroTitle}>{content.title}</h1>
         <p className={styles.heroSubtitle}>{content.subtitle}</p>
@@ -668,6 +693,7 @@ export default async function MinorTravelGuidesPage({
                     alt={guide.image.alt}
                     width={guide.image.width}
                     height={guide.image.height}
+                    unoptimized={guide.image.src.startsWith("/api/") || /^https?:\/\//.test(guide.image.src)}
                     style={{
                       display: "block",
                       width: "100%",

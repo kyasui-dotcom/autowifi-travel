@@ -2,7 +2,9 @@ import { createHash } from "node:crypto";
 
 import type { GuideLocale } from "./extraGuides";
 import { CUSTOM_MINOR_TRAVEL_GUIDE_CONTENT } from "./minorTravelGuideContent.custom";
+import { JAPAN_MINOR_TRAVEL_GUIDE_CONTENT } from "./minorTravelGuideContent.japan";
 import { MINOR_GUIDE_CONFIG_OVERRIDES } from "./minorTravelGuideOverrides";
+import { MINOR_GUIDE_ENRICHMENTS } from "./minorTravelGuideEnrichments";
 
 type GuideMediaImage = {
   src: string;
@@ -58,6 +60,14 @@ type MinorGuideLocaleConfig = {
   avoid: string;
   extension: string;
   timeNeeded: string;
+  // Per-article enrichment fields. Optional so we can roll out incrementally
+  // without breaking existing entries; buildSections falls back to the generic
+  // template paragraphs when these are missing.
+  neighborhoodCharacter?: string;
+  concreteRoute?: string;
+  namedStops?: { name: string; note: string }[];
+  localMistakes?: string;
+  extraFaqs?: { q: string; a: string }[];
 };
 
 type MinorGuideConsistencyChecks = {
@@ -222,76 +232,76 @@ const CLUSTER_COPY: Record<MinorGuideCluster, MinorGuideClusterCopy> = {
 const CLUSTER_X_EMBEDS: Record<"ja" | "en", Record<MinorGuideCluster, GuideXEmbed[]>> = {
   ja: {
     yanaka: [
-      { url: "https://nitter.net/NedujinjaOhgai/status/2039595160791875832#m", label: "根津神社まわりの新緑と庭の雰囲気" },
-      { url: "https://nitter.net/NedujinjaOhgai/status/2039485998586032513#m", label: "舞姫の家と根津神社まわりの静かな景色" },
-      { url: "https://nitter.net/NedujinjaOhgai/status/2039126840628097287#m", label: "つつじまつり前後の根津神社の空気感" },
-      { url: "https://nitter.net/bunkyo_tokyo/status/2040950111237505084#m", label: "文京区公式の根津神社まつり案内" },
-      { url: "https://nitter.net/bunkyo_tokyo/status/2040595277674152282#m", label: "文京区のまち歩き視点に近い投稿" },
-      { url: "https://nitter.net/himitsuno132/status/2040443489532686637#m", label: "谷中本店にもつながる下町の甘味スポット" },
-      { url: "https://nitter.net/uenotoshogu/status/2040216484417573116#m", label: "上野側からつなげやすい春の立ち寄り先" },
+      { url: "https://x.com/NedujinjaOhgai/status/2039595160791875832", label: "根津神社まわりの新緑と庭の雰囲気" },
+      { url: "https://x.com/NedujinjaOhgai/status/2039485998586032513", label: "舞姫の家と根津神社まわりの静かな景色" },
+      { url: "https://x.com/NedujinjaOhgai/status/2039126840628097287", label: "つつじまつり前後の根津神社の空気感" },
+      { url: "https://x.com/bunkyo_tokyo/status/2040950111237505084", label: "文京区公式の根津神社まつり案内" },
+      { url: "https://x.com/bunkyo_tokyo/status/2040595277674152282", label: "文京区のまち歩き視点に近い投稿" },
+      { url: "https://x.com/himitsuno132/status/2040443489532686637", label: "谷中本店にもつながる下町の甘味スポット" },
+      { url: "https://x.com/uenotoshogu/status/2040216484417573116", label: "上野側からつなげやすい春の立ち寄り先" },
     ],
     kiyosumi: [
-      { url: "https://nitter.net/KiyosumiTeien/status/2040979030548299824#m", label: "清澄公園の桜と園路の空気感" },
-      { url: "https://nitter.net/KiyosumiTeien/status/2040959759235621217#m", label: "清澄庭園の里桜と庭園の見どころ" },
-      { url: "https://nitter.net/KiyosumiTeien/status/2040251219831349644#m", label: "雨の日の清澄公園の様子" },
-      { url: "https://nitter.net/KiyosumiTeien/status/2039555359740940707#m", label: "清澄庭園のツツジと季節の変化" },
-      { url: "https://nitter.net/KiyosumiTeien/status/2038851364806373643#m", label: "清澄庭園の花の見どころ" },
-      { url: "https://nitter.net/KiyosumiTeien/status/2038844019741176181#m", label: "新芽と庭園の色合いの参考" },
-      { url: "https://nitter.net/KiyosumiTeien/status/2039609841896018288#m", label: "庭園施設の使い方に関する案内" },
+      { url: "https://x.com/KiyosumiTeien/status/2040979030548299824", label: "清澄公園の桜と園路の空気感" },
+      { url: "https://x.com/KiyosumiTeien/status/2040959759235621217", label: "清澄庭園の里桜と庭園の見どころ" },
+      { url: "https://x.com/KiyosumiTeien/status/2040251219831349644", label: "雨の日の清澄公園の様子" },
+      { url: "https://x.com/KiyosumiTeien/status/2039555359740940707", label: "清澄庭園のツツジと季節の変化" },
+      { url: "https://x.com/KiyosumiTeien/status/2038851364806373643", label: "清澄庭園の花の見どころ" },
+      { url: "https://x.com/KiyosumiTeien/status/2038844019741176181", label: "新芽と庭園の色合いの参考" },
+      { url: "https://x.com/KiyosumiTeien/status/2039609841896018288", label: "庭園施設の使い方に関する案内" },
     ],
     kuramae: [
-      { url: "https://nitter.net/kuramaeiine/status/2030792925832184027#m", label: "蔵前近くの朝食スポットの雰囲気" },
-      { url: "https://nitter.net/kuramaeiine/status/2030463059828027671#m", label: "厩橋まわりの橋の景色" },
-      { url: "https://nitter.net/kuramaeiine/status/2030088136227967190#m", label: "蔵前橋の見え方の参考" },
-      { url: "https://nitter.net/kuramaeiine/status/2031940919310868637#m", label: "蔵前近辺の新しい飲食店の投稿" },
-      { url: "https://nitter.net/icho8man/status/2033076363670991003#m", label: "浅草橋寄りの神社と朝市の空気" },
-      { url: "https://nitter.net/icho8man/status/2031973197617447175#m", label: "浅草橋の駅近神社の雰囲気" },
-      { url: "https://nitter.net/edotokyomuseum/status/2037429580269777351#m", label: "両国側の文化スポット案内" },
+      { url: "https://x.com/kuramaeiine/status/2030792925832184027", label: "蔵前近くの朝食スポットの雰囲気" },
+      { url: "https://x.com/kuramaeiine/status/2030463059828027671", label: "厩橋まわりの橋の景色" },
+      { url: "https://x.com/kuramaeiine/status/2030088136227967190", label: "蔵前橋の見え方の参考" },
+      { url: "https://x.com/kuramaeiine/status/2031940919310868637", label: "蔵前近辺の新しい飲食店の投稿" },
+      { url: "https://x.com/icho8man/status/2033076363670991003", label: "浅草橋寄りの神社と朝市の空気" },
+      { url: "https://x.com/icho8man/status/2031973197617447175", label: "浅草橋の駅近神社の雰囲気" },
+      { url: "https://x.com/edotokyomuseum/status/2037429580269777351", label: "両国側の文化スポット案内" },
     ],
     tram: [
-      { url: "https://nitter.net/toeikotsu_eng/status/2041063366857462042#m", label: "都電荒川線の最新運行状況 夕方便" },
-      { url: "https://nitter.net/toeikotsu_eng/status/2040912370747551810#m", label: "都電荒川線の最新運行状況 朝便" },
-      { url: "https://nitter.net/toeikotsu_eng/status/2040700978538909728#m", label: "都電荒川線の前日運行状況" },
-      { url: "https://nitter.net/toeikotsu/status/2041063365712433193#m", label: "都営交通公式の都電運行情報" },
-      { url: "https://nitter.net/toeikotsu/status/2040912368147010009#m", label: "朝の都電運行状況" },
-      { url: "https://nitter.net/toeikotsu/status/2040700975892320344#m", label: "夕方の都電運行状況" },
+      { url: "https://x.com/toeikotsu_eng/status/2041063366857462042", label: "都電荒川線の最新運行状況 夕方便" },
+      { url: "https://x.com/toeikotsu_eng/status/2040912370747551810", label: "都電荒川線の最新運行状況 朝便" },
+      { url: "https://x.com/toeikotsu_eng/status/2040700978538909728", label: "都電荒川線の前日運行状況" },
+      { url: "https://x.com/toeikotsu/status/2041063365712433193", label: "都営交通公式の都電運行情報" },
+      { url: "https://x.com/toeikotsu/status/2040912368147010009", label: "朝の都電運行状況" },
+      { url: "https://x.com/toeikotsu/status/2040700975892320344", label: "夕方の都電運行状況" },
     ],
   },
   en: {
     yanaka: [
-      { url: "https://nitter.net/NedujinjaOhgai/status/2039595160791875832#m", label: "Nezu area greenery and garden atmosphere" },
-      { url: "https://nitter.net/NedujinjaOhgai/status/2039485998586032513#m", label: "Calmer garden views around Nezu Shrine" },
-      { url: "https://nitter.net/NedujinjaOhgai/status/2039126840628097287#m", label: "A seasonal Nezu Shrine reference" },
-      { url: "https://nitter.net/bunkyo_tokyo/status/2040950111237505084#m", label: "Bunkyo ward update tied to Nezu Shrine" },
-      { url: "https://nitter.net/bunkyo_tokyo/status/2040595277674152282#m", label: "A neighborhood-watching post from Bunkyo" },
-      { url: "https://nitter.net/himitsuno132/status/2040443489532686637#m", label: "A Yanaka-linked dessert stop reference" },
-      { url: "https://nitter.net/uenotoshogu/status/2040216484417573116#m", label: "A Ueno-side spring stop that pairs well with Yanaka" },
+      { url: "https://x.com/NedujinjaOhgai/status/2039595160791875832", label: "Nezu area greenery and garden atmosphere" },
+      { url: "https://x.com/NedujinjaOhgai/status/2039485998586032513", label: "Calmer garden views around Nezu Shrine" },
+      { url: "https://x.com/NedujinjaOhgai/status/2039126840628097287", label: "A seasonal Nezu Shrine reference" },
+      { url: "https://x.com/bunkyo_tokyo/status/2040950111237505084", label: "Bunkyo ward update tied to Nezu Shrine" },
+      { url: "https://x.com/bunkyo_tokyo/status/2040595277674152282", label: "A neighborhood-watching post from Bunkyo" },
+      { url: "https://x.com/himitsuno132/status/2040443489532686637", label: "A Yanaka-linked dessert stop reference" },
+      { url: "https://x.com/uenotoshogu/status/2040216484417573116", label: "A Ueno-side spring stop that pairs well with Yanaka" },
     ],
     kiyosumi: [
-      { url: "https://nitter.net/KiyosumiTeien/status/2040979030548299824#m", label: "Kiyosumi Park cherry blossoms and park atmosphere" },
-      { url: "https://nitter.net/KiyosumiTeien/status/2040959759235621217#m", label: "Kiyosumi Garden seasonal blooms" },
-      { url: "https://nitter.net/KiyosumiTeien/status/2040251219831349644#m", label: "A rainy-day look at Kiyosumi Park" },
-      { url: "https://nitter.net/KiyosumiTeien/status/2039555359740940707#m", label: "Seasonal flowers around Kiyosumi Garden" },
-      { url: "https://nitter.net/KiyosumiTeien/status/2038851364806373643#m", label: "A Kiyosumi garden-path reference" },
-      { url: "https://nitter.net/KiyosumiTeien/status/2038844019741176181#m", label: "Fresh spring color inside Kiyosumi Garden" },
-      { url: "https://nitter.net/KiyosumiTeien/status/2039609841896018288#m", label: "A practical Kiyosumi Garden facility update" },
+      { url: "https://x.com/KiyosumiTeien/status/2040979030548299824", label: "Kiyosumi Park cherry blossoms and park atmosphere" },
+      { url: "https://x.com/KiyosumiTeien/status/2040959759235621217", label: "Kiyosumi Garden seasonal blooms" },
+      { url: "https://x.com/KiyosumiTeien/status/2040251219831349644", label: "A rainy-day look at Kiyosumi Park" },
+      { url: "https://x.com/KiyosumiTeien/status/2039555359740940707", label: "Seasonal flowers around Kiyosumi Garden" },
+      { url: "https://x.com/KiyosumiTeien/status/2038851364806373643", label: "A Kiyosumi garden-path reference" },
+      { url: "https://x.com/KiyosumiTeien/status/2038844019741176181", label: "Fresh spring color inside Kiyosumi Garden" },
+      { url: "https://x.com/KiyosumiTeien/status/2039609841896018288", label: "A practical Kiyosumi Garden facility update" },
     ],
     kuramae: [
-      { url: "https://nitter.net/kuramaeiine/status/2030792925832184027#m", label: "A breakfast stop near Kuramae" },
-      { url: "https://nitter.net/kuramaeiine/status/2030463059828027671#m", label: "A bridge-side view around Kuramae" },
-      { url: "https://nitter.net/kuramaeiine/status/2030088136227967190#m", label: "Kuramae Bridge lighting and river mood" },
-      { url: "https://nitter.net/kuramaeiine/status/2031940919310868637#m", label: "A new neighborhood opening near Kuramae" },
-      { url: "https://nitter.net/icho8man/status/2033076363670991003#m", label: "A small shrine market scene near Asakusabashi" },
-      { url: "https://nitter.net/icho8man/status/2031973197617447175#m", label: "A shrine reference close to the Kuramae side of east Tokyo" },
-      { url: "https://nitter.net/edotokyomuseum/status/2037429580269777351#m", label: "A Ryogoku-side cultural event reference" },
+      { url: "https://x.com/kuramaeiine/status/2030792925832184027", label: "A breakfast stop near Kuramae" },
+      { url: "https://x.com/kuramaeiine/status/2030463059828027671", label: "A bridge-side view around Kuramae" },
+      { url: "https://x.com/kuramaeiine/status/2030088136227967190", label: "Kuramae Bridge lighting and river mood" },
+      { url: "https://x.com/kuramaeiine/status/2031940919310868637", label: "A new neighborhood opening near Kuramae" },
+      { url: "https://x.com/icho8man/status/2033076363670991003", label: "A small shrine market scene near Asakusabashi" },
+      { url: "https://x.com/icho8man/status/2031973197617447175", label: "A shrine reference close to the Kuramae side of east Tokyo" },
+      { url: "https://x.com/edotokyomuseum/status/2037429580269777351", label: "A Ryogoku-side cultural event reference" },
     ],
     tram: [
-      { url: "https://nitter.net/toeikotsu_eng/status/2041063366857462042#m", label: "Tokyo Sakura Tram latest evening service update" },
-      { url: "https://nitter.net/toeikotsu_eng/status/2040912370747551810#m", label: "Tokyo Sakura Tram latest morning service update" },
-      { url: "https://nitter.net/toeikotsu_eng/status/2040700978538909728#m", label: "A previous-day tram service reference" },
-      { url: "https://nitter.net/toeikotsu/status/2041063365712433193#m", label: "Toei transport official tram status" },
-      { url: "https://nitter.net/toeikotsu/status/2040912368147010009#m", label: "Morning tram operations from the operator" },
-      { url: "https://nitter.net/toeikotsu/status/2040700975892320344#m", label: "Evening tram operations from the operator" },
+      { url: "https://x.com/toeikotsu_eng/status/2041063366857462042", label: "Tokyo Sakura Tram latest evening service update" },
+      { url: "https://x.com/toeikotsu_eng/status/2040912370747551810", label: "Tokyo Sakura Tram latest morning service update" },
+      { url: "https://x.com/toeikotsu_eng/status/2040700978538909728", label: "A previous-day tram service reference" },
+      { url: "https://x.com/toeikotsu/status/2041063365712433193", label: "Toei transport official tram status" },
+      { url: "https://x.com/toeikotsu/status/2040912368147010009", label: "Morning tram operations from the operator" },
+      { url: "https://x.com/toeikotsu/status/2040700975892320344", label: "Evening tram operations from the operator" },
     ],
   },
 };
@@ -317,21 +327,10 @@ const CLUSTER_GALLERIES: Record<MinorGuideCluster, GuideMediaImage[]> = {
     commonsImage("File:Kiyosumi Garden (11302018475).jpg", "https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Kiyosumi_Garden_%2811302018475%29.jpg/1920px-Kiyosumi_Garden_%2811302018475%29.jpg", 1600, 1200, "Garden path at Kiyosumi Garden", "A garden segment prevents the whole half day from becoming only cafes and transit."),
     commonsImage("File:Kiyosumi Garden (9224577121).jpg", "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Kiyosumi_Garden_%289224577121%29.jpg/1920px-Kiyosumi_Garden_%289224577121%29.jpg", 1600, 1200, "Rocks and water at Kiyosumi Garden", "The older garden layout is one of the strongest reasons to slow down in this part of Tokyo."),
     commonsImage("File:Kiyosumi Garden (9227377264).jpg", "https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Kiyosumi_Garden_%289227377264%29.jpg/1920px-Kiyosumi_Garden_%289227377264%29.jpg", 1600, 1200, "Bridge and pond in Kiyosumi Garden", "Even one waterside stop changes the rhythm of east-Tokyo walking."),
-    commonsImage("File:Kiyosumi-shirakawa-Station-ExitA1.jpg", "https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Kiyosumi-shirakawa-Station-ExitA1.jpg/1920px-Kiyosumi-shirakawa-Station-ExitA1.jpg", 1600, 1200, "Kiyosumi-Shirakawa Station exit", "The station exits matter because they shape how quickly the route feels local."),
-    commonsImage("File:Toei Kiyosumi-shirakawa-STA Gate.jpg", "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Toei_Kiyosumi-shirakawa-STA_Gate.jpg/1920px-Toei_Kiyosumi-shirakawa-STA_Gate.jpg", 1600, 1066, "Toei Kiyosumi-Shirakawa gate", "This area is practical because the route can stay compact even when you rely on station exits."),
-    commonsImage("File:Tokyo-Metro Kiyosumi-shirakawa-STA Kiyosumi-dori-Ave-Gate.jpg", "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Tokyo-Metro_Kiyosumi-shirakawa-STA_Kiyosumi-dori-Ave-Gate.jpg/1920px-Tokyo-Metro_Kiyosumi-shirakawa-STA_Kiyosumi-dori-Ave-Gate.jpg", 1600, 1067, "Tokyo Metro gate at Kiyosumi-Shirakawa", "The route is easy to shorten or lengthen because access points stay simple."),
-    commonsImage("File:Tokyo-Metro Kiyosumi-shirakawa-STA Mitsume-dori-Ave-Gate.jpg", "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Tokyo-Metro_Kiyosumi-shirakawa-STA_Mitsume-dori-Ave-Gate.jpg/1920px-Tokyo-Metro_Kiyosumi-shirakawa-STA_Mitsume-dori-Ave-Gate.jpg", 1600, 1067, "Another Kiyosumi-Shirakawa station gate", "A second gate view helps travelers understand how spread out the neighborhood actually feels."),
-    commonsImage("File:Tokyo-Metro Kiyosumi-shirakawa-STA Platform1-2.jpg", "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Tokyo-Metro_Kiyosumi-shirakawa-STA_Platform1-2.jpg/1920px-Tokyo-Metro_Kiyosumi-shirakawa-STA_Platform1-2.jpg", 1600, 1067, "Kiyosumi-Shirakawa platform", "This route often starts or ends cleanly because transit is straightforward."),
     commonsImage("File:Toei Monzen-nakacho-STA Gate.jpg", "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/Toei_Monzen-nakacho-STA_Gate.jpg/1920px-Toei_Monzen-nakacho-STA_Gate.jpg", 1600, 1067, "Monzen-Nakacho station gate", "Monzen-Nakacho is a strong extension if you want a broader east-Tokyo half day."),
   ],
   kuramae: [
-    commonsImage("File:2024.01.20 Kuramae Police Station.jpg", "https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/2024.01.20_Kuramae_Police_Station.jpg/1920px-2024.01.20_Kuramae_Police_Station.jpg", 1600, 2126, "Street view in Kuramae", "Kuramae rewards close street-level looking more than it rewards headline attractions."),
     commonsImage("File:Kuramae JP Terrace Jutaku.jpg", "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Kuramae_JP_Terrace_Jutaku.jpg/1920px-Kuramae_JP_Terrace_Jutaku.jpg", 1600, 2133, "Mid-rise buildings in Kuramae", "Modern east-Tokyo housing and small shops often sit side by side here."),
-    commonsImage("File:Kuramae Police Station.JPG", "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Kuramae_Police_Station.JPG/1920px-Kuramae_Police_Station.JPG", 1600, 1200, "Kuramae streetscape", "This side of town is more about block-to-block texture than one marquee stop."),
-    commonsImage("File:Kuramae Technical High School.JPG", "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Kuramae_Technical_High_School.JPG/1920px-Kuramae_Technical_High_School.JPG", 1600, 1200, "Kuramae neighborhood building", "A practical Kuramae walk often includes ordinary streets as well as design-forward shops."),
-    commonsImage("File:Kuramae Station Asakusa line exit Jul 31 2021 05-48PM.jpeg", "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Kuramae_Station_Asakusa_line_exit_Jul_31_2021_05-48PM.jpeg/1920px-Kuramae_Station_Asakusa_line_exit_Jul_31_2021_05-48PM.jpeg", 1600, 1200, "Kuramae Station exit", "Station access matters here because you can enter the neighborhood from several angles."),
-    commonsImage("File:Toei-asakusa-line-kuramae-Station.jpg", "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Toei-asakusa-line-kuramae-Station.jpg/1920px-Toei-asakusa-line-kuramae-Station.jpg", 1600, 2133, "Toei Asakusa Line Kuramae Station", "Kuramae works well as a transport-friendly stop between busier eastern districts."),
-    commonsImage("File:Toei-asakusa-line-kuramae-platform.jpg", "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Toei-asakusa-line-kuramae-platform.jpg/1920px-Toei-asakusa-line-kuramae-platform.jpg", 1600, 1200, "Kuramae platform", "The route stays flexible because Kuramae is easy to shorten or extend."),
     commonsImage("File:Tokyo Skytree, view from Kuramae-bashi bridge on Sumida-gawa river. (14555040147).jpg", "https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Tokyo_Skytree%2C_view_from_Kuramae-bashi_bridge_on_Sumida-gawa_river._%2814555040147%29.jpg/1920px-Tokyo_Skytree%2C_view_from_Kuramae-bashi_bridge_on_Sumida-gawa_river._%2814555040147%29.jpg", 1600, 900, "View from Kuramae Bridge toward the river", "Bridge views are one of the cleanest ways to separate Kuramae from inland shopping districts."),
     commonsImage("File:Tokyo - Sumida river (2318963173).jpg", "https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Tokyo_-_Sumida_river_%282318963173%29.jpg/1920px-Tokyo_-_Sumida_river_%282318963173%29.jpg", 1600, 893, "Sumida River near the east-Tokyo route", "The river gives these routes breathing room that tighter districts often lack."),
     commonsImage("File:Sumida River + Tokyo Skytree @ Asakusa (13824463095).jpg", "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Sumida_River_%2B_Tokyo_Skytree_%40_Asakusa_%2813824463095%29.jpg/1920px-Sumida_River_%2B_Tokyo_Skytree_%40_Asakusa_%2813824463095%29.jpg", 1600, 1200, "Asakusa and Sumida River view", "Asakusa-side river views help this cluster feel broader than a single shopping neighborhood."),
@@ -361,7 +360,7 @@ const BASE_GUIDE_CONFIGS: Record<string, MinorGuideConfig> = {
     embedStart: 0,
     heroImage: { src: "/guide/quiet-tokyo-neighborhoods/yanaka-street.jpg", alt: "A calm Yanaka street with small cafes and low-rise storefronts in Tokyo", width: 1280, height: 853, caption: "Lower-rise streets and smaller shops are often what travelers remember most from quieter Tokyo.", creditLabel: "Photo: Alexkom000 / Wikimedia Commons (CC BY 4.0)", creditUrl: "https://commons.wikimedia.org/wiki/File:2024-10-20_Tokyo,_Yanaka_1.jpg" },
     ja: {
-      title: "静かな東京の街歩きガイド 2026",
+      title: "静かな東京の街歩きガイド",
       description: "大通りの定番観光ではなく、落ち着いた路地、小さな個人店、喫茶や散歩を楽しみたい人向けの東京街歩きガイドです。",
       lead: "静かな東京の良さは、派手なランドマークの代わりに歩行の速度が落ちることにあります。",
       route: "上野、谷中、根津、清澄白河、蔵前のうち、その日に相性の良い二地区をつなぐくらいの密度がちょうどよいです。",
@@ -372,7 +371,7 @@ const BASE_GUIDE_CONFIGS: Record<string, MinorGuideConfig> = {
       timeNeeded: "4〜6時間",
     },
     en: {
-      title: "Quiet Tokyo Neighborhoods Guide 2026",
+      title: "Quiet Tokyo Neighborhoods Guide",
       description: "A slower Tokyo guide for travelers who want calm streets, small shops, coffee stops, and walkable neighborhoods beyond the busiest districts.",
       lead: "The appeal of quieter Tokyo is not that nothing happens. It is that the city becomes easier to absorb once the pace drops.",
       route: "The strongest version usually links two neighborhoods such as Yanaka, Nezu, Kiyosumi-Shirakawa, or Kuramae instead of forcing too many districts into one day.",
@@ -389,7 +388,7 @@ const BASE_GUIDE_CONFIGS: Record<string, MinorGuideConfig> = {
     embedStart: 1,
     heroImage: { src: "/guide/yanaka-nezu-sendagi-walk/nezu-shrine.jpg", alt: "Nezu Shrine torii and greenery in Tokyo", width: 1280, height: 853, caption: "Shrine atmosphere and side-street walking stay close together here.", creditLabel: "Photo: Kakidai / Wikimedia Commons (CC BY-SA 4.0)", creditUrl: "https://commons.wikimedia.org/wiki/File:Nezu_Shrine_2020.jpg" },
     ja: {
-      title: "谷中・根津・千駄木の半日街歩きガイド 2026",
+      title: "谷中・根津・千駄木の半日街歩きガイド",
       description: "谷中・根津・千駄木を半日でゆるく回る、静かな東京街歩きのための実用ガイドです。",
       lead: "谷根千とひとまとめに呼ばれますが、実際には谷中、根津、千駄木で歩き方の重心が違います。",
       route: "根津駅か千駄木駅から入り、根津神社、へび道、谷中の路地、必要なら谷中銀座を一つの半日としてつなぐ構成が使いやすいです。",
@@ -400,7 +399,7 @@ const BASE_GUIDE_CONFIGS: Record<string, MinorGuideConfig> = {
       timeNeeded: "3〜4時間",
     },
     en: {
-      title: "Yanaka, Nezu, and Sendagi Half-Day Walk 2026",
+      title: "Yanaka, Nezu, and Sendagi Half-Day Walk",
       description: "A slower half-day Tokyo route through Yanaka, Nezu, and Sendagi for travelers who want old-town streets, shrine stops, cafes, and a calmer pace.",
       lead: "Yanaka, Nezu, and Sendagi are often bundled together, but the route becomes much better once you let each section play a different role.",
       route: "The easiest structure is to enter through Nezu or Sendagi, use Nezu Shrine and Hebi-michi as anchors, then let Yanaka lanes and, if needed, Yanaka Ginza close the half day.",
@@ -417,7 +416,7 @@ const BASE_GUIDE_CONFIGS: Record<string, MinorGuideConfig> = {
     embedStart: 0,
     heroImage: { src: "/guide/quiet-tokyo-neighborhoods/kiyosumi-garden.jpg", alt: "A peaceful pond and greenery at Kiyosumi Garden in Tokyo", width: 1280, height: 960, caption: "Coffee stops and quieter green spaces stay close together here.", creditLabel: "Photo: Guilhem Vellut / Wikimedia Commons (CC BY 2.0)", creditUrl: "https://commons.wikimedia.org/wiki/File:Kiyosumi_Garden_(9224579199).jpg" },
     ja: {
-      title: "清澄白河のコーヒーとギャラリー街歩き 2026",
+      title: "清澄白河のコーヒーとギャラリー街歩き",
       description: "清澄白河でコーヒー、ギャラリー、庭園まわりの静かな時間を組み立てる街歩きガイドです。",
       lead: "清澄白河はコーヒーの街として有名ですが、実際には庭園と水辺の余白が入ることで半日として完成します。",
       route: "清澄白河駅から入り、庭園、カフェ、ギャラリー感のある通り、水辺のいずれかを二つか三つつなぐ形がもっとも扱いやすいです。",
@@ -428,7 +427,7 @@ const BASE_GUIDE_CONFIGS: Record<string, MinorGuideConfig> = {
       timeNeeded: "3〜4時間",
     },
     en: {
-      title: "Kiyosumi-Shirakawa Coffee and Gallery Walk 2026",
+      title: "Kiyosumi-Shirakawa Coffee and Gallery Walk",
       description: "A practical guide to Kiyosumi-Shirakawa for travelers who want coffee stops, small galleries, slower streets, and a calm half-day in Tokyo.",
       lead: "Kiyosumi-Shirakawa is famous for coffee, but it only becomes a real half day once the garden and waterside rhythm are part of the plan.",
       route: "Start near the station and connect two or three anchors such as Kiyosumi Garden, one cafe, one gallery-like street, and one waterside or bridge segment.",
@@ -445,7 +444,7 @@ const BASE_GUIDE_CONFIGS: Record<string, MinorGuideConfig> = {
     embedStart: 0,
     heroImage: { src: "/guide/kuramae-walk/kuramae-shrine.jpg", alt: "Kuramae Shrine in Tokyo", width: 1600, height: 1067, caption: "Kuramae works when you let smaller streets and modest stops control the pace.", creditLabel: "Photo: Kakidai / Wikimedia Commons (CC BY-SA 4.0)", creditUrl: "https://commons.wikimedia.org/wiki/File:Kuramae_Shrine_2021.jpg" },
     ja: {
-      title: "蔵前の文具と器とベーカリー街歩き 2026",
+      title: "蔵前の文具と器とベーカリー街歩き",
       description: "蔵前で文具、器、ベーカリー、小さな店を静かに回るための街歩きガイドです。",
       lead: "蔵前の良さは、店そのものより、店と店の間の通りにあります。",
       route: "蔵前駅から入り、小さな店、ベーカリー、橋の景色、一本裏の通りを組み合わせると半日として綺麗にまとまります。",
@@ -456,7 +455,7 @@ const BASE_GUIDE_CONFIGS: Record<string, MinorGuideConfig> = {
       timeNeeded: "3〜4時間",
     },
     en: {
-      title: "Kuramae Walk for Stationery, Ceramics, and Bakeries 2026",
+      title: "Kuramae Walk for Stationery, Ceramics, and Bakeries",
       description: "A low-key Kuramae guide for travelers who want stationery shops, ceramics, bakeries, and a calmer shopping walk near Asakusa.",
       lead: "Kuramae becomes memorable once you stop treating it as a shopping list and start reading it as a sequence of smaller streets.",
       route: "Enter through Kuramae Station and connect a few small shops, one bakery or breakfast stop, one bridge view, and one back-street segment.",
@@ -473,7 +472,7 @@ const BASE_GUIDE_CONFIGS: Record<string, MinorGuideConfig> = {
     embedStart: 0,
     heroImage: { src: "/guide/tokyo-tram-line-stops/toden-arakawa-asukayama.jpg", alt: "Toden tram near Asukayama in Tokyo", width: 1800, height: 1200, caption: "The tram line matters because it keeps the city feeling closer to street level and easier to absorb on foot.", creditLabel: "Photo: Kakidai / Wikimedia Commons (CC BY-SA 4.0)", creditUrl: "https://commons.wikimedia.org/wiki/File:Toden_Arakawa_Line_Asukayama_2023.jpg" },
     ja: {
-      title: "都電沿線の静かな東京街歩き 2026",
+      title: "都電沿線の静かな東京街歩き",
       description: "都電沿線の静かな街をつないで歩きたい人向けの、少しローカル寄りの東京散歩ガイドです。",
       lead: "都電沿線の魅力は、路面電車そのものより、路面電車が似合う街のスケールにあります。",
       route: "王子、飛鳥山、町屋などから一つか二つの区間を選び、都電を見送る時間と歩く時間を混ぜる構成が向いています。",
@@ -484,7 +483,7 @@ const BASE_GUIDE_CONFIGS: Record<string, MinorGuideConfig> = {
       timeNeeded: "2.5〜4時間",
     },
     en: {
-      title: "Quiet Tokyo Tram-Line Stops Guide 2026",
+      title: "Quiet Tokyo Tram-Line Stops Guide",
       description: "A guide to calmer Tokyo neighborhoods along the tram line, useful for travelers who want a more local-feeling city walk.",
       lead: "The appeal of the tram-line neighborhoods is not only the tram itself. It is the street scale the tram preserves.",
       route: "Choose one or two segments around Oji, Asukayama, or Machiya and mix walking time with a short tram ride or a few passing-tram moments.",
@@ -501,7 +500,7 @@ const BASE_GUIDE_CONFIGS: Record<string, MinorGuideConfig> = {
     embedStart: 4,
     heroImage: { src: "/guide/rainy-day-tokyo-neighborhoods/yomisedori.jpg", alt: "Yomise-dori shopping street in Tokyo", width: 1944, height: 2592, caption: "Rainy Tokyo is often better in neighborhoods where you can walk a little, pause a little, and keep moving.", creditLabel: "Photo: Kentin / Wikimedia Commons (CC BY-SA 3.0)", creditUrl: "https://commons.wikimedia.org/wiki/File:Yomisedori_shopping_street_taito_bunkyo_tokyo_2009.JPG" },
     ja: {
-      title: "雨の日の東京で歩きやすい静かな街ガイド 2026",
+      title: "雨の日の東京で歩きやすい静かな街ガイド",
       description: "雨の日でも歩きやすい、商店街や喫茶、軒のある通りを中心にした東京のマイナー街歩きガイドです。",
       lead: "雨の日の東京は、全部を屋内へ逃がすより、雨に強い街を選んだ方が半日としてきれいにまとまります。",
       route: "千駄木、根津、清澄白河、蔵前のように、次の休憩先が近いエリアを一つか二つつなぐ構成が向いています。",
@@ -512,7 +511,7 @@ const BASE_GUIDE_CONFIGS: Record<string, MinorGuideConfig> = {
       timeNeeded: "2.5〜4時間",
     },
     en: {
-      title: "Rainy-Day Quiet Tokyo Neighborhoods Guide 2026",
+      title: "Rainy-Day Quiet Tokyo Neighborhoods Guide",
       description: "A practical rainy-day Tokyo guide built around shopping streets, cafe pauses, and lower-pressure neighborhoods that still work when the weather turns.",
       lead: "Rainy Tokyo does not need to become an all-indoor day if you choose the right neighborhoods.",
       route: "Use one or two areas such as Sendagi, Nezu, Kiyosumi-Shirakawa, or Kuramae where covered streets and indoor pauses stay close together.",
@@ -529,7 +528,7 @@ const BASE_GUIDE_CONFIGS: Record<string, MinorGuideConfig> = {
     embedStart: 2,
     heroImage: { src: "/guide/quiet-tokyo-neighborhoods/yanaka-street.jpg", alt: "A calm Yanaka street with small cafes and low-rise storefronts in Tokyo", width: 1280, height: 853, caption: "This route works because the city visibly slows down once you leave Ueno behind.", creditLabel: "Photo: Alexkom000 / Wikimedia Commons (CC BY 4.0)", creditUrl: "https://commons.wikimedia.org/wiki/File:2024-10-20_Tokyo,_Yanaka_1.jpg" },
     ja: {
-      title: "上野から谷中へ抜ける静かな街歩き 2026",
+      title: "上野から谷中へ抜ける静かな街歩き",
       description: "上野のにぎわいを抜けて谷中側へ温度を落とす、外国人旅行者向けの半日街歩きガイドです。",
       lead: "上野から谷中へ抜けると、東京の速度がかなりはっきり変わります。",
       route: "上野駅か上野公園外縁から入り、寺町や谷中の路地を通って日暮里か谷中銀座側へ抜ける構成が扱いやすいです。",
@@ -540,7 +539,7 @@ const BASE_GUIDE_CONFIGS: Record<string, MinorGuideConfig> = {
       timeNeeded: "3〜4時間",
     },
     en: {
-      title: "Ueno to Yanaka Walk Guide 2026",
+      title: "Ueno to Yanaka Walk Guide",
       description: "A half-day route that lets travelers leave Ueno behind and ease into Yanaka for a noticeably calmer Tokyo neighborhood walk.",
       lead: "The strongest part of this route is the speed change once Ueno starts to fade and Yanaka begins to take over.",
       route: "Enter from Ueno Station or the park edge, move through temple-side blocks and Yanaka lanes, and close near Nippori or the Yanaka Ginza side.",
@@ -557,7 +556,7 @@ const BASE_GUIDE_CONFIGS: Record<string, MinorGuideConfig> = {
     embedStart: 3,
     heroImage: { src: "/guide/yanaka-nezu-sendagi-walk/nezu-shrine.jpg", alt: "Nezu Shrine torii and greenery in Tokyo", width: 1280, height: 853, caption: "Nezu and Sendagi work best as a calm morning sequence rather than a crowded midday stop.", creditLabel: "Photo: Kakidai / Wikimedia Commons (CC BY-SA 4.0)", creditUrl: "https://commons.wikimedia.org/wiki/File:Nezu_Shrine_2020.jpg" },
     ja: {
-      title: "根津・千駄木の朝散歩ガイド 2026",
+      title: "根津・千駄木の朝散歩ガイド",
       description: "根津と千駄木を朝の時間帯に歩くための、静かな東京の半日ガイドです。",
       lead: "根津と千駄木は、昼以降より朝の方が良さが見えやすい東京エリアです。",
       route: "根津駅か千駄木駅から入り、神社、へび道、商店街、小さな喫茶を朝の時間帯に一つの流れとしてつなぎます。",
@@ -568,7 +567,7 @@ const BASE_GUIDE_CONFIGS: Record<string, MinorGuideConfig> = {
       timeNeeded: "2.5〜3.5時間",
     },
     en: {
-      title: "Nezu and Sendagi Morning Walk Guide 2026",
+      title: "Nezu and Sendagi Morning Walk Guide",
       description: "A slower morning route through Nezu and Sendagi for travelers who want a quieter Tokyo half day before the city fully speeds up.",
       lead: "Nezu and Sendagi make unusual sense in the morning, before they start reading as standard sightseeing.",
       route: "Start from Nezu or Sendagi Station and connect one shrine segment, one lane segment, one shopping-street segment, and one small morning break.",
@@ -585,7 +584,7 @@ const BASE_GUIDE_CONFIGS: Record<string, MinorGuideConfig> = {
     embedStart: 2,
     heroImage: { src: "/guide/quiet-tokyo-neighborhoods/kiyosumi-garden.jpg", alt: "A peaceful pond and greenery at Kiyosumi Garden in Tokyo", width: 1280, height: 960, caption: "This side of Tokyo works when temple atmosphere, water, and slower local streets stay in the same half day.", creditLabel: "Photo: Guilhem Vellut / Wikimedia Commons (CC BY 2.0)", creditUrl: "https://commons.wikimedia.org/wiki/File:Kiyosumi_Garden_(9224579199).jpg" },
     ja: {
-      title: "門前仲町と深川の半日街歩き 2026",
+      title: "門前仲町と深川の半日街歩き",
       description: "門前仲町と深川の寺社、水辺、生活街をゆるくつなぐ東東京の半日ガイドです。",
       lead: "門前仲町と深川は、清澄白河よりも生活街の温度が前に出る東東京です。",
       route: "門前仲町駅から入り、寺社、門前町、水辺、場合によっては清澄方面への接続を半日でつなぐと綺麗にまとまります。",
@@ -596,7 +595,7 @@ const BASE_GUIDE_CONFIGS: Record<string, MinorGuideConfig> = {
       timeNeeded: "3〜4時間",
     },
     en: {
-      title: "Monzen-Nakacho and Fukagawa Walk Guide 2026",
+      title: "Monzen-Nakacho and Fukagawa Walk Guide",
       description: "A practical east-Tokyo half day linking Monzen-Nakacho and Fukagawa through shrine space, local streets, and waterside edges.",
       lead: "Monzen-Nakacho and Fukagawa feel more lived-in than Kiyosumi-Shirakawa, and that difference is what makes the route useful.",
       route: "Start at Monzen-Nakacho Station and connect shrine space, town streets, one waterside segment, and, if wanted, a light extension toward Kiyosumi.",
@@ -613,7 +612,7 @@ const BASE_GUIDE_CONFIGS: Record<string, MinorGuideConfig> = {
     embedStart: 2,
     heroImage: { src: "/guide/kuramae-walk/kuramae-shrine.jpg", alt: "Kuramae Shrine in Tokyo", width: 1600, height: 1067, caption: "This route works when Asakusa opens the half day and Kuramae slows it back down.", creditLabel: "Photo: Kakidai / Wikimedia Commons (CC BY-SA 4.0)", creditUrl: "https://commons.wikimedia.org/wiki/File:Kuramae_Shrine_2021.jpg" },
     ja: {
-      title: "浅草・蔵前・隅田川の半日街歩き 2026",
+      title: "浅草・蔵前・隅田川の半日街歩き",
       description: "浅草の外縁から蔵前、隅田川沿いへ抜ける、少し静かめの東東京半日ガイドです。",
       lead: "浅草の密度をそのまま受け止めず、川沿いと蔵前へ逃がすことで東東京の半日がぐっと整います。",
       route: "浅草の外縁か蔵前駅側から入り、川沿い、橋、小さな店を軸に組み立て、浅草は必要な分だけ使う形が向いています。",
@@ -624,7 +623,7 @@ const BASE_GUIDE_CONFIGS: Record<string, MinorGuideConfig> = {
       timeNeeded: "3〜4時間",
     },
     en: {
-      title: "Asakusa, Kuramae, and Sumida River Walk Guide 2026",
+      title: "Asakusa, Kuramae, and Sumida River Walk Guide",
       description: "A practical east-Tokyo half day that uses the quieter edges of Asakusa, the Sumida River, and Kuramae instead of staying in the densest tourist flow.",
       lead: "The route works best when Asakusa is treated as context, not the whole day.",
       route: "Enter from outer Asakusa or the Kuramae side, then use the river edge, one bridge, and smaller Kuramae streets as the main structure.",
@@ -641,7 +640,7 @@ const BASE_GUIDE_CONFIGS: Record<string, MinorGuideConfig> = {
     embedStart: 2,
     heroImage: { src: "/guide/tokyo-tram-line-stops/toden-arakawa-asukayama.jpg", alt: "Toden tram near Asukayama in Tokyo", width: 1800, height: 1200, caption: "Tram-line routes work best when the streetcar adds neighborhood atmosphere rather than becoming a checklist of stops.", creditLabel: "Photo: Kakidai / Wikimedia Commons (CC BY-SA 4.0)", creditUrl: "https://commons.wikimedia.org/wiki/File:Toden_Arakawa_Line_Asukayama_2023.jpg" },
     ja: {
-      title: "王子・飛鳥山の都電街歩き 2026",
+      title: "王子・飛鳥山の都電街歩き",
       description: "飛鳥山公園と都電沿線を中心に、王子側の静かな東京を歩く半日ガイドです。",
       lead: "王子と飛鳥山は、都電沿線の中でも公園の余白が分かりやすく入る組み合わせです。",
       route: "王子駅か飛鳥山から入り、公園、停留場、王子側の通りを半日でゆるくつなぐと綺麗にまとまります。",
@@ -652,7 +651,7 @@ const BASE_GUIDE_CONFIGS: Record<string, MinorGuideConfig> = {
       timeNeeded: "2.5〜4時間",
     },
     en: {
-      title: "Oji and Asukayama Tram Walk Guide 2026",
+      title: "Oji and Asukayama Tram Walk Guide",
       description: "A half-day route around Asukayama Park and the Tokyo Sakura Tram for travelers who want a quieter north-side Tokyo walk.",
       lead: "Oji and Asukayama are one of the clearest tram-line combinations because the park immediately gives the route breathing room.",
       route: "Enter through Oji or Asukayama and link one park segment, one tram segment, and one neighborhood segment rather than trying to do too much.",
@@ -669,7 +668,7 @@ const BASE_GUIDE_CONFIGS: Record<string, MinorGuideConfig> = {
     embedStart: 4,
     heroImage: { src: "/guide/quiet-tokyo-neighborhoods/yanaka-street.jpg", alt: "A calm Yanaka street with small cafes and low-rise storefronts in Tokyo", width: 1280, height: 853, caption: "Starting from Nishi-Nippori makes it easier to reach Yanaka without the sharper pace shift that some travelers feel in Ueno.", creditLabel: "Photo: Alexkom000 / Wikimedia Commons (CC BY 4.0)", creditUrl: "https://commons.wikimedia.org/wiki/File:2024-10-20_Tokyo,_Yanaka_1.jpg" },
     ja: {
-      title: "西日暮里から谷中へ歩くガイド 2026",
+      title: "西日暮里から谷中へ歩くガイド",
       description: "西日暮里から谷中へ入り、低い街並みと路地を味わう半日街歩きガイドです。",
       lead: "西日暮里から谷中へ入ると、谷中が観光地より街として見えやすくなります。",
       route: "西日暮里駅から入り、寺町、谷中の路地、谷中銀座の手前までを丁寧につなぐ構成が向いています。",
@@ -680,7 +679,7 @@ const BASE_GUIDE_CONFIGS: Record<string, MinorGuideConfig> = {
       timeNeeded: "3時間前後",
     },
     en: {
-      title: "Nishi-Nippori to Yanaka Walk Guide 2026",
+      title: "Nishi-Nippori to Yanaka Walk Guide",
       description: "A half-day walk that enters Yanaka from Nishi-Nippori for a quieter, more neighborhood-first version of old Tokyo.",
       lead: "Entering from Nishi-Nippori makes Yanaka feel more like a neighborhood and less like a staged attraction.",
       route: "Start at Nishi-Nippori Station and use temple-side blocks, Yanaka lanes, and the run-up to Yanaka Ginza as the core sequence.",
@@ -697,7 +696,7 @@ const BASE_GUIDE_CONFIGS: Record<string, MinorGuideConfig> = {
     embedStart: 5,
     heroImage: { src: "/guide/rainy-day-tokyo-neighborhoods/yomisedori.jpg", alt: "Yomise-dori shopping street in Tokyo", width: 1944, height: 2592, caption: "Neighborhood routes that let you walk a little, pause a little, and keep moving are often the most useful ones in Tokyo.", creditLabel: "Photo: Kentin / Wikimedia Commons (CC BY-SA 3.0)", creditUrl: "https://commons.wikimedia.org/wiki/File:Yomisedori_shopping_street_taito_bunkyo_tokyo_2009.JPG" },
     ja: {
-      title: "千駄木とよみせ通りの街歩きガイド 2026",
+      title: "千駄木とよみせ通りの街歩きガイド",
       description: "千駄木とよみせ通りを軸に、商店街と路地をつなぐ静かな東京の半日ガイドです。",
       lead: "千駄木とよみせ通りは、谷中よりさらに生活街寄りの空気を味わえる組み合わせです。",
       route: "千駄木駅から入り、よみせ通りを背骨にしつつ、横道や喫茶を一つ二つ差し込む構成が向いています。",
@@ -708,7 +707,7 @@ const BASE_GUIDE_CONFIGS: Record<string, MinorGuideConfig> = {
       timeNeeded: "2.5〜3.5時間",
     },
     en: {
-      title: "Sendagi and Yomise-dori Walk Guide 2026",
+      title: "Sendagi and Yomise-dori Walk Guide",
       description: "A quieter Tokyo half day centered on Sendagi and Yomise-dori, built around shopping-street texture and smaller side lanes rather than major attractions.",
       lead: "Sendagi and Yomise-dori lean even more toward everyday neighborhood atmosphere than Yanaka does.",
       route: "Start from Sendagi Station and use Yomise-dori as the spine while allowing two or three short side-lane detours and one quiet break.",
@@ -725,7 +724,7 @@ const BASE_GUIDE_CONFIGS: Record<string, MinorGuideConfig> = {
     embedStart: 4,
     heroImage: { src: "/guide/quiet-tokyo-neighborhoods/kiyosumi-garden.jpg", alt: "A peaceful pond and greenery at Kiyosumi Garden in Tokyo", width: 1280, height: 960, caption: "Even one garden or waterside pause changes the rhythm of an east-Tokyo half day for the better.", creditLabel: "Photo: Guilhem Vellut / Wikimedia Commons (CC BY 2.0)", creditUrl: "https://commons.wikimedia.org/wiki/File:Kiyosumi_Garden_(9224579199).jpg" },
     ja: {
-      title: "森下から清澄白河へ歩く半日ガイド 2026",
+      title: "森下から清澄白河へ歩く半日ガイド",
       description: "森下から清澄白河へつなぎ、東東京の生活街と庭園・喫茶を一緒に見る半日ガイドです。",
       lead: "森下から入ると、清澄白河が人気エリアではなく東東京の一部として見えやすくなります。",
       route: "森下駅から入り、生活街、橋や水辺、最後に清澄白河の庭園やカフェへ移る形が扱いやすいです。",
@@ -736,7 +735,7 @@ const BASE_GUIDE_CONFIGS: Record<string, MinorGuideConfig> = {
       timeNeeded: "3〜4時間",
     },
     en: {
-      title: "Morishita to Kiyosumi-Shirakawa Walk Guide 2026",
+      title: "Morishita to Kiyosumi-Shirakawa Walk Guide",
       description: "A slower east-Tokyo half day that starts in Morishita and ends in Kiyosumi-Shirakawa for a better balance of everyday streets and curated stops.",
       lead: "Starting in Morishita makes Kiyosumi-Shirakawa feel less like an isolated trend district and more like part of a broader east-Tokyo fabric.",
       route: "Start around Morishita Station, use quieter streets and one river-edge segment, then let Kiyosumi-Shirakawa hold the later garden or cafe pause.",
@@ -753,7 +752,7 @@ const BASE_GUIDE_CONFIGS: Record<string, MinorGuideConfig> = {
     embedStart: 4,
     heroImage: { src: "/guide/kuramae-walk/kuramae-shrine.jpg", alt: "Kuramae Shrine in Tokyo", width: 1600, height: 1067, caption: "Bridge crossings and a Kuramae finish give this route a calmer east-Tokyo shape than many first-timer districts.", creditLabel: "Photo: Kakidai / Wikimedia Commons (CC BY-SA 4.0)", creditUrl: "https://commons.wikimedia.org/wiki/File:Kuramae_Shrine_2021.jpg" },
     ja: {
-      title: "両国から蔵前へ歩く半日ガイド 2026",
+      title: "両国から蔵前へ歩く半日ガイド",
       description: "橋の景色と蔵前の小さな店をつなぐ、東東京の少し落ち着いた半日街歩きガイドです。",
       lead: "両国から蔵前へ向かうと、橋をまたぐごとに東東京の空気が変わるのが分かります。",
       route: "両国駅側から入り、橋と川沿いを使って蔵前寄りの街区へ移り、小さな店で締める構成が向いています。",
@@ -764,7 +763,7 @@ const BASE_GUIDE_CONFIGS: Record<string, MinorGuideConfig> = {
       timeNeeded: "3〜4時間",
     },
     en: {
-      title: "Ryogoku to Kuramae Walk Guide 2026",
+      title: "Ryogoku to Kuramae Walk Guide",
       description: "A practical east-Tokyo route from Ryogoku toward Kuramae for bridge views, craft stops, and a lower-key alternative to denser sightseeing districts.",
       lead: "Ryogoku to Kuramae is one of the clearest east-Tokyo walks for understanding how a bridge can reset the whole pace of a half day.",
       route: "Start near Ryogoku Station, use one or two bridge segments and a river edge, then let Kuramae hold the small-shop finish.",
@@ -781,7 +780,7 @@ const BASE_GUIDE_CONFIGS: Record<string, MinorGuideConfig> = {
     embedStart: 3,
     heroImage: { src: "/guide/tokyo-tram-line-stops/toden-arakawa-asukayama.jpg", alt: "Toden tram near Asukayama in Tokyo", width: 1800, height: 1200, caption: "Tram-line routes work best when the streetcar adds neighborhood atmosphere rather than becoming a checklist of stops.", creditLabel: "Photo: Kakidai / Wikimedia Commons (CC BY-SA 4.0)", creditUrl: "https://commons.wikimedia.org/wiki/File:Toden_Arakawa_Line_Asukayama_2023.jpg" },
     ja: {
-      title: "町屋と荒川の都電街歩きガイド 2026",
+      title: "町屋と荒川の都電街歩きガイド",
       description: "町屋と都電沿線をつなぐ、少しローカルな北東東京の半日街歩きガイドです。",
       lead: "町屋と荒川側の都電沿線は、都電が生活のすぐ横を通っている感覚が特に強い区間です。",
       route: "町屋駅前か町屋二丁目から入り、停留場、生活道路、商店街を一つか二つの区間でまとめる形が向いています。",
@@ -792,7 +791,7 @@ const BASE_GUIDE_CONFIGS: Record<string, MinorGuideConfig> = {
       timeNeeded: "2.5〜3.5時間",
     },
     en: {
-      title: "Machiya and Arakawa Tram Walk Guide 2026",
+      title: "Machiya and Arakawa Tram Walk Guide",
       description: "A local-feeling north-east Tokyo half day around Machiya and the tram line for travelers who want a quieter route with streetcar atmosphere.",
       lead: "The Machiya and Arakawa side of the tram line is one of the strongest places to feel how close daily-life Tokyo sits to the tracks.",
       route: "Start near Machiya-ekimae or Machiya-Nichome and use one or two tram-adjacent walking segments as the whole half day.",
@@ -809,7 +808,7 @@ const BASE_GUIDE_CONFIGS: Record<string, MinorGuideConfig> = {
     embedStart: 0,
     heroImage: { src: "/guide/yanaka-nezu-sendagi-walk/nezu-shrine.jpg", alt: "Nezu Shrine torii and greenery in Tokyo", width: 1280, height: 853, caption: "This route works best when Nezu Shrine sets the tone early and Hebi-michi keeps the pace quiet afterward.", creditLabel: "Photo: Kakidai / Wikimedia Commons (CC BY-SA 4.0)", creditUrl: "https://commons.wikimedia.org/wiki/File:Nezu_Shrine_2020.jpg" },
     ja: {
-      title: "へび道と根津神社の朝寄り街歩きガイド 2026",
+      title: "へび道と根津神社の朝寄り街歩きガイド",
       description: "根津神社からへび道へ抜ける、静かな東京の朝寄り半日ルートをまとめた実用ガイドです。",
       lead: "根津神社とへび道は近いのに、神社の整った空気と生活道路のやわらかさがきれいに切り替わります。",
       route: "根津駅から入り、根津神社を先に見てから、へび道と千駄木寄りの路地へ重心を移す構成がもっとも扱いやすいです。",
@@ -820,7 +819,7 @@ const BASE_GUIDE_CONFIGS: Record<string, MinorGuideConfig> = {
       timeNeeded: "2.5〜3.5時間",
     },
     en: {
-      title: "Hebi-michi and Nezu Shrine Walk Guide 2026",
+      title: "Hebi-michi and Nezu Shrine Walk Guide",
       description: "A quieter Tokyo half-day route that links Nezu Shrine with Hebi-michi for travelers who want shrine atmosphere without losing the neighborhood feel.",
       lead: "Nezu Shrine and Hebi-michi sit close together, but the route only becomes good once you let the shrine mood give way to quieter lane walking.",
       route: "Enter from Nezu Station, use Nezu Shrine first, then shift the route toward Hebi-michi and the softer residential lanes on the Sendagi side.",
@@ -837,7 +836,7 @@ const BASE_GUIDE_CONFIGS: Record<string, MinorGuideConfig> = {
     embedStart: 3,
     heroImage: { src: "/guide/quiet-tokyo-neighborhoods/yanaka-street.jpg", alt: "A calm Yanaka street with small cafes and low-rise storefronts in Tokyo", width: 1280, height: 853, caption: "This version of Yanaka works when small cafes and longer low-rise stretches matter more than checklist sightseeing.", creditLabel: "Photo: Alexkom000 / Wikimedia Commons (CC BY 4.0)", creditUrl: "https://commons.wikimedia.org/wiki/File:2024-10-20_Tokyo,_Yanaka_1.jpg" },
     ja: {
-      title: "谷中霊園まわりと喫茶の静かな街歩き 2026",
+      title: "谷中霊園まわりと喫茶の静かな街歩き",
       description: "谷中霊園まわりの静けさと小さな喫茶休憩を組み合わせる、落ち着いた東京半日ルートのガイドです。",
       lead: "谷中は商店街だけでなく、霊園まわりの余白を歩くと街の密度がほどけて見えてきます。",
       route: "日暮里か西日暮里側から入り、谷中霊園周辺の長い歩行区間を先に取り、その後で喫茶か小さな甘味休憩を一度入れる組み方が向いています。",
@@ -848,7 +847,7 @@ const BASE_GUIDE_CONFIGS: Record<string, MinorGuideConfig> = {
       timeNeeded: "3〜4時間",
     },
     en: {
-      title: "Yanaka Cemetery and Cafe Walk Guide 2026",
+      title: "Yanaka Cemetery and Cafe Walk Guide",
       description: "A quieter Yanaka half-day route for travelers who want longer low-rise streets, cemetery-edge calm, and one deliberate cafe pause.",
       lead: "Yanaka feels very different once you stop centering the shopping street and let the cemetery-side calm shape the walk instead.",
       route: "Start from Nippori or Nishi-Nippori, take the longer cemetery-edge stretch first, then use one cafe or sweets stop to reset before finishing.",
@@ -865,7 +864,7 @@ const BASE_GUIDE_CONFIGS: Record<string, MinorGuideConfig> = {
     embedStart: 4,
     heroImage: { src: "/guide/quiet-tokyo-neighborhoods/kiyosumi-garden.jpg", alt: "A peaceful pond and greenery at Kiyosumi Garden in Tokyo", width: 1280, height: 960, caption: "This route works when the garden carries the first half and one or two roaster stops carry the rest.", creditLabel: "Photo: Guilhem Vellut / Wikimedia Commons (CC BY 2.0)", creditUrl: "https://commons.wikimedia.org/wiki/File:Kiyosumi_Garden_(9224579199).jpg" },
     ja: {
-      title: "清澄庭園とロースター街歩きガイド 2026",
+      title: "清澄庭園とロースター街歩きガイド",
       description: "清澄庭園の余白と清澄白河のロースター文化を一つの半日にまとめる、静かな東東京ガイドです。",
       lead: "清澄白河の良さは、ロースター巡りの前に庭園の静けさを入れると、街の印象が一段きれいに整うことです。",
       route: "清澄庭園を先に置き、その後でロースターかベーカリーを一つか二つつなぐ構成にすると、歩きと休憩の比率がちょうどよくなります。",
@@ -876,7 +875,7 @@ const BASE_GUIDE_CONFIGS: Record<string, MinorGuideConfig> = {
       timeNeeded: "3〜4時間",
     },
     en: {
-      title: "Kiyosumi Garden and Coffee Roasters Walk 2026",
+      title: "Kiyosumi Garden and Coffee Roasters Walk",
       description: "A calmer Kiyosumi-Shirakawa half day for travelers who want Kiyosumi Garden first, then one or two roaster or bakery stops at a slower pace.",
       lead: "Kiyosumi-Shirakawa gets better once the garden comes before the coffee scene rather than after it.",
       route: "Start with Kiyosumi Garden, then let one or two roaster, bakery, or gallery-adjacent stops carry the second half of the walk.",
@@ -893,7 +892,7 @@ const BASE_GUIDE_CONFIGS: Record<string, MinorGuideConfig> = {
     embedStart: 4,
     heroImage: { src: "/guide/kuramae-walk/kuramae-shrine.jpg", alt: "Kuramae Shrine in Tokyo", width: 1600, height: 1067, caption: "Kuramae works best when bridge views and small craft stops balance each other instead of competing.", creditLabel: "Photo: Kakidai / Wikimedia Commons (CC BY-SA 4.0)", creditUrl: "https://commons.wikimedia.org/wiki/File:Kuramae_Shrine_2021.jpg" },
     ja: {
-      title: "蔵前の橋景色とクラフト店街歩き 2026",
+      title: "蔵前の橋景色とクラフト店街歩き",
       description: "橋の景色と蔵前の小さなクラフト店をつなぐ、少し静かな東東京半日ルートのガイドです。",
       lead: "蔵前は店だけでなく、橋へ出たときに街の密度がほどけることで半日としての完成度が上がります。",
       route: "蔵前駅から入り、クラフト店や文具店を一つ二つ拾いながら、途中で橋の景色を必ず一回入れる構成が向いています。",
@@ -904,7 +903,7 @@ const BASE_GUIDE_CONFIGS: Record<string, MinorGuideConfig> = {
       timeNeeded: "3〜4時間",
     },
     en: {
-      title: "Kuramae Bridge and Craft Walk Guide 2026",
+      title: "Kuramae Bridge and Craft Walk Guide",
       description: "A lower-pressure Kuramae route for travelers who want small craft shops, stationery stops, and one or two bridge views in the same half day.",
       lead: "Kuramae becomes much stronger once the bridges are treated as part of the route logic instead of as quick photo breaks.",
       route: "Enter from Kuramae Station, take one or two craft or stationery stops, then use at least one bridge view to open the route back up.",
@@ -921,7 +920,7 @@ const BASE_GUIDE_CONFIGS: Record<string, MinorGuideConfig> = {
     embedStart: 0,
     heroImage: { src: "/guide/tokyo-tram-line-stops/toden-arakawa-asukayama.jpg", alt: "Toden tram near Asukayama in Tokyo", width: 1800, height: 1200, caption: "A good tram-line walk uses the streetcar to set the pace, not to turn the route into transit trivia.", creditLabel: "Photo: Kakidai / Wikimedia Commons (CC BY-SA 4.0)", creditUrl: "https://commons.wikimedia.org/wiki/File:Toden_Arakawa_Line_Asukayama_2023.jpg" },
     ja: {
-      title: "早稲田と面影橋の都電街歩きガイド 2026",
+      title: "早稲田と面影橋の都電街歩きガイド",
       description: "早稲田側から面影橋へかけて都電と街の速度を感じる、静かな東京半日ルートのガイドです。",
       lead: "都電沿線でも早稲田側は、停留場の近さと街の生活感が一体になって見えやすいエリアです。",
       route: "早稲田寄りから入り、停留場を一つか二つ区切りにしながら歩き、面影橋側で川や小さな休憩を入れる構成が扱いやすいです。",
@@ -932,7 +931,7 @@ const BASE_GUIDE_CONFIGS: Record<string, MinorGuideConfig> = {
       timeNeeded: "2.5〜3.5時間",
     },
     en: {
-      title: "Waseda and Omokagebashi Tram Walk Guide 2026",
+      title: "Waseda and Omokagebashi Tram Walk Guide",
       description: "A quieter Tokyo tram-line half day that links the Waseda side with Omokagebashi for travelers who want everyday streetcar atmosphere instead of a sightseeing checklist.",
       lead: "The Waseda side of the tram line works because the streetcar still feels embedded in ordinary neighborhood pace rather than separated from it.",
       route: "Start near Waseda, walk one or two stop-length segments, then let Omokagebashi-side river air or one short break close the route.",
@@ -949,7 +948,7 @@ const BASE_GUIDE_CONFIGS: Record<string, MinorGuideConfig> = {
     embedStart: 2,
     heroImage: { src: "/guide/quiet-tokyo-neighborhoods/kiyosumi-garden.jpg", alt: "A quiet green scene that fits a slower Tokyo morning", width: 1280, height: 960, caption: "A Kichijoji and Inokashira morning works when greenery and neighborhood streets carry more of the route than shopping intensity.", creditLabel: "Photo: Guilhem Vellut / Wikimedia Commons (CC BY 2.0)", creditUrl: "https://commons.wikimedia.org/wiki/File:Kiyosumi_Garden_(9224579199).jpg" },
     ja: {
-      title: "吉祥寺と井の頭公園の朝散歩ガイド 2026",
+      title: "吉祥寺と井の頭公園の朝散歩ガイド",
       description: "吉祥寺の路地と井の頭公園を朝の時間帯でつなぐ、外国人旅行者向けの実用的な半日街歩きガイドです。",
       lead: "吉祥寺と井の頭公園は、東京の西側で朝の空気を無理なく使える数少ない半日ルートです。",
       route: "吉祥寺駅南口側から入り、混み始める前の商店街や裏通りを短く見てから、井の頭公園へ抜ける形が最も扱いやすいです。",
@@ -960,7 +959,7 @@ const BASE_GUIDE_CONFIGS: Record<string, MinorGuideConfig> = {
       timeNeeded: "3〜4時間",
     },
     en: {
-      title: "Kichijoji and Inokashira Park Morning Walk 2026",
+      title: "Kichijoji and Inokashira Park Morning Walk",
       description: "A practical west-Tokyo morning route for foreign travelers who want Kichijoji side streets, Inokashira Park, and a slower local start.",
       lead: "Kichijoji and Inokashira Park are one of the easiest ways to use a Tokyo morning without forcing it into big-city density too early.",
       route: "Start from the south side of Kichijoji Station, use one or two quieter shopping or residential-adjacent lanes, then let Inokashira Park hold the second half.",
@@ -977,7 +976,7 @@ const BASE_GUIDE_CONFIGS: Record<string, MinorGuideConfig> = {
     embedStart: 1,
     heroImage: { src: "/guide/yanaka-nezu-sendagi-walk/nezu-shrine.jpg", alt: "A shrine-adjacent Tokyo scene that fits older lane walking", width: 1280, height: 853, caption: "Kagurazaka works best when the main slope becomes only an entry point and the quieter side lanes do the real work of the half day.", creditLabel: "Photo: Kakidai / Wikimedia Commons (CC BY-SA 4.0)", creditUrl: "https://commons.wikimedia.org/wiki/File:Nezu_Shrine_2020.jpg" },
     ja: {
-      title: "神楽坂の裏通りと路地歩きガイド 2026",
+      title: "神楽坂の裏通りと路地歩きガイド",
       description: "神楽坂通りの表通りだけで終わらせず、石畳の路地や神社まわりまで歩きたい人向けの半日ガイドです。",
       lead: "神楽坂は坂の表通りだけを見るより、一本入った路地や横丁に入って初めて街の輪郭が見えます。",
       route: "飯田橋寄りから上り、メインストリートは短く使い、石畳や寺社まわりの細い道へ何度か折れる構成が向いています。",
@@ -988,7 +987,7 @@ const BASE_GUIDE_CONFIGS: Record<string, MinorGuideConfig> = {
       timeNeeded: "3〜4時間",
     },
     en: {
-      title: "Kagurazaka Backstreets and Side-Lane Walk 2026",
+      title: "Kagurazaka Backstreets and Side-Lane Walk",
       description: "A practical Kagurazaka route for travelers who want stone lanes, shrine pauses, and older Tokyo side streets beyond the main slope.",
       lead: "Kagurazaka only becomes distinctive once you leave the main slope and begin reading the side lanes, stair steps, and stone-textured backstreets around it.",
       route: "Enter from the Iidabashi side, keep the main street brief, and use repeated turns into stone lanes, shrine-adjacent stretches, and smaller side streets.",
@@ -1005,7 +1004,7 @@ const BASE_GUIDE_CONFIGS: Record<string, MinorGuideConfig> = {
     embedStart: 5,
     heroImage: { src: "/guide/kuramae-walk/kuramae-shrine.jpg", alt: "A calmer central Tokyo street scene suitable for a bookstore walk", width: 1600, height: 1067, caption: "Jimbocho and nearby Kanda work when bookstores, coffee breaks, and quieter central blocks balance each other instead of competing.", creditLabel: "Photo: Kakidai / Wikimedia Commons (CC BY-SA 4.0)", creditUrl: "https://commons.wikimedia.org/wiki/File:Kuramae_Shrine_2021.jpg" },
     ja: {
-      title: "神保町と神田ブックタウン散歩ガイド 2026",
+      title: "神保町と神田ブックタウン散歩ガイド",
       description: "古書店、喫茶、静かな中央東京の街区を半日でつなぐ、神保町と神田の街歩きガイドです。",
       lead: "神保町と神田の良さは、本を買うことそのものよりも、本屋と喫茶の間をどう歩くかにあります。",
       route: "神保町駅側から入り、古書店街を軸にしながら、喫茶や裏通りを一つずつ挟んで神田寄りへつなぐ形が扱いやすいです。",
@@ -1016,7 +1015,7 @@ const BASE_GUIDE_CONFIGS: Record<string, MinorGuideConfig> = {
       timeNeeded: "3〜4時間",
     },
     en: {
-      title: "Jimbocho and Kanda Booktown Walk 2026",
+      title: "Jimbocho and Kanda Booktown Walk",
       description: "A practical booktown half day for travelers who want secondhand bookstores, cafe pauses, and calmer central Tokyo blocks.",
       lead: "Jimbocho and nearby Kanda work best when secondhand bookstores, coffee breaks, and short central-Tokyo transitions share the route instead of turning it into a shopping mission.",
       route: "Start near Jimbocho Station, let the bookshop streets set the first half, then add one cafe or quieter side-street transition toward the Kanda side.",
@@ -1033,7 +1032,7 @@ const BASE_GUIDE_CONFIGS: Record<string, MinorGuideConfig> = {
     embedStart: 0,
     heroImage: { src: "/guide/quiet-tokyo-neighborhoods/yanaka-street.jpg", alt: "A slower Tokyo side-street scene suited to neighborhood walking", width: 1280, height: 853, caption: "Nakameguro and Daikanyama improve once you step off the most photographed strips and let smaller streets control the pace.", creditLabel: "Photo: Alexkom000 / Wikimedia Commons (CC BY 4.0)", creditUrl: "https://commons.wikimedia.org/wiki/File:2024-10-20_Tokyo,_Yanaka_1.jpg" },
     ja: {
-      title: "中目黒と代官山の裏通りガイド 2026",
+      title: "中目黒と代官山の裏通りガイド",
       description: "目黒川の定番写真だけで終わらせず、中目黒と代官山の裏通りを静かに歩きたい人向けの半日ガイドです。",
       lead: "中目黒と代官山は、誰でも知る通りに留まるより、一本外れた通りを長めに歩いた方が街の質感が伝わります。",
       route: "中目黒駅側から始め、川沿いは短く使い、住宅寄りの道や小さな店が続く通りを通って代官山へ寄せる構成が向いています。",
@@ -1044,7 +1043,7 @@ const BASE_GUIDE_CONFIGS: Record<string, MinorGuideConfig> = {
       timeNeeded: "3〜4時間",
     },
     en: {
-      title: "Nakameguro and Daikanyama Side Streets 2026",
+      title: "Nakameguro and Daikanyama Side Streets",
       description: "A calmer Tokyo half day for travelers who want Nakameguro and Daikanyama beyond the most photographed river and shopping strips.",
       lead: "Nakameguro and Daikanyama get better once you leave the most photographed stretches and let smaller residential-adjacent streets carry more of the walk.",
       route: "Start near Nakameguro Station, keep the river section short, then use quieter lanes and small-shop streets as you drift toward Daikanyama.",
@@ -1061,7 +1060,7 @@ const BASE_GUIDE_CONFIGS: Record<string, MinorGuideConfig> = {
     embedStart: 2,
     heroImage: { src: "/guide/tokyo-tram-line-stops/toden-arakawa-asukayama.jpg", alt: "A retro-feeling Tokyo transit scene suited to an old-town day trip", width: 1800, height: 1200, caption: "Shibamata is strongest when transit, temple-town atmosphere, and river-edge pauses stay in one slow day instead of being over-programmed.", creditLabel: "Photo: Kakidai / Wikimedia Commons (CC BY-SA 4.0)", creditUrl: "https://commons.wikimedia.org/wiki/File:Toden_Arakawa_Line_Asukayama_2023.jpg" },
     ja: {
-      title: "柴又レトロ日帰りガイド 2026",
+      title: "柴又レトロ日帰りガイド",
       description: "帝釈天の参道、江戸川、水辺の空気をまとめて味わえる、柴又の実用的な半日から日帰りガイドです。",
       lead: "柴又は有名映画の舞台という説明だけでは足りず、参道と川辺の間をどうゆっくりつなぐかで印象が決まるエリアです。",
       route: "柴又駅から入り、帝釈天参道を最初の軸にしながら、山本亭や江戸川側の余白へ抜ける形がもっとも自然です。",
@@ -1072,7 +1071,7 @@ const BASE_GUIDE_CONFIGS: Record<string, MinorGuideConfig> = {
       timeNeeded: "4〜5時間",
     },
     en: {
-      title: "Shibamata Retro Day Trip from Central Tokyo 2026",
+      title: "Shibamata Retro Day Trip from Central Tokyo",
       description: "A practical retro Tokyo day trip for travelers who want temple approaches, river air, and a lower-rise old-Tokyo feel in Shibamata.",
       lead: "Shibamata is more than a film reference. The route becomes worthwhile once you connect the temple approach, lower-rise townscape, and Edogawa riverside calm into one readable outing.",
       route: "Enter from Shibamata Station, let the Taishakuten approach set the first half, then move outward toward Yamamoto-tei and the river edge for the slower second half.",
@@ -1089,7 +1088,7 @@ const BASE_GUIDE_CONFIGS: Record<string, MinorGuideConfig> = {
     embedStart: 5,
     heroImage: { src: "/guide/quiet-tokyo-neighborhoods/yanaka-street.jpg", alt: "A calm low-rise morning street in Tokyo", width: 1280, height: 853, caption: "Tokyo mornings get better when the route begins in a neighborhood that feels readable before the city fully accelerates.", creditLabel: "Photo: Alexkom000 / Wikimedia Commons (CC BY 4.0)", creditUrl: "https://commons.wikimedia.org/wiki/File:2024-10-20_Tokyo,_Yanaka_1.jpg" },
     ja: {
-      title: "東京の朝散歩ベストルートガイド 2026",
+      title: "東京の朝散歩ベストルートガイド",
       description: "外国人旅行者向けに、混雑前の東京を歩きやすい順番でまとめた、静かな朝散歩ガイドです。",
       lead: "東京の朝は、同じエリアでも昼とは別の都市に見えることがあります。",
       route: "谷中、根津、清澄白河、吉祥寺のように、朝の光と店の開き方が相性のよい地区を一つか二つだけ選び、朝食か喫茶を一回だけ挟む構成が最も扱いやすいです。",
@@ -1100,7 +1099,7 @@ const BASE_GUIDE_CONFIGS: Record<string, MinorGuideConfig> = {
       timeNeeded: "2.5〜4時間",
     },
     en: {
-      title: "Best Tokyo Morning Walks Guide 2026",
+      title: "Best Tokyo Morning Walks Guide",
       description: "A practical guide to Tokyo morning walks for foreign travelers who want calmer streets, early neighborhood rhythm, and a lower-pressure start to the day.",
       lead: "Tokyo in the morning can feel like a different city if you choose the right neighborhoods.",
       route: "Use one or two morning-friendly districts such as Yanaka, Nezu, Kiyosumi-Shirakawa, or Kichijoji, and structure the half day around one breakfast or coffee pause instead of a dense attraction list.",
@@ -1117,7 +1116,7 @@ const BASE_GUIDE_CONFIGS: Record<string, MinorGuideConfig> = {
     embedStart: 3,
     heroImage: { src: "/guide/tokyo-tram-line-stops/toden-arakawa-asukayama.jpg", alt: "A Tokyo streetcar scene near Asukayama", width: 1800, height: 1200, caption: "Transit-led half days work best when stations, tram stops, and short walks all keep the route flexible instead of overplanned.", creditLabel: "Photo: Kakidai / Wikimedia Commons (CC BY-SA 4.0)", creditUrl: "https://commons.wikimedia.org/wiki/File:Toden_Arakawa_Line_Asukayama_2023.jpg" },
     ja: {
-      title: "東京のローカル交通で回る半日ルート 2026",
+      title: "東京のローカル交通で回る半日ルート",
       description: "都電や駅近の静かな街区を使って、外国人旅行者が半日で回しやすい東京ルートをまとめたガイドです。",
       lead: "東京の移動は速さだけで組むより、街の速度が見えるローカル交通を軸にした方が半日の完成度が上がることがあります。",
       route: "王子、飛鳥山、町屋、蔵前、門前仲町のように、駅と街区の境目が読みやすいエリアを一つか二つ選び、乗る区間と歩く区間を短く交互に入れる構成が向いています。",
@@ -1128,7 +1127,7 @@ const BASE_GUIDE_CONFIGS: Record<string, MinorGuideConfig> = {
       timeNeeded: "3〜4.5時間",
     },
     en: {
-      title: "Local Transit-Led Tokyo Half-Day Routes 2026",
+      title: "Local Transit-Led Tokyo Half-Day Routes",
       description: "A Tokyo guide for foreign travelers who want quieter half days shaped by local transit, short walks, and neighborhoods that stay legible on the move.",
       lead: "Some Tokyo half days improve once local transit becomes part of the rhythm instead of just a hidden logistics layer.",
       route: "Choose one or two areas where stations, tram stops, or compact rail links stay close to the street texture, then alternate short rides with short walks rather than forcing a purely walking or purely rail-based version.",
@@ -1145,7 +1144,7 @@ const BASE_GUIDE_CONFIGS: Record<string, MinorGuideConfig> = {
     embedStart: 4,
     heroImage: commonsImage("File:Kiyosumi Garden (9224579199).jpg", "https://upload.wikimedia.org/wikipedia/commons/3/30/Kiyosumi_Garden_%289224579199%29.jpg", 1280, 960, "A quiet waterside scene in east Tokyo", "Tokyo waterfront half days get stronger when they combine water, green space, and short neighborhood transitions."),
     ja: {
-      title: "東京の水辺をゆっくり歩く半日ルート 2026",
+      title: "東京の水辺をゆっくり歩く半日ルート",
       description: "清澄白河や東東京の水辺を中心に、外国人旅行者が無理なく歩ける静かな半日ルートをまとめたガイドです。",
       lead: "東京の水辺は、派手な夜景よりも、昼の余白として使う方が旅程に入れやすいことが多いです。",
       route: "清澄白河、門前仲町、蔵前のように川や運河と街区が短い距離で切り替わるエリアを一つか二つつなぎ、橋や庭園の滞在は短めに、休憩は一回に絞ると安定します。",
@@ -1156,7 +1155,7 @@ const BASE_GUIDE_CONFIGS: Record<string, MinorGuideConfig> = {
       timeNeeded: "3〜4時間",
     },
     en: {
-      title: "Tokyo Waterfront and Slow Route Guide 2026",
+      title: "Tokyo Waterfront and Slow Route Guide",
       description: "A calmer Tokyo half day built around waterfront edges, bridges, garden pauses, and east-side neighborhoods that are easier to absorb at a slower pace.",
       lead: "Tokyo’s waterfront is often better as a daytime breathing-space route than as a headline skyline exercise.",
       route: "Link one or two areas where canals, river edges, gardens, and neighborhood blocks sit close together, then keep bridge time selective and let one indoor or seated pause stabilize the half day.",
@@ -1173,7 +1172,7 @@ const BASE_GUIDE_CONFIGS: Record<string, MinorGuideConfig> = {
     embedStart: 6,
     heroImage: { src: "/guide/yanaka-nezu-sendagi-walk/nezu-shrine.jpg", alt: "Nezu Shrine and greenery in old Tokyo", width: 1280, height: 853, caption: "Old-town Tokyo works best when shrine slopes, temple edges, and quieter lanes are read as one continuous half day.", creditLabel: "Photo: Kakidai / Wikimedia Commons (CC BY-SA 4.0)", creditUrl: "https://commons.wikimedia.org/wiki/File:Nezu_Shrine_2020.jpg" },
     ja: {
-      title: "東京の下町と坂まわり街歩きガイド 2026",
+      title: "東京の下町と坂まわり街歩きガイド",
       description: "谷中、根津、神楽坂のような、下町と坂の空気が残る東京を半日で歩くための実用ガイドです。",
       lead: "東京の“古さ”は建物単体より、坂、寺町、神社、低い街並みが連続して見える時にいちばん伝わります。",
       route: "谷中、根津、千駄木、神楽坂のように、高低差が少しありながら街区が歩きやすいエリアを一つか二つ選び、坂の上と下で休憩位置を変える構成が使いやすいです。",
@@ -1184,7 +1183,7 @@ const BASE_GUIDE_CONFIGS: Record<string, MinorGuideConfig> = {
       timeNeeded: "3〜4時間",
     },
     en: {
-      title: "Tokyo Old-Town and Hillside Walk Guide 2026",
+      title: "Tokyo Old-Town and Hillside Walk Guide",
       description: "A practical Tokyo guide for travelers who want older streets, shrine edges, slight elevation change, and neighborhoods that still feel slower and more layered.",
       lead: "Old Tokyo is easiest to feel when shrine space, hillside turns, temple-adjacent lanes, and lower-rise streets stay in one readable sequence.",
       route: "Use one or two neighborhoods such as Yanaka, Nezu, Sendagi, or Kagurazaka where slight elevation change and older street texture help the walk feel layered without becoming difficult.",
@@ -1201,7 +1200,7 @@ const BASE_GUIDE_CONFIGS: Record<string, MinorGuideConfig> = {
     embedStart: 4,
     heroImage: { src: "/guide/kuramae-walk/kuramae-shrine.jpg", alt: "Kuramae Shrine near a station-based Tokyo route", width: 1600, height: 1067, caption: "Station-based Tokyo routes work when one or two exits lead directly into a neighborhood that is usable even on a short stay.", creditLabel: "Photo: Kakidai / Wikimedia Commons (CC BY-SA 4.0)", creditUrl: "https://commons.wikimedia.org/wiki/File:Kuramae_Shrine_2021.jpg" },
     ja: {
-      title: "東京の駅起点で回る短時間街歩き 2026",
+      title: "東京の駅起点で回る短時間街歩き",
       description: "短い滞在や移動の合間でも使いやすい、駅起点の東京半日ルートを外国人旅行者向けにまとめたガイドです。",
       lead: "東京の短時間街歩きは、名所の数より“駅を出てすぐ半日が始まるか”で使いやすさが決まります。",
       route: "蔵前、清澄白河、根津、吉祥寺のように、駅出口から街区の空気へ切り替わるのが早いエリアを一つか二つ選び、ホテル移動や新幹線・空港アクセスの前後へ差し込む構成が向いています。",
@@ -1212,7 +1211,7 @@ const BASE_GUIDE_CONFIGS: Record<string, MinorGuideConfig> = {
       timeNeeded: "2〜3.5時間",
     },
     en: {
-      title: "Station-Based Tokyo Walks for Short Stays 2026",
+      title: "Station-Based Tokyo Walks for Short Stays",
       description: "A practical Tokyo guide for foreign travelers who want short-stay neighborhood walks that start close to stations and stay easy to shorten or exit cleanly.",
       lead: "Short-stay Tokyo routes work best when the half day begins almost immediately after you leave the station.",
       route: "Choose one or two neighborhoods where the station exit gives way to a usable street atmosphere within minutes, making the route easy to slot before check-in, after check-out, or between longer transfers.",
@@ -1240,10 +1239,12 @@ const GUIDE_CONFIGS = Object.fromEntries(
         ja: {
           ...config.ja,
           ...override.ja,
+          ...(MINOR_GUIDE_ENRICHMENTS[slug]?.ja ?? {}),
         },
         en: {
           ...config.en,
           ...override.en,
+          ...(MINOR_GUIDE_ENRICHMENTS[slug]?.en ?? {}),
         },
       },
     ];
@@ -1302,6 +1303,40 @@ function localizeGallery(locale: GuideLocale, gallery: GuideMediaImage[]) {
   }));
 }
 
+function buildNeighborhoodSections(locale: "ja" | "en", config: MinorGuideLocaleConfig) {
+  const sections: { heading: string; body: string }[] = [];
+
+  if (config.neighborhoodCharacter) {
+    sections.push({
+      heading: locale === "ja" ? "この街区がほかと違う理由" : "What makes this district different",
+      body: config.neighborhoodCharacter,
+    });
+  }
+
+  if (config.concreteRoute || config.namedStops?.length) {
+    const stopsBlock = config.namedStops?.length
+      ? "\n\n" +
+        (locale === "ja"
+          ? "立ち寄り候補:\n"
+          : "Recommended anchors along the way:\n") +
+        config.namedStops.map((stop) => `- ${stop.name} — ${stop.note}`).join("\n")
+      : "";
+    sections.push({
+      heading: locale === "ja" ? "歩く順番と立ち寄り候補" : "Suggested route and named anchors",
+      body: `${config.concreteRoute ?? ""}${stopsBlock}`.trim(),
+    });
+  }
+
+  if (config.localMistakes) {
+    sections.push({
+      heading: locale === "ja" ? "現地で見落としやすい注意点" : "Local mistakes worth avoiding",
+      body: config.localMistakes,
+    });
+  }
+
+  return sections;
+}
+
 function buildSections(
   locale: "ja" | "en",
   config: MinorGuideLocaleConfig,
@@ -1311,9 +1346,11 @@ function buildSections(
   const copy = getGuideCopy(guideConfig);
   const xLabels = joinList(locale, embeds.map((embed) => embed.label ?? "X"));
   const photoFocus = getPhotoFocus(locale, guideConfig);
+  const customSections = buildNeighborhoodSections(locale, config);
 
   if (locale === "ja") {
     return [
+      ...customSections,
       {
         heading: "このルートで見るべき東京",
         body:
@@ -1369,6 +1406,7 @@ function buildSections(
   }
 
   return [
+    ...customSections,
     {
       heading: "What this route is actually good at",
       body:
@@ -1424,9 +1462,11 @@ function buildSections(
 
 function buildFaq(locale: "ja" | "en", config: MinorGuideLocaleConfig, guideConfig: MinorGuideConfig) {
   const copy = getGuideCopy(guideConfig);
+  const extras = config.extraFaqs ?? [];
 
   if (locale === "ja") {
     return [
+      ...extras,
       {
         q: "このルートは初めての東京旅行でも使えますか？",
         a: `${config.bestFor} であれば十分使えます。むしろ定番観光の密度に疲れやすい人ほど相性がよく、最初から無理に数を回収しない方が満足度が上がります。`,
@@ -1451,6 +1491,7 @@ function buildFaq(locale: "ja" | "en", config: MinorGuideLocaleConfig, guideConf
   }
 
   return [
+    ...extras,
     {
       q: "Does this route work for a first Tokyo trip?",
       a: `Yes, especially for ${config.bestFor}. It is often better for first-time visitors who want a calmer half day than for travelers trying to maximize big-name sightseeing density.`,
@@ -1627,4 +1668,5 @@ export const MINOR_TRAVEL_GUIDE_CONTENT: Record<string, Partial<Record<GuideLoca
       ]),
     ),
     ...CUSTOM_MINOR_TRAVEL_GUIDE_CONTENT,
+    ...JAPAN_MINOR_TRAVEL_GUIDE_CONTENT,
   };

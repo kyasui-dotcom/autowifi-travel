@@ -1,7 +1,12 @@
 import React from 'react';
 import { getBaseUrl, getDefaultOgImageUrl } from '@/lib/seo';
 
-const DEFAULT_PRICE_VALID_UNTIL = '2027-12-31';
+function getDefaultPriceValidUntil(): string {
+  // Dynamically set to ~1 year from today so Rich Results stays valid
+  const d = new Date();
+  d.setFullYear(d.getFullYear() + 1);
+  return d.toISOString().slice(0, 10);
+}
 
 // ── Generic renderer ────────────────────────────────────────
 
@@ -57,7 +62,7 @@ export function ProductJsonLd({
   const baseUrl = getBaseUrl();
   const normalizedImage = image ?? getDefaultOgImageUrl(baseUrl);
   const resolvedBrand = brand ?? seller ?? 'AutoWiFi Travel';
-  const resolvedPriceValidUntil = priceValidUntil ?? DEFAULT_PRICE_VALID_UNTIL;
+  const resolvedPriceValidUntil = priceValidUntil ?? getDefaultPriceValidUntil();
 
   const data: Record<string, unknown> = {
     '@context': 'https://schema.org',

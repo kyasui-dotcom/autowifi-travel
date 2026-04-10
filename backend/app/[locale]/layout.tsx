@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import Script from "next/script";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -7,7 +7,6 @@ import { OrganizationJsonLd } from "@/lib/components/JsonLd";
 import styles from "./layout.module.css";
 
 const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
-const GSC_VERIFICATION = process.env.NEXT_PUBLIC_GSC_VERIFICATION;
 
 const SUPPORTED_LOCALES = ["en", "ja", "ko", "zh"] as const;
 type Locale = (typeof SUPPORTED_LOCALES)[number];
@@ -24,6 +23,12 @@ const NAV_LABELS: Record<Locale, { home: string; esim: string; app: string; guid
   ja: { home: "ホーム", esim: "eSIMプラン", app: "WiFiアプリ", guide: "ガイド", brandDescription: "200以上の国と地域で使えるお手頃なトラベルeSIM。どこでもつながる。" },
   ko: { home: "홈", esim: "eSIM 플랜", app: "WiFi 앱", guide: "가이드", brandDescription: "200개 이상의 국가에서 사용 가능한 여행용 eSIM. 어디서나 연결." },
   zh: { home: "首页", esim: "eSIM套餐", app: "WiFi应用", guide: "指南", brandDescription: "覆盖200多个国家的旅行eSIM。随时随地保持连接。" },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#0b1220",
 };
 
 export async function generateMetadata({
@@ -145,42 +150,35 @@ export default async function LocaleLayout({
   const validLocale = locale as Locale;
 
   return (
-    <html lang={validLocale}>
-      <head>
-        {GSC_VERIFICATION && (
-          <meta name="google-site-verification" content={GSC_VERIFICATION} />
-        )}
-        <link rel="preconnect" href="https://www.googletagmanager.com" />
-        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
-      </head>
-      <body>
-        <OrganizationJsonLd />
-        <div className={styles.pageWrapper}>
-          <Header locale={validLocale} />
-          <main className={styles.main}>{children}</main>
-          <Footer locale={validLocale} />
-        </div>
+    <>
+      <link rel="preconnect" href="https://www.googletagmanager.com" />
+      <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+      <OrganizationJsonLd />
+      <div className={styles.pageWrapper}>
+        <Header locale={validLocale} />
+        <main className={styles.main}>{children}</main>
+        <Footer locale={validLocale} />
+      </div>
 
-        {/* Google Analytics (GA4) */}
-        {GA_MEASUREMENT_ID && (
-          <>
-            <Script
-              src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
-              strategy="afterInteractive"
-            />
-            <Script id="ga4-init" strategy="afterInteractive">
-              {`
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-                gtag('config', '${GA_MEASUREMENT_ID}', {
-                  page_path: window.location.pathname,
-                });
-              `}
-            </Script>
-          </>
-        )}
-      </body>
-    </html>
+      {/* Google Analytics (GA4) */}
+      {GA_MEASUREMENT_ID && (
+        <>
+          <Script
+            src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+            strategy="afterInteractive"
+          />
+          <Script id="ga4-init" strategy="afterInteractive">
+            {`
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', '${GA_MEASUREMENT_ID}', {
+                page_path: window.location.pathname,
+              });
+            `}
+          </Script>
+        </>
+      )}
+    </>
   );
 }

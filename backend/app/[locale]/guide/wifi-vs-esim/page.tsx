@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArticleJsonLd, BreadcrumbJsonLd, FaqJsonLd } from "@/lib/components/JsonLd";
+import ContentTrustPanel from "@/lib/components/ContentTrustPanel";
 import { generatePageMetadata, getBaseUrl, getDefaultOgImageUrl } from "@/lib/seo";
 import styles from "./page.module.css";
 
@@ -57,7 +58,7 @@ const CONTENT: Record<Locale, PageContent> = {
   ja: {
     title: "モバイルWiFi vs eSIM - 海外旅行のネット接続を徹底比較",
     subtitle: "どっちがお得？あなたに合った海外通信手段がわかる",
-    intro: "海外旅行でインターネットに接続する方法として、従来のモバイルWiFi（ポケットWiFi）とeSIMが人気です。それぞれの特徴、料金、使いやすさを比較して、あなたに最適な方法を見つけましょう。",
+    intro: "海外旅行でインターネットに接続する方法として、従来のモバイルWiFi（ポケットWiFi）とeSIMが人気です。本記事では料金・受け取り・荷物・バッテリー・同時接続台数など11項目の比較表、両者のメリット・デメリット、旅行スタイル別のおすすめ、よくある質問までを2026年時点の相場に基づいて解説します。一人旅・グループ旅行・ビジネス出張まで、あなたに最適な海外通信手段が判断できるようになります。",
     whatIsWifiTitle: "モバイルWiFi（ポケットWiFi）とは？",
     whatIsWifiDesc: "モバイルWiFiは、小型のルーター端末を持ち歩き、そのWiFi電波を通じてスマートフォンやパソコンをインターネットに接続するサービスです。空港でレンタルして、帰国時に返却するのが一般的な利用方法です。複数台同時接続が可能で、グループ旅行では1台で全員が使えるメリットがあります。",
     whatIsEsimTitle: "eSIMとは？",
@@ -434,7 +435,7 @@ export default async function WifiVsEsimPage({
         image={articleImageUrl}
         locale={loc}
         datePublished="2026-03-13"
-        dateModified="2026-03-13"
+        dateModified={new Date().toISOString().slice(0, 10)}
       />
       <FaqJsonLd items={c.faqs.map((faq) => ({ question: faq.q, answer: faq.a }))} />
       <BreadcrumbJsonLd
@@ -459,6 +460,20 @@ export default async function WifiVsEsimPage({
         <h1 className={styles.heroTitle}>{c.title}</h1>
         <p className={styles.heroSubtitle}>{c.subtitle}</p>
       </header>
+
+      <ContentTrustPanel locale={loc} updatedAt={new Date().toISOString().slice(0, 10)} />
+
+      <section className={styles.section}>
+        <h2 className={styles.sectionTitle}>
+          {loc === "ja" ? "出典・参考資料" : loc === "ko" ? "출처 및 참고 자료" : loc === "zh" ? "来源与参考资料" : "Sources & References"}
+        </h2>
+        <ul style={{ paddingLeft: "1.25rem", lineHeight: 1.8 }}>
+          <li><a href="https://www.speedtest.net/global-index" target="_blank" rel="noopener nofollow">Ookla Speedtest Global Index</a></li>
+          <li><a href="https://www.gsma.com/esim/" target="_blank" rel="noopener nofollow">GSMA — eSIM</a></li>
+          <li><a href="https://support.apple.com/HT212780" target="_blank" rel="noopener nofollow">Apple Support — eSIM</a></li>
+          <li><a href="https://support.google.com/android/answer/9337176" target="_blank" rel="noopener nofollow">Google Support — Android eSIM</a></li>
+        </ul>
+      </section>
 
       {/* Intro */}
       <section className={styles.section}>

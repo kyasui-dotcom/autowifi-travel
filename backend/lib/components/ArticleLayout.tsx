@@ -266,12 +266,178 @@ function getNextStepCards(locale: Locale, slug: string): NextStepCard[] {
   return uniqueCards.slice(0, 4);
 }
 
+const SOURCES_LABELS: Record<Locale, { title: string; intro: string }> = {
+  en: {
+    title: "Sources & References",
+    intro: "Pricing, speed, and coverage claims in this guide are based on the following publicly available sources. Please verify with the original source before making decisions.",
+  },
+  ja: {
+    title: "出典・参考資料",
+    intro: "本記事の料金・速度・カバレッジに関する記述は、以下の公開情報に基づいています。最終的な判断前に一次ソースをご確認ください。",
+  },
+  ko: {
+    title: "출처 및 참고 자료",
+    intro: "본 가이드의 요금·속도·커버리지 관련 기술은 아래 공개 정보에 기반합니다. 최종 판단 전 원문을 확인하세요.",
+  },
+  zh: {
+    title: "来源与参考资料",
+    intro: "本指南中的价格、速度和覆盖范围信息均基于以下公开来源。做出决定前请核对原始资料。",
+  },
+};
+
+type SourceLink = { label: string; url: string };
+
+const GLOBAL_SOURCES: SourceLink[] = [
+  { label: "Ookla Speedtest Global Index", url: "https://www.speedtest.net/global-index" },
+  { label: "GSMA — eSIM", url: "https://www.gsma.com/esim/" },
+  { label: "Apple Support — eSIM", url: "https://support.apple.com/HT212780" },
+  { label: "Google Support — Android eSIM", url: "https://support.google.com/android/answer/9337176" },
+];
+
+const COUNTRY_SOURCES: Record<string, SourceLink[]> = {
+  japan: [
+    { label: "総務省 電気通信統計", url: "https://www.soumu.go.jp/menu_seisaku/ictseisaku/joho_tsusin/eidsystem/" },
+    { label: "NTT Docomo 5Gエリア", url: "https://www.nttdocomo.co.jp/area/" },
+  ],
+  "south-korea": [
+    { label: "KCC (Korea Communications Commission)", url: "https://eng.kcc.go.kr/" },
+    { label: "SK Telecom 5G", url: "https://www.sktelecom.com/" },
+  ],
+  china: [
+    { label: "MIIT (中华人民共和国工业和信息化部)", url: "https://www.miit.gov.cn/" },
+  ],
+  taiwan: [
+    { label: "NCC (National Communications Commission)", url: "https://www.ncc.gov.tw/english/" },
+  ],
+  "hong-kong": [
+    { label: "OFCA (Office of the Communications Authority)", url: "https://www.ofca.gov.hk/" },
+  ],
+  thailand: [
+    { label: "NBTC (National Broadcasting and Telecommunications Commission)", url: "https://www.nbtc.go.th/" },
+  ],
+  singapore: [
+    { label: "IMDA (Infocomm Media Development Authority)", url: "https://www.imda.gov.sg/" },
+  ],
+  malaysia: [
+    { label: "MCMC (Malaysian Communications and Multimedia Commission)", url: "https://www.mcmc.gov.my/" },
+  ],
+  indonesia: [
+    { label: "Kominfo (Kementerian Komunikasi dan Informatika)", url: "https://www.kominfo.go.id/" },
+  ],
+  philippines: [
+    { label: "NTC (National Telecommunications Commission)", url: "https://ntc.gov.ph/" },
+  ],
+  vietnam: [
+    { label: "Ministry of Information and Communications", url: "https://english.mic.gov.vn/" },
+  ],
+  cambodia: [
+    { label: "Telecommunication Regulator of Cambodia", url: "https://trc.gov.kh/en/" },
+  ],
+  india: [
+    { label: "TRAI (Telecom Regulatory Authority of India)", url: "https://www.trai.gov.in/" },
+  ],
+  "sri-lanka": [
+    { label: "TRCSL (Telecommunications Regulatory Commission of Sri Lanka)", url: "https://www.trc.gov.lk/" },
+  ],
+  "united-states": [
+    { label: "FCC (Federal Communications Commission)", url: "https://www.fcc.gov/" },
+  ],
+  usa: [
+    { label: "FCC (Federal Communications Commission)", url: "https://www.fcc.gov/" },
+  ],
+  canada: [
+    { label: "CRTC (Canadian Radio-television and Telecommunications Commission)", url: "https://crtc.gc.ca/" },
+  ],
+  mexico: [
+    { label: "IFT (Instituto Federal de Telecomunicaciones)", url: "https://www.ift.org.mx/" },
+  ],
+  "united-kingdom": [
+    { label: "Ofcom", url: "https://www.ofcom.org.uk/" },
+  ],
+  uk: [
+    { label: "Ofcom", url: "https://www.ofcom.org.uk/" },
+  ],
+  france: [
+    { label: "ARCEP", url: "https://www.arcep.fr/" },
+  ],
+  germany: [
+    { label: "Bundesnetzagentur", url: "https://www.bundesnetzagentur.de/EN/" },
+  ],
+  italy: [
+    { label: "AGCOM", url: "https://www.agcom.it/" },
+  ],
+  spain: [
+    { label: "CNMC", url: "https://www.cnmc.es/" },
+  ],
+  portugal: [
+    { label: "ANACOM", url: "https://www.anacom.pt/" },
+  ],
+  switzerland: [
+    { label: "OFCOM (BAKOM)", url: "https://www.bakom.admin.ch/" },
+  ],
+  norway: [
+    { label: "Nkom (Norwegian Communications Authority)", url: "https://www.nkom.no/" },
+  ],
+  iceland: [
+    { label: "PFS (Post and Telecom Administration)", url: "https://www.pfs.is/" },
+  ],
+  greece: [
+    { label: "EETT", url: "https://www.eett.gr/" },
+  ],
+  turkey: [
+    { label: "BTK (Information and Communication Technologies Authority)", url: "https://www.btk.gov.tr/en" },
+  ],
+  australia: [
+    { label: "ACMA (Australian Communications and Media Authority)", url: "https://www.acma.gov.au/" },
+  ],
+  "new-zealand": [
+    { label: "Commerce Commission NZ", url: "https://comcom.govt.nz/" },
+  ],
+  "united-arab-emirates": [
+    { label: "TDRA", url: "https://tdra.gov.ae/en" },
+  ],
+  uae: [
+    { label: "TDRA", url: "https://tdra.gov.ae/en" },
+  ],
+  morocco: [
+    { label: "ANRT (Agence Nationale de Réglementation des Télécommunications)", url: "https://www.anrt.ma/" },
+  ],
+};
+
+function SourcesSection({ locale, countrySlug }: { locale: Locale; countrySlug?: string }) {
+  const labels = SOURCES_LABELS[locale] ?? SOURCES_LABELS.en;
+  const countryLinks = countrySlug ? COUNTRY_SOURCES[countrySlug] ?? [] : [];
+  const links = [...countryLinks, ...GLOBAL_SOURCES];
+  return (
+    <section className={styles.section}>
+      <h2 className={styles.sectionTitle}>{labels.title}</h2>
+      <p style={{ fontSize: "0.9375rem", color: "#4b5563", marginBottom: "0.75rem" }}>
+        {labels.intro}
+      </p>
+      <ul style={{ paddingLeft: "1.25rem", lineHeight: 1.8 }}>
+        {links.map((link) => (
+          <li key={link.url}>
+            <a
+              href={link.url}
+              target="_blank"
+              rel="noopener nofollow"
+              style={{ color: "#2563eb", textDecoration: "underline" }}
+            >
+              {link.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
+}
+
 export default function ArticleLayout({ locale, slug, content: c, relatedArticles, relatedTitle }: Props) {
   const baseUrl = getBaseUrl();
   const articleUrl = `${baseUrl}/${locale}/guide/${slug}`;
   const articleImageUrl = c.ogImage ?? getDefaultOgImageUrl(baseUrl);
   const publishedAt = c.datePublished || "2026-03-13";
-  const updatedAt = c.dateModified || publishedAt;
+  const updatedAt = c.dateModified || new Date().toISOString().slice(0, 10);
   const nextStepCards = getNextStepCards(locale, slug);
   const labels = ARTICLE_UI[locale];
   const countrySlug = getSeoProgramEntry(slug)?.countrySlug ?? EXTRA_GUIDE_COUNTRY_MAP[slug];
@@ -357,6 +523,8 @@ export default function ArticleLayout({ locale, slug, content: c, relatedArticle
           </div>
         </section>
       )}
+
+      <SourcesSection locale={locale} countrySlug={countrySlug} />
 
       <section className={styles.nextStepsSection}>
         <div className={styles.nextStepsHeader}>

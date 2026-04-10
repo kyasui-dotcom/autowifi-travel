@@ -24,6 +24,11 @@ type MinorGuideLocaleConfig = {
   avoid: string;
   extension: string;
   timeNeeded: string;
+  neighborhoodCharacter?: string;
+  concreteRoute?: string;
+  namedStops?: { name: string; note: string }[];
+  localMistakes?: string;
+  extraFaqs?: { q: string; a: string }[];
 };
 
 export type MinorGuideConfigOverride = {
@@ -104,12 +109,12 @@ const GENERIC_TOKYO_WALK_X: Partial<Record<GuideLocale, GuideXEmbed[]>> = {
   ja: [
     { url: "https://x.com/GOTOKYOofficial/status/2028696875835199524", label: "GO TOKYO公式: 江戸の層を感じる東京散歩の参考" },
     { url: "https://x.com/GOTOKYOofficial/status/1418012925713784834", label: "GO TOKYO公式: 静かな東京の朝歩きの参考" },
-    { url: "https://nitter.net/bunkyo_tokyo/status/2040595277674152282#m", label: "文京区公式: 東京の街歩き温度に近い参考投稿" },
+    { url: "https://x.com/bunkyo_tokyo/status/2040595277674152282", label: "文京区公式: 東京の街歩き温度に近い参考投稿" },
   ],
   en: [
     { url: "https://x.com/GOTOKYOofficial/status/2028696875835199524", label: "GO TOKYO: an older-Tokyo walking reference" },
     { url: "https://x.com/GOTOKYOofficial/status/1418012925713784834", label: "GO TOKYO: a quieter Tokyo morning reference" },
-    { url: "https://nitter.net/bunkyo_tokyo/status/2040595277674152282#m", label: "Bunkyo ward: a useful Tokyo neighborhood-walk reference" },
+    { url: "https://x.com/bunkyo_tokyo/status/2040595277674152282", label: "Bunkyo ward: a useful Tokyo neighborhood-walk reference" },
   ],
 };
 
@@ -406,14 +411,14 @@ const KICHIJOJI_INOKASHIRA_IMAGES = [
 
 const KICHIJOJI_INOKASHIRA_X: Partial<Record<GuideLocale, GuideXEmbed[]>> = {
   ja: [
-    { url: "https://nitter.net/InokashiraZoo/status/2041326677683482913#m", label: "井の頭文化園: 井の頭まわりの朝の空気感" },
-    { url: "https://nitter.net/InokashiraZoo/status/2040950255936819327#m", label: "井の頭文化園: 朝に立ち寄りやすい園内の様子" },
-    { url: "https://nitter.net/InokashiraZoo/status/2040313390988685326#m", label: "井の頭文化園: 春の井の頭エリアの参考投稿" },
+    { url: "https://x.com/InokashiraZoo/status/2041326677683482913", label: "井の頭文化園: 井の頭まわりの朝の空気感" },
+    { url: "https://x.com/InokashiraZoo/status/2040950255936819327", label: "井の頭文化園: 朝に立ち寄りやすい園内の様子" },
+    { url: "https://x.com/InokashiraZoo/status/2040313390988685326", label: "井の頭文化園: 春の井の頭エリアの参考投稿" },
   ],
   en: [
-    { url: "https://nitter.net/InokashiraZoo/status/2041326677683482913#m", label: "Inokashira Zoo: a morning reference close to the park" },
-    { url: "https://nitter.net/InokashiraZoo/status/2040950255936819327#m", label: "Inokashira Zoo: an early-day park-area reference" },
-    { url: "https://nitter.net/InokashiraZoo/status/2040313390988685326#m", label: "Inokashira Zoo: a seasonal reference for the park side of the route" },
+    { url: "https://x.com/InokashiraZoo/status/2041326677683482913", label: "Inokashira Zoo: a morning reference close to the park" },
+    { url: "https://x.com/InokashiraZoo/status/2040950255936819327", label: "Inokashira Zoo: an early-day park-area reference" },
+    { url: "https://x.com/InokashiraZoo/status/2040313390988685326", label: "Inokashira Zoo: a seasonal reference for the park side of the route" },
   ],
 };
 
@@ -471,14 +476,14 @@ const NAKAMEGURO_DAIKANYAMA_IMAGES = [
 
 const NAKAMEGURO_DAIKANYAMA_X: Partial<Record<GuideLocale, GuideXEmbed[]>> = {
   ja: [
-    { url: "https://nitter.net/meguro_city/status/2041395548264304983#m", label: "目黒区: 中目黒の街歩き寄りの最新参考" },
-    { url: "https://nitter.net/meguro_city/status/2038858833674854524#m", label: "目黒区: 中目黒スクエア周辺の参考投稿" },
-    { url: "https://nitter.net/DAIKANYAMATSITE/status/2039540101487943898#m", label: "代官山 蔦屋書店: 代官山側の最新動き" },
+    { url: "https://x.com/meguro_city/status/2041395548264304983", label: "目黒区: 中目黒の街歩き寄りの最新参考" },
+    { url: "https://x.com/meguro_city/status/2038858833674854524", label: "目黒区: 中目黒スクエア周辺の参考投稿" },
+    { url: "https://x.com/DAIKANYAMATSITE/status/2039540101487943898", label: "代官山 蔦屋書店: 代官山側の最新動き" },
   ],
   en: [
-    { url: "https://nitter.net/meguro_city/status/2041395548264304983#m", label: "Meguro city: a current Nakameguro street reference" },
-    { url: "https://nitter.net/meguro_city/status/2038858833674854524#m", label: "Meguro city: a local Nakameguro area update" },
-    { url: "https://nitter.net/DAIKANYAMATSITE/status/2039540101487943898#m", label: "Daikanyama T-Site: a Daikanyama-side neighborhood reference" },
+    { url: "https://x.com/meguro_city/status/2041395548264304983", label: "Meguro city: a current Nakameguro street reference" },
+    { url: "https://x.com/meguro_city/status/2038858833674854524", label: "Meguro city: a local Nakameguro area update" },
+    { url: "https://x.com/DAIKANYAMATSITE/status/2039540101487943898", label: "Daikanyama T-Site: a Daikanyama-side neighborhood reference" },
   ],
 };
 
@@ -885,156 +890,156 @@ const STATION_BASED_SHORT_STAY_IMAGES = [
 const UENO_YANAKA_X: Partial<Record<GuideLocale, GuideXEmbed[]>> = {
   ja: [
     { url: "https://x.com/GOTOKYOofficial/status/1418012925713784834", label: "GO TOKYO公式: 上野側から静かな東京へ入る朝の参考" },
-    { url: "https://nitter.net/uenotoshogu/status/2040216484417573116#m", label: "上野東照宮: 上野側の立ち寄り参考" },
-    { url: "https://nitter.net/bunkyo_tokyo/status/2040595277674152282#m", label: "文京区公式: 根津・谷根千へつながる街歩き温度の参考" },
+    { url: "https://x.com/uenotoshogu/status/2040216484417573116", label: "上野東照宮: 上野側の立ち寄り参考" },
+    { url: "https://x.com/bunkyo_tokyo/status/2040595277674152282", label: "文京区公式: 根津・谷根千へつながる街歩き温度の参考" },
   ],
   en: [
     { url: "https://x.com/GOTOKYOofficial/status/1418012925713784834", label: "GO TOKYO: an early-morning Ueno-side reference" },
-    { url: "https://nitter.net/uenotoshogu/status/2040216484417573116#m", label: "Ueno Toshogu: a Ueno-side stop that pairs well with the walk" },
-    { url: "https://nitter.net/bunkyo_tokyo/status/2040595277674152282#m", label: "Bunkyo ward: a neighborhood-walk reference that fits the Yanaka side" },
+    { url: "https://x.com/uenotoshogu/status/2040216484417573116", label: "Ueno Toshogu: a Ueno-side stop that pairs well with the walk" },
+    { url: "https://x.com/bunkyo_tokyo/status/2040595277674152282", label: "Bunkyo ward: a neighborhood-walk reference that fits the Yanaka side" },
   ],
 };
 
 const NEZU_SENDAGI_X: Partial<Record<GuideLocale, GuideXEmbed[]>> = {
   ja: [
-    { url: "https://nitter.net/NedujinjaOhgai/status/2039595160791875832#m", label: "根津神社まわりの新緑と街歩きの雰囲気" },
-    { url: "https://nitter.net/NedujinjaOhgai/status/2039485998586032513#m", label: "根津神社まわりの静かな景色" },
-    { url: "https://nitter.net/bunkyo_tokyo/status/2040595277674152282#m", label: "文京区公式: 千駄木まわりの街歩き感に近い投稿" },
+    { url: "https://x.com/NedujinjaOhgai/status/2039595160791875832", label: "根津神社まわりの新緑と街歩きの雰囲気" },
+    { url: "https://x.com/NedujinjaOhgai/status/2039485998586032513", label: "根津神社まわりの静かな景色" },
+    { url: "https://x.com/bunkyo_tokyo/status/2040595277674152282", label: "文京区公式: 千駄木まわりの街歩き感に近い投稿" },
   ],
   en: [
-    { url: "https://nitter.net/NedujinjaOhgai/status/2039595160791875832#m", label: "A Nezu Shrine and greenery reference" },
-    { url: "https://nitter.net/NedujinjaOhgai/status/2039485998586032513#m", label: "A calmer Nezu Shrine view" },
-    { url: "https://nitter.net/bunkyo_tokyo/status/2040595277674152282#m", label: "A Bunkyo ward post that fits the Sendagi side of the walk" },
+    { url: "https://x.com/NedujinjaOhgai/status/2039595160791875832", label: "A Nezu Shrine and greenery reference" },
+    { url: "https://x.com/NedujinjaOhgai/status/2039485998586032513", label: "A calmer Nezu Shrine view" },
+    { url: "https://x.com/bunkyo_tokyo/status/2040595277674152282", label: "A Bunkyo ward post that fits the Sendagi side of the walk" },
   ],
 };
 
 const OJI_ASUKAYAMA_X: Partial<Record<GuideLocale, GuideXEmbed[]>> = {
   ja: [
-    { url: "https://nitter.net/toeikotsu_eng/status/2041063366857462042#m", label: "都電の最新運行状況 夕方便" },
-    { url: "https://nitter.net/toeikotsu_eng/status/2040912370747551810#m", label: "都電の最新運行状況 朝便" },
-    { url: "https://nitter.net/toeikotsu/status/2041063365712433193#m", label: "都営交通公式: 都電運行情報" },
+    { url: "https://x.com/toeikotsu_eng/status/2041063366857462042", label: "都電の最新運行状況 夕方便" },
+    { url: "https://x.com/toeikotsu_eng/status/2040912370747551810", label: "都電の最新運行状況 朝便" },
+    { url: "https://x.com/toeikotsu/status/2041063365712433193", label: "都営交通公式: 都電運行情報" },
   ],
   en: [
-    { url: "https://nitter.net/toeikotsu_eng/status/2041063366857462042#m", label: "Tokyo Sakura Tram evening service status" },
-    { url: "https://nitter.net/toeikotsu_eng/status/2040912370747551810#m", label: "Tokyo Sakura Tram morning service status" },
-    { url: "https://nitter.net/toeikotsu/status/2041063365712433193#m", label: "Toei transport official tram status" },
+    { url: "https://x.com/toeikotsu_eng/status/2041063366857462042", label: "Tokyo Sakura Tram evening service status" },
+    { url: "https://x.com/toeikotsu_eng/status/2040912370747551810", label: "Tokyo Sakura Tram morning service status" },
+    { url: "https://x.com/toeikotsu/status/2041063365712433193", label: "Toei transport official tram status" },
   ],
 };
 
 const TOKYO_MORNING_X: Partial<Record<GuideLocale, GuideXEmbed[]>> = {
   ja: [
     { url: "https://x.com/GOTOKYOofficial/status/1418012925713784834", label: "GO TOKYO公式: 朝の静かな東京の参考" },
-    { url: "https://nitter.net/InokashiraZoo/status/2041326677683482913#m", label: "井の頭まわりの朝時間に近い参考" },
-    { url: "https://nitter.net/bunkyo_tokyo/status/2040595277674152282#m", label: "文京区公式: 朝散歩に近い街歩きの参考" },
+    { url: "https://x.com/InokashiraZoo/status/2041326677683482913", label: "井の頭まわりの朝時間に近い参考" },
+    { url: "https://x.com/bunkyo_tokyo/status/2040595277674152282", label: "文京区公式: 朝散歩に近い街歩きの参考" },
   ],
   en: [
     { url: "https://x.com/GOTOKYOofficial/status/1418012925713784834", label: "GO TOKYO: a quiet Tokyo morning reference" },
-    { url: "https://nitter.net/InokashiraZoo/status/2041326677683482913#m", label: "Inokashira-area morning reference" },
-    { url: "https://nitter.net/bunkyo_tokyo/status/2040595277674152282#m", label: "Bunkyo ward: a neighborhood-morning reference" },
+    { url: "https://x.com/InokashiraZoo/status/2041326677683482913", label: "Inokashira-area morning reference" },
+    { url: "https://x.com/bunkyo_tokyo/status/2040595277674152282", label: "Bunkyo ward: a neighborhood-morning reference" },
   ],
 };
 
 const TOKYO_LOCAL_TRANSIT_X: Partial<Record<GuideLocale, GuideXEmbed[]>> = {
   ja: [
-    { url: "https://nitter.net/toeikotsu_eng/status/2041063366857462042#m", label: "都電・都営側の最新運行状況" },
-    { url: "https://nitter.net/toeikotsu/status/2040912368147010009#m", label: "都営交通公式: 朝の運行状況" },
-    { url: "https://nitter.net/toeikotsu/status/2040700975892320344#m", label: "都営交通公式: 夕方の運行状況" },
+    { url: "https://x.com/toeikotsu_eng/status/2041063366857462042", label: "都電・都営側の最新運行状況" },
+    { url: "https://x.com/toeikotsu/status/2040912368147010009", label: "都営交通公式: 朝の運行状況" },
+    { url: "https://x.com/toeikotsu/status/2040700975892320344", label: "都営交通公式: 夕方の運行状況" },
   ],
   en: [
-    { url: "https://nitter.net/toeikotsu_eng/status/2041063366857462042#m", label: "A local-transit status check for the day" },
-    { url: "https://nitter.net/toeikotsu/status/2040912368147010009#m", label: "Morning Toei transport status" },
-    { url: "https://nitter.net/toeikotsu/status/2040700975892320344#m", label: "Evening Toei transport status" },
+    { url: "https://x.com/toeikotsu_eng/status/2041063366857462042", label: "A local-transit status check for the day" },
+    { url: "https://x.com/toeikotsu/status/2040912368147010009", label: "Morning Toei transport status" },
+    { url: "https://x.com/toeikotsu/status/2040700975892320344", label: "Evening Toei transport status" },
   ],
 };
 
 const TOKYO_OLD_TOWN_HILLSIDE_X: Partial<Record<GuideLocale, GuideXEmbed[]>> = {
   ja: [
     { url: "https://x.com/GOTOKYOofficial/status/2028696875835199524", label: "GO TOKYO公式: 江戸の痕跡と旧市街歩きの参考" },
-    { url: "https://nitter.net/NedujinjaOhgai/status/2039595160791875832#m", label: "根津神社まわりの旧市街的な空気感" },
-    { url: "https://nitter.net/bunkyo_tokyo/status/2040595277674152282#m", label: "文京区公式: 坂と旧市街の街歩きに近い投稿" },
+    { url: "https://x.com/NedujinjaOhgai/status/2039595160791875832", label: "根津神社まわりの旧市街的な空気感" },
+    { url: "https://x.com/bunkyo_tokyo/status/2040595277674152282", label: "文京区公式: 坂と旧市街の街歩きに近い投稿" },
   ],
   en: [
     { url: "https://x.com/GOTOKYOofficial/status/2028696875835199524", label: "GO TOKYO: an old-Tokyo historical walking reference" },
-    { url: "https://nitter.net/NedujinjaOhgai/status/2039595160791875832#m", label: "A Nezu-side old-town reference" },
-    { url: "https://nitter.net/bunkyo_tokyo/status/2040595277674152282#m", label: "Bunkyo ward: a slower hillside-and-neighborhood reference" },
+    { url: "https://x.com/NedujinjaOhgai/status/2039595160791875832", label: "A Nezu-side old-town reference" },
+    { url: "https://x.com/bunkyo_tokyo/status/2040595277674152282", label: "Bunkyo ward: a slower hillside-and-neighborhood reference" },
   ],
 };
 
 const STATION_BASED_SHORT_STAY_X: Partial<Record<GuideLocale, GuideXEmbed[]>> = {
   ja: [
     { url: "https://x.com/GOTOKYOofficial/status/1418012925713784834", label: "GO TOKYO公式: 朝にすぐ歩き始められる東京の参考" },
-    { url: "https://nitter.net/toeikotsu_eng/status/2041063366857462042#m", label: "都営側の最新運行状況の参考" },
-    { url: "https://nitter.net/InokashiraZoo/status/2041326677683482913#m", label: "短時間で組みやすい朝ルートの参考" },
+    { url: "https://x.com/toeikotsu_eng/status/2041063366857462042", label: "都営側の最新運行状況の参考" },
+    { url: "https://x.com/InokashiraZoo/status/2041326677683482913", label: "短時間で組みやすい朝ルートの参考" },
   ],
   en: [
     { url: "https://x.com/GOTOKYOofficial/status/1418012925713784834", label: "GO TOKYO: a short-stay morning-walk reference" },
-    { url: "https://nitter.net/toeikotsu_eng/status/2041063366857462042#m", label: "Transit status reference for a short-stay day" },
-    { url: "https://nitter.net/InokashiraZoo/status/2041326677683482913#m", label: "A compact morning-route reference" },
+    { url: "https://x.com/toeikotsu_eng/status/2041063366857462042", label: "Transit status reference for a short-stay day" },
+    { url: "https://x.com/InokashiraZoo/status/2041326677683482913", label: "A compact morning-route reference" },
   ],
 };
 
 const KURAMAE_BRIDGE_X: Partial<Record<GuideLocale, GuideXEmbed[]>> = {
   ja: [
-    { url: "https://nitter.net/kuramaeiine/status/2030463059828027671#m", label: "蔵前橋まわりの橋景色の参考" },
-    { url: "https://nitter.net/kuramaeiine/status/2030088136227967190#m", label: "蔵前橋の光と川沿いの参考" },
-    { url: "https://nitter.net/kuramaeiine/status/2030792925832184027#m", label: "蔵前の朝食と小さな店の参考" },
+    { url: "https://x.com/kuramaeiine/status/2030463059828027671", label: "蔵前橋まわりの橋景色の参考" },
+    { url: "https://x.com/kuramaeiine/status/2030088136227967190", label: "蔵前橋の光と川沿いの参考" },
+    { url: "https://x.com/kuramaeiine/status/2030792925832184027", label: "蔵前の朝食と小さな店の参考" },
   ],
   en: [
-    { url: "https://nitter.net/kuramaeiine/status/2030463059828027671#m", label: "A bridge-side Kuramae reference" },
-    { url: "https://nitter.net/kuramaeiine/status/2030088136227967190#m", label: "Kuramae Bridge and river mood reference" },
-    { url: "https://nitter.net/kuramaeiine/status/2030792925832184027#m", label: "A small-shop and breakfast reference near Kuramae" },
+    { url: "https://x.com/kuramaeiine/status/2030463059828027671", label: "A bridge-side Kuramae reference" },
+    { url: "https://x.com/kuramaeiine/status/2030088136227967190", label: "Kuramae Bridge and river mood reference" },
+    { url: "https://x.com/kuramaeiine/status/2030792925832184027", label: "A small-shop and breakfast reference near Kuramae" },
   ],
 };
 
 const KIYOSUMI_GARDEN_AND_COFFEE_X: Partial<Record<GuideLocale, GuideXEmbed[]>> = {
   ja: [
-    { url: "https://nitter.net/KiyosumiTeien/status/2040959759235621217#m", label: "清澄庭園の季節の参考" },
-    { url: "https://nitter.net/KiyosumiTeien/status/2039555359740940707#m", label: "清澄庭園の花の参考" },
+    { url: "https://x.com/KiyosumiTeien/status/2040959759235621217", label: "清澄庭園の季節の参考" },
+    { url: "https://x.com/KiyosumiTeien/status/2039555359740940707", label: "清澄庭園の花の参考" },
     { url: "https://x.com/bluebottleroast/status/1889358892628623478", label: "ブルーボトル清澄白河のコーヒー体験の参考" },
   ],
   en: [
-    { url: "https://nitter.net/KiyosumiTeien/status/2040959759235621217#m", label: "A seasonal Kiyosumi Garden reference" },
-    { url: "https://nitter.net/KiyosumiTeien/status/2039555359740940707#m", label: "A Kiyosumi Garden flowers reference" },
+    { url: "https://x.com/KiyosumiTeien/status/2040959759235621217", label: "A seasonal Kiyosumi Garden reference" },
+    { url: "https://x.com/KiyosumiTeien/status/2039555359740940707", label: "A Kiyosumi Garden flowers reference" },
     { url: "https://x.com/bluebottleroast/status/1889358892628623478", label: "A Blue Bottle Kiyosumi-Shirakawa coffee reference" },
   ],
 };
 
 const MONZEN_FUKAGAWA_X: Partial<Record<GuideLocale, GuideXEmbed[]>> = {
   ja: [
-    { url: "https://nitter.net/KiyosumiTeien/status/2040979030548299824#m", label: "東東京の水辺と緑に近い参考" },
-    { url: "https://nitter.net/KiyosumiTeien/status/2040251219831349644#m", label: "東東京の雨の日の水辺の参考" },
-    { url: "https://nitter.net/KiyosumiTeien/status/2039609841896018288#m", label: "東東京の庭園施設運用の参考" },
+    { url: "https://x.com/KiyosumiTeien/status/2040979030548299824", label: "東東京の水辺と緑に近い参考" },
+    { url: "https://x.com/KiyosumiTeien/status/2040251219831349644", label: "東東京の雨の日の水辺の参考" },
+    { url: "https://x.com/KiyosumiTeien/status/2039609841896018288", label: "東東京の庭園施設運用の参考" },
   ],
   en: [
-    { url: "https://nitter.net/KiyosumiTeien/status/2040979030548299824#m", label: "An east-Tokyo greenery and waterside reference" },
-    { url: "https://nitter.net/KiyosumiTeien/status/2040251219831349644#m", label: "A rainy-day east-Tokyo waterside reference" },
-    { url: "https://nitter.net/KiyosumiTeien/status/2039609841896018288#m", label: "A practical east-Tokyo garden facility reference" },
+    { url: "https://x.com/KiyosumiTeien/status/2040979030548299824", label: "An east-Tokyo greenery and waterside reference" },
+    { url: "https://x.com/KiyosumiTeien/status/2040251219831349644", label: "A rainy-day east-Tokyo waterside reference" },
+    { url: "https://x.com/KiyosumiTeien/status/2039609841896018288", label: "A practical east-Tokyo garden facility reference" },
   ],
 };
 
 const ASAKUSA_KURAMAE_X: Partial<Record<GuideLocale, GuideXEmbed[]>> = {
   ja: [
-    { url: "https://nitter.net/kuramaeiine/status/2030463059828027671#m", label: "蔵前橋まわりの参考" },
-    { url: "https://nitter.net/kuramaeiine/status/2030088136227967190#m", label: "隅田川と蔵前橋の参考" },
-    { url: "https://nitter.net/icho8man/status/2033076363670991003#m", label: "浅草橋寄りの東東京の空気感の参考" },
+    { url: "https://x.com/kuramaeiine/status/2030463059828027671", label: "蔵前橋まわりの参考" },
+    { url: "https://x.com/kuramaeiine/status/2030088136227967190", label: "隅田川と蔵前橋の参考" },
+    { url: "https://x.com/icho8man/status/2033076363670991003", label: "浅草橋寄りの東東京の空気感の参考" },
   ],
   en: [
-    { url: "https://nitter.net/kuramaeiine/status/2030463059828027671#m", label: "A Kuramae bridge-side reference" },
-    { url: "https://nitter.net/kuramaeiine/status/2030088136227967190#m", label: "A Sumida and Kuramae bridge reference" },
-    { url: "https://nitter.net/icho8man/status/2033076363670991003#m", label: "An east-Tokyo side-street reference near the Asakusabashi side" },
+    { url: "https://x.com/kuramaeiine/status/2030463059828027671", label: "A Kuramae bridge-side reference" },
+    { url: "https://x.com/kuramaeiine/status/2030088136227967190", label: "A Sumida and Kuramae bridge reference" },
+    { url: "https://x.com/icho8man/status/2033076363670991003", label: "An east-Tokyo side-street reference near the Asakusabashi side" },
   ],
 };
 
 const RYOGOKU_KURAMAE_X: Partial<Record<GuideLocale, GuideXEmbed[]>> = {
   ja: [
-    { url: "https://nitter.net/edotokyomuseum/status/2037429580269777351#m", label: "両国側の文化スポットの参考" },
-    { url: "https://nitter.net/kuramaeiine/status/2030463059828027671#m", label: "蔵前橋まわりの橋景色の参考" },
-    { url: "https://nitter.net/kuramaeiine/status/2030088136227967190#m", label: "隅田川と橋の流れの参考" },
+    { url: "https://x.com/edotokyomuseum/status/2037429580269777351", label: "両国側の文化スポットの参考" },
+    { url: "https://x.com/kuramaeiine/status/2030463059828027671", label: "蔵前橋まわりの橋景色の参考" },
+    { url: "https://x.com/kuramaeiine/status/2030088136227967190", label: "隅田川と橋の流れの参考" },
   ],
   en: [
-    { url: "https://nitter.net/edotokyomuseum/status/2037429580269777351#m", label: "A Ryogoku-side cultural reference" },
-    { url: "https://nitter.net/kuramaeiine/status/2030463059828027671#m", label: "A Kuramae bridge-side reference" },
-    { url: "https://nitter.net/kuramaeiine/status/2030088136227967190#m", label: "A Sumida bridge-and-river reference" },
+    { url: "https://x.com/edotokyomuseum/status/2037429580269777351", label: "A Ryogoku-side cultural reference" },
+    { url: "https://x.com/kuramaeiine/status/2030463059828027671", label: "A Kuramae bridge-side reference" },
+    { url: "https://x.com/kuramaeiine/status/2030088136227967190", label: "A Sumida bridge-and-river reference" },
   ],
 };
 
@@ -1110,7 +1115,7 @@ export const MINOR_GUIDE_CONFIG_OVERRIDES: Partial<Record<string, MinorGuideConf
       transportEn: "What matters here is not garden timing but station exits, queue length, opening hours, and whether a class or special menu is running. This route works best when you can reorder stops in real time.",
     },
     ja: {
-      title: "清澄白河のコーヒー街歩き 2026",
+      title: "清澄白河のコーヒー街歩き",
       description: "清澄白河で本気のコーヒー時間を半日にまとめるための街歩きガイドです。フラッグシップのロースタリー、カウンター、二杯目の寄り方までコーヒー軸で整理します。",
       lead: "このページは清澄庭園へ逃がすためのものではなく、清澄白河をコーヒー街として読み切るためのガイドです。起点はブルーボトルのフラッグシップで、そこから先もコーヒーの余韻が切れない範囲で歩きます。",
       route: "清澄白河駅から入り、平野一丁目のブルーボトル清澄白河フラッグシップを一つ目の軸にします。その後は白河・常盤・清澄の低い街区へ戻り、iki ESPRESSO や Allpress Espresso Tokyo Roastery & Cafe のような二杯目候補を同じ街区で拾う形がもっとも扱いやすいです。",
@@ -1121,7 +1126,7 @@ export const MINOR_GUIDE_CONFIG_OVERRIDES: Partial<Record<string, MinorGuideConf
       timeNeeded: "2.5〜4時間",
     },
     en: {
-      title: "Kiyosumi-Shirakawa Coffee Walk 2026",
+      title: "Kiyosumi-Shirakawa Coffee Walk",
       description: "A coffee-first Kiyosumi-Shirakawa guide built around the flagship roastery, coffee counters, and the low-rise streets that still feel like part of the same cup-to-cup walk.",
       lead: "This page is not here to soften Kiyosumi-Shirakawa with a garden detour. It is here to treat the district as a real coffee walk, with the Blue Bottle flagship as the center of gravity and the rest of the half day staying loyal to that coffee logic.",
       route: "Start from Kiyosumi-Shirakawa Station and make the Blue Bottle flagship at 1-4-8 Hirano the first anchor. After that, stay on the Kiyosumi-Shirakawa grid for a second coffee stop such as iki ESPRESSO or Allpress Espresso Tokyo Roastery & Cafe, instead of drifting toward unrelated sightseeing filler.",
@@ -1154,14 +1159,14 @@ export const MINOR_GUIDE_CONFIG_OVERRIDES: Partial<Record<string, MinorGuideConf
       xDescriptionEn: "These embeds now stay with Kuramae, nearby bridges, and adjacent east-Tokyo street references instead of pretending the route is about product categories alone.",
     },
     ja: {
-      title: "蔵前の小さな店と橋景色の街歩き 2026",
+      title: "蔵前の小さな店と橋景色の街歩き",
       description: "蔵前で小さな店、橋の景色、静かな東東京の通りをつなぐための半日街歩きガイドです。",
       lead: "蔵前の良さは、商品ジャンルよりも、橋景色と小さな店が同じ速度で現れることにあります。",
       route: "蔵前駅から入り、小さな店を一つ二つ、橋の見える区間を一つ、その間の静かな通りをつなぐ形がもっとも扱いやすいです。",
       focus: "買い物の件数ではなく、橋と街区の切り替わり、小さな店に入る前後の余白がこのルートの核になります。",
     },
     en: {
-      title: "Kuramae Small Shops and Bridge Views Walk 2026",
+      title: "Kuramae Small Shops and Bridge Views Walk",
       description: "A lower-key Kuramae half day built around small shops, bridge views, and the slower east-Tokyo streets between them.",
       lead: "Kuramae is more convincing when it is framed as a walk between smaller shops and bridge views, not as a checklist of product categories.",
       route: "Start at Kuramae Station, keep one or two small-shop stops, one bridge segment, and use the quieter blocks between them as part of the route rather than filler.",
@@ -1202,11 +1207,11 @@ export const MINOR_GUIDE_CONFIG_OVERRIDES: Partial<Record<string, MinorGuideConf
       xDescriptionEn: "These embeds stay tied to the Kiyosumi area so the post set no longer drifts away from the garden-and-roaster framing of the guide.",
     },
     ja: {
-      title: "清澄庭園とコーヒー散歩ガイド 2026",
+      title: "清澄庭園とコーヒー散歩ガイド",
       description: "清澄庭園と清澄白河のコーヒー時間を一つの半日としてつなぐ街歩きガイドです。",
     },
     en: {
-      title: "Kiyosumi Garden and Coffee Walk 2026",
+      title: "Kiyosumi Garden and Coffee Walk",
       description: "A Kiyosumi half day that links Kiyosumi Garden with one strong coffee stop and the slower streets between them.",
     },
     consistencyChecks: {
@@ -1223,12 +1228,12 @@ export const MINOR_GUIDE_CONFIG_OVERRIDES: Partial<Record<string, MinorGuideConf
       en: "bridge views, small storefronts, key intersections, and the neighborhood change that happens as the route reaches the river",
     },
     ja: {
-      title: "蔵前の橋景色と小さな店の街歩き 2026",
+      title: "蔵前の橋景色と小さな店の街歩き",
       description: "蔵前の橋景色と小さな店を中心に、東東京らしい余白を歩くための半日ガイドです。",
       focus: "橋と小さな店の切り替わりを見ることが目的で、商品の種類を細かく追うことは主題ではありません。",
     },
     en: {
-      title: "Kuramae Bridge Views and Small-Shop Walk 2026",
+      title: "Kuramae Bridge Views and Small-Shop Walk",
       description: "A Kuramae half day centered on bridge views, smaller storefronts, and the slower east-Tokyo blocks between them.",
       focus: "The route is about the shift between bridges and smaller shop-lined streets, not about promising a fully itemized craft crawl.",
     },
@@ -1275,14 +1280,14 @@ export const MINOR_GUIDE_CONFIG_OVERRIDES: Partial<Record<string, MinorGuideConf
     ],
     xEmbedsOverride: {
       ja: [
-        { url: "https://nitter.net/KiyosumiTeien/status/2040251219831349644#m", label: "清澄公園: 雨の日の参考" },
+        { url: "https://x.com/KiyosumiTeien/status/2040251219831349644", label: "清澄公園: 雨の日の参考" },
         { url: "https://x.com/GOTOKYOofficial/status/1418012925713784834", label: "GO TOKYO公式: 静かな東京の朝の参考" },
-        { url: "https://nitter.net/bunkyo_tokyo/status/2040595277674152282#m", label: "文京区公式: 商店街と街歩きの参考" },
+        { url: "https://x.com/bunkyo_tokyo/status/2040595277674152282", label: "文京区公式: 商店街と街歩きの参考" },
       ],
       en: [
-        { url: "https://nitter.net/KiyosumiTeien/status/2040251219831349644#m", label: "Kiyosumi Park: a rainy-day reference" },
+        { url: "https://x.com/KiyosumiTeien/status/2040251219831349644", label: "Kiyosumi Park: a rainy-day reference" },
         { url: "https://x.com/GOTOKYOofficial/status/1418012925713784834", label: "GO TOKYO: a quiet-Tokyo morning reference" },
-        { url: "https://nitter.net/bunkyo_tokyo/status/2040595277674152282#m", label: "Bunkyo ward: a shopping-street walk reference" },
+        { url: "https://x.com/bunkyo_tokyo/status/2040595277674152282", label: "Bunkyo ward: a shopping-street walk reference" },
       ],
     },
     photoFocusOverride: {
@@ -1549,11 +1554,11 @@ export const MINOR_GUIDE_CONFIG_OVERRIDES: Partial<Record<string, MinorGuideConf
       en: "Monzen-Nakacho station edges, Fukagawa shrine-and-waterside segments, and the bridges that link them back to quieter residential streets",
     },
     ja: {
-      title: "門前仲町と深川の水辺街歩き 2026",
+      title: "門前仲町と深川の水辺街歩き",
       description: "門前仲町から深川の寺社と水辺へつなぐ、東東京らしい半日街歩きガイドです。",
     },
     en: {
-      title: "Monzen-Nakacho and Fukagawa Waterside Walk 2026",
+      title: "Monzen-Nakacho and Fukagawa Waterside Walk",
       description: "A practical east-Tokyo half day linking Monzen-Nakacho with Fukagawa shrine space and waterside streets.",
     },
     consistencyChecks: {
@@ -1570,11 +1575,11 @@ export const MINOR_GUIDE_CONFIG_OVERRIDES: Partial<Record<string, MinorGuideConf
       en: "Asakusa-side river views, the Sumida River itself, bridges back toward Kuramae, and the quieter exits away from the densest tourist flow",
     },
     ja: {
-      title: "浅草の川沿いから蔵前へ歩く半日ルート 2026",
+      title: "浅草の川沿いから蔵前へ歩く半日ルート",
       description: "浅草の外縁と隅田川、蔵前の静かな東東京ブロックをつなぐ半日ルートです。",
     },
     en: {
-      title: "Asakusa Riverside to Kuramae Walk 2026",
+      title: "Asakusa Riverside to Kuramae Walk",
       description: "A half-day east-Tokyo route that leaves the busiest Asakusa blocks for the Sumida River edge and a calmer Kuramae finish.",
     },
     consistencyChecks: {
@@ -1591,11 +1596,11 @@ export const MINOR_GUIDE_CONFIG_OVERRIDES: Partial<Record<string, MinorGuideConf
       en: "Morishita station edges, quieter everyday east-Tokyo streets, and the change in mood before the route reaches Kiyosumi Garden",
     },
     ja: {
-      title: "森下から清澄庭園へ歩く半日ガイド 2026",
+      title: "森下から清澄庭園へ歩く半日ガイド",
       description: "森下の生活街から清澄庭園へつなぐ、東東京らしい静かな半日ガイドです。",
     },
     en: {
-      title: "Morishita to Kiyosumi Garden Walk 2026",
+      title: "Morishita to Kiyosumi Garden Walk",
       description: "A slower east-Tokyo half day that starts in Morishita streets and ends with a Kiyosumi Garden pause.",
     },
     consistencyChecks: {
@@ -1612,11 +1617,11 @@ export const MINOR_GUIDE_CONFIG_OVERRIDES: Partial<Record<string, MinorGuideConf
       en: "the Ryogoku-side entry, the pace change as the walk crosses bridges toward Kuramae, and the shift between station blocks and river edges",
     },
     ja: {
-      title: "両国から蔵前へ橋を渡って歩く半日ガイド 2026",
+      title: "両国から蔵前へ橋を渡って歩く半日ガイド",
       description: "両国側から入り、橋と川沿いを使って蔵前へ抜ける東東京の半日ルートです。",
     },
     en: {
-      title: "Ryogoku to Kuramae Bridge Walk 2026",
+      title: "Ryogoku to Kuramae Bridge Walk",
       description: "A practical east-Tokyo half day that starts on the Ryogoku side and crosses bridges toward a calmer Kuramae finish.",
     },
     consistencyChecks: {
@@ -1633,11 +1638,11 @@ export const MINOR_GUIDE_CONFIG_OVERRIDES: Partial<Record<string, MinorGuideConf
       en: "Machiya station and tram-stop edges, everyday Arakawa-side streets, and the way the tram stays close to residential-scale roads",
     },
     ja: {
-      title: "町屋の都電街歩きガイド 2026",
+      title: "町屋の都電街歩きガイド",
       description: "町屋から始める、少しローカルな都電沿線の半日街歩きガイドです。",
     },
     en: {
-      title: "Machiya Tram-Line Walk Guide 2026",
+      title: "Machiya Tram-Line Walk Guide",
       description: "A lower-key tram-line half day that starts from Machiya and stays close to everyday northeast-Tokyo streets.",
     },
     consistencyChecks: {
@@ -1705,13 +1710,13 @@ export const MINOR_GUIDE_CONFIG_OVERRIDES: Partial<Record<string, MinorGuideConf
       en: "how east-Tokyo waterside edges, gardens, and quieter river segments support a slower half day",
     },
     ja: {
-      title: "東東京の庭園と水辺をゆっくり歩く半日ルート 2026",
+      title: "東東京の庭園と水辺をゆっくり歩く半日ルート",
       description: "清澄側の庭園と東東京の水辺感を軸に、急がず歩く半日ルートを組み立てるガイドです。",
       lead: "このルートは大きな海辺観光ではなく、東東京の庭園、水辺、駅近の余白を静かにつなぐ考え方の方が合います。",
       focus: "海辺の絶景を集めるより、庭園の水面と東東京の水辺感をどうゆっくり使うかが主題です。",
     },
     en: {
-      title: "East Tokyo Garden and Waterside Slow Route 2026",
+      title: "East Tokyo Garden and Waterside Slow Route",
       description: "A slower east-Tokyo half day built around garden pauses, waterside atmosphere, and compact station-to-neighborhood transitions.",
       lead: "This route works better as an east-Tokyo garden-and-waterside half day than as a promise of dramatic open-water sightseeing.",
       focus: "The page is about how to use garden water, neighborhood edges, and compact east-Tokyo transitions at a slower pace, not about chasing big waterfront spectacle.",
