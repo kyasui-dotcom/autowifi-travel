@@ -1,4 +1,6 @@
 :root {
+  color-scheme: light;
+
   /* ── Brand colors ─────────────────────────────────────── */
   --color-primary: #0ea5e9;
   --color-primary-hover: #0284c7;
@@ -69,7 +71,7 @@
 
   /* ── Layout ─────────────────────────────────────────── */
   --max-width: 1200px;
-  --header-height: 64px;
+  --header-height: 72px;
 
   /* ── Border radius ──────────────────────────────────── */
   --radius-sm: 0.25rem;  /* 4px  */
@@ -86,47 +88,6 @@
   --background: #ffffff;
   --foreground: #111827;
 }
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-
-    /* ── Dark mode brand colors ────────────────────────── */
-    --color-primary: #38bdf8;
-    --color-primary-hover: #7dd3fc;
-    --color-primary-light: #0c4a6e;
-    --color-secondary: #7dd3fc;
-    --color-secondary-hover: #bae6fd;
-    --color-secondary-light: #082f49;
-    --color-accent: #22d3ee;
-    --color-accent-hover: #67e8f9;
-    --color-accent-light: #083344;
-
-    /* ── Dark mode surfaces ────────────────────────────── */
-    --bg-surface: #111111;
-    --bg-muted: #1a1a1a;
-    --bg-card: #1f1f1f;
-    --bg-overlay: rgba(0, 0, 0, 0.7);
-
-    /* ── Dark mode text ────────────────────────────────── */
-    --text-primary: #f9fafb;
-    --text-secondary: #d1d5db;
-    --text-muted: #6b7280;
-    --text-inverse: #111827;
-
-    /* ── Dark mode borders ─────────────────────────────── */
-    --border-default: #374151;
-    --border-light: #1f2937;
-    --border-focus: #38bdf8;
-
-    /* ── Dark mode shadows ─────────────────────────────── */
-    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
-    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -2px rgba(0, 0, 0, 0.3);
-    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -4px rgba(0, 0, 0, 0.4);
-  }
-}
-
 *,
 *::before,
 *::after {

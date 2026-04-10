@@ -7,11 +7,16 @@ interface CheckoutFormProps {
   packageId: string;
   locale: string;
   labels: {
+    formTitle: string;
+    formLead: string;
     emailLabel: string;
     emailPlaceholder: string;
     emailHint: string;
     submitButton: string;
     submitting: string;
+    invalidEmail: string;
+    checkoutFailed: string;
+    missingCheckoutUrl: string;
   };
 }
 
@@ -25,7 +30,7 @@ export default function CheckoutForm({ packageId, locale, labels }: CheckoutForm
     setError("");
 
     if (!email || !email.includes("@")) {
-      setError("Please enter a valid email address.");
+      setError(labels.invalidEmail);
       return;
     }
 
@@ -46,24 +51,27 @@ export default function CheckoutForm({ packageId, locale, labels }: CheckoutForm
       const data = (await response.json()) as { error?: string; checkoutUrl?: string };
 
       if (!response.ok) {
-        throw new Error(data.error || "Checkout failed. Please try again.");
+        throw new Error(data.error || labels.checkoutFailed);
       }
 
       // Redirect to Stripe checkout
       if (data.checkoutUrl) {
         window.location.href = data.checkoutUrl;
       } else {
-        throw new Error("No checkout URL returned.");
+        throw new Error(labels.missingCheckoutUrl);
       }
     } catch (err) {
-      setError(err instanceof Error ? err.message : "An error occurred. Please try again.");
+      setError(err instanceof Error ? err.message : labels.checkoutFailed);
       setIsSubmitting(false);
     }
   }
 
   return (
     <form onSubmit={handleSubmit} className={styles.formSection}>
-      <h2 className={styles.formTitle}>{labels.emailLabel}</h2>
+      <div className={styles.formIntro}>
+        <h2 className={styles.formTitle}>{labels.formTitle}</h2>
+        <p className={styles.formLead}>{labels.formLead}</p>
+      </div>
 
       {error && <div className={styles.errorMessage}>{error}</div>}
 

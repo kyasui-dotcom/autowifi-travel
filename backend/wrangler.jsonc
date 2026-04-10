@@ -2,7 +2,7 @@
   "name": "autowifi-travel-api",
   "compatibility_date": "2025-04-01",
   "compatibility_flags": ["nodejs_compat"],
-  "main": ".open-next/worker.js",
+  "main": "worker.ts",
   "assets": {
     "directory": ".open-next/assets",
     "binding": "ASSETS"
@@ -21,5 +21,8 @@
       "database_name": "autowifi-travel-db",
       "database_id": "3f798287-8f47-4ea9-a0a4-eb22698a2dcb"
     }
-  ]
+  ],
+  "triggers": {
+    "crons": ["*/30 * * * *"]
+  }
 }
