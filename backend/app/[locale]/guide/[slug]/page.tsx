@@ -1,83 +1,117 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { generatePageMetadata } from "@/lib/seo";
+import { generatePageMetadata, getBaseUrl, getDefaultOgImageUrl, getGuideOgImageUrl } from "@/lib/seo";
 import type { Locale } from "@/lib/i18n/config";
 import { ArticleJsonLd, BreadcrumbJsonLd, FaqJsonLd } from "@/lib/components/JsonLd";
+import ContentTrustPanel from "@/lib/components/ContentTrustPanel";
+import XEmbeddedPosts from "@/lib/components/XEmbeddedPosts";
+import { getAuthorProfileUrl } from "@/lib/content/eeat";
+import { getGuideImageUrl, shouldProxyGuideImage } from "@/lib/guides/guideImageUrl";
 import {
   EXTRA_GUIDE_COUNTRY_MAP,
   EXTRA_GUIDE_SLUGS,
   getExtraGuideContent,
+  getExtraGuideDefinition,
   type GuideLocale,
 } from "@/lib/guides/extraGuides";
 import {
   getPriorityGuideContent,
   PRIORITY_GUIDE_RELATED,
+  type GuideArticleContent,
+  type GuideMediaImage,
 } from "@/lib/guides/priorityGuideContent";
 import {
   buildSeoProgramContent,
   getSeoProgramRelatedSlugs,
+  SEO_PROGRAM_DEFAULT_PUBLISHED_DATE,
+  SEO_PROGRAM_OVERRIDE_DATE,
   SEO_PROGRAM_SLUGS,
 } from "@/lib/guides/seoProgram";
 
 const SUPPORTED_LOCALES = ["en", "ja", "ko", "zh"] as const;
 
-// Guide publication dates for JSON-LD and display
+// Manual guide date overrides only. Programmatic guide dates come from seoProgram.ts.
 const GUIDE_DATES: Record<string, { published: string; modified: string }> = {
-  "japan-esim": { published: "2026-03-01", modified: "2026-03-16" },
-  "korea-esim": { published: "2026-03-01", modified: "2026-03-16" },
-  "thailand-esim": { published: "2026-03-01", modified: "2026-03-16" },
-  "usa-esim": { published: "2026-03-01", modified: "2026-03-16" },
-  "uk-esim": { published: "2026-03-02", modified: "2026-03-16" },
-  "france-esim": { published: "2026-03-02", modified: "2026-03-16" },
-  "italy-esim": { published: "2026-03-02", modified: "2026-03-16" },
-  "spain-esim": { published: "2026-03-02", modified: "2026-03-16" },
-  "germany-esim": { published: "2026-03-02", modified: "2026-03-16" },
-  "australia-esim": { published: "2026-03-03", modified: "2026-03-16" },
-  "singapore-esim": { published: "2026-03-03", modified: "2026-03-16" },
-  "taiwan-esim": { published: "2026-03-03", modified: "2026-03-16" },
-  "vietnam-esim": { published: "2026-03-03", modified: "2026-03-16" },
-  "indonesia-esim": { published: "2026-03-03", modified: "2026-03-16" },
-  "malaysia-esim": { published: "2026-03-03", modified: "2026-03-16" },
-  "philippines-esim": { published: "2026-03-03", modified: "2026-03-16" },
-  "china-esim": { published: "2026-03-04", modified: "2026-03-16" },
-  "canada-esim": { published: "2026-03-04", modified: "2026-03-16" },
-  "turkey-esim": { published: "2026-03-04", modified: "2026-03-16" },
-  "india-esim": { published: "2026-03-04", modified: "2026-03-16" },
-  "hawaii-esim": { published: "2026-03-05", modified: "2026-03-16" },
-  "guam-esim": { published: "2026-03-05", modified: "2026-03-16" },
-  "hong-kong-esim": { published: "2026-03-05", modified: "2026-03-16" },
-  "dubai-esim": { published: "2026-03-05", modified: "2026-03-16" },
-  "europe-esim": { published: "2026-03-05", modified: "2026-03-16" },
-  "cambodia-esim": { published: "2026-03-06", modified: "2026-03-16" },
-  "greece-esim": { published: "2026-03-06", modified: "2026-03-16" },
-  "mexico-esim": { published: "2026-03-06", modified: "2026-03-16" },
-  "new-zealand-esim": { published: "2026-03-06", modified: "2026-03-16" },
-  "norway-esim": { published: "2026-03-06", modified: "2026-03-16" },
-  "portugal-esim": { published: "2026-03-06", modified: "2026-03-16" },
-  "switzerland-esim": { published: "2026-03-06", modified: "2026-03-16" },
-  "morocco-esim": { published: "2026-03-06", modified: "2026-03-16" },
-  "wifi-vs-esim": { published: "2026-03-07", modified: "2026-03-16" },
-  "how-to-setup-esim": { published: "2026-03-07", modified: "2026-03-16" },
-  "esim-compatible-phones": { published: "2026-03-07", modified: "2026-03-16" },
-  "esim-troubleshooting": { published: "2026-03-07", modified: "2026-03-16" },
-  "esim-vs-sim-card": { published: "2026-03-08", modified: "2026-03-16" },
-  "esim-for-business-travel": { published: "2026-03-08", modified: "2026-03-16" },
-  "first-time-esim": { published: "2026-03-08", modified: "2026-03-16" },
-  "esim-data-plans-explained": { published: "2026-03-08", modified: "2026-03-16" },
-  "travel-internet-options": { published: "2026-03-09", modified: "2026-03-16" },
-  "esim-iphone-setup": { published: "2026-03-10", modified: "2026-03-16" },
-  "esim-android-setup": { published: "2026-03-10", modified: "2026-03-16" },
-  "airalo-review": { published: "2026-03-10", modified: "2026-03-16" },
-  "holafly-review": { published: "2026-03-10", modified: "2026-03-16" },
-  "cheapest-esim-plans": { published: "2026-03-19", modified: "2026-03-19" },
-  "best-esim-for-europe": { published: "2026-03-19", modified: "2026-03-19" },
-  "best-esim-for-asia": { published: "2026-03-19", modified: "2026-03-19" },
-  "esim-vs-airport-sim": { published: "2026-03-19", modified: "2026-03-19" },
-  "esim-hotspot-tethering": { published: "2026-03-19", modified: "2026-03-19" },
-  "how-much-data-do-i-need-for-travel": { published: "2026-03-19", modified: "2026-03-19" },
+  "best-esim-for-southeast-asia": { published: "2026-04-04", modified: "2026-04-04" },
+  "quiet-tokyo-neighborhoods": { published: "2026-04-05", modified: "2026-04-07" },
+  "yanaka-nezu-sendagi-walk": { published: "2026-04-05", modified: "2026-04-07" },
+  "kiyosumi-shirakawa-walk": { published: "2026-04-05", modified: "2026-04-07" },
+  "kuramae-walk": { published: "2026-04-05", modified: "2026-04-07" },
+  "tokyo-tram-line-stops": { published: "2026-04-05", modified: "2026-04-07" },
+  "rainy-day-tokyo-neighborhoods": { published: "2026-04-05", modified: "2026-04-07" },
+  "ueno-to-yanaka-walk": { published: "2026-04-06", modified: "2026-04-07" },
+  "nezu-sendagi-morning-walk": { published: "2026-04-06", modified: "2026-04-07" },
+  "monzen-nakacho-fukagawa-walk": { published: "2026-04-06", modified: "2026-04-07" },
+  "asakusa-kuramae-sumida-walk": { published: "2026-04-06", modified: "2026-04-07" },
+  "oji-asukayama-tram-walk": { published: "2026-04-06", modified: "2026-04-07" },
+  "nishi-nippori-yanaka-walk": { published: "2026-04-06", modified: "2026-04-07" },
+  "sendagi-yomise-dori-walk": { published: "2026-04-06", modified: "2026-04-07" },
+  "morishita-kiyosumi-walk": { published: "2026-04-06", modified: "2026-04-07" },
+  "ryogoku-kuramae-walk": { published: "2026-04-06", modified: "2026-04-07" },
+  "machiya-arakawa-tram-walk": { published: "2026-04-06", modified: "2026-04-07" },
+  "hebi-michi-nezu-shrine-walk": { published: "2026-04-07", modified: "2026-04-07" },
+  "yanaka-cemetery-and-cafe-walk": { published: "2026-04-07", modified: "2026-04-07" },
+  "kiyosumi-garden-coffee-roasters-walk": { published: "2026-04-07", modified: "2026-04-07" },
+  "kuramae-bridge-and-craft-walk": { published: "2026-04-07", modified: "2026-04-07" },
+  "waseda-omokagebashi-tram-walk": { published: "2026-04-07", modified: "2026-04-07" },
+  "tokyo-morning-walks": { published: "2026-04-07", modified: "2026-04-07" },
+  "tokyo-local-transit-half-day": { published: "2026-04-07", modified: "2026-04-07" },
+  "tokyo-waterfront-slow-route": { published: "2026-04-07", modified: "2026-04-07" },
+  "tokyo-old-town-hillside-walk": { published: "2026-04-07", modified: "2026-04-07" },
+  "tokyo-station-based-short-stays": { published: "2026-04-07", modified: "2026-04-07" },
+  "tokyo-markets-cafes-local-streets": { published: "2026-04-07", modified: "2026-04-07" },
+  "kichijoji-inokashira-park-morning": { published: "2026-04-07", modified: "2026-04-07" },
+  "kagurazaka-backstreets-walk": { published: "2026-04-07", modified: "2026-04-07" },
+  "jimbocho-kanda-booktown-walk": { published: "2026-04-07", modified: "2026-04-07" },
+  "nakameguro-daikanyama-side-streets": { published: "2026-04-07", modified: "2026-04-07" },
+  "shibamata-retro-day-trip": { published: "2026-04-07", modified: "2026-04-07" },
+  "seoul-morning-walks": { published: "2026-04-07", modified: "2026-04-07" },
+  "seoul-seongsu-side-streets-day": { published: "2026-04-07", modified: "2026-04-07" },
+  "kyoto-okazaki-canal-and-museums": { published: "2026-04-07", modified: "2026-04-07" },
+  "osaka-nakanoshima-riverside-day": { published: "2026-04-07", modified: "2026-04-07" },
+  "kyoto-demachiyanagi-kamo-walk": { published: "2026-04-07", modified: "2026-04-08" },
+  "kyoto-fushimi-sake-district-walk": { published: "2026-04-07", modified: "2026-04-08" },
+  "osaka-sumiyoshi-retro-tram-route": { published: "2026-04-07", modified: "2026-04-08" },
+  "kyoto-saga-arashiyama-morning-backstreets": { published: "2026-04-07", modified: "2026-04-08" },
+  "kyoto-nishijin-machiya-lanes": { published: "2026-04-07", modified: "2026-04-08" },
+  "kanazawa-higashi-chaya-morning-walk": { published: "2026-04-08", modified: "2026-04-08" },
+  "kanazawa-kenrokuen-garden-walk": { published: "2026-04-08", modified: "2026-04-08" },
+  "travel-esim-with-phone-number": { published: "2026-04-04", modified: "2026-04-04" },
+  "esim-fair-use-policy": { published: "2026-04-04", modified: "2026-04-04" },
+  "regional-esim-vs-country-esim": { published: "2026-04-04", modified: "2026-04-04" },
+  "esim-vs-hotel-wifi": { published: "2026-04-04", modified: "2026-04-04" },
 };
 const DEFAULT_DATES = { published: "2026-03-10", modified: "2026-03-16" };
+
+function resolveGuideDates(
+  source: "priority" | "specific" | "program" | "generic",
+  slug: string,
+  content?: Partial<Pick<GuideArticleContent, "datePublished" | "dateModified">>,
+) {
+  const mappedDates = GUIDE_DATES[slug];
+  const programDates =
+    source === "program"
+      ? {
+          published: SEO_PROGRAM_DEFAULT_PUBLISHED_DATE,
+          modified: SEO_PROGRAM_OVERRIDE_DATE,
+        }
+      : null;
+  const published =
+    content?.datePublished ??
+    programDates?.published ??
+    mappedDates?.published ??
+    DEFAULT_DATES.published;
+  const modified =
+    content?.dateModified ??
+    programDates?.modified ??
+    mappedDates?.modified ??
+    content?.datePublished ??
+    DEFAULT_DATES.modified;
+
+  return { published, modified };
+}
 
 // Guide slug → country eSIM page slug (for cross-linking)
 const GUIDE_TO_COUNTRY: Record<string, string> = {
@@ -93,25 +127,42 @@ const GUIDE_TO_COUNTRY: Record<string, string> = {
   "new-zealand-esim": "new-zealand", "norway-esim": "norway", "portugal-esim": "portugal",
   "switzerland-esim": "switzerland", "morocco-esim": "morocco",
   "iceland-esim": "iceland", "sri-lanka-esim": "sri-lanka", "guam-esim": "guam",
+  "tokyo-morning-walks": "japan",
+  "tokyo-local-transit-half-day": "japan",
+  "tokyo-waterfront-slow-route": "japan",
+  "tokyo-old-town-hillside-walk": "japan",
+  "tokyo-station-based-short-stays": "japan",
+  "tokyo-markets-cafes-local-streets": "japan",
+  "kichijoji-inokashira-park-morning": "japan",
+  "jimbocho-kanda-booktown-walk": "japan",
+  "seoul-morning-walks": "south-korea",
+  "seoul-seongsu-side-streets-day": "south-korea",
+  "kyoto-okazaki-canal-and-museums": "japan",
+  "osaka-nakanoshima-riverside-day": "japan",
+  "kyoto-demachiyanagi-kamo-walk": "japan",
+  "kyoto-fushimi-sake-district-walk": "japan",
+  "osaka-sumiyoshi-retro-tram-route": "japan",
+  "kyoto-saga-arashiyama-morning-backstreets": "japan",
+  "kyoto-nishijin-machiya-lanes": "japan",
   ...EXTRA_GUIDE_COUNTRY_MAP,
 };
 
 // Related guides for cross-linking
 const RELATED_GUIDES: Record<string, string[]> = {
-  "japan-esim": ["korea-esim", "taiwan-esim", "how-to-setup-esim", "pocket-wifi-vs-esim-japan"],
+  "japan-esim": ["korea-esim", "taiwan-esim", "quiet-tokyo-neighborhoods", "pocket-wifi-vs-esim-japan"],
   "korea-esim": ["japan-esim", "taiwan-esim", "esim-compatible-phones"],
-  "thailand-esim": ["vietnam-esim", "cambodia-esim", "asia-travel-connectivity"],
+  "thailand-esim": ["indonesia-esim", "philippines-esim", "esim-for-solo-travel", "greece-esim"],
   "usa-esim": ["canada-esim", "hawaii-esim", "esim-data-plans-explained"],
   "uk-esim": ["france-esim", "europe-esim", "esim-for-business-travel"],
   "france-esim": ["italy-esim", "spain-esim", "europe-esim"],
   "italy-esim": ["france-esim", "greece-esim", "europe-esim"],
   "spain-esim": ["portugal-esim", "france-esim", "europe-esim"],
   "germany-esim": ["switzerland-esim", "france-esim", "europe-esim"],
-  "australia-esim": ["new-zealand-esim", "singapore-esim", "esim-iphone-setup"],
+  "australia-esim": ["esim-for-backpackers", "esim-for-solo-travel", "hawaii-esim", "indonesia-esim"],
   "singapore-esim": ["malaysia-esim", "indonesia-esim", "asia-travel-connectivity"],
   "taiwan-esim": ["japan-esim", "hong-kong-esim", "china-esim"],
   "vietnam-esim": ["thailand-esim", "cambodia-esim", "asia-travel-connectivity"],
-  "indonesia-esim": ["malaysia-esim", "singapore-esim", "asia-travel-connectivity"],
+  "indonesia-esim": ["thailand-esim", "philippines-esim", "esim-for-solo-travel", "greece-esim"],
   "how-to-setup-esim": ["esim-iphone-setup", "esim-android-setup", "first-time-esim"],
   "esim-compatible-phones": ["esim-iphone-setup", "esim-android-setup", "esim-troubleshooting"],
   "esim-troubleshooting": ["how-to-setup-esim", "esim-compatible-phones", "first-time-esim"],
@@ -119,6 +170,57 @@ const RELATED_GUIDES: Record<string, string[]> = {
   "first-time-esim": ["how-to-setup-esim", "esim-compatible-phones", "esim-data-plans-explained"],
   "wifi-vs-esim": ["esim-vs-sim-card", "travel-internet-options", "pocket-wifi-vs-esim-japan"],
   "europe-esim": ["france-esim", "italy-esim", "spain-esim", "germany-esim"],
+  "esim-for-road-trips": ["best-esim-for-north-america", "australia-esim", "new-zealand-esim", "iceland-esim", "esim-hotspot-tethering"],
+  "hawaii-esim": ["esim-for-solo-travel", "greece-esim", "philippines-esim", "guam-esim"],
+  "guam-esim": ["hawaii-esim", "esim-for-honeymoon", "esim-for-solo-travel", "travel-internet-options"],
+  "croatia-esim": ["greece-esim", "cruise-travel-esim", "best-esim-for-europe", "travel-internet-options"],
+  "czech-republic-esim": ["best-esim-for-europe", "europe-esim", "sweden-esim", "travel-internet-options"],
+  "sweden-esim": ["best-esim-for-europe", "europe-esim", "czech-republic-esim", "travel-internet-options"],
+  "south-africa-esim": ["kenya-esim", "esim-for-road-trips", "travel-internet-options", "how-much-data-do-i-need-for-travel"],
+  "kenya-esim": ["south-africa-esim", "esim-for-road-trips", "travel-internet-options", "how-much-data-do-i-need-for-travel"],
+  "nepal-esim": ["how-much-data-do-i-need-for-travel", "travel-internet-options", "iceland-esim", "esim-for-road-trips"],
+  "greece-esim": ["best-esim-for-europe", "esim-for-solo-travel", "hawaii-esim", "cruise-travel-esim"],
+  "philippines-esim": ["best-esim-for-asia", "indonesia-esim", "greece-esim", "hawaii-esim"],
+  "sri-lanka-esim": ["best-esim-for-asia", "esim-for-honeymoon", "how-much-data-do-i-need-for-travel", "travel-internet-options"],
+  "morocco-esim": ["south-africa-esim", "travel-internet-options", "how-much-data-do-i-need-for-travel", "esim-for-road-trips"],
+  "esim-for-honeymoon": ["hawaii-esim", "greece-esim", "philippines-esim", "guam-esim"],
+  "esim-for-backpackers": ["thailand-esim", "indonesia-esim", "philippines-esim", "australia-esim"],
+  "esim-for-solo-travel": ["thailand-esim", "indonesia-esim", "hawaii-esim", "greece-esim"],
+  "ueno-to-yanaka-walk": ["quiet-tokyo-neighborhoods", "yanaka-nezu-sendagi-walk", "nezu-sendagi-morning-walk", "japan-esim"],
+  "nezu-sendagi-morning-walk": ["yanaka-nezu-sendagi-walk", "ueno-to-yanaka-walk", "rainy-day-tokyo-neighborhoods", "japan-esim"],
+  "monzen-nakacho-fukagawa-walk": ["kiyosumi-shirakawa-walk", "quiet-tokyo-neighborhoods", "rainy-day-tokyo-neighborhoods", "japan-esim"],
+  "asakusa-kuramae-sumida-walk": ["kuramae-walk", "tokyo-tram-line-stops", "quiet-tokyo-neighborhoods", "japan-esim"],
+  "oji-asukayama-tram-walk": ["tokyo-tram-line-stops", "quiet-tokyo-neighborhoods", "rainy-day-tokyo-neighborhoods", "japan-esim"],
+  "nishi-nippori-yanaka-walk": ["ueno-to-yanaka-walk", "yanaka-nezu-sendagi-walk", "quiet-tokyo-neighborhoods", "japan-esim"],
+  "sendagi-yomise-dori-walk": ["nezu-sendagi-morning-walk", "rainy-day-tokyo-neighborhoods", "yanaka-nezu-sendagi-walk", "japan-esim"],
+  "morishita-kiyosumi-walk": ["kiyosumi-shirakawa-walk", "monzen-nakacho-fukagawa-walk", "quiet-tokyo-neighborhoods", "japan-esim"],
+  "ryogoku-kuramae-walk": ["asakusa-kuramae-sumida-walk", "kuramae-walk", "quiet-tokyo-neighborhoods", "japan-esim"],
+  "machiya-arakawa-tram-walk": ["oji-asukayama-tram-walk", "tokyo-tram-line-stops", "rainy-day-tokyo-neighborhoods", "japan-esim"],
+  "hebi-michi-nezu-shrine-walk": ["yanaka-nezu-sendagi-walk", "nezu-sendagi-morning-walk", "quiet-tokyo-neighborhoods", "japan-esim"],
+  "yanaka-cemetery-and-cafe-walk": ["nishi-nippori-yanaka-walk", "ueno-to-yanaka-walk", "quiet-tokyo-neighborhoods", "japan-esim"],
+  "kiyosumi-garden-coffee-roasters-walk": ["kiyosumi-shirakawa-walk", "morishita-kiyosumi-walk", "quiet-tokyo-neighborhoods", "japan-esim"],
+  "kuramae-bridge-and-craft-walk": ["kuramae-walk", "ryogoku-kuramae-walk", "asakusa-kuramae-sumida-walk", "japan-esim"],
+  "waseda-omokagebashi-tram-walk": ["tokyo-tram-line-stops", "oji-asukayama-tram-walk", "machiya-arakawa-tram-walk", "japan-esim"],
+  "tokyo-morning-walks": ["quiet-tokyo-neighborhoods", "nezu-sendagi-morning-walk", "kichijoji-inokashira-park-morning", "japan-esim"],
+  "tokyo-local-transit-half-day": ["tokyo-tram-line-stops", "oji-asukayama-tram-walk", "machiya-arakawa-tram-walk", "japan-esim"],
+  "tokyo-waterfront-slow-route": ["kiyosumi-shirakawa-walk", "monzen-nakacho-fukagawa-walk", "asakusa-kuramae-sumida-walk", "japan-esim"],
+  "tokyo-old-town-hillside-walk": ["yanaka-nezu-sendagi-walk", "kagurazaka-backstreets-walk", "ueno-to-yanaka-walk", "japan-esim"],
+  "tokyo-station-based-short-stays": ["tokyo-morning-walks", "kuramae-walk", "kiyosumi-shirakawa-walk", "japan-esim"],
+  "tokyo-markets-cafes-local-streets": ["jimbocho-kanda-booktown-walk", "tokyo-station-based-short-stays", "travel-apps-esim", "japan-esim"],
+  "kichijoji-inokashira-park-morning": ["quiet-tokyo-neighborhoods", "kiyosumi-shirakawa-walk", "rainy-day-tokyo-neighborhoods", "japan-esim"],
+  "kagurazaka-backstreets-walk": ["quiet-tokyo-neighborhoods", "yanaka-nezu-sendagi-walk", "rainy-day-tokyo-neighborhoods", "japan-esim"],
+  "jimbocho-kanda-booktown-walk": ["quiet-tokyo-neighborhoods", "kuramae-walk", "travel-apps-esim", "japan-esim"],
+  "nakameguro-daikanyama-side-streets": ["quiet-tokyo-neighborhoods", "kuramae-walk", "rainy-day-tokyo-neighborhoods", "japan-esim"],
+  "shibamata-retro-day-trip": ["quiet-tokyo-neighborhoods", "tokyo-tram-line-stops", "ueno-to-yanaka-walk", "japan-esim"],
+  "seoul-morning-walks": ["seoul-seongsu-side-streets-day", "korea-esim", "digital-nomad-esim", "travel-apps-esim"],
+  "seoul-seongsu-side-streets-day": ["korea-esim", "digital-nomad-esim", "esim-for-solo-travel", "travel-apps-esim"],
+  "kyoto-okazaki-canal-and-museums": ["japan-esim", "quiet-tokyo-neighborhoods", "rainy-day-tokyo-neighborhoods", "travel-apps-esim"],
+  "osaka-nakanoshima-riverside-day": ["japan-esim", "airport-connectivity-guide", "travel-apps-esim", "esim-for-business-travel"],
+  "kyoto-demachiyanagi-kamo-walk": ["japan-esim", "kyoto-okazaki-canal-and-museums", "travel-apps-esim", "quiet-tokyo-neighborhoods"],
+  "kyoto-fushimi-sake-district-walk": ["japan-esim", "kyoto-okazaki-canal-and-museums", "travel-apps-esim", "esim-for-business-travel"],
+  "osaka-sumiyoshi-retro-tram-route": ["japan-esim", "osaka-nakanoshima-riverside-day", "travel-apps-esim", "airport-connectivity-guide"],
+  "kyoto-saga-arashiyama-morning-backstreets": ["japan-esim", "kyoto-okazaki-canal-and-museums", "travel-apps-esim", "quiet-tokyo-neighborhoods"],
+  "kyoto-nishijin-machiya-lanes": ["japan-esim", "kyoto-okazaki-canal-and-museums", "travel-apps-esim", "rainy-day-tokyo-neighborhoods"],
 };
 
 const DATE_LABELS: Record<string, string> = {
@@ -142,17 +244,92 @@ const VIEW_PLANS_LABELS: Record<string, (country: string) => string> = {
   zh: (c) => `查看${c} eSIM套餐`,
 };
 
+const X_SECTION_LABELS: Record<string, string> = {
+  en: "Seen on X",
+  ja: "Xで見る",
+  ko: "X에서 보기",
+  zh: "在X上查看",
+};
+
+const MINOR_TRAVEL_GUIDE_SLUGS = [
+  "quiet-tokyo-neighborhoods",
+  "yanaka-nezu-sendagi-walk",
+  "kiyosumi-shirakawa-walk",
+  "kuramae-walk",
+  "tokyo-tram-line-stops",
+  "rainy-day-tokyo-neighborhoods",
+  "ueno-to-yanaka-walk",
+  "nezu-sendagi-morning-walk",
+  "monzen-nakacho-fukagawa-walk",
+  "asakusa-kuramae-sumida-walk",
+  "oji-asukayama-tram-walk",
+  "nishi-nippori-yanaka-walk",
+  "sendagi-yomise-dori-walk",
+  "morishita-kiyosumi-walk",
+  "ryogoku-kuramae-walk",
+  "machiya-arakawa-tram-walk",
+  "hebi-michi-nezu-shrine-walk",
+  "yanaka-cemetery-and-cafe-walk",
+  "kiyosumi-garden-coffee-roasters-walk",
+  "kuramae-bridge-and-craft-walk",
+  "waseda-omokagebashi-tram-walk",
+  "tokyo-morning-walks",
+  "tokyo-local-transit-half-day",
+  "tokyo-waterfront-slow-route",
+  "tokyo-old-town-hillside-walk",
+  "tokyo-station-based-short-stays",
+  "tokyo-markets-cafes-local-streets",
+  "kichijoji-inokashira-park-morning",
+  "kagurazaka-backstreets-walk",
+  "jimbocho-kanda-booktown-walk",
+  "nakameguro-daikanyama-side-streets",
+  "shibamata-retro-day-trip",
+  "seoul-morning-walks",
+  "seoul-seongsu-side-streets-day",
+  "kyoto-okazaki-canal-and-museums",
+  "osaka-nakanoshima-riverside-day",
+  "kyoto-demachiyanagi-kamo-walk",
+  "kyoto-fushimi-sake-district-walk",
+  "osaka-sumiyoshi-retro-tram-route",
+  "kyoto-saga-arashiyama-morning-backstreets",
+  "kyoto-nishijin-machiya-lanes",
+] as const;
+
+const MINOR_TRAVEL_HUB_LABELS: Record<string, { title: string; desc: string }> = {
+  en: {
+    title: "Explore more minor travel guides",
+    desc: "Browse quieter neighborhood walks, riverside half days, and low-key city routes for foreign travelers.",
+  },
+  ja: {
+    title: "マイナー観光ガイドをもっと見る",
+    desc: "静かな街歩き、川沿い半日、少しローカル寄りの都市ルートなどをまとめて見られます。",
+  },
+  ko: {
+    title: "소규모 여행 가이드를 더 보기",
+    desc: "조용한 동네 산책, 강변 반나절 코스, 덜 알려진 도시 루트를 한곳에서 볼 수 있습니다.",
+  },
+  zh: {
+    title: "查看更多小众旅行指南",
+    desc: "集中查看安静街区散步、河岸半日路线和更低调的城市行走内容。",
+  },
+};
+
+const MINOR_TRAVEL_JSONLD_SECTION: Record<string, string> = {
+  en: "Travel guide",
+  ja: "観光ガイド",
+  ko: "여행 가이드",
+  zh: "旅行指南",
+};
+
+const MINOR_TRAVEL_JSONLD_ABOUT: Record<string, string> = {
+  en: "Minor neighborhood guides and quieter city walks",
+  ja: "マイナー観光地と静かな街歩き",
+  ko: "소규모 동네 가이드와 조용한 산책 루트",
+  zh: "小众街区与安静散步路线",
+};
+
 // All guide slugs and their per-locale content
-const GUIDE_CONTENT: Record<string, Record<string, {
-  title: string;
-  description: string;
-  sections: { heading: string; body: string }[];
-  faq: { q: string; a: string }[];
-  ctaTitle: string;
-  ctaButton: string;
-  breadcrumbGuide: string;
-  breadcrumbHome: string;
-}>> = {
+const GUIDE_CONTENT: Record<string, Record<string, GuideArticleContent>> = {
   "japan-esim": {
     en: {
       title: "Japan eSIM Guide 2026 — Best Plans for Travelers",
@@ -238,17 +415,9 @@ const GUIDE_CONTENT: Record<string, Record<string, {
 };
 
 // Generic fallback content generator for guides without specific content
-function getGenericContent(slug: string, locale: string): {
-  title: string;
-  description: string;
-  sections: { heading: string; body: string }[];
-  faq: { q: string; a: string }[];
-  ctaTitle: string;
-  ctaButton: string;
-  breadcrumbGuide: string;
-  breadcrumbHome: string;
-} | null {
+function getGenericContent(slug: string, locale: string): GuideArticleContent | null {
   const extraGuideData = getExtraGuideContent(slug, locale as GuideLocale);
+  const extraGuideDefinition = getExtraGuideDefinition(slug);
 
   // Guide index CONTENT by locale for lookup
   const GUIDE_TITLES: Record<string, Record<string, { title: string; desc: string }>> = {
@@ -281,6 +450,7 @@ function getGenericContent(slug: string, locale: string): {
       "greece-esim": { title: "ギリシャのeSIMガイド 2026", desc: "ギリシャ旅行のeSIM完全ガイド。アテネ・サントリーニ島の通信環境とプラン比較。" },
       "mexico-esim": { title: "メキシコのeSIMガイド 2026", desc: "カンクン・メキシコシティのeSION完全ガイド。メキシコ旅行の通信環境とおすすめプラン。" },
       "new-zealand-esim": { title: "ニュージーランドのeSIMガイド 2026", desc: "NZ旅行のeSIM完全ガイド。オークランド・クライストチャーチとドライブ旅行の通信環境。" },
+      "iceland-esim": { title: "アイスランドのeSIMガイド 2026", desc: "リングロード、レイキャビク、郊外ドライブ向けに通信環境を比較するアイスランド旅行ガイド。" },
       "norway-esim": { title: "ノルウェーのeSIMガイド 2026", desc: "フィヨルド観光・オーロラ鑑賞のeSIMガイド。ノルウェー旅行の通信環境とプラン比較。" },
       "portugal-esim": { title: "ポルトガルのeSIMガイド 2026", desc: "リスボン・ポルトのeSIM完全ガイド。ポルトガル旅行とEUローミング対応プランを解説。" },
       "switzerland-esim": { title: "スイスのeSIMガイド 2026", desc: "スイス旅行のeSIM完全ガイド。アルプスと主要都市での通信環境とおすすめプラン。" },
@@ -340,6 +510,7 @@ function getGenericContent(slug: string, locale: string): {
       "greece-esim": { title: "Greece eSIM Guide 2026", desc: "Best eSIM plans for Greece. Coverage in Athens, Santorini, Mykonos and the islands." },
       "mexico-esim": { title: "Mexico eSIM Guide 2026", desc: "Best eSIM plans for Mexico. Coverage in Cancun, Mexico City, Playa del Carmen and beyond." },
       "new-zealand-esim": { title: "New Zealand eSIM Guide 2026", desc: "Best eSIM plans for New Zealand. Coverage for road trips, Auckland, Wellington and Queenstown." },
+      "iceland-esim": { title: "Iceland eSIM Guide 2026", desc: "Best eSIM plans for Iceland. Coverage for Ring Road drives, Reykjavik, and remote scenic routes." },
       "norway-esim": { title: "Norway eSIM Guide 2026", desc: "Best eSIM plans for Norway. Coverage in Oslo, Bergen and fjord regions." },
       "portugal-esim": { title: "Portugal eSIM Guide 2026", desc: "Best eSIM plans for Portugal. Coverage in Lisbon, Porto and EU roaming options." },
       "switzerland-esim": { title: "Switzerland eSIM Guide 2026", desc: "Best eSIM plans for Switzerland. Coverage in Zurich, Geneva, Bern and the Alps." },
@@ -375,6 +546,7 @@ function getGenericContent(slug: string, locale: string): {
       "thailand-esim": { title: "태국 eSIM 가이드 2026", desc: "태국 여행 최고의 eSIM 플랜. 방콕, 푸켓, 치앙마이 커버리지. 즉시 활성화, 합리적인 요금." },
       "usa-esim": { title: "미국 eSIM 가이드 2026", desc: "미국 여행 최고의 eSIM 플랜. 전국 4G/5G 커버리지. 최고 제공업체 비교." },
       "hawaii-esim": { title: "하와이 eSIM 가이드 2026", desc: "하와이 여행 최고의 eSIM 플랜. 오아후, 마우이, 빅아일랜드 커버리지." },
+      "iceland-esim": { title: "아이슬란드 eSIM 가이드 2026", desc: "링로드와 레이캬비크, 외곽 드라이브 기준으로 통신 환경을 비교하는 아이슬란드 여행 가이드." },
       "how-to-setup-esim": { title: "eSIM 설정 방법 — iPhone·Android 단계별 가이드", desc: "모든 기기에서 eSIM 설정 완벽 가이드. iPhone 및 Android 단계별 설명." },
       "esim-compatible-phones": { title: "eSIM 호환 스마트폰 목록 2026", desc: "eSIM을 지원하는 스마트폰 전체 목록. 내 기기 호환 여부를 확인하세요." },
       "esim-troubleshooting": { title: "eSIM 연결 안 됨? 문제 해결 가이드", desc: "일반적인 eSIM 문제 해결: 연결 불가, QR 코드 스캔 오류, 서비스 없음, 느린 속도. 단계별 해결책." },
@@ -386,6 +558,7 @@ function getGenericContent(slug: string, locale: string): {
       "thailand-esim": { title: "泰国eSIM指南 2026", desc: "泰国旅行最佳eSIM套餐。覆盖曼谷、普吉岛、清迈。即时激活，实惠价格。" },
       "usa-esim": { title: "美国eSIM指南 2026", desc: "美国旅行最佳eSIM套餐。全国4G/5G覆盖。对比顶级服务商。" },
       "hawaii-esim": { title: "夏威夷eSIM指南 2026", desc: "夏威夷旅行最佳eSIM套餐。覆盖欧胡岛、茂宜岛、大岛等夏威夷群岛。" },
+      "iceland-esim": { title: "冰岛eSIM指南 2026", desc: "适合环岛公路、雷克雅未克与偏远风景路线的冰岛旅行eSIM对比指南。" },
       "how-to-setup-esim": { title: "eSIM设置方法 — iPhone·Android逐步指南", desc: "任何设备上的eSIM设置完全指南。iPhone和Android分步说明。" },
       "esim-compatible-phones": { title: "eSIM兼容手机列表 2026", desc: "支持eSIM的智能手机完整列表。查看您的手机是否兼容。" },
       "esim-troubleshooting": { title: "eSIM无法连接？故障排除指南", desc: "解决常见eSIM问题：无法连接、二维码无法扫描、无服务、速度慢。逐步解决方案。" },
@@ -402,6 +575,196 @@ function getGenericContent(slug: string, locale: string): {
   const isJa = locale === "ja";
   const isKo = locale === "ko";
   const isZh = locale === "zh";
+
+  if (locale === "en" && extraGuideDefinition) {
+    const isCountry = extraGuideDefinition.category === "country";
+    const isReview = slug.endsWith("-review");
+    const isComparison =
+      slug.startsWith("best-") ||
+      slug.includes("-vs-") ||
+      slug.includes("fair-use") ||
+      slug.includes("phone-number") ||
+      slug.includes("regional-");
+    const isUseCase = slug.startsWith("esim-for-") || slug.startsWith("travel-");
+
+    const sections = isCountry
+      ? [
+          {
+            heading: `Why ${guideData.title.replace(" 2026", "")} deserves a dedicated comparison`,
+            body: `${guideData.desc}\n\nFor country-specific travel eSIM searches, the real question is rarely just "which plan is cheapest?" Travelers usually want to know whether the plan will work on arrival, whether the network is strong enough for maps and ride apps, and whether the package fits the actual trip length instead of looking good only on a pricing table.`,
+          },
+          {
+            heading: "How to choose the right data size and validity",
+            body: "The best plan size depends on how you travel inside the destination. A short city break with messaging, maps, restaurant searches, and translation often stays in the lower data ranges. Multi-stop trips, hotspot use, heavier photo uploads, and long travel days usually justify a larger plan.\n\nValidity matters just as much as raw data. A cheaper package can stop looking cheap if it expires halfway through the trip or forces a top-up during the most inconvenient part of the itinerary.",
+          },
+          {
+            heading: "When a local country plan beats a regional option",
+            body: "If most of the trip stays inside one country, a dedicated local-style travel eSIM is often easier to price correctly. Regional plans make more sense when you are crossing borders or want one fallback plan across several stops. The simplest way to choose is to look at how fixed your route is: stable single-country trips usually reward local plans, while flexible itineraries reward regional coverage.",
+          },
+          {
+            heading: "Arrival-day mistakes that cause the most friction",
+            body: "The most common mistakes are activating too early, underestimating data usage, forgetting to check device compatibility, and assuming every airport or hotel Wi-Fi network will be good enough to fall back on. If arrival logistics matter, travelers should think about the first hour first: immigration, transport, hotel check-in, messaging, and navigation all put more pressure on connectivity than a pricing table suggests.",
+          },
+          {
+            heading: "What changes if you need hotspot, backup internet, or remote work",
+            body: "Trips that involve tethering to a laptop, uploading work files, or relying on backup connectivity need more than a basic sightseeing plan. In those cases, hotspot support, realistic throttling behavior, and how easy it is to recover setup instructions after purchase become more important than the lowest headline price.\n\nThat is why country guides should not only list plans, but also help the traveler understand whether the destination is being used for a city break, a work trip, a road trip, or a more remote itinerary.",
+          },
+          {
+            heading: "How to avoid overbuying or underbuying on destination pages",
+            body: "Many travelers lose money by solving the wrong problem. They either buy too much data for a short, light-usage trip, or they buy too little for an itinerary that clearly includes hotspot use, heavy transfers, and long mobile-only days. A better rule is to match the plan to the highest-stress part of the trip instead of the average day.\n\nIf one airport arrival, one long rail day, or one rural transfer could disrupt the whole itinerary, it is usually worth buying enough validity and data to cover that moment comfortably rather than gambling on the cheapest package.",
+          },
+          {
+            heading: "How to narrow down faster before buying",
+            body: "A practical shortlist starts with four checks: route, trip length, expected data appetite, and whether the trip depends on hotspot or backup connectivity. Once those are clear, it becomes much easier to decide whether this destination needs a small short-stay plan, a larger country package, or a regional option instead.\n\nAutoWiFi Travel is structured to make that narrowing-down process easier by linking this destination guide with setup articles, regional comparison pages, and country plan pages rather than leaving the traveler with one isolated overview.",
+          },
+          {
+            heading: "What to prepare before departure if this is your first eSIM for this destination",
+            body: "If this is your first time using a travel eSIM for this route, the safest preparation is simple: confirm device support, install before departure if the plan allows it, keep a copy of the QR or order details, and know whether the plan starts on installation or first connection. Those small checks remove most of the panic travelers feel when they land and need data immediately.\n\nThe more time-sensitive the arrival is, the more valuable that preparation becomes. Airport transfers, hotel check-ins, rail connections, and support messages are all much easier when the traveler has already solved the setup side before the trip begins.",
+          },
+        ]
+      : isReview
+      ? [
+          {
+            heading: `What travelers actually want from a ${guideData.title.replace(" 2026", "")} review`,
+            body: `${guideData.desc}\n\nReview searches are rarely just about curiosity. Most travelers are trying to decide whether this service is reliable enough to trust on an active trip, whether the app and setup flow feel simple, and whether there are obvious trade-offs around speed, hotspot rules, pricing clarity, or support after purchase.`,
+          },
+          {
+            heading: "Where a provider like this can work well",
+            body: "A review is most useful when it explains the trip types the provider fits best. Some services are better for short city trips, some for broader regional travel, and others for travelers who value app polish over the absolute lowest price. Looking at the fit by trip style usually tells you more than looking at brand familiarity alone.",
+          },
+          {
+            heading: "Where the service can fall short",
+            body: "Travelers should also expect review pages to be honest about the limits. Common weak points include unclear fair-use behavior, weaker value on high-data trips, confusing activation timing, or less attractive pricing once you compare the validity period and data size side by side.\n\nA useful review should make those trade-offs visible before purchase instead of letting the traveler discover them during the trip.",
+          },
+          {
+            heading: "What to compare before making a decision",
+            body: "The best comparison points are not just price and destination coverage. Travelers should also compare hotspot support, setup recovery, whether the plan is data-only, how quickly the service is likely to help when something goes wrong, and whether a country-specific alternative fits the route better.",
+          },
+          {
+            heading: "Who this type of service fits best",
+            body: "Some providers are better for convenience-first travelers who want a smooth purchase and setup experience. Others fit budget-led buyers who are willing to optimize more aggressively. A review page becomes more valuable when it helps the reader self-identify instead of pretending one service is universally best.",
+          },
+          {
+            heading: "How to use the review without over-trusting it",
+            body: "The safest way to use a review is as a shortlist tool. Use it to understand the strengths, spot the weak points, and then compare that provider against a country guide, a regional comparison, and a setup-related article before buying. That approach is much stronger than treating any single review as the whole answer.",
+          },
+        ]
+      : [
+          {
+            heading: `What ${guideData.title.replace(" 2026", "")} means in real trip planning`,
+            body: `${guideData.desc}\n\nSearches like this usually happen close to the buying decision. The traveler is trying to reduce uncertainty: what matters most, what can be ignored, and which mistakes would be annoying enough to damage the trip. That means the article needs to answer the decision, not just define the term.`,
+          },
+          {
+            heading: "The variables that actually change the answer",
+            body: "The right choice usually depends on trip length, number of destinations, expected data use, hotspot needs, and how much arrival-day friction the traveler can tolerate. Two plans that look similar on price can behave very differently once validity, throttling, tethering, or recovery after setup are factored in.",
+          },
+          {
+            heading: "Common mistakes travelers make with this topic",
+            body: "The biggest mistake is optimizing too early around one variable, usually price. Travelers also get stuck when they assume hotel Wi-Fi, airport SIM counters, or roaming passes will be good enough backups without checking how those options behave under real arrival conditions.\n\nA better decision usually comes from looking at the trip sequence first and the plan labels second.",
+          },
+          {
+            heading: "When this matters most by trip type",
+            body: isUseCase
+              ? "This topic becomes more important when the trip style changes the stakes. Solo travel, family travel, business arrivals, study abroad, backpacking, and longer stays each shift what counts as a good eSIM choice. A plan that works well for a weekend city break may be a poor fit for a work trip or a multi-stop route."
+              : isComparison
+              ? "This topic matters most when the traveler is comparing two valid options that solve different kinds of pain. One side may win on convenience, another on cost control, and another on flexibility across multiple stops. The article should help the traveler understand which trade-off is worth paying for."
+              : "This topic matters most when the traveler needs fewer surprises during the trip. The closer the trip gets to departure, the more useful it becomes to replace vague assumptions with a concrete decision framework around data, validity, and setup risk.",
+          },
+          {
+            heading: "A better way to make the decision before buying",
+            body: "A practical approach is to make the decision in order: route, trip length, likely data appetite, whether a phone number or hotspot is required, and what the fallback plan is if setup goes wrong. That sequence prevents many of the mistakes that come from comparing products too early and context too late.",
+          },
+          {
+            heading: "What the best version of this decision looks like on the ground",
+            body: "The strongest travel eSIM decision is the one that still feels right during the messy parts of the trip: a late arrival, a missed transfer, a hotel with weak Wi-Fi, a need to contact support, or a sudden change in route. Articles like this should therefore help travelers think beyond the purchase moment and toward the part of the trip where the wrong assumption becomes expensive.\n\nThat is also why deeper articles tend to perform better: they answer the practical question behind the keyword instead of just repeating the keyword itself.",
+          },
+          {
+            heading: "How this article should connect to the next step",
+            body: "Good travel eSIM content should not stop at explanation. It should bridge into country pages, setup help, and adjacent comparison guides so the traveler can keep narrowing down without restarting the research. That is the role these articles play inside AutoWiFi Travel: they turn a broad query into a shortlist that is easier to act on.",
+          },
+          {
+            heading: "A last pre-purchase checklist for travelers using this guide",
+            body: "Before leaving the page, a traveler should be able to answer five questions clearly: what the trip route is, how many days need coverage, how much data is realistically required, whether hotspot or a phone number matters, and what backup plan exists if setup fails. If the article does not help answer those questions, it is not yet doing enough useful work.\n\nThat is the standard worth aiming for on travel eSIM content. Strong articles reduce uncertainty, shorten the decision, and leave the traveler with fewer avoidable surprises after payment.",
+          },
+          ...(slug === "esim-hotspot-tethering"
+            ? [
+                {
+                  heading: "When hotspot rules matter more than the plan label",
+                  body: "Hotspot support becomes a real decision factor when the phone is expected to carry more than phone-only travel tasks. A traveler may need to tether a laptop at the station, upload photos from a hotel with weak Wi-Fi, share backup data with a second device, or keep a route running across multiple screens during transfers. In those scenarios, a plan that technically works on the handset can still be the wrong choice if tethering is blocked or restricted enough to make the fallback useless.\n\nThat is why hotspot guidance should not be treated like a small technical footnote. It changes the kind of plan a traveler needs, especially on business trips, family trips, long rail days, and any itinerary where the phone may need to act as the backup connection for something more important than casual browsing.",
+                },
+              ]
+            : []),
+          ...(slug === "how-much-data-do-i-need-for-travel"
+            ? [
+                {
+                  heading: "A more realistic way to estimate travel data",
+                  body: "A better travel estimate starts by splitting the trip into light, medium, and heavy days. Light days are mostly maps, messaging, translation, and ride-hailing. Medium days add more social uploads, hotel research, and constant background syncing. Heavy days are the ones with hotspot use, video calls, cloud backups, long airport waits, or train transfers where the phone becomes the main connection for everything.\n\nThat framing is more useful than chasing one universal number because many trips contain a few heavy days that completely change the right package size. A traveler might use very little data most of the week and still regret buying too small a plan because one work session, one transfer day, or one content-heavy day pushed the total far above the average.",
+                },
+              ]
+            : []),
+          ...(slug === "esim-vs-airport-sim"
+            ? [
+                {
+                  heading: "Why this comparison changes once you actually land",
+                  body: "The airport-SIM-versus-eSIM decision often feels different when the traveler is making it in real time after a flight. Queueing at a kiosk, dealing with unfamiliar pricing, relying on uncertain airport Wi-Fi, or solving connectivity while tired and carrying luggage can easily outweigh a small difference in headline cost. That is especially true for late-night arrivals, tight transfers, and trips where the first hour depends on maps, rail apps, ride-hailing, or messaging the accommodation.\n\nThat is why this keyword is not just a price comparison. It is really a friction comparison. The better choice is usually the one that removes more uncertainty from the exact part of the trip where connectivity matters first, not the one that merely looks cheaper in theory.",
+                },
+              ]
+            : []),
+        ];
+
+    const faq = isCountry
+      ? [
+          {
+            q: "How much data is usually enough for this destination?",
+            a: "Maps, messaging, translation, and everyday planning often fit within moderate data sizes, while hotspot use, heavy uploads, and remote work usually need a larger package. Matching the plan to the real trip style matters more than chasing the cheapest headline price.",
+          },
+          {
+            q: "Should I buy a country plan or a regional eSIM instead?",
+            a: "If you are mostly staying in one destination, a country-specific plan is often simpler and easier to price. If the route crosses borders or may still change, a regional plan can reduce friction.",
+          },
+          {
+            q: "What should I check before departure?",
+            a: "Check device compatibility, activation timing, validity, likely data usage, and whether you need hotspot support. Those details usually matter more than small price differences.",
+          },
+          {
+            q: "Why are arrival-day use cases so important?",
+            a: "Because the first hour after landing often includes maps, transport, hotel check-in, and time-sensitive communication. That is when weak fallback assumptions hurt the most.",
+          },
+        ]
+      : [
+          {
+            q: "Is there a minimum word count Google expects for articles like this?",
+            a: "No fixed minimum is published. What matters is whether the page satisfies the search intent with enough depth, clarity, and original value to help a real traveler make a decision.",
+          },
+          {
+            q: "What should a stronger travel eSIM article include?",
+            a: "It should explain the decision clearly, show the main trade-offs, call out common mistakes, and connect the reader to the next practical step such as country pages, setup guidance, or a closer comparison.",
+          },
+          {
+            q: "Why are these topics often harder than they look?",
+            a: "Because travelers are not just choosing a product. They are choosing how much uncertainty they want during arrival, transit, and daily movement. That makes context more important than headline pricing.",
+          },
+          {
+            q: "What makes content here more trustworthy over time?",
+            a: "Clear authorship, transparent editorial pages, honest trade-off explanations, and practical decision frameworks all help. Adding real traveler notes and tested examples makes it even stronger.",
+          },
+          {
+            q: "What would make these articles even stronger than they are now?",
+            a: "First-hand traveler notes, route-specific examples, screenshots from real setup flows, and support edge cases all add originality. Structural depth helps, but real-world detail is what turns a useful article into a distinctive one.",
+          },
+        ];
+
+    return {
+      title: guideData.title,
+      description: guideData.desc,
+      sections,
+      faq,
+      ctaTitle: "Compare travel eSIM options with more context",
+      ctaButton: "View eSIM Plans",
+      breadcrumbGuide: "Guides",
+      breadcrumbHome: "Home",
+    };
+  }
 
   return {
     title: guideData.title,
@@ -465,6 +828,7 @@ export async function generateStaticParams() {
     "international-calling-esim", "cruise-travel-esim", "digital-nomad-esim",
     "family-travel-esim", "esim-prepaid-vs-postpaid", "esim-security-tips",
     "airport-connectivity-guide", "esim-activation-timing", "travel-apps-esim",
+    ...MINOR_TRAVEL_GUIDE_SLUGS,
     ...SEO_PROGRAM_SLUGS,
     ...EXTRA_GUIDE_SLUGS,
   ]));
@@ -499,15 +863,145 @@ export async function generateMetadata({
         }
       : null;
   const content = priority ?? specific ?? program ?? generic;
+  const contentSource = priority
+    ? "priority"
+    : specific
+      ? "specific"
+      : program
+        ? "program"
+        : "generic";
 
   if (!content) return {};
+
+  const baseUrl = getBaseUrl();
+  const ogImage = content.heroImage
+    ? getGuideImageUrl(content.heroImage.src, { absolute: true, baseUrl })
+    : undefined;
 
   return generatePageMetadata({
     locale: locale as Locale,
     path: `/guide/${slug}`,
     title: content.title,
     description: content.description,
+    ogImage,
   });
+}
+
+// Photo files that are reused across multiple priority guides. Each shared
+// file is assigned to a single "owner" slug — every other slug that previously
+// shared the same physical photo will get a unique per-slug OG-generated
+// thumbnail instead, eliminating cross-article photo duplication.
+const PHOTO_OWNERS: Record<string, string> = {
+  "/guide/quiet-tokyo-neighborhoods/yanaka-street.jpg": "quiet-tokyo-neighborhoods",
+  "/guide/quiet-tokyo-neighborhoods/kiyosumi-garden.jpg": "monzen-nakacho-fukagawa-walk",
+  "/guide/kuramae-walk/kuramae-shrine.jpg": "kuramae-walk",
+  "/guide/yanaka-nezu-sendagi-walk/nezu-shrine.jpg": "yanaka-nezu-sendagi-walk",
+  "/guide/yanaka-nezu-sendagi-walk/yanaka-ginza.jpg": "yanaka-cemetery-and-cafe-walk",
+  "/guide/tokyo-tram-line-stops/toden-arakawa-asukayama.jpg": "tokyo-tram-line-stops",
+  "/guide/rainy-day-tokyo-neighborhoods/yomisedori.jpg": "rainy-day-tokyo-neighborhoods",
+};
+
+function buildOgGuideImage(
+  slug: string,
+  locale: string,
+  title: string,
+  description: string,
+): GuideMediaImage {
+  const baseUrl = getBaseUrl();
+  const abs = getGuideOgImageUrl({
+    baseUrl,
+    locale: locale as Locale,
+    path: `/guide/${slug}`,
+    title,
+    description,
+    kindLabel: "Travel Article",
+    footerLabel: title,
+  });
+  const src = abs.startsWith(baseUrl) ? abs.slice(baseUrl.length) : abs;
+  return {
+    src,
+    alt: title,
+    width: 1200,
+    height: 630,
+  };
+}
+
+function dedupeHeroImage(
+  slug: string,
+  locale: string,
+  title: string,
+  description: string,
+  heroImage: GuideMediaImage | undefined,
+): GuideMediaImage | undefined {
+  if (!heroImage) return heroImage;
+  const owner = PHOTO_OWNERS[heroImage.src];
+  if (owner && owner !== slug) {
+    return buildOgGuideImage(slug, locale, title, description);
+  }
+  return heroImage;
+}
+
+function dedupeGallery(
+  slug: string,
+  gallery: GuideMediaImage[] | undefined,
+  heroImage: GuideMediaImage | undefined,
+): GuideMediaImage[] | undefined {
+  if (!gallery || gallery.length === 0) return gallery;
+  const seen = new Set<string>();
+  if (heroImage) seen.add(heroImage.src);
+  const result: GuideMediaImage[] = [];
+  for (const img of gallery) {
+    // Drop gallery images that duplicate the hero or appear earlier in the list,
+    // and drop shared photos owned by another slug.
+    const owner = PHOTO_OWNERS[img.src];
+    if (owner && owner !== slug) continue;
+    if (seen.has(img.src)) continue;
+    seen.add(img.src);
+    result.push(img);
+  }
+  return result;
+}
+
+function renderGuideImage(image: GuideMediaImage, priority = false) {
+  const imageSrc = getGuideImageUrl(image.src);
+  const shouldBypassOptimization =
+    shouldProxyGuideImage(image.src) ||
+    /^https?:\/\//.test(image.src) ||
+    image.src.startsWith("/api/");
+
+  return (
+    <figure
+      key={`${image.src}-${image.alt}`}
+      style={{ margin: 0, background: "#fff", border: "1px solid #e5e7eb", borderRadius: "1rem", overflow: "hidden" }}
+    >
+      <Image
+        src={imageSrc}
+        alt={image.alt}
+        width={image.width}
+        height={image.height}
+        priority={priority}
+        unoptimized={shouldBypassOptimization}
+        style={{ display: "block", width: "100%", height: "auto" }}
+      />
+      {(image.caption || image.creditLabel) && (
+        <figcaption style={{ padding: "0.85rem 1rem 1rem", fontSize: "0.9rem", lineHeight: 1.6, color: "#4b5563" }}>
+          {image.caption && <span>{image.caption}</span>}
+          {image.creditLabel && (
+            <>
+              {image.caption ? <span> </span> : null}
+              {image.creditUrl ? (
+                <a href={image.creditUrl} target="_blank" rel="noreferrer" style={{ color: "#0369a1" }}>
+                  {image.creditLabel}
+                </a>
+              ) : (
+                <span>{image.creditLabel}</span>
+              )}
+            </>
+          )}
+        </figcaption>
+      )}
+    </figure>
+  );
 }
 
 export default async function GuideArticlePage({
@@ -538,15 +1032,42 @@ export default async function GuideArticlePage({
         }
       : null;
   const content = priority ?? specific ?? program ?? generic;
+  const contentSource = priority
+    ? "priority"
+    : specific
+      ? "specific"
+      : program
+        ? "program"
+        : "generic";
 
   if (!content) notFound();
 
-  const BASE_URL = "https://autowifi-travel.com";
+  const BASE_URL = getBaseUrl();
   const articleUrl = `${BASE_URL}/${locale}/guide/${slug}`;
-  const articleImageUrl = `${BASE_URL}/opengraph-image`;
 
-  const dates = GUIDE_DATES[slug] || DEFAULT_DATES;
+  // Deduplicate photos so each article has its own visual identity. Shared
+  // photo files are kept only on their owner slug; everywhere else we fall
+  // back to a per-slug generated OG image.
+  const dedupedHero = dedupeHeroImage(slug, locale, content.title, content.description, content.heroImage);
+  const dedupedGallery = dedupeGallery(slug, content.gallery, dedupedHero);
+  const renderContent: typeof content = {
+    ...content,
+    heroImage: dedupedHero,
+    gallery: dedupedGallery,
+  };
 
+  const articleImageUrl = dedupedHero
+    ? (/^https?:\/\//.test(dedupedHero.src)
+        ? dedupedHero.src
+        : getGuideImageUrl(dedupedHero.src, { absolute: true, baseUrl: BASE_URL }))
+    : getDefaultOgImageUrl(BASE_URL);
+  const isMinorTravelGuide = MINOR_TRAVEL_GUIDE_SLUGS.includes(
+    slug as (typeof MINOR_TRAVEL_GUIDE_SLUGS)[number]
+  );
+  const hubLabels = MINOR_TRAVEL_HUB_LABELS[locale] ?? MINOR_TRAVEL_HUB_LABELS.en;
+  const ctaHref = GUIDE_TO_COUNTRY[slug] ? `/${locale}/esim/${GUIDE_TO_COUNTRY[slug]}` : `/${locale}/esim`;
+
+  const dates = resolveGuideDates(contentSource, slug, content);
   const relatedSlugs =
     PRIORITY_GUIDE_RELATED[slug] ??
     RELATED_GUIDES[slug] ??
@@ -562,6 +1083,18 @@ export default async function GuideArticlePage({
         locale={locale}
         datePublished={dates.published}
         dateModified={dates.modified}
+        authorName="AutoWiFi Travel Editorial Team"
+        authorUrl={getAuthorProfileUrl(locale as Locale)}
+        articleSection={
+          isMinorTravelGuide
+            ? (MINOR_TRAVEL_JSONLD_SECTION[locale] ?? MINOR_TRAVEL_JSONLD_SECTION.en)
+            : "Travel eSIM Guide"
+        }
+        aboutName={
+          isMinorTravelGuide
+            ? (MINOR_TRAVEL_JSONLD_ABOUT[locale] ?? MINOR_TRAVEL_JSONLD_ABOUT.en)
+            : "Travel eSIM"
+        }
       />
       <FaqJsonLd items={content.faq.map((item) => ({ question: item.q, answer: item.a }))} />
       <BreadcrumbJsonLd
@@ -592,6 +1125,22 @@ export default async function GuideArticlePage({
         </time>
       </header>
 
+      <ContentTrustPanel locale={locale as Locale} updatedAt={dates.modified} />
+
+      {renderContent.heroImage ? (
+        <section style={{ marginBottom: "2rem" }}>
+          {renderGuideImage(renderContent.heroImage, true)}
+        </section>
+      ) : null}
+
+      {renderContent.gallery?.length ? (
+        <section style={{ marginBottom: "2.25rem" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "1rem" }}>
+            {renderContent.gallery.map((image) => renderGuideImage(image))}
+          </div>
+        </section>
+      ) : null}
+
       {/* Sections */}
       {content.sections.map((section, i) => (
         <section key={i} style={{ marginBottom: "2rem" }}>
@@ -601,6 +1150,20 @@ export default async function GuideArticlePage({
           <p style={{ lineHeight: 1.8, color: "#374151", whiteSpace: "pre-line" }}>{section.body}</p>
         </section>
       ))}
+
+      {content.xEmbeds?.length ? (
+        <section style={{ marginBottom: "2.5rem", padding: "1.25rem", background: "#f8fafc", borderRadius: "1rem", border: "1px solid #e5e7eb" }}>
+          <h2 style={{ fontSize: "1.375rem", fontWeight: 600, marginBottom: "0.75rem" }}>
+            {content.xSectionTitle ?? X_SECTION_LABELS[locale] ?? X_SECTION_LABELS.en}
+          </h2>
+          {content.xSectionDescription ? (
+            <p style={{ marginBottom: "1rem", lineHeight: 1.8, color: "#4b5563" }}>
+              {content.xSectionDescription}
+            </p>
+          ) : null}
+          <XEmbeddedPosts embeds={content.xEmbeds} />
+        </section>
+      ) : null}
 
       {/* FAQ */}
       {content.faq.length > 0 && (
@@ -659,12 +1222,30 @@ export default async function GuideArticlePage({
         </section>
       )}
 
+      {isMinorTravelGuide ? (
+        <section style={{ marginBottom: "2rem", padding: "1.25rem", background: "#f8fafc", borderRadius: "0.75rem", border: "1px solid #e5e7eb" }}>
+          <h2 style={{ fontSize: "1.25rem", fontWeight: 600, marginBottom: "0.75rem" }}>
+            {hubLabels.title}
+          </h2>
+          <p style={{ marginBottom: "1rem", lineHeight: 1.8, color: "#4b5563" }}>
+            {hubLabels.desc}
+          </p>
+          <Link
+            href={`/${locale}/guide/minor-travel-guides`}
+            style={{ display: "inline-flex", alignItems: "center", gap: "0.45rem", textDecoration: "none", color: "#0369a1", fontWeight: 700 }}
+          >
+            <span>{hubLabels.title}</span>
+            <span>→</span>
+          </Link>
+        </section>
+      ) : null}
+
       {/* CTA */}
       <section style={{ background: "linear-gradient(135deg, #0ea5e9, #0369a1)", borderRadius: "1rem", padding: "2rem", textAlign: "center", color: "#fff" }}>
         <h2 style={{ fontSize: "1.5rem", fontWeight: 700, marginBottom: "0.75rem" }}>{content.ctaTitle}</h2>
         <p style={{ marginBottom: "1.25rem", opacity: 0.9 }}>{content.description.slice(0, 100)}...</p>
         <Link
-          href={`/${locale}/esim`}
+          href={ctaHref}
           style={{ display: "inline-block", background: "#fff", color: "#0369a1", fontWeight: 700, padding: "0.75rem 2rem", borderRadius: "2rem", textDecoration: "none", fontSize: "1rem" }}
         >
           {content.ctaButton} →

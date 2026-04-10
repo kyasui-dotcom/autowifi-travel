@@ -6,33 +6,33 @@ const RELATED_ARTICLES: Record<Locale, { articles: RelatedArticle[]; title: stri
   ja: {
     title: "関連ガイド",
     articles: [
-      { slug: "italy-esim", title: "イタリアeSIMガイド" },
-      { slug: "turkey-esim", title: "トルコeSIMガイド" },
-      { slug: "europe-travel-connectivity", title: "ヨーロッパ旅行の通信ガイド" },
+      { slug: "best-esim-for-europe", title: "ヨーロッパeSIMおすすめ比較" },
+      { slug: "croatia-esim", title: "クロアチアeSIMガイド" },
+      { slug: "hawaii-esim", title: "ハワイeSIMガイド" },
     ],
   },
   en: {
     title: "Related Guides",
     articles: [
-      { slug: "italy-esim", title: "Italy eSIM Guide" },
-      { slug: "turkey-esim", title: "Turkey eSIM Guide" },
-      { slug: "europe-travel-connectivity", title: "Europe Travel Connectivity Guide" },
+      { slug: "best-esim-for-europe", title: "Best eSIM for Europe 2026" },
+      { slug: "croatia-esim", title: "Croatia eSIM Guide 2026" },
+      { slug: "hawaii-esim", title: "Hawaii eSIM Guide 2026" },
     ],
   },
   ko: {
     title: "관련 가이드",
     articles: [
-      { slug: "italy-esim", title: "이탈리아 eSIM 가이드" },
-      { slug: "turkey-esim", title: "터키 eSIM 가이드" },
-      { slug: "europe-travel-connectivity", title: "유럽 여행 통신 가이드" },
+      { slug: "best-esim-for-europe", title: "유럽 eSIM 추천 비교" },
+      { slug: "croatia-esim", title: "크로아티아 eSIM 가이드" },
+      { slug: "hawaii-esim", title: "하와이 eSIM 가이드" },
     ],
   },
   zh: {
     title: "相关指南",
     articles: [
-      { slug: "italy-esim", title: "意大利eSIM指南" },
-      { slug: "turkey-esim", title: "土耳其eSIM指南" },
-      { slug: "europe-travel-connectivity", title: "欧洲旅行通信指南" },
+      { slug: "best-esim-for-europe", title: "欧洲eSIM推荐比较" },
+      { slug: "croatia-esim", title: "克罗地亚eSIM指南" },
+      { slug: "hawaii-esim", title: "夏威夷eSIM指南" },
     ],
   },
 };
@@ -41,7 +41,7 @@ const CONTENT: Record<Locale, ArticleContent> = {
   ja: {
     title: "ギリシャeSIMガイド - アテネ・サントリーニ島のカバレッジとEUローミング",
     subtitle: "EU圏内ローミング対応eSIMでギリシャの島々を快適に巡ろう",
-    intro: "ギリシャはエーゲ海の美しい島々と古代遺跡で世界中の旅行者を魅了する人気の観光地です。アテネを中心にモバイル通信が整備されており、eSIMを利用すればアテネ国際空港到着後すぐにGoogle Mapsでアクロポリスへのルート検索やフェリーの時刻表確認が可能です。EU圏内ローミング対応プランなら、ギリシャからイタリアやトルコへの周遊旅行にも便利です。",
+    intro: "ギリシャはエーゲ海の美しい島々と古代遺跡で世界中の旅行者を魅了する人気の観光地です。アテネを中心にモバイル通信が整備されており、eSIMを利用すればアテネ国際空港到着後すぐにGoogle Mapsでアクロポリスへのルート検索やフェリーの時刻表確認が可能です。EU圏内ローミング対応プランなら、ギリシャからイタリアやトルコへの周遊旅行にも便利です。本記事ではEU圏内ローミング対応eSIMでギリシャの島々を快適に巡ろう・ギリシャのモバイル通信事情・おすすめのeSIMプランなどを2026年時点の情報に基づき、旅行者目線で具体的に解説しています。",
     sections: [
       {
         title: "ギリシャのモバイル通信事情",

@@ -1,7 +1,12 @@
 import React from 'react';
-import { getBaseUrl } from '@/lib/seo';
+import { getBaseUrl, getDefaultOgImageUrl } from '@/lib/seo';
 
-const DEFAULT_PRICE_VALID_UNTIL = '2027-12-31';
+function getDefaultPriceValidUntil(): string {
+  // Dynamically set to ~1 year from today so Rich Results stays valid
+  const d = new Date();
+  d.setFullYear(d.getFullYear() + 1);
+  return d.toISOString().slice(0, 10);
+}
 
 // ── Generic renderer ────────────────────────────────────────
 
@@ -55,9 +60,9 @@ export function ProductJsonLd({
   priceValidUntil,
 }: ProductJsonLdProps) {
   const baseUrl = getBaseUrl();
-  const normalizedImage = image ?? `${baseUrl}/opengraph-image`;
+  const normalizedImage = image ?? getDefaultOgImageUrl(baseUrl);
   const resolvedBrand = brand ?? seller ?? 'AutoWiFi Travel';
-  const resolvedPriceValidUntil = priceValidUntil ?? DEFAULT_PRICE_VALID_UNTIL;
+  const resolvedPriceValidUntil = priceValidUntil ?? getDefaultPriceValidUntil();
 
   const data: Record<string, unknown> = {
     '@context': 'https://schema.org',
@@ -165,7 +170,11 @@ interface ArticleJsonLdProps {
   datePublished?: string;
   dateModified?: string;
   authorName?: string;
+  authorUrl?: string;
+  authorType?: 'Person' | 'Organization';
   publisherName?: string;
+  articleSection?: string;
+  aboutName?: string;
 }
 
 export function ArticleJsonLd({
@@ -177,10 +186,14 @@ export function ArticleJsonLd({
   datePublished,
   dateModified,
   authorName = 'AutoWiFi Travel',
+  authorUrl,
+  authorType = 'Organization',
   publisherName = 'AutoWiFi Travel',
+  articleSection = 'Travel eSIM Guide',
+  aboutName = 'Travel eSIM',
 }: ArticleJsonLdProps) {
   const baseUrl = getBaseUrl();
-  const normalizedImage = image ?? `${baseUrl}/opengraph-image`;
+  const normalizedImage = image ?? getDefaultOgImageUrl(baseUrl);
 
   const data: Record<string, unknown> = {
     '@context': 'https://schema.org',
@@ -193,8 +206,9 @@ export function ArticleJsonLd({
       '@id': url,
     },
     author: {
-      '@type': 'Organization',
+      '@type': authorType,
       name: authorName,
+      ...(authorUrl ? { url: authorUrl } : {}),
     },
     publisher: {
       '@type': 'Organization',
@@ -207,10 +221,10 @@ export function ArticleJsonLd({
     },
     url,
     isAccessibleForFree: true,
-    articleSection: 'Travel eSIM Guide',
+    articleSection,
     about: {
       '@type': 'Thing',
-      name: 'Travel eSIM',
+      name: aboutName,
     },
     ...(locale ? { inLanguage: locale } : {}),
     ...(datePublished ? { datePublished } : {}),
@@ -223,13 +237,44 @@ export function ArticleJsonLd({
 // ── Organization JSON-LD ────────────────────────────────────
 
 export function OrganizationJsonLd() {
+  const baseUrl = getBaseUrl();
   const data = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
+    '@id': `${baseUrl}/#organization`,
     name: 'AutoWiFi Travel',
-    url: 'https://autowifi-travel.com',
-    logo: 'https://autowifi-travel.com/favicon.ico',
+    url: baseUrl,
+    logo: {
+      '@type': 'ImageObject',
+      url: `${baseUrl}/icon.png`,
+    },
     description: 'Affordable travel eSIM for 200+ countries. Stay connected wherever you go.',
+    email: 'support@autowifi.travel',
+    knowsAbout: [
+      'Travel eSIM',
+      'eSIM setup',
+      'Travel connectivity',
+      'Travel data plans',
+    ],
+    publishingPrinciples: `${baseUrl}/en/editorial-policy`,
+    subjectOf: [
+      {
+        '@type': 'AboutPage',
+        url: `${baseUrl}/en/about`,
+      },
+      {
+        '@type': 'AboutPage',
+        url: `${baseUrl}/en/how-we-review-esims`,
+      },
+      {
+        '@type': 'ProfilePage',
+        url: `${baseUrl}/en/authors/autowifi-editorial-team`,
+      },
+    ],
+    areaServed: {
+      '@type': 'Place',
+      name: 'Worldwide',
+    },
     contactPoint: {
       '@type': 'ContactPoint',
       email: 'support@autowifi.travel',
@@ -319,6 +364,148 @@ export function FaqJsonLd({ items }: FaqJsonLdProps) {
         text: item.answer,
       },
     })),
+  };
+
+  return <JsonLd data={data} />;
+}
+
+interface CollectionPageJsonLdProps {
+  url: string;
+  title: string;
+  description: string;
+  locale?: string;
+  dateModified?: string;
+  itemList?: Array<{ name: string; url: string }>;
+  aboutName?: string;
+}
+
+export function CollectionPageJsonLd({
+  url,
+  title,
+  description,
+  locale,
+  dateModified,
+  itemList,
+  aboutName = 'Travel eSIM plans',
+}: CollectionPageJsonLdProps) {
+  const baseUrl = getBaseUrl();
+  const data: Record<string, unknown> = {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: title,
+    description,
+    url,
+    isPartOf: {
+      '@type': 'WebSite',
+      name: 'AutoWiFi Travel',
+      url: baseUrl,
+    },
+    about: {
+      '@type': 'Thing',
+      name: aboutName,
+    },
+    ...(locale ? { inLanguage: locale } : {}),
+    ...(dateModified ? { dateModified } : {}),
+  };
+
+  if (itemList?.length) {
+    data.mainEntity = {
+      '@type': 'ItemList',
+      itemListElement: itemList.map((item, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        name: item.name,
+        url: item.url,
+      })),
+    };
+  }
+
+  return <JsonLd data={data} />;
+}
+
+interface ProfilePageJsonLdProps {
+  url: string;
+  name: string;
+  description: string;
+  entityType?: 'Person' | 'Organization';
+  image?: string;
+  locale?: string;
+  dateCreated?: string;
+  dateModified?: string;
+  knowsAbout?: string[];
+}
+
+export function ProfilePageJsonLd({
+  url,
+  name,
+  description,
+  entityType = 'Organization',
+  image,
+  locale,
+  dateCreated,
+  dateModified,
+  knowsAbout,
+}: ProfilePageJsonLdProps) {
+  const baseUrl = getBaseUrl();
+  const data: Record<string, unknown> = {
+    '@context': 'https://schema.org',
+    '@type': 'ProfilePage',
+    url,
+    mainEntity: {
+      '@type': entityType,
+      name,
+      description,
+      url,
+      ...(image ? { image } : {}),
+      ...(knowsAbout?.length ? { knowsAbout } : {}),
+    },
+    ...(locale ? { inLanguage: locale } : {}),
+    ...(dateCreated ? { dateCreated } : {}),
+    ...(dateModified ? { dateModified } : {}),
+    isPartOf: {
+      '@type': 'WebSite',
+      name: 'AutoWiFi Travel',
+      url: baseUrl,
+    },
+  };
+
+  return <JsonLd data={data} />;
+}
+
+interface AboutPageJsonLdProps {
+  url: string;
+  title: string;
+  description: string;
+  locale?: string;
+  dateModified?: string;
+}
+
+export function AboutPageJsonLd({
+  url,
+  title,
+  description,
+  locale,
+  dateModified,
+}: AboutPageJsonLdProps) {
+  const baseUrl = getBaseUrl();
+  const data: Record<string, unknown> = {
+    '@context': 'https://schema.org',
+    '@type': 'AboutPage',
+    name: title,
+    description,
+    url,
+    about: {
+      '@type': 'Organization',
+      name: 'AutoWiFi Travel',
+      url: baseUrl,
+    },
+    isPartOf: {
+      '@type': 'WebSite',
+      name: 'AutoWiFi Travel',
+      url: baseUrl,
+    },
+    ...(locale ? { inLanguage: locale } : {}),
+    ...(dateModified ? { dateModified } : {}),
   };
 
   return <JsonLd data={data} />;

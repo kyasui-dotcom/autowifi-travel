@@ -1,5 +1,4 @@
-import type { Metadata } from "next";
-import type { Viewport } from "next";
+import type { Metadata, Viewport } from "next";
 import Script from "next/script";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -9,14 +8,7 @@ import WebVitals from "@/lib/components/WebVitals";
 import "../globals.css";
 import styles from "./layout.module.css";
 
-export const viewport: Viewport = {
-  width: "device-width",
-  initialScale: 1,
-  maximumScale: 5,
-  themeColor: "#0ea5e9",
-};
-
-const GA_MEASUREMENT_ID = "G-9QDD3E917Y";
+const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ?? "G-9QDD3E917Y";
 const GSC_VERIFICATION = process.env.NEXT_PUBLIC_GSC_VERIFICATION;
 
 const SUPPORTED_LOCALES = ["en", "ja", "ko", "zh"] as const;
@@ -34,6 +26,12 @@ const NAV_LABELS: Record<Locale, { home: string; esim: string; app: string; guid
   ja: { home: "ホーム", esim: "eSIMプラン", app: "WiFiアプリ", guide: "ガイド", brandDescription: "200以上の国と地域で使えるお手頃なトラベルeSIM。どこでもつながる。", footerProduct: "プロダクト", footerSupport: "サポート", footerLegal: "法的情報" },
   ko: { home: "홈", esim: "eSIM 플랜", app: "WiFi 앱", guide: "가이드", brandDescription: "200개 이상의 국가에서 사용 가능한 여행용 eSIM. 어디서나 연결.", footerProduct: "제품", footerSupport: "지원", footerLegal: "법적 정보" },
   zh: { home: "首页", esim: "eSIM套餐", app: "WiFi应用", guide: "指南", brandDescription: "覆盖200多个国家的旅行eSIM。随时随地保持连接。", footerProduct: "产品", footerSupport: "支持", footerLegal: "法律信息" },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#0b1220",
 };
 
 export async function generateMetadata({
@@ -182,7 +180,9 @@ export default async function LocaleLayout({
                 window.dataLayer = window.dataLayer || [];
                 function gtag(){dataLayer.push(arguments);}
                 gtag('js', new Date());
-                gtag('config', '${GA_MEASUREMENT_ID}');
+                gtag('config', '${GA_MEASUREMENT_ID}', {
+                  page_path: window.location.pathname,
+                });
               `}
             </Script>
           </>

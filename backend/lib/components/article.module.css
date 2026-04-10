@@ -155,8 +155,132 @@
   box-shadow: var(--shadow-md);
 }
 
+.nextStepsSection {
+  margin-top: var(--space-2xl);
+  margin-bottom: var(--space-2xl);
+  padding: var(--space-xl);
+  background:
+    linear-gradient(180deg, rgba(14, 165, 233, 0.08), rgba(255, 255, 255, 0.96)),
+    var(--bg-card);
+  border: 1px solid rgba(14, 165, 233, 0.16);
+  border-radius: var(--radius-lg);
+}
+
+.nextStepsHeader {
+  max-width: 48rem;
+  margin-bottom: var(--space-lg);
+}
+
+.nextStepsTitle {
+  margin: 0 0 var(--space-sm);
+  font-size: var(--font-size-2xl);
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.nextStepsIntro {
+  margin: 0;
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+
+.nextStepsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--space-md);
+}
+
+.nextStepCard,
+.nextStepCardFeatured {
+  display: grid;
+  gap: var(--space-sm);
+  min-height: 100%;
+  padding: var(--space-lg);
+  border-radius: var(--radius-md);
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+
+.nextStepCard {
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid var(--border-default);
+  box-shadow: 0 10px 22px rgba(15, 23, 42, 0.04);
+}
+
+.nextStepCardFeatured {
+  background: linear-gradient(135deg, #0284c7, #0ea5e9);
+  border: 1px solid rgba(14, 165, 233, 0.55);
+  box-shadow: 0 16px 28px rgba(2, 132, 199, 0.18);
+}
+
+.nextStepCard:hover,
+.nextStepCardFeatured:hover {
+  transform: translateY(-3px);
+}
+
+.nextStepCard:hover {
+  box-shadow: var(--shadow-md);
+  border-color: rgba(14, 165, 233, 0.32);
+}
+
+.nextStepCardFeatured:hover {
+  box-shadow: 0 20px 34px rgba(2, 132, 199, 0.24);
+}
+
+.nextStepBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  min-height: 1.6rem;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.nextStepCard .nextStepBadge {
+  background: rgba(14, 165, 233, 0.12);
+  color: #0369a1;
+}
+
+.nextStepCardFeatured .nextStepBadge {
+  background: rgba(255, 255, 255, 0.18);
+  color: white;
+}
+
+.nextStepTitle {
+  font-size: var(--font-size-lg);
+  line-height: 1.5;
+}
+
+.nextStepCard .nextStepTitle {
+  color: var(--text-primary);
+}
+
+.nextStepCardFeatured .nextStepTitle {
+  color: white;
+}
+
+.nextStepDesc {
+  line-height: 1.7;
+}
+
+.nextStepCard .nextStepDesc {
+  color: var(--text-secondary);
+}
+
+.nextStepCardFeatured .nextStepDesc {
+  color: rgba(255, 255, 255, 0.88);
+}
+
 @media (max-width: 768px) {
   .heroTitle {
     font-size: var(--font-size-2xl);
+  }
+
+  .nextStepsSection {
+    padding: var(--space-lg);
   }
 }

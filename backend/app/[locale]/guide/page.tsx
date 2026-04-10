@@ -1,7 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { generatePageMetadata } from "@/lib/seo";
+import { generatePageMetadata, getGuideOgImageUrl } from "@/lib/seo";
 import { ItemListJsonLd } from "@/lib/components/JsonLd";
+import {
+  getAboutPageUrl,
+  getAuthorProfileUrl,
+  getEditorialPolicyUrl,
+  getReviewMethodologyUrl,
+} from "@/lib/content/eeat";
 import { getExtraGuideItems } from "@/lib/guides/extraGuides";
 import styles from "./page.module.css";
 
@@ -26,12 +32,34 @@ interface PageContent {
 }
 
 const FEATURED_GUIDE_SLUGS = [
+  "international-esim",
+  "global-esim",
+  "esim-vs-roaming",
+  "esim-unlimited-data",
+  "esim-for-honeymoon",
+  "esim-for-backpackers",
+  "esim-for-solo-travel",
+  "airport-connectivity-guide",
+  "esim-for-layovers",
+  "esim-vs-airport-sim",
+  "esim-for-road-trips",
+  "travel-internet-options",
+  "dual-sim-esim",
+  "save-money-roaming",
+  "how-much-data-do-i-need-for-travel",
+  "esim-compatible-phones",
+  "esim-vs-sim-card",
+  "esim-prepaid-vs-postpaid",
+  "international-calling-esim",
+  "esim-speed-test",
   "best-esim-providers",
   "cheapest-esim-plans",
   "best-esim-for-europe",
-  "best-esim-for-asia",
-  "esim-vs-airport-sim",
-  "how-much-data-do-i-need-for-travel",
+  "best-esim-for-southeast-asia",
+  "best-esim-for-north-america",
+  "regional-esim-vs-country-esim",
+  "esim-fair-use-policy",
+  "travel-esim-with-phone-number",
 ] as const;
 
 const CONTENT: Record<Locale, PageContent> = {
@@ -98,6 +126,7 @@ const CONTENT: Record<Locale, PageContent> = {
       { slug: "asia-travel-connectivity", title: "アジア旅行の通信ガイド", desc: "アジア各国の通信インフラとeSIM事情", category: "topic" },
       { slug: "europe-travel-connectivity", title: "ヨーロッパ旅行の通信ガイド", desc: "EU圏の通信ルールとeSIM活用法", category: "topic" },
       { slug: "best-esim-providers", title: "海外eSIMおすすめ比較", desc: "主要eSIMサービスの比較と選び方", category: "topic" },
+      { slug: "international-esim", title: "international eSIM比較", desc: "海外旅行向けの global・regional・local eSIM を比較", category: "topic" },
       { slug: "travel-data-usage-tips", title: "旅行中のデータ節約術", desc: "モバイルデータを賢く使うテクニック", category: "topic" },
       { slug: "international-calling-esim", title: "eSIMでの国際通話", desc: "eSIMを使った海外通話の方法と料金", category: "topic" },
       { slug: "cruise-travel-esim", title: "クルーズ旅行のeSIM", desc: "クルーズ旅行での通信手段ガイド", category: "topic" },
@@ -127,8 +156,8 @@ const CONTENT: Record<Locale, PageContent> = {
     categoryHowto: "How-to & Setup Guides",
     categoryTopic: "Tips & Resources",
     guides: [
-      { slug: "japan-esim", title: "Japan eSIM Guide", desc: "Everything about eSIM for traveling in Japan", category: "country" },
-      { slug: "korea-esim", title: "South Korea eSIM Guide", desc: "High-speed 5G and eSIM tips for Korea", category: "country" },
+      { slug: "japan-esim", title: "Japan eSIM Guide", desc: "Tokyo arrivals, airport rail, hotel Wi-Fi backup, and eSIM setup for Japan travel", category: "country" },
+      { slug: "korea-esim", title: "South Korea eSIM Guide", desc: "Seoul arrivals, AREX transfers, hotel Wi-Fi backup, and high-speed 5G eSIM tips", category: "country" },
       { slug: "thailand-esim", title: "Thailand eSIM Guide", desc: "Best value eSIM plans for Thailand travel", category: "country" },
       { slug: "usa-esim", title: "USA eSIM Guide", desc: "eSIM coverage and plans for the United States", category: "country" },
       { slug: "uk-esim", title: "UK eSIM Guide", desc: "eSIM guide for traveling in the United Kingdom", category: "country" },
@@ -137,7 +166,7 @@ const CONTENT: Record<Locale, PageContent> = {
       { slug: "spain-esim", title: "Spain eSIM Guide", desc: "eSIM guide for traveling across Spain", category: "country" },
       { slug: "germany-esim", title: "Germany eSIM Guide", desc: "eSIM and connectivity in Germany", category: "country" },
       { slug: "australia-esim", title: "Australia eSIM Guide", desc: "eSIM coverage across Australia's vast territory", category: "country" },
-      { slug: "singapore-esim", title: "Singapore eSIM Guide", desc: "High-speed eSIM for the city-state", category: "country" },
+      { slug: "singapore-esim", title: "Singapore eSIM Guide", desc: "High-speed eSIM for Changi arrivals, stopovers, and city travel", category: "country" },
       { slug: "taiwan-esim", title: "Taiwan eSIM Guide", desc: "eSIM guide for Taiwan travel", category: "country" },
       { slug: "vietnam-esim", title: "Vietnam eSIM Guide", desc: "Affordable eSIM plans for Vietnam", category: "country" },
       { slug: "indonesia-esim", title: "Indonesia eSIM Guide", desc: "eSIM for Bali, Jakarta and beyond", category: "country" },
@@ -149,8 +178,8 @@ const CONTENT: Record<Locale, PageContent> = {
       { slug: "india-esim", title: "India eSIM Guide", desc: "eSIM and connectivity in India", category: "country" },
       { slug: "hawaii-esim", title: "Hawaii eSIM Guide", desc: "eSIM for Hawaiian island hopping", category: "country" },
       { slug: "guam-esim", title: "Guam eSIM Guide", desc: "eSIM for Guam resort travel", category: "country" },
-      { slug: "hong-kong-esim", title: "Hong Kong eSIM Guide", desc: "High-speed 5G eSIM in Hong Kong", category: "country" },
-      { slug: "dubai-esim", title: "Dubai & UAE eSIM Guide", desc: "eSIM for Dubai and UAE travel", category: "country" },
+      { slug: "hong-kong-esim", title: "Hong Kong eSIM Guide", desc: "5G eSIM for airport arrivals, Airport Express transfers, and Macau day trips", category: "country" },
+      { slug: "dubai-esim", title: "Dubai & UAE eSIM Guide", desc: "eSIM for Dubai red-eye arrivals, UAE stopovers, and hotel transfers", category: "country" },
       { slug: "europe-esim", title: "Europe Multi-Country eSIM", desc: "One eSIM for traveling across Europe", category: "country" },
       { slug: "cambodia-esim", title: "Cambodia eSIM Guide", desc: "eSIM for Angkor Wat and Phnom Penh travel", category: "country" },
       { slug: "greece-esim", title: "Greece eSIM Guide", desc: "eSIM for Greek islands and Athens", category: "country" },
@@ -166,7 +195,7 @@ const CONTENT: Record<Locale, PageContent> = {
       { slug: "esim-compatible-phones", title: "eSIM Compatible Phones", desc: "Complete list of eSIM-supported devices", category: "howto" },
       { slug: "esim-troubleshooting", title: "eSIM Troubleshooting", desc: "Common problems and how to fix them", category: "howto" },
       { slug: "esim-vs-sim-card", title: "eSIM vs Physical SIM Card", desc: "Detailed comparison of eSIM and traditional SIM", category: "howto" },
-      { slug: "esim-for-business-travel", title: "eSIM for Business Travel", desc: "eSIM guide for business travelers", category: "howto" },
+      { slug: "esim-for-business-travel", title: "eSIM for Business Travel", desc: "Secure mobile data for business arrivals, airport rail, hotel Wi-Fi backup, and transit days", category: "howto" },
       { slug: "first-time-esim", title: "First-Time eSIM Guide", desc: "Complete beginner's guide to eSIM", category: "howto" },
       { slug: "esim-data-plans-explained", title: "eSIM Data Plans Explained", desc: "Understanding data, validity and coverage", category: "howto" },
       { slug: "travel-internet-options", title: "Travel Internet Options", desc: "Compare eSIM, WiFi, roaming, and SIM cards", category: "howto" },
@@ -178,6 +207,11 @@ const CONTENT: Record<Locale, PageContent> = {
       { slug: "asia-travel-connectivity", title: "Asia Travel Connectivity", desc: "Internet infrastructure across Asia", category: "topic" },
       { slug: "europe-travel-connectivity", title: "Europe Travel Connectivity", desc: "EU roaming rules and eSIM tips", category: "topic" },
       { slug: "best-esim-providers", title: "Best Travel eSIM Providers", desc: "Compare leading travel eSIM services", category: "topic" },
+      { slug: "international-esim", title: "International eSIM Guide", desc: "Compare local, regional, and global eSIM options for travel", category: "topic" },
+      { slug: "global-esim", title: "Global eSIM Guide", desc: "Understand when a worldwide eSIM beats local and regional travel plans", category: "topic" },
+      { slug: "esim-vs-roaming", title: "eSIM vs Roaming", desc: "Compare roaming convenience with travel eSIM price control before you buy", category: "topic" },
+      { slug: "best-esim-for-north-america", title: "Best eSIM for North America", desc: "Compare USA, Canada, and cross-border eSIM options for North America trips", category: "topic" },
+      { slug: "esim-unlimited-data", title: "Unlimited Data eSIM Guide", desc: "Learn when unlimited travel eSIM plans are actually worth it and what limits to check first", category: "topic" },
       { slug: "travel-data-usage-tips", title: "Save Data While Traveling", desc: "Tips to reduce mobile data usage", category: "topic" },
       { slug: "international-calling-esim", title: "International Calls with eSIM", desc: "Making calls abroad with eSIM", category: "topic" },
       { slug: "cruise-travel-esim", title: "eSIM for Cruise Travel", desc: "Staying connected on cruise ships", category: "topic" },
@@ -185,7 +219,8 @@ const CONTENT: Record<Locale, PageContent> = {
       { slug: "family-travel-esim", title: "eSIM for Family Travel", desc: "Managing eSIM for the whole family", category: "topic" },
       { slug: "esim-prepaid-vs-postpaid", title: "Prepaid vs Postpaid eSIM", desc: "Understanding eSIM pricing models", category: "topic" },
       { slug: "esim-security-tips", title: "eSIM Security Tips", desc: "eSIM safety and privacy protection", category: "topic" },
-      { slug: "airport-connectivity-guide", title: "Airport Connectivity Guide", desc: "WiFi and connectivity at major airports", category: "topic" },
+      { slug: "airport-connectivity-guide", title: "Airport Connectivity Guide", desc: "Compare airport WiFi, airport rail, hotel transfers, and first-hour arrival connectivity in major hub cities", category: "topic" },
+      { slug: "esim-for-layovers", title: "Best eSIM for Layovers", desc: "Compare Tokyo, Seoul, Hong Kong, Singapore, and Dubai for stopovers, overnight arrivals, airport rail, and hotel transfers", category: "topic" },
       { slug: "esim-activation-timing", title: "When to Activate eSIM", desc: "Before departure vs after arrival", category: "topic" },
       { slug: "travel-apps-esim", title: "Best Travel Apps for eSIM", desc: "Must-have apps for eSIM travelers", category: "topic" },
       { slug: "esim-iphone-setup", title: "iPhone eSIM Setup Guide", desc: "Complete step-by-step iPhone eSIM activation", category: "howto" },
@@ -258,6 +293,7 @@ const CONTENT: Record<Locale, PageContent> = {
       { slug: "asia-travel-connectivity", title: "아시아 여행 통신 가이드", desc: "아시아 각국의 통신 인프라", category: "topic" },
       { slug: "europe-travel-connectivity", title: "유럽 여행 통신 가이드", desc: "EU 로밍 규정과 eSIM 팁", category: "topic" },
       { slug: "best-esim-providers", title: "추천 여행 eSIM 비교", desc: "주요 여행 eSIM 서비스 비교", category: "topic" },
+      { slug: "international-esim", title: "international eSIM 가이드", desc: "여행용 local·regional·global eSIM 비교", category: "topic" },
       { slug: "travel-data-usage-tips", title: "여행 중 데이터 절약법", desc: "모바일 데이터 절약 팁", category: "topic" },
       { slug: "international-calling-esim", title: "eSIM 국제 전화", desc: "eSIM으로 해외 통화하기", category: "topic" },
       { slug: "cruise-travel-esim", title: "크루즈 여행 eSIM", desc: "크루즈에서의 통신 수단", category: "topic" },
@@ -338,6 +374,7 @@ const CONTENT: Record<Locale, PageContent> = {
       { slug: "asia-travel-connectivity", title: "亚洲旅行通信指南", desc: "亚洲各国通信基础设施", category: "topic" },
       { slug: "europe-travel-connectivity", title: "欧洲旅行通信指南", desc: "EU漫游规则和eSIM技巧", category: "topic" },
       { slug: "best-esim-providers", title: "旅行eSIM推荐对比", desc: "主流旅行eSIM服务比较", category: "topic" },
+      { slug: "international-esim", title: "international eSIM 指南", desc: "比较旅行中的 local、regional 和 global eSIM", category: "topic" },
       { slug: "travel-data-usage-tips", title: "旅行省流量技巧", desc: "移动数据节省小贴士", category: "topic" },
       { slug: "international-calling-esim", title: "eSIM国际通话", desc: "用eSIM在海外打电话", category: "topic" },
       { slug: "cruise-travel-esim", title: "邮轮旅行eSIM", desc: "邮轮上的通信方案", category: "topic" },
@@ -372,6 +409,28 @@ export async function generateMetadata({
     path: "/guide",
     title: c.title,
     description: c.subtitle,
+    ogImage: getGuideOgImageUrl({
+      locale: locale as Locale,
+      path: "/guide",
+      title: c.title,
+      description: c.subtitle,
+      kindLabel:
+        locale === "ja"
+          ? "Guide Index"
+          : locale === "ko"
+            ? "Guide Index"
+            : locale === "zh"
+              ? "Guide Index"
+              : "Guide Index",
+      footerLabel:
+        locale === "ja"
+          ? "eSIM Travel Guides"
+          : locale === "ko"
+            ? "eSIM Travel Guides"
+            : locale === "zh"
+              ? "eSIM Travel Guides"
+              : "eSIM Travel Guides",
+    }),
   });
 }
 
@@ -411,6 +470,97 @@ export default async function GuidePage({
       <header className={styles.hero}>
         <h1 className={styles.heroTitle}>{c.title}</h1>
         <p className={styles.heroSubtitle}>{c.subtitle}</p>
+        <p className={styles.featuredSubtitle}>
+          {loc === "ja"
+            ? "執筆主体と更新方針は編集チームプロフィールと編集方針ページで確認できます。"
+            : loc === "ko"
+            ? "작성 주체와 업데이트 기준은 편집팀 프로필과 편집 정책 페이지에서 확인할 수 있습니다."
+            : loc === "zh"
+            ? "内容作者和更新规则可在编辑团队简介与编辑政策页面中查看。"
+            : "Authorship and update standards are disclosed on our editorial team profile and editorial policy pages."}
+        </p>
+        <div className={styles.heroActions}>
+          <Link href={getAboutPageUrl(loc)} className={styles.guideCard} prefetch={false}>
+            <h3 className={styles.guideTitle}>
+              {loc === "ja"
+                ? "AutoWiFi Travelについて"
+                : loc === "ko"
+                ? "AutoWiFi Travel 소개"
+                : loc === "zh"
+                ? "关于 AutoWiFi Travel"
+                : "About AutoWiFi Travel"}
+            </h3>
+            <p className={styles.guideDesc}>
+              {loc === "ja"
+                ? "このサイトが何を公開し、誰のために運営しているかを確認できます。"
+                : loc === "ko"
+                ? "이 사이트가 누구를 위해 어떤 정보를 제공하는지 확인할 수 있습니다."
+                : loc === "zh"
+                ? "了解本站为谁服务，以及提供哪些信息。"
+                : "See what this site publishes and who it is built to help."}
+            </p>
+          </Link>
+          <Link href={getReviewMethodologyUrl(loc)} className={styles.guideCard} prefetch={false}>
+            <h3 className={styles.guideTitle}>
+              {loc === "ja"
+                ? "eSIM比較・更新方法を見る"
+                : loc === "ko"
+                ? "eSIM 검토 방식 보기"
+                : loc === "zh"
+                ? "查看 eSIM 评估方式"
+                : "How we review eSIMs"}
+            </h3>
+            <p className={styles.guideDesc}>
+              {loc === "ja"
+                ? "比較基準、更新方針、確認しているポイントを公開しています。"
+                : loc === "ko"
+                ? "비교 기준, 업데이트 원칙, 점검 항목을 공개합니다."
+                : loc === "zh"
+                ? "公开比较标准、更新规则和检查项目。"
+                : "Review our criteria, update rules, and what we check before publishing."}
+            </p>
+          </Link>
+          <Link href={getAuthorProfileUrl(loc)} className={styles.guideCard} prefetch={false}>
+            <h3 className={styles.guideTitle}>
+              {loc === "ja"
+                ? "編集チームを見る"
+                : loc === "ko"
+                ? "편집팀 보기"
+                : loc === "zh"
+                ? "查看编辑团队"
+                : "Meet the editorial team"}
+            </h3>
+            <p className={styles.guideDesc}>
+              {loc === "ja"
+                ? "執筆主体と担当領域を公開しています。"
+                : loc === "ko"
+                ? "작성 주체와 담당 영역을 공개합니다."
+                : loc === "zh"
+                ? "公开作者主体和负责范围。"
+                : "See who maintains our guides and what they cover."}
+            </p>
+          </Link>
+          <Link href={getEditorialPolicyUrl(loc)} className={styles.guideCard} prefetch={false}>
+            <h3 className={styles.guideTitle}>
+              {loc === "ja"
+                ? "編集方針を見る"
+                : loc === "ko"
+                ? "편집 정책 보기"
+                : loc === "zh"
+                ? "查看编辑政策"
+                : "Read the editorial policy"}
+            </h3>
+            <p className={styles.guideDesc}>
+              {loc === "ja"
+                ? "更新基準と開示方針を確認できます。"
+                : loc === "ko"
+                ? "업데이트 기준과 고지 원칙을 확인할 수 있습니다."
+                : loc === "zh"
+                ? "了解更新标准和披露原则。"
+                : "Understand how content is reviewed, updated, and disclosed."}
+            </p>
+          </Link>
+        </div>
       </header>
 
       <section className={styles.categorySection}>
@@ -428,6 +578,50 @@ export default async function GuidePage({
               <span className={styles.readMore}>→</span>
             </Link>
           ))}
+        </div>
+      </section>
+
+      <section className={styles.categorySection}>
+        <h2 className={styles.categoryTitle}>
+          {loc === "ja"
+            ? "マイナー観光ガイド"
+            : loc === "ko"
+            ? "마이너 여행 가이드"
+            : loc === "zh"
+            ? "小众旅行指南"
+            : "Minor travel guides"}
+        </h2>
+        <p className={styles.featuredSubtitle}>
+          {loc === "ja"
+            ? "静かな街歩きや少しマイナーな半日ルートを都市横断でまとめた観光ハブです。外国人旅行者向けに実用性を重視しています。"
+            : loc === "ko"
+            ? "조용한 산책과 조금 덜 알려진 반나절 루트를 도시별로 모은 여행 허브입니다. 외국인 여행자를 기준으로 구성했습니다."
+            : loc === "zh"
+            ? "集中整理更安静的街区散步和稍微小众的半日路线，重点面向外国游客。"
+            : "A tourism-first hub for quieter neighborhood walks and low-key half-day routes built for foreign travelers."}
+        </p>
+        <div className={styles.guideGrid}>
+          <Link href={`/${loc}/guide/minor-travel-guides`} className={styles.guideCard}>
+            <h3 className={styles.guideTitle}>
+              {loc === "ja"
+                ? "マイナー観光ガイドを見る"
+                : loc === "ko"
+                ? "소규모 여행 가이드 보기"
+                : loc === "zh"
+                ? "查看小众旅行指南"
+                : "Explore minor travel guides"}
+            </h3>
+            <p className={styles.guideDesc}>
+              {loc === "ja"
+                ? "東京の静かな街歩きに加えて、ソウル、京都、大阪などの低圧な半日ルートも、写真とX引用付きで見られます。"
+                : loc === "ko"
+                ? "도쿄의 조용한 산책뿐 아니라 서울, 교토, 오사카의 반나절 루트도 사진과 X 인용과 함께 볼 수 있습니다."
+                : loc === "zh"
+                ? "从一个入口查看东京、首尔、京都、大阪等地更安静的半日路线，并配有图片和 X 引用。"
+                : "Browse quieter Tokyo routes plus newer Seoul, Kyoto, and Osaka half-day guides with photos and official X references."}
+            </p>
+            <span className={styles.readMore}>→</span>
+          </Link>
         </div>
       </section>
 

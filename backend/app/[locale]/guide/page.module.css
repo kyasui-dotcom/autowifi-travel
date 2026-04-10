@@ -54,6 +54,13 @@
   margin: 0 auto;
 }
 
+.heroActions {
+  margin-top: var(--space-xl);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--space-md);
+}
+
 /* ── Breadcrumb ───────────────────────────────────────────────── */
 .breadcrumb {
   max-width: var(--max-width);

@@ -1,12 +1,55 @@
 import type { Metadata } from "next";
-import ArticleLayout, { type Locale, type ArticleContent } from "@/lib/components/ArticleLayout";
+import ArticleLayout, { type Locale, type ArticleContent, type RelatedArticle } from "@/lib/components/ArticleLayout";
 import { generatePageMetadata } from "@/lib/seo";
+
+const RELATED: Record<Locale, { title: string; articles: RelatedArticle[] }> = {
+  ja: {
+    title: "リングロードや郊外移動前に比較したいガイド",
+    articles: [
+      { slug: "esim-for-road-trips", title: "ロードトリップ向けeSIMガイド" },
+      { slug: "new-zealand-esim", title: "ニュージーランドeSIMガイド" },
+      { slug: "australia-esim", title: "オーストラリアeSIMガイド" },
+      { slug: "travel-internet-options", title: "海外旅行のネット接続方法" },
+      { slug: "how-much-data-do-i-need-for-travel", title: "旅行に必要なデータ容量の目安" },
+    ],
+  },
+  en: {
+    title: "Compare More Before You Drive the Ring Road",
+    articles: [
+      { slug: "esim-for-road-trips", title: "Best eSIM for Road Trips" },
+      { slug: "new-zealand-esim", title: "New Zealand eSIM Guide" },
+      { slug: "australia-esim", title: "Australia eSIM Guide" },
+      { slug: "travel-internet-options", title: "Travel Internet Options" },
+      { slug: "how-much-data-do-i-need-for-travel", title: "How Much Data Do I Need for Travel?" },
+    ],
+  },
+  ko: {
+    title: "링로드와 외곽 이동 전에 함께 볼 가이드",
+    articles: [
+      { slug: "esim-for-road-trips", title: "로드트립용 eSIM 가이드" },
+      { slug: "new-zealand-esim", title: "뉴질랜드 eSIM 가이드" },
+      { slug: "australia-esim", title: "호주 eSIM 가이드" },
+      { slug: "travel-internet-options", title: "여행 인터넷 옵션 비교" },
+      { slug: "how-much-data-do-i-need-for-travel", title: "여행에 필요한 데이터 용량" },
+    ],
+  },
+  zh: {
+    title: "环岛与偏远路段出发前值得继续比较",
+    articles: [
+      { slug: "esim-for-road-trips", title: "自驾旅行eSIM指南" },
+      { slug: "new-zealand-esim", title: "新西兰eSIM指南" },
+      { slug: "australia-esim", title: "澳大利亚eSIM指南" },
+      { slug: "travel-internet-options", title: "旅行上网方式对比" },
+      { slug: "how-much-data-do-i-need-for-travel", title: "旅行需要多少流量？" },
+    ],
+  },
+};
 
 const CONTENT: Record<Locale, ArticleContent> = {
   ja: {
     title: "アイスランド旅行eSIMガイド - オーロラとリングロードで安心通信",
     subtitle: "レイキャビクから大自然の絶景スポットまでeSIMで接続",
-    intro: "アイスランドはオーロラ観賞、間欠泉、氷河、壮大な溶岩台地など他では体験できない絶景が集まる国です。スカンジナビアの中でも通信インフラが整備されており、主要観光ルート沿いではeSIMで安定した接続が利用できます。",
+    intro: "アイスランドはオーロラ観賞、間欠泉、氷河、壮大な溶岩台地など他では体験できない絶景が集まる国です。スカンジナビアの中でも通信インフラが整備されており、主要観光ルート沿いではeSIMで安定した接続が利用できます。本記事ではレイキャビクから大自然の絶景スポットまでeSIMで接続・アイスランドのモバイル通信事情・おすすめのeSIMプランなどを2026年時点の情報に基づき、旅行者目線で具体的に解説しています。",
     sections: [
       { title: "アイスランドのモバイル通信事情", body: "アイスランドの主要通信キャリアはSiminn、Vodafone Iceland（Nova）、TAL（Ice）の3社です。レイキャビクなどの都市部では5G/4G通信が利用でき、リングロード（国道1号線）沿いもほぼカバーされています。\n\n内陸のハイランド地帯（ランドマンナラウガル、クヴェルフィヨル等）や山岳地帯では電波が届かない場合があります。また、アイスランド北部や東部の辺境エリアでもカバレッジが限定的です。冬季はオーロラ観賞のため農村部に出かけることが多いですが、リングロード近辺は概ね接続可能です。\n\nアイスランドはEEA加盟国で、EU規制の影響を受けますが、日本からの旅行者には旅行用eSIMが最も経済的です。" },
       { title: "おすすめのeSIMプラン", body: "アイスランドはヨーロッパ最高峰クラスの物価を誇る国です。ローミングは非常に割高になるため、事前にeSIMを準備することを強くおすすめします。1週間のリングロード旅行なら5〜10GBが適切です。ナビゲーション、オーロラ予報、天気予報、SNS投稿で思ったよりデータ消費が増えます。\n\nAutoWiFi eSIMではアイスランド向けプランを提供しており、到着後すぐに使い始められます。レンタカーでのリングロード周遊では、カバレッジが途切れる可能性があるため、重要な情報は事前にオフラインでダウンロードしておくことが重要です。\n\nアイスランドを含むヨーロッパ全域プランも選択肢として検討できます。ノルウェーやデンマーク経由の旅程にも対応できます。" },
@@ -114,5 +157,5 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function Page({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const loc = (locale as Locale) || "en";
-  return <ArticleLayout locale={loc} slug="iceland-esim" content={CONTENT[loc]} />;
+  return <ArticleLayout locale={loc} slug="iceland-esim" content={CONTENT[loc]} relatedArticles={RELATED[loc].articles} relatedTitle={RELATED[loc].title} />;
 }

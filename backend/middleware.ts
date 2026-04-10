@@ -55,7 +55,12 @@ export function middleware(request: NextRequest) {
   );
 
   if (pathnameHasLocale) {
-    return NextResponse.next();
+    const matched = SUPPORTED_LOCALES.find(
+      (loc) => pathname === `/${loc}` || pathname.startsWith(`/${loc}/`)
+    );
+    const requestHeaders = new Headers(request.headers);
+    if (matched) requestHeaders.set("x-locale", matched);
+    return NextResponse.next({ request: { headers: requestHeaders } });
   }
 
   // Redirect to the preferred locale

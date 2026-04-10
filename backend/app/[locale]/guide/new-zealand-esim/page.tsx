@@ -4,34 +4,42 @@ import { generatePageMetadata } from "@/lib/seo";
 
 const RELATED_ARTICLES: Record<Locale, { articles: RelatedArticle[]; title: string }> = {
   ja: {
-    title: "関連ガイド",
+    title: "ロードトリップと国立公園前に見たいガイド",
     articles: [
       { slug: "australia-esim", title: "オーストラリアeSIMガイド" },
-      { slug: "travel-data-usage-tips", title: "旅行中のデータ使用量の目安" },
+      { slug: "iceland-esim", title: "アイスランドeSIMガイド" },
+      { slug: "esim-for-road-trips", title: "ロードトリップ向けeSIMガイド" },
+      { slug: "travel-internet-options", title: "海外旅行のネット接続方法" },
       { slug: "esim-troubleshooting", title: "eSIMトラブルシューティング" },
     ],
   },
   en: {
-    title: "Related Guides",
+    title: "Compare More Before You Drive Through Remote New Zealand",
     articles: [
       { slug: "australia-esim", title: "Australia eSIM Guide" },
-      { slug: "travel-data-usage-tips", title: "Travel Data Usage Tips" },
+      { slug: "iceland-esim", title: "Iceland eSIM Guide" },
+      { slug: "esim-for-road-trips", title: "Best eSIM for Road Trips" },
+      { slug: "travel-internet-options", title: "Travel Internet Options" },
       { slug: "esim-troubleshooting", title: "eSIM Troubleshooting" },
     ],
   },
   ko: {
-    title: "관련 가이드",
+    title: "로드트립과 국립공원 이동 전에 함께 볼 가이드",
     articles: [
       { slug: "australia-esim", title: "호주 eSIM 가이드" },
-      { slug: "travel-data-usage-tips", title: "여행 중 데이터 사용량 팁" },
+      { slug: "iceland-esim", title: "아이슬란드 eSIM 가이드" },
+      { slug: "esim-for-road-trips", title: "로드트립용 eSIM 가이드" },
+      { slug: "travel-internet-options", title: "여행 인터넷 옵션 비교" },
       { slug: "esim-troubleshooting", title: "eSIM 문제 해결" },
     ],
   },
   zh: {
-    title: "相关指南",
+    title: "自驾和国家公园出发前值得继续比较",
     articles: [
       { slug: "australia-esim", title: "澳大利亚eSIM指南" },
-      { slug: "travel-data-usage-tips", title: "旅行数据用量指南" },
+      { slug: "iceland-esim", title: "冰岛eSIM指南" },
+      { slug: "esim-for-road-trips", title: "自驾旅行eSIM指南" },
+      { slug: "travel-internet-options", title: "旅行上网方式对比" },
       { slug: "esim-troubleshooting", title: "eSIM故障排除" },
     ],
   },
@@ -41,7 +49,7 @@ const CONTENT: Record<Locale, ArticleContent> = {
   ja: {
     title: "ニュージーランドeSIMガイド - オークランド・クイーンズタウンのカバレッジと旅行者向けヒント",
     subtitle: "大自然の国ニュージーランドをeSIMで快適に旅しよう",
-    intro: "ニュージーランドは壮大な自然景観で知られる人気旅行先です。オークランドやウェリントンなどの都市部では高品質な4G LTE通信が利用でき、eSIMを使えばオークランド空港到着後すぐにGoogle Mapsでのナビやレンタカーの手配が可能です。ただし、ミルフォードサウンドや国立公園など一部のリモートエリアでは通信が限られるため、事前の準備が重要です。",
+    intro: "ニュージーランドは壮大な自然景観で知られる人気旅行先です。オークランドやウェリントンなどの都市部では高品質な4G LTE通信が利用でき、eSIMを使えばオークランド空港到着後すぐにGoogle Mapsでのナビやレンタカーの手配が可能です。ただし、ミルフォードサウンドや国立公園など一部のリモートエリアでは通信が限られるため、事前の準備が重要です。本記事では大自然の国ニュージーランドをeSIMで快適に旅しよう・ニュージーランドのモバイル通信事情・おすすめのeSIMプランなどを2026年時点の情報に基づき、旅行者目線で具体的に解説しています。",
     sections: [
       {
         title: "ニュージーランドのモバイル通信事情",
