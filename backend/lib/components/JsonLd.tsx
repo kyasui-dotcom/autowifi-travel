@@ -1,6 +1,11 @@
 import React from 'react';
 import { getBaseUrl, getDefaultOgImageUrl } from '@/lib/seo';
 
+/** Ensure date strings are full ISO 8601 datetime for Google structured data */
+function toIsoDateTime(date: string): string {
+  return date.length === 10 ? `${date}T00:00:00+00:00` : date;
+}
+
 function getDefaultPriceValidUntil(): string {
   // Dynamically set to ~1 year from today so Rich Results stays valid
   const d = new Date();
@@ -227,8 +232,8 @@ export function ArticleJsonLd({
       name: aboutName,
     },
     ...(locale ? { inLanguage: locale } : {}),
-    ...(datePublished ? { datePublished } : {}),
-    ...(dateModified ? { dateModified } : {}),
+    ...(datePublished ? { datePublished: toIsoDateTime(datePublished) } : {}),
+    ...(dateModified ? { dateModified: toIsoDateTime(dateModified) } : {}),
   };
 
   return <JsonLd data={data} />;
@@ -265,10 +270,6 @@ export function OrganizationJsonLd() {
       {
         '@type': 'AboutPage',
         url: `${baseUrl}/en/how-we-review-esims`,
-      },
-      {
-        '@type': 'ProfilePage',
-        url: `${baseUrl}/en/authors/autowifi-editorial-team`,
       },
     ],
     areaServed: {
@@ -405,7 +406,7 @@ export function CollectionPageJsonLd({
       name: aboutName,
     },
     ...(locale ? { inLanguage: locale } : {}),
-    ...(dateModified ? { dateModified } : {}),
+    ...(dateModified ? { dateModified: toIsoDateTime(dateModified) } : {}),
   };
 
   if (itemList?.length) {
@@ -460,8 +461,8 @@ export function ProfilePageJsonLd({
       ...(knowsAbout?.length ? { knowsAbout } : {}),
     },
     ...(locale ? { inLanguage: locale } : {}),
-    ...(dateCreated ? { dateCreated } : {}),
-    ...(dateModified ? { dateModified } : {}),
+    ...(dateCreated ? { dateCreated: toIsoDateTime(dateCreated) } : {}),
+    ...(dateModified ? { dateModified: toIsoDateTime(dateModified) } : {}),
     isPartOf: {
       '@type': 'WebSite',
       name: 'AutoWiFi Travel',
@@ -505,7 +506,7 @@ export function AboutPageJsonLd({
       url: baseUrl,
     },
     ...(locale ? { inLanguage: locale } : {}),
-    ...(dateModified ? { dateModified } : {}),
+    ...(dateModified ? { dateModified: toIsoDateTime(dateModified) } : {}),
   };
 
   return <JsonLd data={data} />;
