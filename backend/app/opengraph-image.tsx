@@ -1,92 +1,43 @@
-import { ImageResponse } from "next/og";
-
 export const alt = "AutoWiFi Travel eSIM";
 export const size = { width: 1200, height: 630 };
-export const contentType = "image/png";
+export const contentType = "image/svg+xml";
 
 export default function OpenGraphImage() {
-  return new ImageResponse(
-    (
-      <div
-        style={{
-          width: "100%",
-          height: "100%",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-          padding: "64px",
-          background: "linear-gradient(135deg, #082f49 0%, #0f766e 45%, #38bdf8 100%)",
-          color: "#f8fafc",
-          fontFamily: "sans-serif",
-        }}
-      >
-        <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "16px",
-              fontSize: 28,
-              fontWeight: 700,
-              letterSpacing: "0.08em",
-              textTransform: "uppercase",
-            }}
-          >
-            <div
-              style={{
-                width: 56,
-                height: 56,
-                borderRadius: 18,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                background: "rgba(255,255,255,0.16)",
-                border: "1px solid rgba(255,255,255,0.25)",
-              }}
-            >
-              AW
-            </div>
-            AutoWiFi Travel
-          </div>
+  const svg = `<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#082f49"/>
+      <stop offset="0.45" stop-color="#0f766e"/>
+      <stop offset="1" stop-color="#38bdf8"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="1050" cy="100" r="180" fill="#38bdf8" opacity="0.18"/>
+  <circle cx="150" cy="550" r="200" fill="#0ea5e9" opacity="0.14"/>
+  <rect x="64" y="64" width="56" height="56" rx="18" fill="rgba(255,255,255,0.16)" stroke="rgba(255,255,255,0.25)"/>
+  <text x="76" y="100" fill="#f8fafc" font-size="22" font-family="Arial, Helvetica, sans-serif" font-weight="700">AW</text>
+  <text x="136" y="100" fill="#f8fafc" font-size="28" font-family="Arial, Helvetica, sans-serif" font-weight="700" letter-spacing="2">AUTOWIFI TRAVEL</text>
+  <text x="64" y="220" fill="#f8fafc" font-size="68" font-family="Arial, Helvetica, sans-serif" font-weight="800">
+    <tspan x="64" y="220">Travel eSIM for</tspan>
+    <tspan x="64" y="296">200+ Countries</tspan>
+  </text>
+  <text x="64" y="360" fill="rgba(248,250,252,0.88)" font-size="30" font-family="Arial, Helvetica, sans-serif" font-weight="500">
+    <tspan x="64" y="360">Instant QR setup, fast mobile data, and simple</tspan>
+    <tspan x="64" y="398">activation for international trips.</tspan>
+  </text>
+  <rect x="64" y="460" width="240" height="52" rx="26" fill="rgba(255,255,255,0.14)" stroke="rgba(255,255,255,0.24)"/>
+  <text x="98" y="493" fill="#f8fafc" font-size="24" font-family="Arial, Helvetica, sans-serif" font-weight="600">Instant activation</text>
+  <rect x="324" y="460" width="280" height="52" rx="26" fill="rgba(255,255,255,0.14)" stroke="rgba(255,255,255,0.24)"/>
+  <text x="358" y="493" fill="#f8fafc" font-size="24" font-family="Arial, Helvetica, sans-serif" font-weight="600">Keep your main SIM</text>
+  <rect x="624" y="460" width="310" height="52" rx="26" fill="rgba(255,255,255,0.14)" stroke="rgba(255,255,255,0.24)"/>
+  <text x="658" y="493" fill="#f8fafc" font-size="24" font-family="Arial, Helvetica, sans-serif" font-weight="600">Travel-ready data plans</text>
+</svg>`;
 
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              gap: "16px",
-              maxWidth: 820,
-            }}
-          >
-            <div style={{ fontSize: 68, lineHeight: 1.05, fontWeight: 800 }}>
-              Travel eSIM for 200+ Countries
-            </div>
-            <div style={{ fontSize: 30, lineHeight: 1.4, color: "rgba(248,250,252,0.88)" }}>
-              Instant QR setup, fast mobile data, and simple activation for international trips.
-            </div>
-          </div>
-        </div>
-
-        <div style={{ display: "flex", gap: "18px", flexWrap: "wrap" }}>
-          {["Instant activation", "Keep your main SIM", "Travel-ready data plans"].map((label) => (
-            <div
-              key={label}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                padding: "14px 22px",
-                borderRadius: 999,
-                background: "rgba(255,255,255,0.14)",
-                border: "1px solid rgba(255,255,255,0.24)",
-                fontSize: 24,
-                fontWeight: 600,
-              }}
-            >
-              {label}
-            </div>
-          ))}
-        </div>
-      </div>
-    ),
-    size
-  );
+  return new Response(svg, {
+    headers: {
+      "content-type": "image/svg+xml; charset=utf-8",
+      "cache-control": "public, max-age=86400, stale-while-revalidate=604800",
+    },
+  });
 }
