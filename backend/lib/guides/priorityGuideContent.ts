@@ -1,5 +1,6 @@
 import type { GuideLocale } from "./extraGuides";
 import { MINOR_TRAVEL_GUIDE_CONTENT } from "./minorTravelGuideContent";
+import { HUB_GUIDE_RELATED } from "./minorTravelGuideContent.hubs";
 
 export interface GuideMediaImage {
   src: string;
@@ -75,6 +76,20 @@ export const PRIORITY_GUIDE_RELATED: Record<string, string[]> = {
   "nakameguro-daikanyama-side-streets": ["quiet-tokyo-neighborhoods", "kuramae-walk", "rainy-day-tokyo-neighborhoods", "japan-esim"],
   "shibamata-retro-day-trip": ["quiet-tokyo-neighborhoods", "tokyo-tram-line-stops", "ueno-to-yanaka-walk", "japan-esim"],
 };
+
+// Merge hub guide related links
+Object.assign(PRIORITY_GUIDE_RELATED, HUB_GUIDE_RELATED);
+
+// Add hub backlinks to child articles
+for (const [hubSlug, children] of Object.entries(HUB_GUIDE_RELATED)) {
+  for (const childSlug of children) {
+    if (!PRIORITY_GUIDE_RELATED[childSlug]) {
+      PRIORITY_GUIDE_RELATED[childSlug] = [hubSlug];
+    } else if (!PRIORITY_GUIDE_RELATED[childSlug].includes(hubSlug)) {
+      PRIORITY_GUIDE_RELATED[childSlug].unshift(hubSlug);
+    }
+  }
+}
 
 const PRIORITY_GUIDE_CONTENT_BASE: PriorityGuideMap = {
 

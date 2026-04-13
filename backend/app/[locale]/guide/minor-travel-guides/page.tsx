@@ -11,56 +11,13 @@ import {
 import ContentTrustPanel from "@/lib/components/ContentTrustPanel";
 import { getExtraGuideItems } from "@/lib/guides/extraGuides";
 import { getPriorityGuideContent } from "@/lib/guides/priorityGuideContent";
+import { MINOR_TRAVEL_GUIDE_CONTENT } from "@/lib/guides/minorTravelGuideContent";
 import type { GuideLocale } from "@/lib/guides/extraGuides";
 import styles from "../page.module.css";
 
 type Locale = "en" | "ja" | "ko" | "zh";
 
-const PUBLISHED_GUIDE_SLUGS = [
-  "quiet-tokyo-neighborhoods",
-  "yanaka-nezu-sendagi-walk",
-  "kiyosumi-shirakawa-walk",
-  "kuramae-walk",
-  "tokyo-tram-line-stops",
-  "rainy-day-tokyo-neighborhoods",
-  "ueno-to-yanaka-walk",
-  "nezu-sendagi-morning-walk",
-  "monzen-nakacho-fukagawa-walk",
-  "asakusa-kuramae-sumida-walk",
-  "oji-asukayama-tram-walk",
-  "nishi-nippori-yanaka-walk",
-  "sendagi-yomise-dori-walk",
-  "morishita-kiyosumi-walk",
-  "ryogoku-kuramae-walk",
-  "machiya-arakawa-tram-walk",
-  "hebi-michi-nezu-shrine-walk",
-  "yanaka-cemetery-and-cafe-walk",
-  "kiyosumi-garden-coffee-roasters-walk",
-  "kuramae-bridge-and-craft-walk",
-  "waseda-omokagebashi-tram-walk",
-  "tokyo-morning-walks",
-  "tokyo-local-transit-half-day",
-  "tokyo-waterfront-slow-route",
-  "tokyo-old-town-hillside-walk",
-  "tokyo-station-based-short-stays",
-  "tokyo-markets-cafes-local-streets",
-  "kichijoji-inokashira-park-morning",
-  "kagurazaka-backstreets-walk",
-  "jimbocho-kanda-booktown-walk",
-  "nakameguro-daikanyama-side-streets",
-  "shibamata-retro-day-trip",
-  "seoul-morning-walks",
-  "seoul-seongsu-side-streets-day",
-  "kyoto-okazaki-canal-and-museums",
-  "osaka-nakanoshima-riverside-day",
-  "kyoto-demachiyanagi-kamo-walk",
-  "kyoto-fushimi-sake-district-walk",
-  "osaka-sumiyoshi-retro-tram-route",
-  "kyoto-saga-arashiyama-morning-backstreets",
-  "kyoto-nishijin-machiya-lanes",
-  "kanazawa-higashi-chaya-morning-walk",
-  "kanazawa-kenrokuen-garden-walk",
-] as const;
+const PUBLISHED_GUIDE_SLUGS = Object.keys(MINOR_TRAVEL_GUIDE_CONTENT);
 
 type GuideCard = {
   slug: string;
@@ -111,7 +68,7 @@ const CONTENT: Record<
       "Find quieter city walks, low-key neighborhood routes, and offbeat half-day ideas for foreign travelers with photos, official X references, and practical route notes.",
     title: "Minor Travel Guides",
     subtitle:
-      "A curated hub for quieter city walks, local-feeling neighborhood routes, and offbeat travel ideas that feel more specific than a standard first-timer guidebook route.",
+      "A curated hub for quieter city walks organized by city: Tokyo, Kyoto, Osaka, Seoul, and Kanazawa. Each city hub links to detailed neighborhood routes and half-day walking plans.",
     collectionAbout: "Minor travel guides, quieter city walks, and offbeat neighborhood routes",
     breadcrumbGuides: "Guides",
     breadcrumbCurrent: "Minor Travel Guides",
@@ -119,8 +76,8 @@ const CONTENT: Record<
     secondaryCta: "All guides",
     summaryTitle: "A better hub for foreign travelers who want lower-pressure routes",
     summaryParagraphs: [
-      "This page is built for travelers searching for quieter neighborhood walks, offbeat half-day routes, and local-feeling city areas that still work in a real itinerary. Instead of rewriting the same famous shortlist, we group practical routes that foreign travelers can actually use after they land.",
-      "The goal is not to be obscure for the sake of it. Each guide needs to stay actionable, photo-supported, and easy to follow with station access, time-of-day advice, and a clear sense of why the area is worth a detour. X helps us spot mood and local interest, but the published guide still needs to stand on its own with verified route value.",
+      "This page organizes quieter neighborhood walks by city. Start from a city hub — Tokyo, Kyoto, Osaka, Seoul, or Kanazawa — to find area-by-area route guides, or browse individual articles directly below.",
+      "Each guide stays actionable with station access, time-of-day advice, and a clear sense of why the area is worth a detour. City hubs connect related routes so you can plan a full day across multiple neighborhoods.",
     ],
     publishedTitle: "Published now",
     publishedLead:
@@ -146,25 +103,29 @@ const CONTENT: Record<
         desc: "These guides stay tourism-first, with eSIM and travel prep links kept light and placed after the core travel value.",
       },
     ],
-    clustersTitle: "Clusters we are building next",
+    clustersTitle: "City hubs",
     clustersLead:
-      "We will expand this hub city by city, starting with quieter urban walks and low-key neighborhood routes.",
+      "Each city hub organizes related walking guides by area so you can find routes that fit your schedule and interests.",
     clusters: [
       {
-        title: "Tokyo quiet walks",
-        desc: "Yanaka, Nezu, Sendagi, Kuramae, tram-line stops, rainy-day calm areas, and station-based half-day routes.",
+        title: "Tokyo (31 routes)",
+        desc: "Yanaka, Kiyosumi-Shirakawa, Kuramae, tram lines, morning walks, rainy-day routes, and more. The largest collection.",
       },
       {
-        title: "Kyoto and Osaka backstreets",
-        desc: "Streets just behind major sightseeing zones, retro alleys, riverside walks, and local shopping streets.",
+        title: "Kyoto (5 routes)",
+        desc: "Okazaki canal, Demachiyanagi riverside, Fushimi sake district, Arashiyama backstreets, and Nishijin machiya lanes.",
       },
       {
-        title: "Seoul evening neighborhoods",
-        desc: "Calmer districts, late-day walking routes, and cafe streets outside the busiest downtown core.",
+        title: "Osaka (2 routes)",
+        desc: "Nakanoshima riverside museums and Sumiyoshi retro tram route. Quieter sides of Osaka beyond Dotonbori.",
       },
       {
-        title: "Taipei low-key city routes",
-        desc: "Coffee neighborhoods, quiet daytime wandering, and short routes that work well for slower city travel.",
+        title: "Seoul (2 routes)",
+        desc: "Morning walks through Bukchon and Samcheong-dong, plus Seongsu-dong renovated cafe district.",
+      },
+      {
+        title: "Kanazawa (2 routes)",
+        desc: "Higashi Chaya teahouse morning walk and Kenroku-en garden walk. A compact castle town 2.5 hours from Tokyo.",
       },
     ],
     faqTitle: "Frequently Asked Questions",
@@ -213,7 +174,7 @@ const CONTENT: Record<
       "谷根千、蔵前、路面電車沿線、雨の日の東京など、少しマイナーで歩きやすい東京観光ガイドをまとめた入口です。写真とX引用付き。",
     title: "マイナー観光ガイド",
     subtitle:
-      "定番の初回観光リストではなく、静かな街歩き、少しマイナーな半日ルート、ひとつ奥のエリアを集める観光ガイドの入口です。",
+      "東京・京都・大阪・ソウル・金沢の都市別ハブから、静かな街歩きルートと半日プランを探せるガイドの入口です。",
     collectionAbout: "東京のマイナー観光地と静かな街歩き",
     breadcrumbGuides: "ガイド",
     breadcrumbCurrent: "マイナー観光ガイド",
@@ -221,8 +182,8 @@ const CONTENT: Record<
     secondaryCta: "ガイド一覧へ",
     summaryTitle: "静かな東京を探す人向けの観光ハブ",
     summaryParagraphs: [
-      "このページは、東京の静かな街歩き、少しマイナーな観光地、落ち着いた半日ルートを探している人向けの入口です。有名スポットの再編集ではなく、旅行者が実際に歩きやすく、雰囲気まで想像しやすい場所をまとめています。",
-      "狙っているのは、ただの穴場紹介ではありません。駅からの動きやすさ、時間帯の相性、雨の日でも成立するか、周辺でつなげやすいかまで含めて、旅行中に使える観光記事として組み立てています。X は雰囲気発見の入口として使い、記事自体は単独で読んでも役立つ形にしています。",
+      "このページでは街歩きガイドを都市別に整理しています。東京・京都・大阪・ソウル・金沢の各ハブ記事から、エリア別のルートガイドへ進めます。個別記事を直接選ぶこともできます。",
+      "各記事は駅からのアクセス、時間帯の相性、周辺とのつなぎやすさを含めた実用的な内容になっています。都市別ハブを使えば、関連するルートをまとめて把握できます。",
     ],
     publishedTitle: "公開中の記事",
     publishedLead:
@@ -248,25 +209,29 @@ const CONTENT: Record<
         desc: "本文の主役は観光情報にして、eSIMや旅行準備への導線は記事末と関連記事で自然につなぎます。",
       },
     ],
-    clustersTitle: "次に広げるクラスター",
+    clustersTitle: "都市別ハブ",
     clustersLead:
-      "まずは静かな都市散歩や少しマイナーな回り方を軸に、都市ごとにまとまりを作っていきます。",
+      "各都市のハブ記事から、エリア別の街歩きルートを一覧できます。",
     clusters: [
       {
-        title: "東京の静かな街歩き",
-        desc: "谷根千、蔵前、路面電車沿線、雨の日でも歩きやすいエリア、駅起点の半日ルートを広げます。",
+        title: "東京（31ルート）",
+        desc: "谷根千、清澄白河、蔵前、都電沿線、朝散歩、雨の日ルートなど。最大のコレクションです。",
       },
       {
-        title: "京都・大阪の裏通り",
-        desc: "定番観光地の裏側にある静かな通り、レトロな商店街、川沿いの散歩ルートを集めます。",
+        title: "京都（5ルート）",
+        desc: "岡崎の疏水、出町柳の鴨川、伏見の酒蔵、嵐山の裏道、西陣の町家路地。",
       },
       {
-        title: "ソウルの夕方散歩",
-        desc: "繁華街のど真ん中ではない、夜歩きしやすい落ち着いた街区やカフェ通りを狙います。",
+        title: "大阪（2ルート）",
+        desc: "中之島のリバーサイド散歩と住吉のレトロ路面電車ルート。道頓堀の外の大阪です。",
       },
       {
-        title: "台北のゆるい街歩き",
-        desc: "コーヒー街区、昼に歩きやすいエリア、短時間でも成立する静かなルートを増やします。",
+        title: "ソウル（2ルート）",
+        desc: "北村・三清洞の朝散歩と聖水洞のリノベカフェ街。明洞の外のソウルを歩きます。",
+      },
+      {
+        title: "金沢（2ルート）",
+        desc: "ひがし茶屋街の朝散歩と兼六園の庭園歩き。東京から新幹線で約2.5時間の城下町です。",
       },
     ],
     faqTitle: "よくある質問",
@@ -350,25 +315,29 @@ const CONTENT: Record<
         desc: "본문은 관광 정보 중심으로 두고, eSIM 링크는 글 말미와 관련 글 수준으로만 연결합니다.",
       },
     ],
-    clustersTitle: "다음으로 키울 클러스터",
+    clustersTitle: "도시별 허브",
     clustersLead:
-      "먼저 조용한 도시 산책과 덜 알려진 루트를 도시별로 묶어 확장할 예정입니다.",
+      "각 도시 허브에서 지역별 산책 루트를 한눈에 볼 수 있습니다.",
     clusters: [
       {
-        title: "도쿄의 조용한 동네 산책",
-        desc: "야나카, 네즈, 쿠라마에, 노면전차 라인 주변, 비 오는 날 걷기 좋은 지역을 넓혀 갑니다.",
+        title: "도쿄 (31개 루트)",
+        desc: "야나카, 기요스미시라카와, 쿠라마에, 노면전차, 아침 산책, 비 오는 날 루트 등 최대 컬렉션.",
       },
       {
-        title: "교토·오사카의 뒷골목",
-        desc: "대표 관광지 뒤편의 조용한 거리, 레트로 골목, 강변 산책 루트를 모읍니다.",
+        title: "교토 (5개 루트)",
+        desc: "오카자키 수로, 데마치야나기 강변, 후시미 사케 거리, 아라시야마 뒷골목, 니시진 마치야.",
       },
       {
-        title: "서울의 저녁 산책 동네",
-        desc: "가장 붐비는 중심가 바깥에서 걷기 좋은 차분한 구역과 카페 거리를 노립니다.",
+        title: "오사카 (2개 루트)",
+        desc: "나카노시마 리버사이드와 스미요시 레트로 전차. 도톤보리 바깥의 오사카.",
       },
       {
-        title: "타이베이의 느린 시내 루트",
-        desc: "카페 거리, 낮에 걷기 좋은 구역, 짧게 돌아도 만족도 높은 동선을 늘립니다.",
+        title: "서울 (2개 루트)",
+        desc: "북촌·삼청동 아침 산책과 성수동 리노베이션 카페 거리.",
+      },
+      {
+        title: "가나자와 (2개 루트)",
+        desc: "히가시 차야 아침 산책과 겐로쿠엔 정원. 도쿄에서 신칸센 2.5시간.",
       },
     ],
     faqTitle: "자주 묻는 질문",
@@ -452,25 +421,29 @@ const CONTENT: Record<
         desc: "文章主体仍是旅游信息，eSIM 相关链接只会在文末和相关阅读里轻轻带出。",
       },
     ],
-    clustersTitle: "下一步扩展的主题簇",
+    clustersTitle: "城市导航",
     clustersLead:
-      "会先从安静城市散步和稍微小众的走法开始，按城市逐步扩展。",
+      "每个城市页面汇总了该城市的区域散步路线。",
     clusters: [
       {
-        title: "东京安静散步",
-        desc: "谷根千、藏前、电车沿线、雨天也适合走的区域，以及以车站为起点的半日路线。",
+        title: "东京（31条路线）",
+        desc: "谷根千、清澄白河、藏前、电车沿线、晨走、雨天路线等，最大合集。",
       },
       {
-        title: "京都与大阪的背街",
-        desc: "热门景点背后的安静街道、复古小巷、河边步行路线和本地商店街。",
+        title: "京都（5条路线）",
+        desc: "冈崎疏水、出町柳河边、伏见酒藏、岚山背街、西阵町家巷。",
       },
       {
-        title: "首尔的傍晚散步街区",
-        desc: "避开最拥挤的核心区，寻找更适合夜间散步和慢逛的区域与咖啡街。",
+        title: "大阪（2条路线）",
+        desc: "中之岛河畔和住吉复古电车线路。道顿堀之外的大阪。",
       },
       {
-        title: "台北的慢节奏路线",
-        desc: "咖啡街区、适合白天慢走的区域，以及短时间也成立的低压路线。",
+        title: "首尔（2条路线）",
+        desc: "北村·三清洞晨走和圣水洞翻新咖啡区。",
+      },
+      {
+        title: "金泽（2条路线）",
+        desc: "东茶屋街晨走和兼六园庭园散步。从东京坐新干线约2.5小时。",
       },
     ],
     faqTitle: "常见问题",
