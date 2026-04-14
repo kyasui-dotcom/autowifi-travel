@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { getAllCountries } from "@/lib/countries";
 import { EXTRA_GUIDE_SLUGS } from "@/lib/guides/extraGuides";
 import { SEO_PROGRAM_SLUGS } from "@/lib/guides/seoProgram";
+import { MINOR_TRAVEL_GUIDE_CONTENT } from "@/lib/guides/minorTravelGuideContent";
 
 const BASE_URL = "https://autowifi-travel.com";
 const LOCALES = ["en", "ja", "ko", "zh"] as const;
@@ -256,6 +257,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "kyoto-nishijin-machiya-lanes",
     ...SEO_PROGRAM_SLUGS,
     ...EXTRA_GUIDE_SLUGS,
+    ...Object.keys(MINOR_TRAVEL_GUIDE_CONTENT),
   ]));
   for (const locale of LOCALES) {
     for (const slug of guideSlugs) {

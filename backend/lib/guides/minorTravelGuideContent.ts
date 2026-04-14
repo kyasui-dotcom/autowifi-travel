@@ -2,7 +2,25 @@ import { createHash } from "node:crypto";
 
 import type { GuideLocale } from "./extraGuides";
 import { CUSTOM_MINOR_TRAVEL_GUIDE_CONTENT } from "./minorTravelGuideContent.custom";
+import { HUB_GUIDE_CONTENT } from "./minorTravelGuideContent.hubs";
+import { HUBS_JAPAN_KOREA_CONTENT } from "./minorTravelGuideContent.hubs-japan-korea";
+import { HUBS_ASIA_CONTENT } from "./minorTravelGuideContent.hubs-asia";
+import { HUBS_EUROPE_CONTENT } from "./minorTravelGuideContent.hubs-europe";
+import { HUBS_AMERICAS_OTHERS_CONTENT } from "./minorTravelGuideContent.hubs-americas-others";
 import { JAPAN_MINOR_TRAVEL_GUIDE_CONTENT } from "./minorTravelGuideContent.japan";
+import { JAPAN_EXPANSION_GUIDE_CONTENT } from "./minorTravelGuideContent.japan-expansion";
+import { JAPAN_3_GUIDE_CONTENT } from "./minorTravelGuideContent.japan-3";
+import { KOREA_TAIWAN_GUIDE_CONTENT } from "./minorTravelGuideContent.korea-taiwan";
+import { SOUTHEAST_ASIA_GUIDE_CONTENT } from "./minorTravelGuideContent.southeast-asia";
+import { EUROPE_GUIDE_CONTENT } from "./minorTravelGuideContent.europe";
+import { EUROPE_2_GUIDE_CONTENT } from "./minorTravelGuideContent.europe-2";
+import { EUROPE_3_GUIDE_CONTENT } from "./minorTravelGuideContent.europe-3";
+import { AMERICAS_OTHERS_GUIDE_CONTENT } from "./minorTravelGuideContent.americas-others";
+import { AMERICAS_2_GUIDE_CONTENT } from "./minorTravelGuideContent.americas-2";
+import { AMERICAS_OCEANIA_3_GUIDE_CONTENT } from "./minorTravelGuideContent.americas-oceania-3";
+import { ASIA_2_GUIDE_CONTENT } from "./minorTravelGuideContent.asia-2";
+import { ASIA_3_GUIDE_CONTENT } from "./minorTravelGuideContent.asia-3";
+import { OCEANIA_MIDEAST_AFRICA_GUIDE_CONTENT } from "./minorTravelGuideContent.oceania-mideast-africa";
 import { MINOR_GUIDE_CONFIG_OVERRIDES } from "./minorTravelGuideOverrides";
 import { MINOR_GUIDE_ENRICHMENTS } from "./minorTravelGuideEnrichments";
 
@@ -1669,4 +1687,22 @@ export const MINOR_TRAVEL_GUIDE_CONTENT: Record<string, Partial<Record<GuideLoca
     ),
     ...CUSTOM_MINOR_TRAVEL_GUIDE_CONTENT,
     ...JAPAN_MINOR_TRAVEL_GUIDE_CONTENT,
+    ...JAPAN_EXPANSION_GUIDE_CONTENT,
+    ...JAPAN_3_GUIDE_CONTENT,
+    ...KOREA_TAIWAN_GUIDE_CONTENT,
+    ...SOUTHEAST_ASIA_GUIDE_CONTENT,
+    ...EUROPE_GUIDE_CONTENT,
+    ...EUROPE_2_GUIDE_CONTENT,
+    ...EUROPE_3_GUIDE_CONTENT,
+    ...AMERICAS_OTHERS_GUIDE_CONTENT,
+    ...AMERICAS_2_GUIDE_CONTENT,
+    ...AMERICAS_OCEANIA_3_GUIDE_CONTENT,
+    ...ASIA_2_GUIDE_CONTENT,
+    ...ASIA_3_GUIDE_CONTENT,
+    ...OCEANIA_MIDEAST_AFRICA_GUIDE_CONTENT,
+    ...HUB_GUIDE_CONTENT,
+    ...HUBS_JAPAN_KOREA_CONTENT,
+    ...HUBS_ASIA_CONTENT,
+    ...HUBS_EUROPE_CONTENT,
+    ...HUBS_AMERICAS_OTHERS_CONTENT,
   };
