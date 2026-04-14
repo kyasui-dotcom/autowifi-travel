@@ -56,9 +56,9 @@ const QUICK_LINKS = [
   },
   {
     href: "/en/esim/japan",
-    title: "Popular country page",
+    title: "Travel eSIM for Japan",
     description:
-      "Review live plan options, pricing, and FAQs on a country-specific eSIM landing page.",
+      "See current plans, prices, and answers to common questions for one of our most popular destinations.",
   },
 ] as const;
 
@@ -112,7 +112,7 @@ export default function RootLandingPage() {
       <WebSiteJsonLd
         name="AutoWiFi Travel"
         url={`${BASE_URL}/`}
-        description="Travel eSIM plans for 200+ countries with multilingual landing pages and setup guides."
+        description="Travel eSIM plans for 200+ countries, available in English, 日本語, 한국어, and 中文 with step-by-step setup guides."
       />
       <ServiceJsonLd />
       <ItemListJsonLd
@@ -126,7 +126,7 @@ export default function RootLandingPage() {
       <main className={styles.page}>
         <section className={styles.hero}>
           <div className={styles.heroInner}>
-            <p className={styles.eyebrow}>x-default landing page</p>
+            <p className={styles.eyebrow}>Travel connectivity, simplified</p>
             <h1 className={styles.title}>Travel eSIM for 200+ Countries</h1>
             <p className={styles.subtitle}>
               AutoWiFi Travel helps travelers compare eSIM plans, setup guides,
@@ -172,12 +172,11 @@ export default function RootLandingPage() {
 
         <section className={styles.section}>
           <div className={styles.sectionHeader}>
-            <h2 className={styles.sectionTitle}>What you can compare on this site</h2>
+            <h2 className={styles.sectionTitle}>Plan your trip data in minutes</h2>
             <p className={styles.sectionLead}>
-              Travelers usually compare destination coverage, trip length,
-              installation steps, and common setup issues before buying an
-              eSIM. AutoWiFi Travel organizes those answers into country pages
-              and practical guides.
+              Compare coverage by destination, choose the right plan for your
+              trip length, follow step-by-step setup guides, and find quick
+              fixes if something doesn&apos;t connect &mdash; all in one place.
             </p>
           </div>
           <div className={styles.quickGrid}>
@@ -193,16 +192,17 @@ export default function RootLandingPage() {
 
         <section className={styles.section}>
           <div className={styles.copyBlock}>
-            <h2 className={styles.sectionTitle}>Why keep the root domain indexable</h2>
+            <h2 className={styles.sectionTitle}>Why travelers choose AutoWiFi Travel</h2>
             <p className={styles.copyParagraph}>
-              The root domain works as the global entry point for AutoWiFi
-              Travel. Instead of redirecting immediately, it now provides a
-              crawlable overview of the brand, links to each supported language,
-              and direct paths to core eSIM comparison pages.
+              Stay online from the moment you land. Our travel eSIMs activate
+              instantly with a QR code, keep your home phone number active, and
+              cover 200+ countries with reliable mobile data &mdash; no roaming
+              surprises and no SIM swapping at the airport.
             </p>
             <p className={styles.copyParagraph}>
-              This helps search engines understand the site hierarchy while
-              still guiding users to the most relevant localized experience.
+              Pick a destination, choose how much data you need, and you&apos;ll
+              be ready to navigate, translate, share photos, and book on the go
+              before you even leave the gate.
             </p>
           </div>
         </section>

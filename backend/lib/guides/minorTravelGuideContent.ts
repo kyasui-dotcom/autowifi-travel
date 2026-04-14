@@ -1706,3 +1706,33 @@ export const MINOR_TRAVEL_GUIDE_CONTENT: Record<string, Partial<Record<GuideLoca
     ...HUBS_EUROPE_CONTENT,
     ...HUBS_AMERICAS_OTHERS_CONTENT,
   };
+
+/**
+ * Derive related minor-travel-guide slugs for internal linking.
+ *
+ * Strategy: find other MINOR_TRAVEL_GUIDE_CONTENT slugs that share the
+ * longest common leading city-token prefix with the current slug
+ * (tries 3-token, then 2-token, then 1-token prefixes).
+ * Hub articles (*-neighborhood-walks / *-walks) are prioritized first.
+ * Returns up to `limit` slugs, excluding the current one.
+ */
+export function deriveMinorGuideRelatedSlugs(slug: string, limit = 6): string[] {
+  const all = Object.keys(MINOR_TRAVEL_GUIDE_CONTENT);
+  if (!all.includes(slug)) return [];
+
+  const tokens = slug.split("-");
+  const tryLengths = [3, 2, 1].filter((n) => n < tokens.length);
+
+  for (const n of tryLengths) {
+    const prefix = `${tokens.slice(0, n).join("-")}-`;
+    const matches = all.filter((s) => s !== slug && s.startsWith(prefix));
+    if (matches.length >= 3) {
+      const hubs = matches.filter(
+        (s) => s.endsWith("-neighborhood-walks") || s.endsWith("-walks"),
+      );
+      const rest = matches.filter((s) => !hubs.includes(s));
+      return [...hubs, ...rest].slice(0, limit);
+    }
+  }
+  return [];
+}

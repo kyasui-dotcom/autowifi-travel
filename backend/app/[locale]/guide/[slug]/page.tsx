@@ -29,6 +29,7 @@ import {
   SEO_PROGRAM_OVERRIDE_DATE,
   SEO_PROGRAM_SLUGS,
 } from "@/lib/guides/seoProgram";
+import { deriveMinorGuideRelatedSlugs } from "@/lib/guides/minorTravelGuideContent";
 
 const SUPPORTED_LOCALES = ["en", "ja", "ko", "zh"] as const;
 
@@ -1073,10 +1074,11 @@ export default async function GuideArticlePage({
   const ctaHref = GUIDE_TO_COUNTRY[slug] ? `/${locale}/esim/${GUIDE_TO_COUNTRY[slug]}` : `/${locale}/esim`;
 
   const dates = resolveGuideDates(contentSource, slug, content);
+  const minorGuideRelated = deriveMinorGuideRelatedSlugs(slug);
   const relatedSlugs =
     PRIORITY_GUIDE_RELATED[slug] ??
     RELATED_GUIDES[slug] ??
-    getSeoProgramRelatedSlugs(slug);
+    (minorGuideRelated.length > 0 ? minorGuideRelated : getSeoProgramRelatedSlugs(slug));
 
   return (
     <article style={{ maxWidth: "860px", margin: "0 auto", padding: "2rem 1rem" }}>
