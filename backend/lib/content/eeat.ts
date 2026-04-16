@@ -5,7 +5,7 @@ import type { Locale } from "@/lib/i18n/config";
 // stable per-locale slug so JSON-LD and UI anchors still resolve during local
 // development and type-checking without requiring the full content tree.
 export function getAuthorProfileUrl(locale: Locale): string {
-  return `/${locale}/about/editorial`;
+  return `/${locale}/authors/autowifi-editorial-team`;
 }
 
 export const EDITORIAL_TEAM_NAME = "AutoWiFi Travel Editorial Team";
@@ -15,9 +15,9 @@ export function getAboutPageUrl(locale: Locale): string {
 }
 
 export function getEditorialPolicyUrl(locale: Locale): string {
-  return `/${locale}/about/editorial`;
+  return `/${locale}/editorial-policy`;
 }
 
 export function getReviewMethodologyUrl(locale: Locale): string {
-  return `/${locale}/about/review-methodology`;
+  return `/${locale}/how-we-review-esims`;
 }
