@@ -709,26 +709,6 @@ export const EXTRA_GUIDES: ExtraGuideDefinition[] = [
     },
   },
   {
-    slug: "tokyo-markets-cafes-local-streets",
-    category: "topic",
-    content: {
-      en: { title: "Tokyo Markets, Cafes, and Local Streets Guide 2026", desc: "A practical Tokyo guide for travelers who want antenna shops, coffee pauses, specialist retail, and city texture beyond landmark-only sightseeing." },
-      ja: { title: "東京の市場・カフェ・ローカルストリートガイド 2026", desc: "アンテナショップ、喫茶、専門店の並び方を軸に、東京を街として歩きたい外国人旅行者向けの半日ガイドです。" },
-      ko: { title: "도쿄 시장, 카페, 로컬 스트리트 가이드 2026", desc: "안테나 숍, 카페, 전문점 거리를 중심으로 도쿄를 더 촉감 있게 걷고 싶은 여행자를 위한 반나절 가이드입니다." },
-      zh: { title: "东京市场、咖啡馆与在地街区指南 2026", desc: "适合想通过区域特产店、咖啡停留与专业小店来感受东京街道质感的半日路线。" },
-    },
-  },
-  {
-    slug: "seoul-morning-walks",
-    category: "topic",
-    content: {
-      en: { title: "Seoul Morning Walks Guide 2026", desc: "A practical Seoul guide for travelers who want a softer start with walkable streets, one cafe pause, and room to avoid queue-heavy districts early." },
-      ja: { title: "ソウルの朝散歩ガイド 2026", desc: "混雑が本格化する前に、散歩、カフェ、軽い寄り道を組み合わせて半日を始める外国人旅行者向けガイドです。" },
-      ko: { title: "서울 아침 산책 가이드 2026", desc: "혼잡해지기 전, 산책과 카페 한 번으로 서울의 아침을 부드럽게 여는 반나절 가이드입니다." },
-      zh: { title: "首尔晨间散步指南 2026", desc: "适合想在人潮真正涌入前，用步行与一次咖啡停留开始首尔半日行程的旅行者。" },
-    },
-  },
-  {
     slug: "kichijoji-inokashira-park-morning",
     category: "topic",
     content: {
