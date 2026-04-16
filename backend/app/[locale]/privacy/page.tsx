@@ -62,7 +62,7 @@ const CONTENT: Record<LegalLocale, PrivacyContent> = {
       {
         heading: "Your Choices",
         paragraphs: [
-          "If you would like to access, correct, or delete personal information associated with an order, contact us at support@autowifi.travel. We will review requests in accordance with applicable law and operational obligations such as fraud prevention and transaction record retention.",
+          "If you would like to access, correct, or delete personal information associated with an order, contact us at support@autowifi-travel.com. We will review requests in accordance with applicable law and operational obligations such as fraud prevention and transaction record retention.",
         ],
       },
     ],
@@ -105,7 +105,7 @@ const CONTENT: Record<LegalLocale, PrivacyContent> = {
       {
         heading: "開示・訂正・削除の依頼",
         paragraphs: [
-          "注文に紐づく個人情報の確認、修正、削除をご希望の場合は support@autowifi.travel までご連絡ください。法令上必要な保存義務や不正防止上の要件を踏まえて対応します。",
+          "注文に紐づく個人情報の確認、修正、削除をご希望の場合は support@autowifi-travel.com までご連絡ください。法令上必要な保存義務や不正防止上の要件を踏まえて対応します。",
         ],
       },
     ],
@@ -148,7 +148,7 @@ const CONTENT: Record<LegalLocale, PrivacyContent> = {
       {
         heading: "이용자 요청",
         paragraphs: [
-          "주문과 관련된 개인정보의 열람, 정정, 삭제를 원하시면 support@autowifi.travel 로 연락해 주세요. 관련 법령과 사기 방지 목적에 따라 요청을 검토합니다.",
+          "주문과 관련된 개인정보의 열람, 정정, 삭제를 원하시면 support@autowifi-travel.com 로 연락해 주세요. 관련 법령과 사기 방지 목적에 따라 요청을 검토합니다.",
         ],
       },
     ],
@@ -191,7 +191,7 @@ const CONTENT: Record<LegalLocale, PrivacyContent> = {
       {
         heading: "您的权利",
         paragraphs: [
-          "如需访问、更正或删除与订单相关的个人信息，请联系 support@autowifi.travel。我们会依据适用法律以及反欺诈、交易记录保存等运营要求进行处理。",
+          "如需访问、更正或删除与订单相关的个人信息，请联系 support@autowifi-travel.com。我们会依据适用法律以及反欺诈、交易记录保存等运营要求进行处理。",
         ],
       },
     ],

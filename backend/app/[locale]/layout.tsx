@@ -116,7 +116,7 @@ function Footer({ locale }: { locale: Locale }) {
         <div className={styles.footerColumn}>
           <h4>{labels.footerSupport}</h4>
           <ul className={styles.footerLinks}>
-            <li><a href="mailto:support@autowifi.travel">Contact Us</a></li>
+            <li><a href="mailto:support@autowifi-travel.com">Contact Us</a></li>
           </ul>
         </div>
 

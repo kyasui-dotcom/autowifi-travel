@@ -249,7 +249,7 @@ export function OrganizationJsonLd() {
       url: `${baseUrl}/icon.png`,
     },
     description: 'Affordable travel eSIM for 200+ countries. Stay connected wherever you go.',
-    email: 'support@autowifi.travel',
+    email: 'support@autowifi-travel.com',
     knowsAbout: [
       'Travel eSIM',
       'eSIM setup',
@@ -277,7 +277,7 @@ export function OrganizationJsonLd() {
     },
     contactPoint: {
       '@type': 'ContactPoint',
-      email: 'support@autowifi.travel',
+      email: 'support@autowifi-travel.com',
       contactType: 'customer service',
       availableLanguage: ['English', 'Japanese', 'Korean', 'Chinese'],
     },

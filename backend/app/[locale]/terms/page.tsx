@@ -62,7 +62,7 @@ const CONTENT: Record<LegalLocale, TermsContent> = {
         heading: "Support and Liability",
         paragraphs: [
           "We work to provide accurate package information and dependable delivery, but network quality, local carrier behavior, and device compatibility can vary by country and handset. To the extent permitted by law, indirect or consequential damages are excluded.",
-          "If you experience a problem, contact support@autowifi.travel and include your order number so we can review the issue promptly.",
+          "If you experience a problem, contact support@autowifi-travel.com and include your order number so we can review the issue promptly.",
         ],
       },
     ],
@@ -105,7 +105,7 @@ const CONTENT: Record<LegalLocale, TermsContent> = {
         heading: "サポートと責任範囲",
         paragraphs: [
           "当社は正確な商品情報と安定した提供に努めますが、通信品質、現地キャリアの挙動、端末互換性は国や端末により異なります。法令上許される範囲で、間接損害や特別損害については責任を負いません。",
-          "問題が発生した場合は、注文番号を添えて support@autowifi.travel までご連絡ください。内容を確認のうえ対応します。",
+          "問題が発生した場合は、注文番号を添えて support@autowifi-travel.com までご連絡ください。内容を確認のうえ対応します。",
         ],
       },
     ],
@@ -148,7 +148,7 @@ const CONTENT: Record<LegalLocale, TermsContent> = {
         heading: "지원 및 책임 범위",
         paragraphs: [
           "당사는 정확한 상품 정보와 안정적인 제공을 위해 노력하지만, 네트워크 품질, 현지 통신사 환경, 단말 호환성은 국가와 기기에 따라 달라질 수 있습니다. 관련 법령이 허용하는 범위에서 간접적 또는 결과적 손해에 대한 책임은 제외됩니다.",
-          "문제가 발생하면 주문 번호와 함께 support@autowifi.travel 로 문의해 주세요. 신속히 확인하겠습니다.",
+          "문제가 발생하면 주문 번호와 함께 support@autowifi-travel.com 로 문의해 주세요. 신속히 확인하겠습니다.",
         ],
       },
     ],
@@ -191,7 +191,7 @@ const CONTENT: Record<LegalLocale, TermsContent> = {
         heading: "支持与责任限制",
         paragraphs: [
           "我们会尽力提供准确的套餐信息和稳定的交付体验，但网络质量、当地运营商行为以及设备兼容性会因国家和机型而不同。在法律允许范围内，我们不承担间接或附带损失责任。",
-          "如遇到问题，请将订单号发送至 support@autowifi.travel，我们会尽快协助处理。",
+          "如遇到问题，请将订单号发送至 support@autowifi-travel.com，我们会尽快协助处理。",
         ],
       },
     ],
