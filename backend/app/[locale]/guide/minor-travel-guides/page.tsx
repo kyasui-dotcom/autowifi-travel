@@ -55,6 +55,11 @@ const PUBLISHED_GUIDE_SLUGS = [
   "kyoto-nishijin-machiya-lanes",
   "kanazawa-higashi-chaya-morning-walk",
   "kanazawa-kenrokuen-garden-walk",
+  "kamakura-komachi-backstreets-walk",
+  "yokohama-noge-retro-walk",
+  "kawagoe-koedo-kurazukuri-walk",
+  "nara-naramachi-machiya-walk",
+  "kobe-kitano-ijinkan-walk",
 ] as const;
 
 type GuideCard = {

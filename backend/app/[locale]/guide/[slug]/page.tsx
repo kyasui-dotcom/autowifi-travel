@@ -73,6 +73,11 @@ const GUIDE_DATES: Record<string, { published: string; modified: string }> = {
   "kyoto-nishijin-machiya-lanes": { published: "2026-04-07", modified: "2026-04-08" },
   "kanazawa-higashi-chaya-morning-walk": { published: "2026-04-08", modified: "2026-04-08" },
   "kanazawa-kenrokuen-garden-walk": { published: "2026-04-08", modified: "2026-04-08" },
+  "kamakura-komachi-backstreets-walk": { published: "2026-04-17", modified: "2026-04-17" },
+  "yokohama-noge-retro-walk": { published: "2026-04-17", modified: "2026-04-17" },
+  "kawagoe-koedo-kurazukuri-walk": { published: "2026-04-17", modified: "2026-04-17" },
+  "nara-naramachi-machiya-walk": { published: "2026-04-17", modified: "2026-04-17" },
+  "kobe-kitano-ijinkan-walk": { published: "2026-04-17", modified: "2026-04-17" },
   "travel-esim-with-phone-number": { published: "2026-04-04", modified: "2026-04-04" },
   "esim-fair-use-policy": { published: "2026-04-04", modified: "2026-04-04" },
   "regional-esim-vs-country-esim": { published: "2026-04-04", modified: "2026-04-04" },
@@ -206,6 +211,11 @@ const RELATED_GUIDES: Record<string, string[]> = {
   "osaka-sumiyoshi-retro-tram-route": ["japan-esim", "kyoto-fushimi-sake-district-walk", "travel-apps-esim", "airport-connectivity-guide"],
   "kyoto-saga-arashiyama-morning-backstreets": ["japan-esim", "kyoto-demachiyanagi-kamo-walk", "travel-apps-esim", "quiet-tokyo-neighborhoods"],
   "kyoto-nishijin-machiya-lanes": ["japan-esim", "kyoto-fushimi-sake-district-walk", "travel-apps-esim", "rainy-day-tokyo-neighborhoods"],
+  "kamakura-komachi-backstreets-walk": ["japan-esim", "yokohama-noge-retro-walk", "kawagoe-koedo-kurazukuri-walk", "quiet-tokyo-neighborhoods"],
+  "yokohama-noge-retro-walk": ["japan-esim", "kamakura-komachi-backstreets-walk", "kawagoe-koedo-kurazukuri-walk", "quiet-tokyo-neighborhoods"],
+  "kawagoe-koedo-kurazukuri-walk": ["japan-esim", "kamakura-komachi-backstreets-walk", "yokohama-noge-retro-walk", "shibamata-retro-day-trip"],
+  "nara-naramachi-machiya-walk": ["japan-esim", "kyoto-nishijin-machiya-lanes", "kyoto-fushimi-sake-district-walk", "kobe-kitano-ijinkan-walk"],
+  "kobe-kitano-ijinkan-walk": ["japan-esim", "osaka-sumiyoshi-retro-tram-route", "nara-naramachi-machiya-walk", "kyoto-fushimi-sake-district-walk"],
 };
 
 const DATE_LABELS: Record<string, string> = {

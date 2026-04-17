@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { generatePageMetadata, getGuideOgImageUrl } from "@/lib/seo";
-import { ItemListJsonLd } from "@/lib/components/JsonLd";
+import { BreadcrumbJsonLd, ItemListJsonLd } from "@/lib/components/JsonLd";
 import {
   getAboutPageUrl,
   getAuthorProfileUrl,
@@ -460,6 +460,12 @@ export default async function GuidePage({
 
   return (
     <div className={styles.container}>
+      <BreadcrumbJsonLd
+        items={[
+          { name: loc === "ja" ? "ホーム" : loc === "ko" ? "홈" : loc === "zh" ? "首页" : "Home", url: `${baseUrl}/${loc}` },
+          { name: loc === "ja" ? "ガイド" : loc === "ko" ? "가이드" : loc === "zh" ? "指南" : "Guides", url: `${baseUrl}/${loc}/guide` },
+        ]}
+      />
       <ItemListJsonLd
         items={guides.map((g, i) => ({
           name: g.title,
