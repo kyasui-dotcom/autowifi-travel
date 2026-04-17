@@ -45,8 +45,12 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
+  // Redirect root to preferred locale (avoid duplicate content / 404)
   if (pathname === "/") {
-    return NextResponse.next();
+    const locale = getPreferredLocale(request);
+    const url = request.nextUrl.clone();
+    url.pathname = `/${locale}`;
+    return NextResponse.redirect(url, 307);
   }
 
   // Check if the pathname already starts with a supported locale

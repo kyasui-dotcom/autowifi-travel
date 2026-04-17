@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import ArticleLayout, { type Locale, type ArticleContent, type RelatedArticle } from "@/lib/components/ArticleLayout";
-import { generatePageMetadata } from "@/lib/seo";
+import { generatePageMetadata, truncateAtSentence } from "@/lib/seo";
 
 const RELATED_ARTICLES: Record<Locale, { title: string; articles: RelatedArticle[] }> = {
   ja: {
@@ -81,7 +81,7 @@ const CONTENT: Record<Locale, ArticleContent> = {
     breadcrumbCurrent: "韓国eSIMガイド",
   },
   en: {
-    title: "Best eSIM for South Korea Travel 2026 - Seoul Arrivals, AREX, and Hotel Backup",
+    title: "Best eSIM for South Korea 2026 - Seoul, AREX & Hotel Backup",
     subtitle: "Plan Incheon arrivals, airport rail, late-night Seoul transfers, and secure 5G from the first hour",
     intro: "Looking for the best eSIM for South Korea travel? A travel eSIM is usually the easiest way to get online the moment you land at Incheon, especially if you need AREX directions, late-night hotel transfers, taxi apps, or reliable backup before hotel WiFi is working. Korea's ultra-fast 5G networks make eSIM especially useful for Seoul arrivals, business trips, and short urban stays where every first-hour task depends on mobile data.",
     sections: [
@@ -205,7 +205,7 @@ const CONTENT: Record<Locale, ArticleContent> = {
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const c = CONTENT[(locale as Locale) || "en"];
-  return generatePageMetadata({ locale: locale as Locale, path: "/guide/korea-esim", title: c.title, description: c.intro.slice(0, 160) });
+  return generatePageMetadata({ locale: locale as Locale, path: "/guide/korea-esim", title: c.title, description: truncateAtSentence(c.intro) });
 }
 
 export default async function Page({ params }: { params: Promise<{ locale: string }> }) {

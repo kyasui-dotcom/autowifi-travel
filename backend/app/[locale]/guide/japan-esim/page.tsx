@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import ArticleLayout, { type Locale, type ArticleContent, type RelatedArticle } from "@/lib/components/ArticleLayout";
-import { generatePageMetadata } from "@/lib/seo";
+import { generatePageMetadata, truncateAtSentence } from "@/lib/seo";
 
 const RELATED: Record<Locale, { title: string; articles: RelatedArticle[] }> = {
   ja: {
@@ -87,7 +87,7 @@ const CONTENT: Record<Locale, ArticleContent> = {
     breadcrumbCurrent: "日本eSIMガイド",
   },
   en: {
-    title: "Best eSIM for Japan Travel 2026 - Tokyo Arrivals, Airport Rail, and Hotel Backup",
+    title: "Best eSIM for Japan 2026 - Tokyo, Airport Rail & Hotel Backup",
     subtitle: "Plan Narita and Haneda arrivals, airport rail transfers, hotel WiFi backup, and pocket WiFi alternatives with one Japan eSIM",
     intro: "Looking for the best eSIM for Japan travel? A travel eSIM is usually the easiest way to get online before you leave Narita or Haneda, especially if you need airport rail directions, hotel check-in messages, taxi apps, and backup data before hotel WiFi is trustworthy. Japan has one of the world's most advanced mobile networks, making eSIM a low-friction option for Tokyo arrivals, rail-heavy itineraries, and business trips.",
     sections: [
@@ -211,7 +211,7 @@ const CONTENT: Record<Locale, ArticleContent> = {
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const c = CONTENT[(locale as Locale) || "en"];
-  return generatePageMetadata({ locale: locale as Locale, path: "/guide/japan-esim", title: c.title, description: c.intro.slice(0, 160) });
+  return generatePageMetadata({ locale: locale as Locale, path: "/guide/japan-esim", title: c.title, description: truncateAtSentence(c.intro) });
 }
 
 export default async function Page({ params }: { params: Promise<{ locale: string }> }) {

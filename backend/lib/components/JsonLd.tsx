@@ -250,6 +250,9 @@ export function OrganizationJsonLd() {
     },
     description: 'Affordable travel eSIM for 200+ countries. Stay connected wherever you go.',
     email: 'support@autowifi-travel.com',
+    sameAs: [
+      'https://x.com/Autowifi_travel',
+    ],
     knowsAbout: [
       'Travel eSIM',
       'eSIM setup',

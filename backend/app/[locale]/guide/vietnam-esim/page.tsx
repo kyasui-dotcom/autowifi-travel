@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import ArticleLayout, { type Locale, type ArticleContent } from "@/lib/components/ArticleLayout";
-import { generatePageMetadata } from "@/lib/seo";
+import { generatePageMetadata, truncateAtSentence } from "@/lib/seo";
 
 const CONTENT: Record<Locale, ArticleContent> = {
   ja: {
@@ -40,7 +40,7 @@ const CONTENT: Record<Locale, ArticleContent> = {
     breadcrumbCurrent: "ベトナムeSIM",
   },
   en: {
-    title: "Vietnam eSIM Guide - Best Value Connectivity in Hanoi, Ho Chi Minh City & Da Nang",
+    title: "Vietnam eSIM Guide - Hanoi, Ho Chi Minh & Da Nang Coverage",
     subtitle: "Incredible value meets incredible destinations — stay connected for less",
     intro: "Vietnam offers travelers an unbeatable combination of affordable prices, stunning natural beauty, and rich culinary culture. From exploring Hanoi's Old Quarter to admiring Ho Chi Minh City's French colonial architecture and relaxing on Da Nang's beaches, there's no shortage of experiences. An eSIM eliminates the hassle of buying a local SIM card at the airport, letting you use Grab and Google Maps from the moment you arrive. Vietnam eSIM plans are exceptionally affordable, making them perfect for budget-conscious travelers.",
     sections: [
@@ -152,7 +152,7 @@ const CONTENT: Record<Locale, ArticleContent> = {
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const c = CONTENT[(locale as Locale) || "en"];
-  return generatePageMetadata({ locale: locale as Locale, path: "/guide/vietnam-esim", title: c.title, description: c.intro.slice(0, 160) });
+  return generatePageMetadata({ locale: locale as Locale, path: "/guide/vietnam-esim", title: c.title, description: truncateAtSentence(c.intro) });
 }
 
 export default async function Page({ params }: { params: Promise<{ locale: string }> }) {

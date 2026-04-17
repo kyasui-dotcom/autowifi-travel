@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ArticleJsonLd, BreadcrumbJsonLd, FaqJsonLd } from "./JsonLd";
 import ContentTrustPanel from "./ContentTrustPanel";
-import { getAuthorProfileUrl } from "@/lib/content/eeat";
+import { getAuthorProfileUrlAbsolute } from "@/lib/content/eeat";
 import { EXTRA_GUIDE_COUNTRY_MAP } from "@/lib/guides/extraGuides";
 import { getSeoProgramEntry } from "@/lib/guides/seoProgram";
 import { getBaseUrl, getDefaultOgImageUrl } from "@/lib/seo";
@@ -455,7 +455,7 @@ export default function ArticleLayout({ locale, slug, content: c, relatedArticle
         datePublished={publishedAt}
         dateModified={updatedAt}
         authorName="AutoWiFi Travel Editorial Team"
-        authorUrl={getAuthorProfileUrl(locale)}
+        authorUrl={getAuthorProfileUrlAbsolute(locale, baseUrl)}
       />
       <BreadcrumbJsonLd
         items={[

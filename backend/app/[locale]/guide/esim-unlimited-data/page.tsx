@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import ArticleLayout, { type Locale, type ArticleContent, type RelatedArticle } from "@/lib/components/ArticleLayout";
-import { generatePageMetadata } from "@/lib/seo";
+import { generatePageMetadata, truncateAtSentence } from "@/lib/seo";
 
 const RELATED_ARTICLES: Record<Locale, { articles: RelatedArticle[]; title: string }> = {
   ja: {
@@ -240,7 +240,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     locale: loc,
     path: "/guide/esim-unlimited-data",
     title: c.title,
-    description: c.intro.slice(0, 160),
+    description: truncateAtSentence(c.intro),
   });
 }
 

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import ArticleLayout, { type Locale, type ArticleContent, type RelatedArticle } from "@/lib/components/ArticleLayout";
-import { generatePageMetadata } from "@/lib/seo";
+import { generatePageMetadata, truncateAtSentence } from "@/lib/seo";
 
 const RELATED_ARTICLES: Record<Locale, { articles: RelatedArticle[]; title: string }> = {
   ja: {
@@ -79,7 +79,7 @@ const CONTENT: Record<Locale, ArticleContent> = {
     breadcrumbCurrent: "Holaflyレビュー",
   },
   en: {
-    title: "Holafly Review & Comparison - Unlimited Data eSIM Pros, Cons & Pricing",
+    title: "Holafly Review 2026 - Unlimited Data eSIM Pros & Cons",
     subtitle: "Is Holafly's unlimited data eSIM worth it? An honest look at features, pricing, and alternatives",
     intro: "Holafly is an eSIM provider offering unlimited data plans for 160+ destinations worldwide. With over 74,000 Trustpilot reviews, it has become one of the most visible names in the travel eSIM space. The promise of unlimited data is appealing, but there are important details about pricing, speed throttling, and coverage that travelers should understand before purchasing. This article provides a balanced review to help you decide if Holafly is the right fit for your trip.",
     sections: [
@@ -203,7 +203,7 @@ const CONTENT: Record<Locale, ArticleContent> = {
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const c = CONTENT[(locale as Locale) || "en"];
-  return generatePageMetadata({ locale: locale as Locale, path: "/guide/holafly-review", title: c.title, description: c.intro.slice(0, 160) });
+  return generatePageMetadata({ locale: locale as Locale, path: "/guide/holafly-review", title: c.title, description: truncateAtSentence(c.intro) });
 }
 
 export default async function Page({ params }: { params: Promise<{ locale: string }> }) {

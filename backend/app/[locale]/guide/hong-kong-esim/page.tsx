@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import ArticleLayout, { type Locale, type ArticleContent, type RelatedArticle } from "@/lib/components/ArticleLayout";
-import { generatePageMetadata } from "@/lib/seo";
+import { generatePageMetadata, truncateAtSentence } from "@/lib/seo";
 
 const RELATED_ARTICLES: Record<Locale, { articles: RelatedArticle[]; title: string }> = {
   ja: {
@@ -77,7 +77,7 @@ const CONTENT: Record<Locale, ArticleContent> = {
     breadcrumbCurrent: "香港eSIM",
   },
   en: {
-    title: "Best eSIM for Hong Kong Travel 2026 - Airport Arrivals and Macau Day Trips",
+    title: "Best eSIM for Hong Kong 2026 - Airport & Macau Day Trips",
     subtitle: "Plan airport train transfers, late-night arrivals, and Macau ferry days with one Hong Kong eSIM",
     intro: "Hong Kong is one of the easiest places in Asia to navigate with mobile data, especially if you want to move quickly from the airport into the city. With strong 5G coverage across MTR lines, dense urban neighborhoods, and many cross-border travel options, an eSIM helps you handle Airport Express transfers, late-night arrivals, hotel check-in, and Macau ferry planning without relying on patchy public WiFi. This guide covers how to use eSIM across Hong Kong and Macau.",
     sections: [
@@ -189,7 +189,7 @@ const CONTENT: Record<Locale, ArticleContent> = {
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const c = CONTENT[(locale as Locale) || "en"];
-  return generatePageMetadata({ locale: locale as Locale, path: "/guide/hong-kong-esim", title: c.title, description: c.intro.slice(0, 160) });
+  return generatePageMetadata({ locale: locale as Locale, path: "/guide/hong-kong-esim", title: c.title, description: truncateAtSentence(c.intro) });
 }
 
 export default async function Page({ params }: { params: Promise<{ locale: string }> }) {

@@ -4,7 +4,7 @@ import ArticleLayout, {
   type Locale,
   type RelatedArticle,
 } from "@/lib/components/ArticleLayout";
-import { generatePageMetadata } from "@/lib/seo";
+import { generatePageMetadata, truncateAtSentence } from "@/lib/seo";
 
 const RELATED_ARTICLES: Record<
   Locale,
@@ -265,7 +265,7 @@ export async function generateMetadata({
     locale: locale as Locale,
     path: "/guide/esim-for-layovers",
     title: c.title,
-    description: c.intro.slice(0, 160),
+    description: truncateAtSentence(c.intro),
   });
 }
 

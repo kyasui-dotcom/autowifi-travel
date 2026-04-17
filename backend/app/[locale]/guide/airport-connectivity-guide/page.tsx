@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import ArticleLayout, { type Locale, type ArticleContent, type RelatedArticle } from "@/lib/components/ArticleLayout";
-import { generatePageMetadata } from "@/lib/seo";
+import { generatePageMetadata, truncateAtSentence } from "@/lib/seo";
 
 const RELATED: Record<Locale, { title: string; articles: RelatedArticle[] }> = {
   ja: {
@@ -85,7 +85,7 @@ const CONTENT: Record<Locale, ArticleContent> = {
     breadcrumbCurrent: "空港WiFi・通信ガイド"
   },
   en: {
-    title: "Airport WiFi and eSIM Guide for Layovers, Airport Rail, and Late Arrivals",
+    title: "Airport WiFi & eSIM Guide for Layovers & Late Arrivals",
     subtitle: "Plan airport rail, hotel transfers, and overnight arrivals without relying on crowded terminal WiFi",
     intro: "Airports are where travelers most urgently need internet. Right after landing, you may need airport rail directions, ride-hailing apps, hotel messages, transit alerts, and backup connectivity before hotel WiFi is available. This guide covers airport WiFi at major hubs worldwide and shows when eSIM is the more reliable option for layovers, late arrivals, first-hour travel logistics, and business-arrival transfers in cities like Tokyo, Seoul, Hong Kong, Singapore, and Dubai.",
     sections: [
@@ -197,7 +197,7 @@ const CONTENT: Record<Locale, ArticleContent> = {
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const c = CONTENT[(locale as Locale) || "en"];
-  return generatePageMetadata({ locale: locale as Locale, path: "/guide/airport-connectivity-guide", title: c.title, description: c.intro.slice(0, 160) });
+  return generatePageMetadata({ locale: locale as Locale, path: "/guide/airport-connectivity-guide", title: c.title, description: truncateAtSentence(c.intro) });
 }
 
 export default async function Page({ params }: { params: Promise<{ locale: string }> }) {

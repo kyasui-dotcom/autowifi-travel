@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import ArticleLayout, { type Locale, type ArticleContent, type RelatedArticle } from "@/lib/components/ArticleLayout";
-import { generatePageMetadata } from "@/lib/seo";
+import { generatePageMetadata, truncateAtSentence } from "@/lib/seo";
 
 const RELATED: Record<Locale, { title: string; articles: RelatedArticle[] }> = {
   ja: {
@@ -83,7 +83,7 @@ const CONTENT: Record<Locale, ArticleContent> = {
     breadcrumbCurrent: "デジタルノマド向けeSIM"
   },
   en: {
-    title: "eSIM Guide for Digital Nomads - Long-Term & Multi-Country Connectivity",
+    title: "eSIM for Digital Nomads - Long-Term & Multi-Country",
     subtitle: "The ultimate connectivity strategy for remote workers traveling the world",
     intro: "For digital nomads, reliable high-speed internet is essential for work. Video conferencing, cloud tools, and file sharing all demand quality data connections. This guide covers optimal eSIM strategies for nomad workers who move between countries while maintaining productive remote work setups.",
     sections: [
@@ -195,7 +195,7 @@ const CONTENT: Record<Locale, ArticleContent> = {
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const c = CONTENT[(locale as Locale) || "en"];
-  return generatePageMetadata({ locale: locale as Locale, path: "/guide/digital-nomad-esim", title: c.title, description: c.intro.slice(0, 160) });
+  return generatePageMetadata({ locale: locale as Locale, path: "/guide/digital-nomad-esim", title: c.title, description: truncateAtSentence(c.intro) });
 }
 
 export default async function Page({ params }: { params: Promise<{ locale: string }> }) {

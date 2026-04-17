@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import ArticleLayout, { type Locale, type ArticleContent } from "@/lib/components/ArticleLayout";
-import { generatePageMetadata } from "@/lib/seo";
+import { generatePageMetadata, truncateAtSentence } from "@/lib/seo";
 
 const CONTENT: Record<Locale, ArticleContent> = {
   ja: {
@@ -40,7 +40,7 @@ const CONTENT: Record<Locale, ArticleContent> = {
     breadcrumbCurrent: "インドネシアeSIM",
   },
   en: {
-    title: "Indonesia eSIM Guide - Bali, Jakarta & Inter-Island Coverage Explained",
+    title: "Indonesia eSIM Guide - Bali, Jakarta & Inter-Island Coverage",
     subtitle: "Navigate the world's largest archipelago with reliable mobile connectivity",
     intro: "Indonesia is the world's largest archipelago nation, comprising over 17,000 islands. From Bali's beach resorts to Jakarta's urban bustle and Yogyakarta's ancient temples, each island offers distinct attractions. While coverage varies across this vast territory, major tourist areas support comfortable eSIM connectivity. Setting up your eSIM before departure means you can use Grab and maps apps immediately upon arrival.",
     sections: [
@@ -152,7 +152,7 @@ const CONTENT: Record<Locale, ArticleContent> = {
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const c = CONTENT[(locale as Locale) || "en"];
-  return generatePageMetadata({ locale: locale as Locale, path: "/guide/indonesia-esim", title: c.title, description: c.intro.slice(0, 160) });
+  return generatePageMetadata({ locale: locale as Locale, path: "/guide/indonesia-esim", title: c.title, description: truncateAtSentence(c.intro) });
 }
 
 export default async function Page({ params }: { params: Promise<{ locale: string }> }) {

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import ArticleLayout, { type Locale, type ArticleContent, type RelatedArticle } from "@/lib/components/ArticleLayout";
-import { generatePageMetadata } from "@/lib/seo";
+import { generatePageMetadata, truncateAtSentence } from "@/lib/seo";
 
 const RELATED: Record<Locale, { title: string; articles: RelatedArticle[] }> = {
   ja: {
@@ -84,7 +84,7 @@ const CONTENT: Record<Locale, ArticleContent> = {
     breadcrumbCurrent: "ビジネス旅行者のためのeSIM"
   },
   en: {
-    title: "eSIM for Business Travel: Airport Arrivals, Transit Days, and Hotel WiFi Backup",
+    title: "eSIM for Business Travel - Airport, Transit & Hotel Backup",
     subtitle: "Stay productive from airport transfer to hotel check-in with secure mobile data and cleaner expense tracking",
     intro: "For business travelers, reliable connectivity matters most during the first hours after landing. You may need to message a client, book a car, find the right airport rail line, join a meeting from transit, or work around weak hotel WiFi. eSIM is the ideal solution because it combines instant setup, simple expense tracking, and secure mobile data. This guide explains how business travelers can use eSIM to stay productive across arrivals, layovers, and multi-city transit days, especially in arrival-heavy hubs like Tokyo, Seoul, Hong Kong, Singapore, and Dubai.",
     sections: [
@@ -193,7 +193,7 @@ const CONTENT: Record<Locale, ArticleContent> = {
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const c = CONTENT[(locale as Locale) || "en"];
-  return generatePageMetadata({ locale: locale as Locale, path: "/guide/esim-for-business-travel", title: c.title, description: c.intro.slice(0, 160) });
+  return generatePageMetadata({ locale: locale as Locale, path: "/guide/esim-for-business-travel", title: c.title, description: truncateAtSentence(c.intro) });
 }
 
 export default async function Page({ params }: { params: Promise<{ locale: string }> }) {

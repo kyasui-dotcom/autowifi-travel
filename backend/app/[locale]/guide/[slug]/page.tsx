@@ -7,7 +7,7 @@ import type { Locale } from "@/lib/i18n/config";
 import { ArticleJsonLd, BreadcrumbJsonLd, FaqJsonLd } from "@/lib/components/JsonLd";
 import ContentTrustPanel from "@/lib/components/ContentTrustPanel";
 import XEmbeddedPosts from "@/lib/components/XEmbeddedPosts";
-import { getAuthorProfileUrl } from "@/lib/content/eeat";
+import { getAuthorProfileUrlAbsolute } from "@/lib/content/eeat";
 import { getGuideImageUrl, shouldProxyGuideImage } from "@/lib/guides/guideImageUrl";
 import {
   EXTRA_GUIDE_COUNTRY_MAP,
@@ -1064,7 +1064,7 @@ export default async function GuideArticlePage({
         datePublished={dates.published}
         dateModified={dates.modified}
         authorName="AutoWiFi Travel Editorial Team"
-        authorUrl={getAuthorProfileUrl(locale as Locale)}
+        authorUrl={getAuthorProfileUrlAbsolute(locale as Locale, BASE_URL)}
         articleSection={
           isMinorTravelGuide
             ? (MINOR_TRAVEL_JSONLD_SECTION[locale] ?? MINOR_TRAVEL_JSONLD_SECTION.en)

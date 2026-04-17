@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import ArticleLayout, { type Locale, type ArticleContent, type RelatedArticle } from "@/lib/components/ArticleLayout";
-import { generatePageMetadata } from "@/lib/seo";
+import { generatePageMetadata, truncateAtSentence } from "@/lib/seo";
 
 const RELATED_ARTICLES: Record<Locale, { articles: RelatedArticle[]; title: string }> = {
   ja: {
@@ -231,7 +231,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     zh: ["eSIM速度测试", "eSIM速度对比", "eSIM网速", "旅行eSIM速度"],
   };
   return {
-    ...await generatePageMetadata({ locale: loc, path: "/guide/esim-speed-test", title: c.title, description: c.intro.slice(0, 160) }),
+    ...await generatePageMetadata({ locale: loc, path: "/guide/esim-speed-test", title: c.title, description: truncateAtSentence(c.intro) }),
     keywords: seoKeywords[loc],
   };
 }

@@ -1,11 +1,15 @@
 import type { Locale } from "@/lib/i18n/config";
+import { getBaseUrl } from "@/lib/seo";
 
-// Local stub for author profile URLs used across guide and article layouts.
-// The real E-E-A-T profile pages live outside this working tree; we return a
-// stable per-locale slug so JSON-LD and UI anchors still resolve during local
-// development and type-checking without requiring the full content tree.
+// E-E-A-T author/editorial URL helpers. Returned paths are relative so they
+// work in <Link href> and UI anchors; the `*Absolute` variants prepend the
+// canonical base URL for JSON-LD (schema.org) where Google expects absolute URLs.
 export function getAuthorProfileUrl(locale: Locale): string {
   return `/${locale}/authors/autowifi-editorial-team`;
+}
+
+export function getAuthorProfileUrlAbsolute(locale: Locale, baseUrl: string = getBaseUrl()): string {
+  return `${baseUrl}${getAuthorProfileUrl(locale)}`;
 }
 
 export const EDITORIAL_TEAM_NAME = "AutoWiFi Travel Editorial Team";

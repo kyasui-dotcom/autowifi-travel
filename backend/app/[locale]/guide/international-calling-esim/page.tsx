@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import ArticleLayout, { type Locale, type ArticleContent, type RelatedArticle } from "@/lib/components/ArticleLayout";
-import { generatePageMetadata } from "@/lib/seo";
+import { generatePageMetadata, truncateAtSentence } from "@/lib/seo";
 
 const RELATED_ARTICLES: Record<Locale, { articles: RelatedArticle[]; title: string }> = {
   ja: {
@@ -79,7 +79,7 @@ const CONTENT: Record<Locale, ArticleContent> = {
     breadcrumbCurrent: "eSIMで国際通話"
   },
   en: {
-    title: "International Calls with eSIM - VoIP, WhatsApp & Calling Options Guide",
+    title: "International Calls with eSIM - VoIP & WhatsApp Options",
     subtitle: "Save on international calling costs using eSIM data and VoIP apps",
     intro: "Phone calls during international travel are more common than you might expect. From confirming hotel reservations to contacting restaurants and handling emergencies, your eSIM data connection enables affordable voice communication without expensive international calling rates. This guide covers all the ways to make calls using eSIM.",
     sections: [
@@ -191,7 +191,7 @@ const CONTENT: Record<Locale, ArticleContent> = {
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const c = CONTENT[(locale as Locale) || "en"];
-  return generatePageMetadata({ locale: locale as Locale, path: "/guide/international-calling-esim", title: c.title, description: c.intro.slice(0, 160) });
+  return generatePageMetadata({ locale: locale as Locale, path: "/guide/international-calling-esim", title: c.title, description: truncateAtSentence(c.intro) });
 }
 
 export default async function Page({ params }: { params: Promise<{ locale: string }> }) {

@@ -5,6 +5,34 @@ export function getBaseUrl(): string {
   return process.env.NEXT_PUBLIC_BASE_URL ?? 'https://autowifi-travel.com';
 }
 
+/**
+ * Truncate a long intro/description to a meta-description-friendly length
+ * without cutting in the middle of a word. Prefers a sentence boundary
+ * (. ? ! 。 ？ ！) near `maxLen`; falls back to the last space (or CJK
+ * character boundary) before `maxLen`; appends a single-char ellipsis
+ * when content was actually truncated.
+ */
+export function truncateAtSentence(text: string, maxLen = 155): string {
+  const normalized = text.replace(/\s+/g, ' ').trim();
+  if (normalized.length <= maxLen) return normalized;
+
+  // Try to cut at the last sentence boundary within maxLen
+  const window = normalized.slice(0, maxLen);
+  const sentenceMatch = window.match(/^[\s\S]*[.!?。？！](?=\s|$)/);
+  if (sentenceMatch && sentenceMatch[0].length >= Math.floor(maxLen * 0.6)) {
+    return sentenceMatch[0].trim();
+  }
+
+  // Fall back to last space boundary (ASCII languages)
+  const lastSpace = window.lastIndexOf(' ');
+  if (lastSpace >= Math.floor(maxLen * 0.6)) {
+    return window.slice(0, lastSpace).trim() + '…';
+  }
+
+  // CJK / no-space languages: cut at maxLen and add ellipsis
+  return window.trim() + '…';
+}
+
 export const DEFAULT_OG_IMAGE_PATH = '/og-default.png';
 
 export function getDefaultOgImageUrl(baseUrl: string = getBaseUrl()): string {
@@ -227,6 +255,8 @@ export function generatePageMetadata({
     },
     twitter: {
       card: 'summary_large_image',
+      site: '@Autowifi_travel',
+      creator: '@Autowifi_travel',
       title,
       description,
       images: [image],

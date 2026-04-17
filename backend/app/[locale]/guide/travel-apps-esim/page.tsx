@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import ArticleLayout, { type Locale, type ArticleContent } from "@/lib/components/ArticleLayout";
-import { generatePageMetadata } from "@/lib/seo";
+import { generatePageMetadata, truncateAtSentence } from "@/lib/seo";
 
 const CONTENT: Record<Locale, ArticleContent> = {
   ja: {
@@ -40,7 +40,7 @@ const CONTENT: Record<Locale, ArticleContent> = {
     breadcrumbCurrent: "旅行アプリとeSIM"
   },
   en: {
-    title: "Best Travel Apps That Work with eSIM - Maps, Translation & Ride-Sharing",
+    title: "Best Travel Apps for eSIM - Maps, Translation & Ride-Sharing",
     subtitle: "Essential apps that pair perfectly with eSIM data for seamless travel",
     intro: "With an eSIM, your smartphone becomes the ultimate travel companion. Navigation, real-time translation, ride-hailing, and trip planning apps all depend on data connectivity. This guide covers the must-have travel apps organized by category, showing how each benefits from eSIM data.",
     sections: [
@@ -152,7 +152,7 @@ const CONTENT: Record<Locale, ArticleContent> = {
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const c = CONTENT[(locale as Locale) || "en"];
-  return generatePageMetadata({ locale: locale as Locale, path: "/guide/travel-apps-esim", title: c.title, description: c.intro.slice(0, 160) });
+  return generatePageMetadata({ locale: locale as Locale, path: "/guide/travel-apps-esim", title: c.title, description: truncateAtSentence(c.intro) });
 }
 
 export default async function Page({ params }: { params: Promise<{ locale: string }> }) {

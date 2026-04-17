@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArticleJsonLd, BreadcrumbJsonLd, FaqJsonLd } from "@/lib/components/JsonLd";
 import ContentTrustPanel from "@/lib/components/ContentTrustPanel";
-import { generatePageMetadata, getBaseUrl, getDefaultOgImageUrl } from "@/lib/seo";
+import { generatePageMetadata, getBaseUrl, getDefaultOgImageUrl, truncateAtSentence } from "@/lib/seo";
 import styles from "./page.module.css";
 
 type Locale = "en" | "ja" | "ko" | "zh";
@@ -396,7 +396,7 @@ export async function generateMetadata({
     locale: locale as Locale,
     path: "/guide/wifi-vs-esim",
     title: c.title,
-    description: c.intro.slice(0, 160),
+    description: truncateAtSentence(c.intro),
   });
 }
 
@@ -436,6 +436,8 @@ export default async function WifiVsEsimPage({
         locale={loc}
         datePublished="2026-03-13"
         dateModified={new Date().toISOString().slice(0, 10)}
+        authorName="AutoWiFi Travel Editorial Team"
+        authorUrl={`${baseUrl}/${loc}/authors/autowifi-editorial-team`}
       />
       <FaqJsonLd items={c.faqs.map((faq) => ({ question: faq.q, answer: faq.a }))} />
       <BreadcrumbJsonLd

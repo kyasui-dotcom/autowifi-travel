@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import ArticleLayout, { type Locale, type ArticleContent } from "@/lib/components/ArticleLayout";
-import { generatePageMetadata } from "@/lib/seo";
+import { generatePageMetadata, truncateAtSentence } from "@/lib/seo";
 
 const CONTENT: Record<Locale, ArticleContent> = {
   ja: {
@@ -40,7 +40,7 @@ const CONTENT: Record<Locale, ArticleContent> = {
     breadcrumbCurrent: "中国eSIM",
   },
   en: {
-    title: "China eSIM Guide - VPN Issues, WeChat & Connectivity in Shanghai/Beijing",
+    title: "China eSIM Guide - VPN, WeChat & Shanghai/Beijing Coverage",
     subtitle: "Navigate the Great Firewall and stay connected to your favorite apps",
     intro: "Internet access is one of the most critical considerations for China travel. China's Great Firewall blocks many popular international services including Google, YouTube, Instagram, LINE, and WhatsApp. The right eSIM plan can help you bypass these restrictions. This guide covers the latest connectivity information for Shanghai and Beijing, plus essential tips for staying connected in China.",
     sections: [
@@ -152,7 +152,7 @@ const CONTENT: Record<Locale, ArticleContent> = {
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const c = CONTENT[(locale as Locale) || "en"];
-  return generatePageMetadata({ locale: locale as Locale, path: "/guide/china-esim", title: c.title, description: c.intro.slice(0, 160) });
+  return generatePageMetadata({ locale: locale as Locale, path: "/guide/china-esim", title: c.title, description: truncateAtSentence(c.intro) });
 }
 
 export default async function Page({ params }: { params: Promise<{ locale: string }> }) {
