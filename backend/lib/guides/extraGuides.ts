@@ -784,6 +784,31 @@ export const EXTRA_GUIDES: ExtraGuideDefinition[] = [
     content: MINOR_GUIDE_CANON["kyoto-nishijin-machiya-lanes"],
   },
   {
+    slug: "kamakura-komachi-backstreets-walk",
+    category: "topic",
+    content: MINOR_GUIDE_CANON["kamakura-komachi-backstreets-walk"],
+  },
+  {
+    slug: "yokohama-noge-retro-walk",
+    category: "topic",
+    content: MINOR_GUIDE_CANON["yokohama-noge-retro-walk"],
+  },
+  {
+    slug: "kawagoe-koedo-kurazukuri-walk",
+    category: "topic",
+    content: MINOR_GUIDE_CANON["kawagoe-koedo-kurazukuri-walk"],
+  },
+  {
+    slug: "nara-naramachi-machiya-walk",
+    category: "topic",
+    content: MINOR_GUIDE_CANON["nara-naramachi-machiya-walk"],
+  },
+  {
+    slug: "kobe-kitano-ijinkan-walk",
+    category: "topic",
+    content: MINOR_GUIDE_CANON["kobe-kitano-ijinkan-walk"],
+  },
+  {
     slug: "kanazawa-higashi-chaya-morning-walk",
     category: "topic",
     content: {

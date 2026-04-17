@@ -71,6 +71,96 @@ const MINOR_GUIDE_CANON = {
       desc: "利用清晨时段走更安静的岚山侧巷、落柿舍与更偏北西一带的半日路线。",
     },
   },
+  "kamakura-komachi-backstreets-walk": {
+    en: {
+      title: "Kamakura Komachi-dori Backstreets Walk",
+      desc: "A practical Kamakura half day that uses the red east-exit torii, the Komachi-dori approach, and the quieter lanes toward Tsurugaoka Hachimangu.",
+    },
+    ja: {
+      title: "鎌倉・小町通り裏路地の半日ガイド",
+      desc: "鎌倉駅東口の赤い鳥居と小町通り、鶴岡八幡宮側に抜ける裏路地を静かに歩く実用的な半日ガイドです。",
+    },
+    ko: {
+      title: "가마쿠라 고마치도리 뒷골목 산책 가이드",
+      desc: "가마쿠라역 동쪽 출구 붉은 도리이에서 고마치도리, 쓰루가오카하치만구 쪽 조용한 골목까지 반나절로 걷는 실용 가이드입니다.",
+    },
+    zh: {
+      title: "镰仓小町通里巷散步指南",
+      desc: "以镰仓站东口红色鸟居为起点，穿过小町通，转入通往鹤冈八幡宫一带安静小巷的镰仓半日路线。",
+    },
+  },
+  "yokohama-noge-retro-walk": {
+    en: {
+      title: "Yokohama Noge Retro Walk from Sakuragicho",
+      desc: "A Yokohama half day that uses Sakuragicho Station and the Noge-Chikamichi underpass to reach the low-rise Noge drinking and retro-street district.",
+    },
+    ja: {
+      title: "横浜・野毛レトロ散歩ガイド",
+      desc: "桜木町駅と野毛ちかみち地下道を入口に、低層の野毛飲み屋街とレトロな路地を半日で歩く横浜ガイドです。",
+    },
+    ko: {
+      title: "요코하마 노게 레트로 산책 가이드",
+      desc: "사쿠라기초역과 노게치카미치 지하도를 입구로 삼아 낮은 노게 골목과 레트로 거리를 걷는 요코하마 반나절 가이드입니다.",
+    },
+    zh: {
+      title: "横滨野毛复古街区散步指南",
+      desc: "以樱木町站与野毛地下道为入口，步行逛低层的野毛居酒屋街与复古小巷的横滨半日路线。",
+    },
+  },
+  "kawagoe-koedo-kurazukuri-walk": {
+    en: {
+      title: "Kawagoe Koedo Kurazukuri Street Walk",
+      desc: "A practical Kawagoe day trip through the Kurazukuri Preservation District, Toki no Kane bell tower, Kashiya Yokocho, and Hikawa Shrine.",
+    },
+    ja: {
+      title: "川越・小江戸蔵造り通り散歩ガイド",
+      desc: "蔵造りの町並み、時の鐘、菓子屋横丁、氷川神社までを一日で歩く川越の実用ガイドです。",
+    },
+    ko: {
+      title: "가와고에 고에도 구라즈쿠리 거리 산책 가이드",
+      desc: "구라즈쿠리 보존 지구, 도키노카네 종루, 과자 가게 골목, 히카와 신사를 돌아보는 가와고에 당일치기 가이드입니다.",
+    },
+    zh: {
+      title: "川越小江户藏造老街散步指南",
+      desc: "走访藏造传统保存区、时之钟、菓子屋横丁与冰川神社的川越一日游实用路线。",
+    },
+  },
+  "nara-naramachi-machiya-walk": {
+    en: {
+      title: "Nara Naramachi Machiya Walking Guide",
+      desc: "A quieter Nara half day through the Naramachi machiya streets, Sarusawa-ike pond, and Gangoji Temple south of Kintetsu Nara Station.",
+    },
+    ja: {
+      title: "奈良・ならまち町家散歩ガイド",
+      desc: "近鉄奈良駅の南、ならまちの町家街区、猿沢池、元興寺をつなぐ静かな奈良の半日ガイドです。",
+    },
+    ko: {
+      title: "나라 나라마치 마치야 산책 가이드",
+      desc: "긴테쓰 나라역 남쪽의 나라마치 마치야 거리와 사루사와 연못, 간고지 사찰을 잇는 조용한 나라 반나절 가이드입니다.",
+    },
+    zh: {
+      title: "奈良奈良町町家散步指南",
+      desc: "从近铁奈良站往南，串联奈良町町家街区、猿泽池与元兴寺的安静奈良半日路线。",
+    },
+  },
+  "kobe-kitano-ijinkan-walk": {
+    en: {
+      title: "Kobe Kitano Ijinkan Walking Guide",
+      desc: "A Kobe half day through the Kitano Ijinkan district, the Weathercock House, Moegi House, and the hill streets above Sannomiya.",
+    },
+    ja: {
+      title: "神戸・北野異人館街の半日ガイド",
+      desc: "三宮の北側にある北野異人館街、風見鶏の館、萌黄の館、坂道の街路を歩く神戸の半日ガイドです。",
+    },
+    ko: {
+      title: "고베 기타노 이진칸 산책 가이드",
+      desc: "산노미야 북쪽 기타노 이진칸 거리와 풍견계관, 모에기관, 언덕길을 걷는 고베 반나절 가이드입니다.",
+    },
+    zh: {
+      title: "神户北野异人馆散步指南",
+      desc: "走访三宫北侧的北野异人馆街、风见鸡之馆、萌黄之馆与坡道街区的神户半日路线。",
+    },
+  },
   "kyoto-nishijin-machiya-lanes": {
     en: {
       title: "Kyoto Nishijin Machiya Lanes",

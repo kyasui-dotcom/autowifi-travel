@@ -75,16 +75,34 @@ function commonsThumbImage(
   };
 }
 
-function guideCta(locale: GuideLocale) {
+type GuideRegion = "kyoto-osaka" | "kanto" | "kansai";
+
+const GUIDE_CTA_TITLES: Record<GuideRegion, { ja: string; en: string }> = {
+  "kyoto-osaka": {
+    ja: "京都・大阪の現地判断を軽くしておく",
+    en: "Keep Kyoto and Osaka route changes easy on the ground",
+  },
+  kanto: {
+    ja: "関東の街歩きの現地判断を軽くしておく",
+    en: "Keep your Kanto walking-route decisions easy on the ground",
+  },
+  kansai: {
+    ja: "関西の街歩きの現地判断を軽くしておく",
+    en: "Keep your Kansai walking-route decisions easy on the ground",
+  },
+};
+
+function guideCta(locale: GuideLocale, region: GuideRegion = "kyoto-osaka") {
+  const title = GUIDE_CTA_TITLES[region][locale === "ja" ? "ja" : "en"];
   return locale === "ja"
     ? {
-        ctaTitle: "京都・大阪の現地判断を軽くしておく",
+        ctaTitle: title,
         ctaButton: "日本のeSIMを見る",
         breadcrumbGuide: "ガイド",
         breadcrumbHome: "ホーム",
       }
     : {
-        ctaTitle: "Keep Kyoto and Osaka route changes easy on the ground",
+        ctaTitle: title,
         ctaButton: "View Japan eSIM plans",
         breadcrumbGuide: "Guides",
         breadcrumbHome: "Home",
@@ -94,11 +112,12 @@ function guideCta(locale: GuideLocale) {
 function jpContent(
   title: string,
   description: string,
-  heroImage: GuideMediaImage,
+  heroImage: GuideMediaImage | undefined,
   gallery: GuideMediaImage[],
   xEmbeds: GuideXEmbed[],
   sections: { heading: string; body: string }[],
   faq: { q: string; a: string }[],
+  region: GuideRegion = "kyoto-osaka",
 ): GuideArticleContent {
   return {
     title,
@@ -107,22 +126,23 @@ function jpContent(
     gallery,
     xSectionTitle: "Xで現地の空気を確かめる",
     xSectionDescription:
-      "埋め込みは各記事の場所やテーマに寄せて選び直し、京都・大阪全体の汎用ポストを機械的に使い回さないようにしています。",
+      "埋め込みは各記事の場所やテーマに寄せて選び直し、汎用ポストを機械的に使い回さないようにしています。",
     xEmbeds,
     sections,
     faq,
-    ...guideCta("ja"),
+    ...guideCta("ja", region),
   };
 }
 
 function enContent(
   title: string,
   description: string,
-  heroImage: GuideMediaImage,
+  heroImage: GuideMediaImage | undefined,
   gallery: GuideMediaImage[],
   xEmbeds: GuideXEmbed[],
   sections: { heading: string; body: string }[],
   faq: { q: string; a: string }[],
+  region: GuideRegion = "kyoto-osaka",
 ): GuideArticleContent {
   return {
     title,
@@ -135,7 +155,7 @@ function enContent(
     xEmbeds,
     sections,
     faq,
-    ...guideCta("en"),
+    ...guideCta("en", region),
   };
 }
 
@@ -503,6 +523,246 @@ export const CUSTOM_MINOR_TRAVEL_GUIDE_CONTENT: Record<string, Partial<Record<Gu
         { q: "Does the route still work in rain?", a: "Yes. The district is compact enough that it can be shortened easily, which makes it relatively resilient in light rain or lower-energy conditions." },
         { q: "How much cafe or meal planning should I add?", a: "Usually one or two decisions at most. Too many shop or food stops can dilute the lane-focused structure that makes Nishijin worthwhile." },
       ],
+    ),
+  },
+  "kamakura-komachi-backstreets-walk": {
+    ja: jpContent(
+      MINOR_GUIDE_CANON["kamakura-komachi-backstreets-walk"].ja.title,
+      MINOR_GUIDE_CANON["kamakura-komachi-backstreets-walk"].ja.desc,
+      undefined,
+      [],
+      [],
+      [
+        { heading: "このルートは小町通りだけで終わらせない", body: "鎌倉の小町通りは鎌倉駅東口の赤い鳥居から始まる短い参道通りで、八幡宮までのおよそ350mを埋める飲食と土産の列です。多くの訪問者がここだけで半日を使い切ってしまいますが、このガイドの主題はその“裏路地”です。通りに並行して走る若宮大路との間には、細い抜け道と町家寄りの低層街区があり、人の密度が数十メートルで一気に下がります。\n\n順番はシンプルで、駅から赤い鳥居を抜けて一度だけ小町通りに入り、早いうちに横に逸れます。そうすると半日がただの買い物通りにならず、鎌倉らしい生活街区の呼吸に戻れます。ゴールは鶴岡八幡宮で良いのですが、そこに着くまでの道筋を二、三回意識的に曲げるだけで体験の質はかなり変わります。" },
+        { heading: "鎌倉駅東口を起点にすると迷いが少ない", body: "出発点は鎌倉駅東口で問題ありません。ここはJR横須賀線と江ノ電の結節で、駅前の小さな広場を抜ければすぐ赤い鳥居が見えます。最初の判断はここで行います。小町通りをどこで離れるか、若宮大路側へ一度だけ渡るか、最初から一本奥の細道を選ぶか。この三択だけ決めておけば、半日が混雑に押し戻されることはありません。\n\n外国人旅行者にとって鎌倉の分かりにくさは道ではなく、どこまでが観光通りでどこからが住宅街かの境目です。赤い鳥居と鶴岡八幡宮という両端を固定し、途中の曲がり方を自由にする、この骨格が一番扱いやすいです。" },
+        { heading: "裏路地が半日の主役になる", body: "小町通りと若宮大路の間の路地は、看板が少なく低い家並みが続きます。表通りの賑わいをすぐ横で切り捨てられるのは鎌倉の構造的な強みで、京都の中心部ではこれほど短い距離で街の層が切り替わることはあまりありません。写真を狙って歩くよりも、通りの幅と建物の高さの変化を見ながら歩く方が、このルートの価値は引き立ちます。\n\nまた、裏路地は逆方向にも使えます。鶴岡八幡宮から戻るとき、そのまま小町通りに再突入せず、一本ずれた道で駅へ戻れば、鎌倉の半日は一枚の連続した記憶として終わります。行きと帰りを同じ道にしない、それだけで密度は変わります。" },
+        { heading: "鶴岡八幡宮は到達点であり休憩ポイント", body: "鶴岡八幡宮は小町通り北端の若宮大路突き当たりに鎮座する鎌倉の中心的な神社で、若宮大路の石段と段葛の景観と合わせて一つの大きな休止符として機能します。ここを観光の“最後の一件”として扱うのではなく、半日の中間休憩と位置付けると疲労が溜まりません。参道の広がりで一度ペースを落とし、境内で少し座り、その後に裏路地へ戻る。この順番だと鎌倉の半日は想像より軽く歩けます。\n\n紅葉や花の季節は境内も若宮大路側も混みますが、そのぶん裏路地の価値が相対的に上がります。観光の主戦場から50メートル離れるだけで、人流の圧が一段下がるのが鎌倉の特徴です。" },
+        { heading: "紫陽花シーズンは逃げ道を必ず作っておく", body: "鎌倉は6月の紫陽花シーズンに人流が急増します。明月院や長谷寺などの紫陽花名所は小町通りから直接は行けませんが、鎌倉駅の江ノ電側や北鎌倉側に移動する人が多く、小町通り自体の混雑も連動して上がります。このルートではそれを前提に、紫陽花名所へ行くか行かないかを先に決めておくのが実務的です。\n\n名所へ向かわないなら、小町通りの早い時間帯と裏路地だけで半日を構成するのが最も静かです。向かうなら、小町通りを短く切り、先に紫陽花寺で時間を使い、鎌倉駅に戻ってから裏路地へ入る逆コースが安定します。どちらにしても、混雑期は“表通りで長く止まらない”の一点さえ守れば、鎌倉の半日は崩れにくいです。" },
+        { heading: "外国人旅行者向けの実務メモ", body: "保存しておくと良いのは、鎌倉駅東口、小町通りの赤い鳥居、鶴岡八幡宮、そして帰りに使う駅だけです。鎌倉は街区が小さく迷いにくい反面、人の多さで判断が鈍ります。途中で小町通りを一本外す、八幡宮から戻る道を変える、そのレベルの小さな調整がその場でできれば十分です。\n\nその意味で、日本向けeSIMはこの半日とも相性が良いです。地図で一本奥の道を確認する、江ノ電の時刻を見る、北鎌倉方面へ伸ばすかを決める。そうした現地判断を軽くできると、鎌倉は“行列のある街”から“選択できる街”に変わります。本文の中心は街歩きですが、通信の軽さが静けさを守ります。" },
+      ],
+      [
+        { q: "小町通りは完全に避けるべきですか？", a: "避ける必要はありません。赤い鳥居から入ってすぐの区間は鎌倉の空気を感じる入口として必要です。ただし早めに一本裏へ逸れると半日の質が上がります。" },
+        { q: "鶴岡八幡宮は必須ですか？", a: "必須ではありませんが、裏路地を歩く半日の到達点としては自然です。短くしたい場合でも、段葛か若宮大路のどちらかは通過すると記事タイトル通りの流れが残ります。" },
+        { q: "紫陽花を見るならこのルートと両立しますか？", a: "両立します。ただし明月院や長谷寺は小町通りから直接歩ける距離ではないので、半日の配分を“裏路地か紫陽花か”で先に決めるのがおすすめです。" },
+        { q: "一人旅でも歩きやすいですか？", a: "歩きやすいです。鎌倉は区画が小さく、途中で引き返しやすいので、一人でも無理なく速度を調整できます。" },
+        { q: "雨の日でも成立しますか？", a: "小雨なら成立します。若宮大路や小町通りの屋根掛かりの区間を多めに使い、裏路地は短めにすると安定します。" },
+      ],
+      "kanto",
+    ),
+    en: enContent(
+      MINOR_GUIDE_CANON["kamakura-komachi-backstreets-walk"].en.title,
+      MINOR_GUIDE_CANON["kamakura-komachi-backstreets-walk"].en.desc,
+      undefined,
+      [],
+      [],
+      [
+        { heading: "Do not let Komachi-dori eat the whole half day", body: "Komachi-dori is the short approach street that runs from the red torii at the east exit of Kamakura Station toward Tsurugaoka Hachimangu, roughly 350 meters of food and souvenir shops running parallel to the wider Wakamiya-oji avenue. Most first-time visitors spend the entire half day on it, and that is exactly the move this guide is written against. The real subject here is the set of quieter lanes between Komachi-dori and Wakamiya-oji.\n\nThe sequencing is simple: enter under the red torii, walk Komachi-dori briefly for context, then step off to the side within the first couple of blocks. That single adjustment changes the half day from a shopping-street loop into something closer to a real neighborhood walk, finishing at Tsurugaoka Hachimangu without the street noise dominating your memory of Kamakura." },
+        { heading: "Kamakura Station east exit is the obvious starting point", body: "Start at the east exit of Kamakura Station, where the JR Yokosuka Line and the Enoden meet. The small plaza in front puts the red torii immediately in view, which is what makes the route easy to read without complex navigation. Your only real decision here is when to leave Komachi-dori: within the first block, somewhere in the middle, or not at all. Pick one and the whole day flows.\n\nFor foreign travelers, the confusing part of Kamakura is rarely the streets. It is the boundary between tourist corridor and residential lane, which is unusually close together here. Anchoring on the red torii and Tsurugaoka Hachimangu at the two ends, then improvising in between, is the most forgiving structure." },
+        { heading: "The backstreets are the actual subject", body: "The lanes between Komachi-dori and Wakamiya-oji have fewer signs and lower buildings. Kamakura's strength is how quickly that change happens: stepping one street over can drop the crowd pressure almost immediately, which is rarely true in the busier parts of Kyoto. Walking here is less about hitting photo spots and more about noticing how quickly the width of the road and the height of the buildings change.\n\nThese backstreets also work in reverse. On the way back from Tsurugaoka Hachimangu, if you skip returning down Komachi-dori and use a parallel lane instead, the whole half day closes as one coherent walk rather than fragmenting into 'shopping street twice'." },
+        { heading: "Tsurugaoka Hachimangu is a midpoint, not a grand finale", body: "Tsurugaoka Hachimangu sits at the end of Wakamiya-oji, framed by its stone steps and the raised Dankazura path. It works best as a structural pause in the middle of the half day rather than as the dramatic final stop. Slow down along the approach, rest briefly inside the precinct, then turn back into the backstreets. That keeps the visit physically recoverable even in warmer months.\n\nIn peak leaf or flower seasons the precinct itself and Wakamiya-oji get busier, which actually raises the relative value of the side lanes. In Kamakura, the distance needed to drop crowd pressure is unusually short." },
+        { heading: "Plan an escape if you visit during hydrangea season", body: "Kamakura gets significantly busier in June, when the hydrangea temples Meigetsu-in and Hasedera pull heavy daily volume. Neither one is directly reachable from Komachi-dori, but the flow of visitors routing through Kamakura Station raises the pressure on Komachi-dori itself. This route still works in that window, but only if you decide in advance whether to include a hydrangea temple or stay inside the Komachi area.\n\nIf you skip the hydrangea temples, keep the half day strictly to early Komachi-dori plus the backstreets. If you include them, do the flower temple first, return to Kamakura Station, and then do the backstreet loop. Either way, the one rule is: do not loiter on Komachi-dori during peak hours." },
+        { heading: "Practical notes for foreign travelers", body: "Save Kamakura Station east exit, the red torii, Tsurugaoka Hachimangu, and one return station. That is enough. Kamakura is compact and very readable, but crowd density makes small decisions feel harder than they really are. Having the ability to step off Komachi-dori, change the return path, or extend toward the Enoden side on the spot is the real quality-of-life factor.\n\nA light Japan eSIM path helps here for the same reason. Checking a map for a parallel lane, looking at Enoden timings, or deciding whether to add a Kita-Kamakura extension is exactly the sort of small, on-the-ground adjustment that makes Kamakura feel selectable rather than simply crowded." },
+      ],
+      [
+        { q: "Should I avoid Komachi-dori entirely?", a: "No. The first segment from the red torii is worth walking as the natural entry to Kamakura. Just step off onto a parallel lane within the first couple of blocks to keep the half day balanced." },
+        { q: "Is Tsurugaoka Hachimangu required?", a: "Not strictly, but it makes a natural pivot for a backstreet-centered route. Even a short pass along Dankazura is enough to keep the walk coherent with the title." },
+        { q: "Does this work during hydrangea season?", a: "Yes, if you commit early: either skip the famous hydrangea temples and stay in the Komachi area, or do the flower temple first and return for the backstreet loop afterward." },
+        { q: "Is it good for solo travelers?", a: "Yes. The area is small and easy to reverse, so a solo walker can adjust pace without losing the route." },
+        { q: "What about rain?", a: "Light rain is fine. Lean a little more on the covered sections of Komachi-dori and Wakamiya-oji, and shorten the backstreet segments." },
+      ],
+      "kanto",
+    ),
+  },
+  "yokohama-noge-retro-walk": {
+    ja: jpContent(
+      MINOR_GUIDE_CANON["yokohama-noge-retro-walk"].ja.title,
+      MINOR_GUIDE_CANON["yokohama-noge-retro-walk"].ja.desc,
+      undefined,
+      [],
+      [],
+      [
+        { heading: "野毛はみなとみらいの“反対側”として読む", body: "野毛は横浜・桜木町駅を挟んでみなとみらい地区の反対側にある、低層の飲み屋街とレトロな商店街です。みなとみらいが広くて新しい都市面だとすれば、野毛は狭くて古い路地面で、この対比を一日で歩けるのが横浜の半日ルートとしての強みです。大岡川を渡って一街区入るだけで、建物の高さも人の速度も大きく変わります。\n\nこの記事は野毛を“昼から夕方にかけて”歩くことを前提にしています。夜の飲みが主役になる街ですが、昼〜夕方の看板と街並みだけを見て歩いても十分成立します。飲まない旅行者でも、横浜の二面性を体感する半日として機能します。" },
+        { heading: "桜木町駅と野毛ちかみちを入口にすると分かりやすい", body: "起点は桜木町駅です。JR根岸線・京浜東北線と横浜市営地下鉄ブルーラインが接続する駅で、みなとみらい側と野毛側を結ぶ地下通路“野毛ちかみち”がそのまま野毛地区への入口になります。駅からほぼ歩きのみで野毛大通りに出られる構造なので、初回でも迷いません。\n\n入口の選び方はもう一つあります。みなとみらい側を先に見て、桜木町に戻ってから野毛へ渡るルートです。先に広く新しい都市を体験してから古い路地へ入ると、野毛の低さが一層はっきり見えます。記事タイトルのレトロ感を一番素直に感じられるのはこの順序です。" },
+        { heading: "野毛大通りと小路の使い分けが半日の肝", body: "野毛大通りは地区を貫く広めの通りですが、野毛の本質は大通りから枝分かれする細い路地にあります。飲食店の看板が密に並び、昭和〜平成初期の景観が多く残っています。ここで大事なのは、大通りだけを歩き切るのではなく、小路へ短く入って戻る、を繰り返すことです。一度入るだけで街の奥行きが変わります。\n\n写真を撮るために立ち止まるよりも、小路の幅と看板の密度の変化を見る方が、野毛の半日としては豊かです。京都の町家路地とは違う“横浜側の古さ”が、低層の看板群と手すりの鉄の錆と電線の張り方で表現されています。" },
+        { heading: "野毛山公園と伊勢山皇大神宮までで半日が締まる", body: "街並みだけでは半日が少し足りない場合、野毛の西側を登って野毛山公園や伊勢山皇大神宮まで行くと、ルート全体がきれいに閉じます。坂道を少し使いますが、距離は大きくなく、見晴らしと静けさが一段上がります。大通りと路地だけで終えるか、公園まで延ばすかの二択で半日の密度を調整できます。\n\n逆に公園まで行かない場合は、大岡川沿いに少し戻り、桜木町駅方面を眺めて帰るとちょうど良い終わり方になります。どちらを選んでも、野毛の半日は“小さく古い都市を一つ見た”という満足感で終わります。" },
+        { heading: "夜側に寄せるなら時間を短く設計する", body: "野毛は夕方以降に本領を発揮します。ただし夜の野毛を観光目的で歩く場合、全部を見ようとすると疲れるので、むしろ2〜3時間に絞った方が満足度が高いです。大通りを一往復、気になる小路を一本、軽く一杯、それで十分に“横浜のレトロ”は伝わります。\n\nまた、毎年4月末には野毛大道芸が開催され、地区一帯がパフォーマンス会場になります。このタイミングは通常の歩き方より人流が激しくなるため、レトロ街歩きを主目的にするなら日程を外す方が落ち着いて歩けます。" },
+        { heading: "外国人旅行者向けの実務メモ", body: "保存しておくと良いのは、桜木町駅、野毛ちかみち、野毛大通り、伊勢山皇大神宮、そして帰りの駅だけです。野毛は地区として小さく、道もほぼ格子状なので、細かい保存を増やすより現地で地図を軽く確認できる状態の方が向いています。\n\nそのため、日本向けeSIMとの相性は良いです。みなとみらい側へ戻るか、野毛山公園まで延ばすか、もう一本路地に入るか。その場でこうした判断を軽くできれば、横浜の対比は体感として強く残ります。飲む予定が無くても、野毛は歩くだけで十分に横浜らしい半日になります。" },
+      ],
+      [
+        { q: "飲まなくても楽しめますか？", a: "十分楽しめます。野毛は建物、路地、看板の景観が主役で、昼〜夕方の通過でもレトロ街並みとして機能します。" },
+        { q: "みなとみらいとどちらを先にすべきですか？", a: "みなとみらいを先に、野毛を後にするのがおすすめです。新しい都市を先に体験した方が、野毛側の低さが際立ちます。" },
+        { q: "野毛山公園は必須ですか？", a: "必須ではありません。時間と体力があれば半日の締めとして効きますが、大通りと路地だけでも成立します。" },
+        { q: "大道芸の日に行く価値はありますか？", a: "お祭りとして楽しむなら価値は高いですが、記事タイトルの静かなレトロ散歩にはなりません。目的で使い分けるのが良いです。" },
+        { q: "雨の日でも成立しますか？", a: "小雨なら成立します。屋根付きの大通り区間を中心に使い、路地は短めに調整すると安定します。" },
+      ],
+      "kanto",
+    ),
+    en: enContent(
+      MINOR_GUIDE_CANON["yokohama-noge-retro-walk"].en.title,
+      MINOR_GUIDE_CANON["yokohama-noge-retro-walk"].en.desc,
+      undefined,
+      [],
+      [],
+      [
+        { heading: "Read Noge as the opposite side of Minato Mirai", body: "Noge is the low-rise retro drinking and shopping quarter directly across from the tall Minato Mirai district, separated only by Sakuragicho Station and the Ooka River. If Minato Mirai is Yokohama's wide, glass-and-steel face, Noge is the narrow-lane, older-signage face of the same city. The value of this half day is that both sit within easy walking distance of each other, and crossing over produces a much sharper contrast than most Tokyo neighborhood walks can offer.\n\nThis guide assumes an afternoon-to-early-evening use of Noge, not a full bar crawl. Noge is genuinely famous for nightlife, but its streetscape and retro signage read clearly during daylight too, which means even travelers who do not drink can still get the core Yokohama contrast from this route." },
+        { heading: "Sakuragicho Station and Noge-Chikamichi are the clean entry point", body: "Start at Sakuragicho Station, served by JR Keihin-Tohoku / Negishi and the Yokohama Municipal Subway Blue Line. The Noge-Chikamichi underpass connects Sakuragicho directly under the street network into Noge, so you enter the district almost entirely on foot without exposed traffic crossings. That makes the whole transition simple even for a first visit.\n\nA second option is to see Minato Mirai first and only then cross into Noge. Doing it in that order makes the contrast sharper: the scale of the towers on one side, then the low signage and narrow streets on the other. That sequencing is the easiest way to make this half day feel like one coherent route rather than two separate visits." },
+        { heading: "The main street and the side lanes serve different purposes", body: "Noge-odori is the wider street running through the district, but the real identity of Noge lives in the smaller lanes branching off it. These are where the dense food-and-bar signage, older facades, and unmistakably Showa-era streetscape stay strongest. The practical move is not to walk Noge-odori end to end; it is to go short distances on it, peel off into a side lane, come back, and repeat.\n\nYou will likely get more from this route by observing how the width and signage density change than by hunting specific photo spots. It is a different kind of old than Kyoto-machiya old: Yokohama's version runs on low storefronts, metal railings, and a thick tangle of overhead cables." },
+        { heading: "Nogeyama Park and Iseyama Kotai Jingu close the route cleanly", body: "If the streets alone do not fill the half day, climbing west to Nogeyama Park and Iseyama Kotai Jingu closes the route at a quieter elevation. The grade is moderate rather than hard, and it provides a visible break from the dense street layout below. Your main structural choice is whether to stay low in the streets or push up for the final segment.\n\nIf you skip the uphill finish, walking briefly back along the Ooka River toward Sakuragicho makes a clean alternative ending. Either way, the half day lands with a clear sense of having seen one small, older piece of Yokohama rather than only crossing it." },
+        { heading: "If you lean into the evening, keep the scope tight", body: "Noge shows its full character after dark, but as a travel plan an open-ended bar crawl rarely beats a focused two-to-three-hour window. One round-trip on Noge-odori, one chosen side lane, and one seated break is usually enough to feel what the district does in the evening without exhausting the rest of the trip.\n\nOne timing note: the annual Noge Daidogei (street performance) festival takes place on a weekend in late April and fills the whole district with performers and crowds. That is fun on its own terms but it does not produce the quiet retro walk this page describes. If the retro-street feel is the goal, avoid the festival weekend." },
+        { heading: "Practical notes for foreign travelers", body: "Save Sakuragicho Station, Noge-Chikamichi, Noge-odori, Iseyama Kotai Jingu, and one return station. That is enough. Noge is compact and mostly gridded, so heavy route saving is unnecessary. What matters is being able to make small decisions in the moment: whether to cut back to Minato Mirai, extend up to Nogeyama Park, or duck into one more lane.\n\nA light Japan eSIM path supports exactly that kind of small decision. Quick map checks and transit timing are what lets this route stay flexible on the ground, and that flexibility is what makes Yokohama feel like a two-sided city instead of only the postcard waterfront." },
+      ],
+      [
+        { q: "Is it worth visiting if I do not drink?", a: "Yes. Noge's streetscape, signage, and low-rise layout read well in daylight too, so a daytime retro walk works cleanly on its own." },
+        { q: "Should I see Noge or Minato Mirai first?", a: "Usually Minato Mirai first, then Noge. Seeing the tall, new side first makes the low, older side much more distinct when you cross." },
+        { q: "Is Nogeyama Park essential?", a: "No. It is a clean ending if you have time, but the Noge-odori and side lanes already make a complete half day." },
+        { q: "Is the Daidogei festival a good time to visit?", a: "It is a good experience on its own terms, but it does not fit this quieter retro-walk framing. Pick the goal first, then choose the date." },
+        { q: "Does this route work in rain?", a: "Light rain is fine. Stay mostly on the more covered parts of the main street and shorten the side lanes." },
+      ],
+      "kanto",
+    ),
+  },
+  "kawagoe-koedo-kurazukuri-walk": {
+    ja: jpContent(
+      MINOR_GUIDE_CANON["kawagoe-koedo-kurazukuri-walk"].ja.title,
+      MINOR_GUIDE_CANON["kawagoe-koedo-kurazukuri-walk"].ja.desc,
+      undefined,
+      [],
+      [],
+      [
+        { heading: "川越は“東京からの日帰り”の実用的な選択肢", body: "川越は埼玉県にある旧城下町で、蔵造りの商家が連続する一番街地区が中心です。新宿から西武新宿線で本川越駅まで、池袋から東武東上線やJR川越線で川越駅まで、いずれも片道30〜45分程度で届くため、東京からの日帰りとして無理のない距離にあります。日光や鎌倉より近く、浅草や両国と比べれば滞在時間の半分近くが実質的な街歩きに使えるのが強みです。\n\nこのガイドが扱うのは、観光地としての川越ではなく、蔵造り通り・時の鐘・菓子屋横丁・氷川神社の四点を一本の動線でつなぐ“歩くための一日”です。川越のエリアは徒歩で回りきれる範囲に集まっているので、半日でも一日でも使える柔軟なルートになります。" },
+        { heading: "どの駅から入るかで街の印象が変わる", body: "川越には事実上三つの入口があります。西武新宿線の本川越駅、東武東上線の川越駅、JR川越線の川越駅です。本川越駅は中心部に最も近く、蔵造り通りまで徒歩10〜15分ほどで届くため、最短で街並みに入りたいなら本川越が楽です。東武・JRの川越駅はクレアモール商店街を抜けてから一番街へ向かう距離があり、そのぶん現代的な駅前から旧街区への変化を歩きで感じられます。\n\n初回訪問で分かりやすさを取るなら本川越、街の層を順に見たければ川越駅、と割り切るのが実務的です。帰りに別の駅を使うと、同じ道を二度歩かずに一日がまとまります。" },
+        { heading: "一番街の蔵造り通りが半日の中心", body: "川越の主題は一番街の蔵造り通りです。1893年の大火のあとに防火構造として再建された重厚な商家が連続し、1999年には国の重要伝統的建造物群保存地区に選定されています。通りの中心には時の鐘が立ち、旧町の時間軸を象徴する存在として写真と音の両方で分かります。\n\nこの通りは両側の建物の屋根と壁の連続を見ながら歩くのが最も豊かな楽しみ方で、個別の店に入り浸るより、通り全体の連なりを一度往復する方が街の構造が見えます。周辺の脇道にも蔵造りが断続的に残っているので、一本裏へ入る余白を残しておくと体験の密度が上がります。" },
+        { heading: "菓子屋横丁と喜多院は性格が違う寄り道", body: "蔵造り通りから少し北西へ入ると菓子屋横丁です。駄菓子と飴の店が並ぶ短い路地で、通りの雰囲気とは別の、やや庶民的な昭和の残り香があります。滞在は長くなくていいので、蔵造り通りの途中の方向転換として挟むとバランスが良いです。\n\nもう一つの寄り道は喜多院です。蔵造り通りから南側へ歩いて10分強の位置にあり、徳川家ゆかりの寺として歴史的な厚みがあります。こちらは蔵造りの商家建築とは別系統の文化財なので、体力と興味がある日に組み込むと一日の構造が“街+寺”の二層になります。" },
+        { heading: "氷川神社は終盤に置くと流れが良い", body: "川越氷川神社は一番街のさらに北東側、新河岸川沿いに位置します。縁結びの神社として広く知られ、夏には風鈴祭(縁むすび風鈴)、7月20日には例大祭、10月の第三土日には川越祭(2016年にユネスコ無形文化遺産に登録された山車行事)など、季節ごとの行事が重なります。蔵造り通りと菓子屋横丁で街並みを歩いてから氷川神社へ抜けると、一日の終盤の空気が切り替わります。\n\nお祭りの日程に合わせるかは目的次第ですが、川越祭の週末は人流と交通規制が強く、蔵造り通り単体の静かな街歩きを求める旅行者には向きません。祭りが見たい日なのか、街並みが見たい日なのかを先に決めておく方が満足度が高いです。" },
+        { heading: "外国人旅行者向けの実務メモ", body: "保存しておくと良いのは、本川越駅もしくは川越駅、蔵造り通り(一番街)、時の鐘、菓子屋横丁、氷川神社、そして帰りの駅だけです。中心部はほぼ徒歩圏で、小江戸巡回バスもありますが、歩き中心の一日ならバス路線を厳密に覚える必要はありません。\n\nその意味で、日本向けeSIMはこの日帰りにも効きます。蔵造り通りを先に往復するか、菓子屋横丁を先に寄るか、氷川神社まで延ばすか、喜多院を足すか。その場で軽く地図と時刻を確認できるだけで、川越の一日はかなり扱いやすくなります。" },
+      ],
+      [
+        { q: "川越は半日でも足りますか？", a: "足ります。蔵造り通り、時の鐘、菓子屋横丁だけに絞れば、本川越駅を起点に半日で十分成立します。" },
+        { q: "東京から最短ルートはどれですか？", a: "西武新宿線で本川越駅まで行くのが中心部まで最短です。池袋から東武東上線の川越駅経由も近く、帰りを別ルートに取ると動線が重なりません。" },
+        { q: "氷川神社と喜多院は両方入れるべきですか？", a: "一日で余裕があれば両方可能ですが、半日ベースなら氷川神社を優先すると蔵造り→街→神社という流れが自然です。" },
+        { q: "川越祭の週末に行く価値はありますか？", a: "祭り目当てなら高い価値がありますが、静かな蔵造り散歩としては成立しにくくなります。目的を先に決めるのがおすすめです。" },
+        { q: "雨の日でも成立しますか？", a: "成立します。蔵造り通りは屋根付きや庇のある区間が多く、菓子屋横丁も短いので、雨に弱いルートではありません。" },
+      ],
+      "kanto",
+    ),
+    en: enContent(
+      MINOR_GUIDE_CANON["kawagoe-koedo-kurazukuri-walk"].en.title,
+      MINOR_GUIDE_CANON["kawagoe-koedo-kurazukuri-walk"].en.desc,
+      undefined,
+      [],
+      [],
+      [
+        { heading: "Kawagoe is one of the most practical day trips out of Tokyo", body: "Kawagoe is a former castle town in Saitama Prefecture, known for a continuous row of kura-zukuri (warehouse-style) merchant houses along Ichibangai street. It is roughly 30 to 45 minutes one way from central Tokyo: the Seibu Shinjuku Line runs to Hon-Kawagoe Station, and the Tobu Tojo Line from Ikebukuro plus the JR Kawagoe Line serve Kawagoe Station. That puts it closer to central Tokyo than Nikko or deep Kamakura extensions, which means much more of the day is actual walking time.\n\nThis guide is not written as a general Kawagoe overview. It is written as a walkable day linking four points: the Kurazukuri Preservation District, Toki no Kane bell tower, Kashiya Yokocho (the candy alley), and Hikawa Shrine. All four sit within a tight on-foot radius, which is why the route works equally well as a half day or a full day." },
+        { heading: "Your station choice changes the shape of the day", body: "Kawagoe effectively has three station entries: Hon-Kawagoe on the Seibu Shinjuku Line, Kawagoe on the Tobu Tojo Line, and Kawagoe on the JR Kawagoe Line. Hon-Kawagoe is closest to the core, roughly a 10 to 15 minute walk to Ichibangai, so it is the fastest way to reach the kura-zukuri street directly. The Tobu and JR Kawagoe stations sit farther south; reaching Ichibangai from either involves walking through the modern Crea Mall shopping arcade first.\n\nA simple rule: use Hon-Kawagoe if you want to land in the old town quickly, and use Tobu or JR Kawagoe if you want the layered experience of modern station, contemporary shopping street, and then the historic district. Entering through one and leaving through a different one avoids walking the same ground twice." },
+        { heading: "Ichibangai's kura-zukuri street is the core of the day", body: "The centerpiece is Ichibangai, the kura-zukuri merchant street rebuilt after Kawagoe's 1893 fire using fire-resistant clay-walled construction. The district was designated a National Important Preservation District for Groups of Traditional Buildings in 1999, and Toki no Kane, the wooden bell tower at the heart of the street, remains the visual anchor that ties the block together.\n\nWalking Ichibangai is less about individual shops and more about the continuous roofline and heavy front facades. Walking the street end-to-end once, then turning off onto a side lane, usually reveals more of the preservation layer than just standing in front of one storefront. The kura buildings do extend intermittently into adjacent streets, so leaving a little room to wander sideways is part of doing Ichibangai well." },
+        { heading: "Kashiya Yokocho and Kitain are two different kinds of side trips", body: "Just northwest of Ichibangai, Kashiya Yokocho is a short candy-shop alley. It has a more everyday Showa-era feel than the heavier kura street, so it works best as a brief detour midway through Ichibangai rather than as a separate destination. You do not need to linger to get the point.\n\nKitain, the Tendai-sect temple associated with the Tokugawa family, sits about a 10-15 minute walk south of Ichibangai. It is a different cultural layer from the merchant-house architecture and adds real depth if you have the day rather than only the half day. Treat it as an optional second leg rather than part of the core kura-zukuri sequence." },
+        { heading: "Hikawa Shrine makes the cleanest closing stop", body: "Kawagoe Hikawa Shrine is northeast of Ichibangai, along the Shingashi River. It is widely known for enmusubi (matchmaking) and hosts a summer wind-chime festival, a major annual festival on July 20, and the Kawagoe Matsuri on the third weekend of October (the festival's float procession was inscribed on UNESCO's Intangible Cultural Heritage list in 2016). Finishing the day with the shrine after Ichibangai and Kashiya Yokocho gives the route a gentler closing register.\n\nWhether to align with festival dates is a taste question. Kawagoe Matsuri weekend brings heavy crowd volume and traffic control to the old town, which is incompatible with a quiet kura-zukuri walk. Decide up front whether you are here for the festival or for the streetscape; the two visits look very different on the ground." },
+        { heading: "Practical notes for foreign travelers", body: "Save Hon-Kawagoe or Kawagoe Station, Ichibangai, Toki no Kane, Kashiya Yokocho, Hikawa Shrine, and your return station. That is enough. Most of the core is walkable; the Koedo loop bus exists if you want it, but a walking-centric day does not require memorizing its routes.\n\nA light Japan eSIM path is helpful here because the in-day decisions are small but meaningful: do you extend to Kitain, lean harder into Hikawa Shrine, swap return stations, or shorten Ichibangai if the day is hotter than expected? Quick map and schedule checks on the ground are what makes Kawagoe feel like a flexible day trip rather than a fixed itinerary." },
+      ],
+      [
+        { q: "Is a half day enough for Kawagoe?", a: "Yes. A half day starting at Hon-Kawagoe and covering Ichibangai, Toki no Kane, and Kashiya Yokocho works cleanly. A full day adds Hikawa Shrine and optionally Kitain." },
+        { q: "What is the fastest way from central Tokyo?", a: "Seibu Shinjuku Line to Hon-Kawagoe lands closest to the old town. Tobu Tojo Line from Ikebukuro to Kawagoe Station is a common alternative; using different stations for arrival and departure avoids retracing the same walk." },
+        { q: "Should I include both Hikawa Shrine and Kitain?", a: "With a full day, yes. For a half day, prioritize Hikawa Shrine as the closing stop, since it sits naturally at the end of the kura-zukuri walk." },
+        { q: "Is Kawagoe Matsuri weekend a good time to go?", a: "It is excellent for the festival itself, but it is not compatible with a quiet kura-zukuri walk. Pick the purpose first, then the date." },
+        { q: "Does this work in rain?", a: "Yes. Ichibangai has many storefront eaves and Kashiya Yokocho is short, so the route is relatively rain-tolerant compared to more exposed walks." },
+      ],
+      "kanto",
+    ),
+  },
+  "nara-naramachi-machiya-walk": {
+    ja: jpContent(
+      MINOR_GUIDE_CANON["nara-naramachi-machiya-walk"].ja.title,
+      MINOR_GUIDE_CANON["nara-naramachi-machiya-walk"].ja.desc,
+      undefined,
+      [],
+      [],
+      [
+        { heading: "奈良は“東大寺と鹿”だけで終わらせない", body: "奈良観光は多くの場合、近鉄奈良駅から東大寺と奈良公園へ直行する定番ルートで消費されます。このガイドが扱う“ならまち”は、その反対方向、近鉄奈良駅の南側に広がる町家街区です。奈良町の範囲はかつて元興寺の境内だった場所と重なっており、今でも低層の町家と細い路地、小さな寺社が連続する奈良の古い生活層が残っています。\n\n東大寺側が“仏教建築の巨大さ”で奈良を見せる場所だとすれば、奈良町は“都市の低さ”で奈良を見せる場所です。観光のピークを避けたい旅行者、奈良に半日だけ使える旅行者、あるいは二度目以降の奈良訪問で別の層を体験したい旅行者にとっては、こちらの半日のほうが記憶に残りやすいです。" },
+        { heading: "近鉄奈良駅から南へ歩くと骨格が分かりやすい", body: "起点は近鉄奈良駅が最も分かりやすいです。駅南口から猿沢池までは徒歩5分ほどで、池の向かいに興福寺の五重塔が立つ構図を見てから奈良町へ降りると、都市の縮尺が段階的に変わっていきます。JR奈良駅を起点にすることもでき、その場合は20分ほど東へ歩くことで三条通り経由で町の中心へ入れます。\n\nどちらの駅から入っても、奈良町の入口までは徒歩で収まる距離です。奈良公園と反対方向に歩くことさえ意識すれば、方向感覚を失う心配は少ないです。帰りをJRから戻すか、近鉄で戻すかを先に決めておくと一日がきれいに閉じます。" },
+        { heading: "ならまちは元興寺を中心に読む", body: "奈良町の中心的な寺が元興寺です。もともと飛鳥寺の流れをくむ古代寺院で、奈良町の街区自体がかつての元興寺境内に由来しています。境内の規模は縮小しましたが、瓦屋根の古さや本堂周辺の静けさは、観光地化されきらないスケールで残っています。ここを一度訪れると、町家路地がただの“古そうな街並み”ではなく、大寺の境内の残滓を歩いているという構造が見えてきます。\n\n写真を撮って回る場所というより、境内と町家路地の距離感を肌で確認する場所です。奈良町の路地は狭く、白壁と格子戸、小さな祠が連続していますが、どれも元興寺の周囲に広がったかつての寺内町の輪郭に沿っています。歴史を全て覚える必要はなく、寺と町が同じ地面の上にあることが分かれば十分です。" },
+        { heading: "猿沢池と興福寺は入口かつ休止符", body: "猿沢池は奈良町と奈良公園側の中間に位置する小さな池で、対岸の興福寺の五重塔を水面に映す定番の景観地です。観光の通過点として有名ですが、このルートでは“奈良町に入る前と後のリセット地点”として位置付けると有効に使えます。入る前に一度通ると気分が整い、奈良町から戻ってきたときに座って休むと、半日の集中力が回復します。\n\n興福寺は猿沢池から階段を上るとすぐで、国宝館の仏像群はそれだけで半日を埋める密度がありますが、ならまち歩きの日に組み込む場合は外観の通過だけでも意味があります。欲張って全部を見るより、半日の軸を奈良町側に保ったほうが記事タイトルに忠実です。" },
+        { heading: "奈良町の路地は“観光用”として作られていない", body: "奈良町の魅力は、見学対象としてパッケージ化されていないことです。町家を改装したカフェやショップは増えていますが、中心はあくまで住宅街で、朝早い時間帯は特に生活の気配が強く残ります。これは京都の観光化された町家地区とは大きく違う点で、外国人旅行者にとっては“本物の古い街”として感じやすい要因になります。\n\nただし、生活街区であるがゆえに立ち入りのマナーは重要です。個人宅の敷地や私道に踏み込まない、大声で歩かない、写真は通りの公共空間に限る、といった基本的な節度を守るだけで、奈良町の半日は街と旅行者の双方にとって無理のないものになります。" },
+        { heading: "外国人旅行者向けの実務メモ", body: "保存しておくと良いのは、近鉄奈良駅、猿沢池、元興寺、そして帰りの駅(近鉄奈良かJR奈良)だけです。奈良町は区画が小さく、地図を細かく保存するより、交差点ごとに軽く確認できる状態の方が街の密度に合います。奈良交通の市内循環バス1・2系統も市内中心を周回しており、疲れた時のエスケープ手段になります。\n\n日本向けeSIMはこの半日とも相性が良いです。東大寺側へ戻るか、ならまちを短くするか、JR側へ抜けて戻るか、そうした小さな判断が軽くできれば、奈良は“鹿の街”ではなく“低い町の街”として記憶に残ります。本文の中心は街歩きですが、通信の軽さがその静けさを守ります。" },
+      ],
+      [
+        { q: "東大寺や鹿を見なくても価値はありますか？", a: "あります。ならまちは奈良公園側とは別軸の街歩きとして成立するので、寺社や鹿を省いても半日は十分に機能します。" },
+        { q: "近鉄奈良とJR奈良、どちらから入るべきですか？", a: "中心部に近いのは近鉄奈良駅です。JR奈良駅から入ると三条通り経由の距離があり、そのぶん街の変化を歩けます。" },
+        { q: "元興寺は必須ですか？", a: "街の構造を理解するには一度入るのがおすすめです。奈良町全体がかつての境内だったという文脈が、路地歩きの意味を変えます。" },
+        { q: "一人旅でも歩きやすいですか？", a: "歩きやすいです。区画が小さく混雑も比較的軽いため、一人でも速度を自分で保てます。" },
+        { q: "雨の日でも成立しますか？", a: "成立します。路地は短い区間の連続なので、屋根のある建物に避難しやすく、奈良公園側より雨に強いルートです。" },
+      ],
+      "kansai",
+    ),
+    en: enContent(
+      MINOR_GUIDE_CANON["nara-naramachi-machiya-walk"].en.title,
+      MINOR_GUIDE_CANON["nara-naramachi-machiya-walk"].en.desc,
+      undefined,
+      [],
+      [],
+      [
+        { heading: "Nara is not only Todai-ji and the deer", body: "A typical Nara day trip runs from Kintetsu Nara Station straight into Nara Park and Todai-ji, which compresses the city into its loudest, most famous segment. This guide covers the opposite direction: Naramachi, the old machiya district immediately south of Kintetsu Nara Station. Naramachi overlaps almost exactly with what were once the temple grounds of Gango-ji, and the area still preserves low-rise machiya houses, narrow lanes, and small shrines in a way that reads very differently from the park side.\n\nIf Todai-ji represents monumental-scale Nara, Naramachi represents low-rise Nara. For travelers who want to avoid peak-Nara crowding, for travelers with only a half day in the city, and especially for second-time Nara visitors, this half day often turns into the more memorable one." },
+        { heading: "Walking south from Kintetsu Nara is the easiest structure", body: "Kintetsu Nara Station is the most convenient starting point. From the south side of the station it is about a 5-minute walk to Sarusawa-ike pond, with Kofuku-ji's five-story pagoda visible across the water. From the pond, descending south takes you into Naramachi within another few minutes. JR Nara Station also works, but requires roughly 20 minutes walking east via Sanjo-dori to reach the central district.\n\nFrom either station the entry is fully walkable. The one directional rule worth keeping in mind is: walk away from Nara Park, not toward it. If you commit to the opposite direction and plan whether to return via the same station or the other, the half day closes neatly." },
+        { heading: "Naramachi is best read through Gango-ji", body: "The central temple of the district is Gango-ji, a temple with roots tracing back to Asuka-dera, and the Naramachi area itself developed on what were once its grounds. The modern temple compound is much smaller, but the tiled roofs and the quiet around the main hall read clearly as a surviving older core rather than a polished sightseeing stop. Once you understand that Naramachi literally sits on Gango-ji's former precincts, the lanes stop being 'generic old streets' and start reading as the remains of a temple town.\n\nThis is less a place to photograph exhaustively and more a place to feel the relationship between the temple interior and the surrounding lanes. The streets are narrow, the white walls and wooden lattices are continuous, and small shrines appear without warning, all roughly tracing the historical outline of what used to be one much larger temple complex." },
+        { heading: "Sarusawa-ike and Kofuku-ji are a threshold, not the main event", body: "Sarusawa-ike sits between Nara Park and Naramachi, offering the classic reflection of Kofuku-ji's pagoda across the water. It is famous enough that most travelers pass through it, but for this route it works best as a reset point on the way in and a seated pause on the way back. Using the pond twice that way, rather than as a single photo stop, makes the half day feel structured without adding distance.\n\nKofuku-ji is right above the pond, and its National Treasure Hall alone is dense enough to eat a whole half day. On a Naramachi-centered day, treating Kofuku-ji as an optional exterior walk-through is usually the right call. Keeping the center of gravity on Naramachi is what keeps the page honest to its title." },
+        { heading: "Naramachi was not built for tourism", body: "Naramachi's appeal is that it is not packaged. Cafes and shops inside renovated machiya have increased, but the neighborhood is still fundamentally residential, and in the early morning in particular the district reads as ordinary lived-in space. That is a meaningful contrast with heavily commercialized old districts in other cities, and it is a big reason foreign travelers often describe Naramachi as feeling 'genuinely old' rather than restored for visitors.\n\nBeing a residential district, the usual etiquette applies: keep off private land and driveways, keep voices low, and keep photography on public streets rather than into private windows. With those small baseline habits, the half day works smoothly for both the visitor and the neighborhood." },
+        { heading: "Practical notes for foreign travelers", body: "Save Kintetsu Nara Station, Sarusawa-ike, Gango-ji, and your return station (Kintetsu Nara or JR Nara). That is enough. Naramachi is compact, so heavy pre-saved lists underperform compared to making small decisions at each junction. Nara Kotsu's city loop buses 1 and 2 circle the central area and can rescue tired legs if you need them.\n\nA light Japan eSIM path pairs well with this half day. Deciding whether to cut back toward Nara Park, shorten the Naramachi loop, or return via the other station is the kind of small call that benefits directly from reliable maps and timing on the ground. The route stays walking-first, but low-friction connectivity is what keeps it quietly flexible." },
+      ],
+      [
+        { q: "Is it worth doing if I skip Todai-ji and the deer?", a: "Yes. Naramachi stands on its own as a half day, and travelers who already know Nara Park often find this the more memorable side of the city." },
+        { q: "Should I start at Kintetsu Nara or JR Nara?", a: "Kintetsu Nara is closer to the core. JR Nara adds a walking segment along Sanjo-dori, which is useful if you want the layered approach through the city." },
+        { q: "Is Gango-ji essential?", a: "Strongly recommended. Visiting Gango-ji is what turns the surrounding lanes from generic old streets into the outline of a former temple town." },
+        { q: "Is this good for solo travelers?", a: "Yes. The district is compact and generally quieter than the park side, which makes solo pacing easy." },
+        { q: "Does it work in rain?", a: "Yes. The lanes run in short segments, so sheltering between buildings is straightforward, and the route is noticeably more rain-tolerant than the exposed park side." },
+      ],
+      "kansai",
+    ),
+  },
+  "kobe-kitano-ijinkan-walk": {
+    ja: jpContent(
+      MINOR_GUIDE_CANON["kobe-kitano-ijinkan-walk"].ja.title,
+      MINOR_GUIDE_CANON["kobe-kitano-ijinkan-walk"].ja.desc,
+      undefined,
+      [],
+      [],
+      [
+        { heading: "北野は“神戸らしさ”を最短で体感できる半日", body: "北野異人館街は、神戸の中心である三宮と新神戸の北側、六甲山の麓の斜面に広がる居留地由来の洋館群です。1868年の神戸開港以降、外国人居留地が中心部に設けられ、その関連で貿易商や領事が住居を構えたのが北野エリアで、煉瓦、下見板張り、ベイウィンドウといった西洋建築様式が坂道の上に並ぶ景観が残っています。\n\nこのルートは、神戸の“海・港・商業”の面ではなく、“港から人が上陸したあとに暮らした住居の街”を見る半日です。三宮から徒歩15分ほどで街区に入れるため、半日もしくは午後の短い時間でも十分に北野の主題を歩けます。" },
+        { heading: "三宮と新神戸が実質的な二つの入口", body: "北野異人館街の代表的な入口は二つあります。三宮駅北口から坂を上がる動線と、新神戸駅から下りる動線です。どちらもおよそ徒歩15分の距離で、どちらを選んでも街区の中心(北野町広場周辺)に到達します。三宮から入ると“街から上がる”体験になり、新神戸から入ると“山側から下る”体験になります。\n\n実用的な組み方としては、片方から入ってもう片方で下りる往復ルートがおすすめです。同じ坂を二度歩かずに済み、斜面の街としての性格も双方向から感じられます。神戸市のシティループバスも北野異人館前に停車するので、体力を温存したい場合はバスを片道に組み込めます。" },
+        { heading: "風見鶏の館と萌黄の館が街区の核", body: "北野の中心的な建物が、旧トーマス邸として知られる風見鶏の館です。ドイツ人貿易商G.トーマスのために1909年に建てられた住宅で、設計はドイツ人建築家G.デ・ラランデ。煉瓦外壁と半地下の花崗岩、尖塔の風見鶏が特徴で、国の重要文化財に指定されています。北野町広場の正面に立ち、この街区の象徴となっています。\n\n隣に並ぶ萌黄の館は、淡い黄緑色の木造洋館で、風見鶏の館とは別系統の穏やかな外観を持ちます。二棟を対比で見ると、北野の異人館が一つのスタイルに統一されていたのではなく、住人ごとの様式が斜面に点在していた街だということが分かります。内部見学は有料の館が多いので、外観と街路の連続を歩くだけでも十分に街の構造は伝わります。" },
+        { heading: "坂道と細道を“街並み”として読む", body: "北野の面白さは、異人館一軒一軒よりも、それらを結ぶ坂道と細道の連続にあります。北野町広場を中心に、北野通り、山本通り、そして枝分かれする細い坂が斜面を等高線に沿って走り、角ごとに街並みの見え方が変わります。観光的な“必見の館”だけを線でつなぐのではなく、館の間を歩く時間に比重を置くと、神戸の半日としての密度が増します。\n\nまた、坂の上からは神戸の街と港方向への眺望がところどころに開けます。北野単体では港は見えませんが、街の高低差そのものが神戸の地形の物語を視覚化しているので、歩きながら高さを使うだけで、港町・神戸の構造が体で理解できます。" },
+        { heading: "下山後は三宮・元町側に自然につながる", body: "北野の半日は、坂を下りて三宮や元町側に戻るところで自然に終わります。三宮はJR・阪急・阪神・ポートライナー・神戸市営地下鉄が集まる交通ハブで、北野を出たあとに夕食やショッピングを足すのも、そのまま別のエリアへ移動するのも簡単です。神戸港・メリケンパーク方面まで徒歩で続ける選択肢も実用的な範囲内にあります。\n\n一方で、半日を北野だけで完結させる構成も十分に成り立ちます。観光の“もう一件”を無理に積まないことで、北野異人館街というテーマが最後まで軸として残ります。ショートトリップで神戸を初めて訪れる旅行者にとっては、こちらの方が印象を散らさずに済みます。" },
+        { heading: "外国人旅行者向けの実務メモ", body: "保存しておくと良いのは、三宮駅または新神戸駅、北野町広場、風見鶏の館、萌黄の館、そして帰りの駅だけです。北野は坂道ではありますが区画としては小さく、地図を細かく保存するより、坂の上と下のランドマークを押さえておく方が実務的です。神戸シティループバスが北野異人館前を通るので、片道を徒歩、もう片道をバスにしてもきれいに収まります。\n\n日本向けeSIMもこの半日と相性が良いです。次の館まで歩くか、バスを使うか、三宮側へ戻るか新神戸側へ下るか、といった現地判断を軽くできると、北野の坂道は単なる登りではなく“選べる街”になります。本文の中心は街歩きですが、通信の軽さが選択肢の幅を保ちます。" },
+      ],
+      [
+        { q: "全部の異人館に入るべきですか？", a: "その必要はありません。内部見学は有料館が多く、外観と坂道の連続を歩くだけでも北野の街としての構造は十分に伝わります。" },
+        { q: "三宮と新神戸、どちらから入るべきですか？", a: "どちらでも成立しますが、片方から入って反対から出る往復ルートが最もきれいです。同じ坂を二度歩かずに済みます。" },
+        { q: "シティループバスは使うべきですか？", a: "疲労や時間次第で片道に組み込む価値があります。全行程をバスにする必要はなく、歩きと組み合わせる方が北野の斜面の性格が体で分かります。" },
+        { q: "ポートタワー側と同日に回れますか？", a: "回れます。ただし北野と港側は性格がかなり違うので、半日ずつで分けた方が印象が散りにくいです。" },
+        { q: "雨の日でも成立しますか？", a: "小雨なら成立します。異人館の外観と坂道の組み合わせは雨の日にも独特の雰囲気があり、見学を内部にシフトする余地もあります。" },
+      ],
+      "kansai",
+    ),
+    en: enContent(
+      MINOR_GUIDE_CANON["kobe-kitano-ijinkan-walk"].en.title,
+      MINOR_GUIDE_CANON["kobe-kitano-ijinkan-walk"].en.desc,
+      undefined,
+      [],
+      [],
+      [
+        { heading: "Kitano is the fastest way to feel 'Kobe-like' Kobe", body: "The Kitano Ijinkan district sits on the slope north of Sannomiya and Shin-Kobe stations, at the base of Mt. Rokko. After Kobe opened as a port in 1868, a foreign settlement was set up in the central city, and the traders and consuls connected to it built residences uphill in Kitano. What remains is a scatter of Western-style residences with brick walls, wooden siding, and bay windows sitting along stepped streets above the modern city center.\n\nThis route is not the 'sea and port' side of Kobe. It is the 'where foreign residents lived after they arrived' side, and it is reachable in roughly 15 minutes on foot from Sannomiya, which makes it one of the more time-efficient half-day options in the Kansai region." },
+        { heading: "Sannomiya and Shin-Kobe are the two natural entries", body: "Kitano effectively has two gateway stations. Sannomiya (JR, Hankyu, Hanshin, Port Liner, municipal subway) is the southern entry and involves walking up the slope. Shin-Kobe (Sanyo Shinkansen, municipal subway) is the northern entry and involves walking down. Either one is about 15 minutes to the heart of the district around Kitano-cho Square.\n\nThe practical move is to enter from one and leave from the other. That avoids walking the same slope twice and lets you feel Kitano from both the uphill and downhill sides. The City Loop bus also stops at Kitano Ijinkan, which makes a useful one-way option if you want to conserve energy for a later Kobe segment." },
+        { heading: "The Weathercock House and the Moegi House are the district's core", body: "The centerpiece of Kitano is the Weathercock House (Kazamidori no Yakata), also known as the former Thomas Residence. It was built in 1909 for the German trader G. Thomas, designed by the German architect Georg de Lalande, and features a brick exterior, a half-basement granite level, and a spire topped by a weathervane. It is designated a National Important Cultural Property and faces directly onto Kitano-cho Square, which makes it the obvious visual anchor for the district.\n\nThe Moegi House (the 'light yellowish-green' residence) stands immediately next to it in a very different wooden Western style. Viewing the two buildings side by side clarifies that the Ijinkan were not a single unified architectural program; they were individual residences built to different tastes and scattered along the slope. Many interiors charge admission, but even just walking the exteriors and the streetscape conveys most of the district's story." },
+        { heading: "Read the slope and side lanes as the actual streetscape", body: "Kitano is more interesting as a continuous slope than as a sequence of individual residences. Around Kitano-cho Square, Kitano-dori and Yamamoto-dori run roughly along the contours, and smaller stepped lanes branch off them. The view from one corner to the next keeps changing because of the grade. The highest-value approach is to give as much time to the walk between buildings as to the buildings themselves.\n\nFrom higher points along the slope, occasional views open up over central Kobe toward the port. Kitano itself does not overlook the water directly, but the elevation of the district relative to the city visualizes the port-town geography of Kobe in a way that reading a map does not. Climbing and descending the slope is the lesson." },
+        { heading: "Coming down links naturally back to Sannomiya / Motomachi", body: "A Kitano half day closes almost automatically by descending back into Sannomiya or Motomachi. Sannomiya is the city's main multi-line hub, so dinner, shopping, or onward travel all attach easily. Continuing on foot toward Meriken Park and the Kobe Port area is also within a reasonable range if the day is cooperating.\n\nThat said, ending the day at Kitano is just as legitimate. Not forcing a second attraction keeps the Ijinkan district as the central memory rather than diluting it with a second, different district. For travelers doing Kobe as a short first visit, this often produces a cleaner impression of the city." },
+        { heading: "Practical notes for foreign travelers", body: "Save Sannomiya or Shin-Kobe Station, Kitano-cho Square, the Weathercock House, the Moegi House, and your return station. That is enough. The district is on a slope but compact in plan, so detailed mapping matters less than knowing the top and bottom landmarks. The City Loop bus passes Kitano Ijinkan and can cover one direction if you want to save legs.\n\nA light Japan eSIM path supports exactly this kind of half day. Deciding whether to walk to the next house, grab the City Loop for one leg, return via Sannomiya, or descend to Shin-Kobe instead is what turns Kitano from a fixed climb into a selectable walk. The route remains tourism-first, but low-friction connectivity keeps the options open." },
+      ],
+      [
+        { q: "Do I need to enter every Ijinkan?", a: "No. Most interior visits are paid, and walking the exteriors plus the slope streets already conveys the district's architectural story." },
+        { q: "Sannomiya or Shin-Kobe as the entry?", a: "Either works. Entering from one and leaving via the other is the cleanest structure because it avoids walking the same slope twice." },
+        { q: "Should I use the City Loop bus?", a: "It is worth using for one direction if energy or time is tight. Doing the full route by bus removes the slope experience that makes Kitano feel like Kitano." },
+        { q: "Can I combine Kitano with the Kobe port area?", a: "Yes, but the two districts have very different characters. Giving each a half day usually produces a sharper impression than compressing them both into one morning." },
+        { q: "Does it work in light rain?", a: "Yes. The combination of European-style exteriors and sloped streets carries a particular atmosphere in rain, and interior visits become more attractive as a fallback." },
+      ],
+      "kansai",
     ),
   },
 };
