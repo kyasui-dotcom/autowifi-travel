@@ -98,6 +98,8 @@ export async function POST(request: NextRequest) {
       email: body.email,
       successUrl,
       cancelUrl,
+      // Spring30 sale: allow promo code only for Japan eSIMs
+      allowPromotionCodes: pkg.countryCode === "JP",
     });
 
     // Create order record

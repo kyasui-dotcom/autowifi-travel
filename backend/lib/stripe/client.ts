@@ -7,6 +7,7 @@ interface CheckoutSessionParams {
   email: string;
   successUrl: string;
   cancelUrl: string;
+  allowPromotionCodes?: boolean;
 }
 
 interface CheckoutSession {
@@ -54,6 +55,9 @@ export function createStripeClient(secretKey: string) {
       body.set("success_url", params.successUrl);
       body.set("cancel_url", params.cancelUrl);
       body.set("metadata[order_id]", params.orderId);
+      if (params.allowPromotionCodes) {
+        body.set("allow_promotion_codes", "true");
+      }
 
       const res = await stripeRequest("/checkout/sessions", body);
       const data = (await res.json()) as { id: string; url: string };
